@@ -1,0 +1,59 @@
+{
+  "name": "@gondel/core",
+  "version": "0.0.1",
+  "description": "The base core of the gondel library",
+  "bugs": "https://github.com/namics/gondel/issues",
+  "homepage": "https://github.com/namics/gondel",
+  "repository": "https://github.com/namics/gondel.git",
+  "main": "./dist/gondel.es5.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "build:clean": "rimraf dist",
+    "build:rollup": "rollup -c rollup.config.js",
+    "build:types": "tsc --project ./tsconfig.json --declaration --esModuleInterop --target es5 --declarationDir dist/ --sourceMap --outDir dist/",
+    "build:min": "rollup -c rollup.config.min.js",
+    "build": "npm-run-all build:clean build:types build:rollup build:min file-size",
+    "file-size": "gzip-size dist/gondel.es5.min.js",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "files": [
+    "dist/"
+  ],
+  "devDependencies": {
+    "@types/jest": "22.2.0",
+    "gzip-size-cli": "2.1.0",
+    "jest": "22.4.2",
+    "npm-run-all": "4.1.2",
+    "rimraf": "2.6.2",
+    "rollup": "0.53.3",
+    "rollup-plugin-uglify": "2.0.1",
+    "typescript": "2.8.3",
+    "ts-jest": "22.4.1",
+    "tslib": "1.9.0"
+  },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "enableTsDiagnostics": true
+      }
+    },
+    "transform": {
+      "^.+\\.ts?$": "ts-jest"
+    },
+    "testRegex": "\\.test\\.ts$",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx,js,jsx}"
+    ],
+    "coverageDirectory": "coverage",
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json",
+      "node"
+    ]
+  }
+}

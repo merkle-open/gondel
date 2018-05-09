@@ -1,0 +1,71 @@
+<html>
+  <body>
+
+    <script>
+
+      var libs = {
+        terrific: 'https://unpkg.com/terrific@3.0.0/dist/terrific.js',
+        gondel: '../../packages/core/dist/gondel.es5.js'
+      }
+      var componentsToBoot = 100000;
+
+      function gondel() {
+
+        class Demo {
+          _greet() {
+            alert('Hello from gondel');
+          }
+        }
+        window.gondel.EventListener('click')(Demo, '_greet');
+        window.gondel.Component('Demo')(Demo);
+
+        return window.gondel.startComponents();
+
+      }
+
+      function terrific() {
+        T.Module.Demo = T.createModule({
+          start: function(resolve) {
+            this._ctx.addEventListener('click', this.greet);
+            resolve();
+          },
+          stop: function() {
+            this._ctx.removeEventListener('click', this.greet);
+          },
+          greet: function() {
+            alert('Hello from terrific');
+          }
+        });
+        window.application = window.application  || new T.Application();
+        application.registerModules();
+        return application.start();
+      }
+
+      [terrific, gondel].forEach((gondelBootstrap) => {
+        const button = document.createElement('button')
+        button.innerHTML = 'Start ' + gondelBootstrap.name;
+        button.onclick = function() {
+          var script = document.createElement('script');
+          script.src = libs[gondelBootstrap.name];
+          document.body.appendChild(script);
+          script.onload = function() {
+            var t0 = performance.now();
+            gondelBootstrap().then(() => {
+              var t1 = performance.now();
+              console.log(gondelBootstrap.name + " booted", componentsToBoot, "components in ", (t1 - t0), " milliseconds.");
+            });
+          }
+        };
+        document.body.appendChild(button);
+      });
+
+      for (let i = 0; i < componentsToBoot; i++) {
+        const div = document.createElement('div')
+        div.innerHTML = 'Click me - ' + i;
+        div.setAttribute('data-g-name', 'Demo');
+        div.setAttribute('data-t-name', 'Demo');
+        document.body.appendChild(div);
+      }
+    </script>
+  </body>
+</html>

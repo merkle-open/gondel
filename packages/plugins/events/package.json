@@ -1,0 +1,36 @@
+{
+  "name": "@gondel/plugin-events",
+  "version": "0.0.1",
+  "description": "Provide additional custom events",
+  "bugs": "https://github.com/namics/gondel/issues",
+  "homepage": "https://github.com/namics/gondel",
+  "repository": "https://github.com/namics/gondel.git",
+  "main": "./dist/index.es5.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "author": "Jan Nicklas",
+  "license": "MIT",
+  "scripts": {
+    "build:clean": "rimraf dist",
+    "build:rollup": "rollup -c rollup.config.js",
+    "build:esm": "tsc --project ./tsconfig.json --declaration --esModuleInterop --declarationDir dist/ --sourceMap --outDir dist/",
+    "build": "npm-run-all build:clean build:esm build:rollup"
+  },
+  "peerDependencies": {
+    "@gondel/core": "*"
+  },
+  "devDependencies": {
+    "@gondel/core": "*",
+    "@babel/core": "7.0.0-beta.40",
+    "@babel/preset-env": "7.0.0-beta.40",
+    "babel-cli": "7.0.0-beta.3",
+    "babel-minify": "0.2.0",
+    "babel-plugin-transform-class-properties": "6.24.1",
+    "npm-run-all": "4.1.2",
+    "rimraf": "2.6.2",
+    "rollup": "0.53.3",
+    "rollup-plugin-node-resolve": "3.0.0",
+    "rollup-plugin-uglify": "2.0.1",
+    "typescript": "2.8.3"
+  }
+}

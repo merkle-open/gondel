@@ -1,0 +1,43 @@
+<html>
+  <body>
+    <div data-a-name="Demo">a) Click me</div>
+    <div data-b-name="Demo">b) Click me</div>
+    <div data-a-name="Demo">a) Click me too</div>
+    <div data-b-name="Demo">b) Click me too</div>
+
+    <script src="../../packages/core/dist/gondel.es5.js"></script>
+    <script src="../../packages/plugins/id/dist/index.es5.js"></script>
+
+    <script>
+      gondelPluginId.init('a');
+      gondelPluginId.init('b');
+
+      gondel.registerComponent('Demo', 'a', class Demo {
+        start() {
+          this._ctx.addEventListener('click', this.greet);
+        }
+        stop() {
+          this._ctx.removeEventListener('click', this.greet);
+        }
+        greet() {
+          alert('Hello from namespace A');
+        }
+      });
+
+      gondel.registerComponent('Demo', 'b', class Demo {
+        start() {
+          this._ctx.addEventListener('click', this.greet);
+        }
+        stop() {
+          this._ctx.removeEventListener('click', this.greet);
+        }
+        greet() {
+          alert('Hello from namespace B');
+        }
+      });
+
+      gondel.startComponents(document.body, 'a');
+      gondel.startComponents(document.body, 'b');
+    </script>
+  </body>
+</html>

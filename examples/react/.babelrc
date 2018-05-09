@@ -1,0 +1,17 @@
+{
+  "presets": [
+    "@babel/react",
+    [
+      "@babel/env", {
+        "modules": false,
+        "targets": {
+          "ie": 9
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-decorators",
+    "transform-class-properties"
+  ]
+}
