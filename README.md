@@ -68,6 +68,10 @@ npm run test:watch
 
 https://stackblitz.com/fork/gondel
 
+# Examples
+
++ Gondel 5 Star - https://stackblitz.com/edit/gondel-5-star
+
 ## License
 
 [MIT license](http://opensource.org/licenses/MIT)
