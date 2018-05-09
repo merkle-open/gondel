@@ -73,7 +73,7 @@ https://stackblitz.com/fork/gondel
 [MIT license](http://opensource.org/licenses/MIT)
 
 [npm-image]: https://badge.fury.io/js/%gondel%2Fcore.svg
-[npm-url]: https://npmjs.org/package/@namics/core
+[npm-url]: https://npmjs.org/package/@gondel/core
 [travis-image]: https://travis-ci.org/namics/gondel.svg?branch=master
 [travis-url]: https://travis-ci.org/namics/gondel
 [license-image]: https://img.shields.io/badge/license-MIT-green.svg
