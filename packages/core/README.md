@@ -1,5 +1,6 @@
 [![NPM version][npm-image]][npm-url] 
-[![Build Status][travis-image]][travis-url] 
+[![Build Status][travis-image]][travis-url]
+[![Size][size-image]][size-url]
 [![License][license-image]][license-url] 
 [![Commitizen friendly][commitizen-image]][commitizen-url] 
 [![Prettier](https://img.shields.io/badge/Code%20Style-Prettier-green.svg)](https://github.com/prettier/prettier)
@@ -76,7 +77,7 @@ https://stackblitz.com/fork/gondel
 
 [MIT license](http://opensource.org/licenses/MIT)
 
-[npm-image]: https://badge.fury.io/js/%gondel%2Fcore.svg
+[npm-image]: https://badge.fury.io/js/%40gondel%2Fcore.svg
 [npm-url]: https://npmjs.org/package/@gondel/core
 [travis-image]: https://travis-ci.org/namics/gondel.svg?branch=master
 [travis-url]: https://travis-ci.org/namics/gondel
@@ -84,3 +85,5 @@ https://stackblitz.com/fork/gondel
 [license-url]: http://opensource.org/licenses/MIT
 [commitizen-image]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
 [commitizen-url]: http://commitizen.github.io/cz-cli/
+[size-image]: http://img.badgesize.io/namics/gondel/master/packages/core/dist/gondel.es5.min.js.svg?compression=gzip&label=gzip%20size
+[size-url]: https://unpkg.com/@gondel/core/dist/gondel.es5.min.js

@@ -28,6 +28,18 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
+  "size-limit": [
+    {
+      "name": "@gondel/core",
+      "limit": "3 KB",
+      "path": "./packages/core/dist/index.js"
+    },
+    {
+      "name": "@gondel/core es5",
+      "limit": "3 KB",
+      "path": "./packages/core/dist/gondel.es5.js"
+    }
+  ],
   "devDependencies": {
     "commitizen": "2.9.6",
     "conventional-changelog-lint": "2.1.1",
