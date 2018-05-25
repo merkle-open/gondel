@@ -29,5 +29,5 @@ export declare class GondelBaseComponent implements GondelComponent {
     /**
      * Stop method
      */
-    stop: () => {};
+    stop(): void;
 }

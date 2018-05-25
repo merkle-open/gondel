@@ -568,7 +568,8 @@ function hookEventDecoratorInCore() {
             // The decorator will store the event information in two different places.
             // For ES6 classes it is using __events
             // For ES5 prototype classes and transpiled ES6 classes it is using prototype.__events
-            var componentEventOptions = (gondelComponent.prototype && gondelComponent.prototype.__events) || gondelComponent.__events;
+            var componentEventOptions = (gondelComponent.prototype && gondelComponent.prototype.__events) ||
+                gondelComponent.__events;
             if (componentEventOptions) {
                 componentEventOptions.forEach(function (eventOptions) {
                     addRootEventListener(namespace, 
@@ -602,6 +603,11 @@ function EventListener(eventName, selector) {
 var GondelBaseComponent = /** @class */ (function () {
     function GondelBaseComponent() {
     }
+    /**
+     * Stop method
+     */
+    GondelBaseComponent.prototype.stop = function () { };
+    
     return GondelBaseComponent;
 }());
 
