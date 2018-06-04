@@ -13,24 +13,34 @@ export default class Button extends GondelBaseComponent {
     this._ctx.style.border = '';
   }
 
-  @EventListener('swipe-left') 
+  @EventListener('swipe-left')
   _handleSwipeLeft(event) {
     console.log(this._ctx, 'was swiped left');
   }
 
-  @EventListener('swipe-right') 
+  @EventListener('swipe-right')
   _handleSwipeRight(event) {
     console.log(this._ctx, 'was swiped right');
   }
 
-  @EventListener('key', 'Escape') 
+  @EventListener('key', 'Escape')
   _handleEscapePress(event) {
     console.log('Global escape key was pressed');
   }
 
-  @EventListener('resize') 
+  @EventListener('resize')
   _handleResize(event) {
     console.log(this._ctx, 'was resized');
+  }
+
+  @EventListener('viewportChange')
+  _handleViewportChange(event) {
+    console.log('New viewport', event.viewport);
+  }
+
+  @EventListener('viewportChange', 'xxsmall')
+  _handleMobileViewportChange(event) {
+    console.log('The mobile viewport was entered (xxsmall)');
   }
 
 

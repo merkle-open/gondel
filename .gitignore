@@ -1,8 +1,35 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+_.*
+.project
+.idea
+/*.iml
 .vscode
-.DS_STORE
+.cache
+.settings
+.config
+.buildpath
+.metadata
+.tmp*
+*.prefs
+.deployables
+atlassian-ide-plugin.xml
+
+# Node
 node_modules
 npm-debug.log
+yarn-error.log
 lerna-debug.log
-.module-cache
+
+# allow
+!.gitkeep
+
+
 *.log*
 coverage
+
+.idea
+*.iml

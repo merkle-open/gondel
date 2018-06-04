@@ -1,0 +1,34 @@
+{
+  "name": "@gondel/plugin-media-queries",
+  "version": "0.0.1",
+  "description": "Provide a custom gondel event which will fire once a given media query is met",
+  "bugs": "https://github.com/namics/gondel/issues",
+  "homepage": "https://github.com/namics/gondel/tree/master/packages/plugins/media-queries",
+  "repository": "https://github.com/namics/gondel.git",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "author": "Jan Widmer",
+  "license": "MIT",
+  "scripts": {
+    "build:clean": "rimraf dist",
+    "build:rollup": "rollup -c rollup.config.js",
+    "build:esm": "tsc --project ./tsconfig.json --declaration --esModuleInterop --declarationDir dist/ --sourceMap --outDir dist/",
+    "build": "npm-run-all build:clean build:esm build:rollup"
+  },
+  "peerDependencies": {
+    "@gondel/core": "*"
+  },
+  "devDependencies": {
+    "@gondel/core": "*",
+    "npm-run-all": "4.1.2",
+    "rimraf": "2.6.2",
+    "rollup": "0.53.3",
+    "rollup-plugin-node-resolve": "3.0.0",
+    "rollup-plugin-uglify": "2.0.1",
+    "typescript": "2.8.3"
+  }
+}
