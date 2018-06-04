@@ -72,6 +72,7 @@ https://stackblitz.com/fork/gondel
 # Examples
 
 + Gondel 5 Star - https://stackblitz.com/edit/gondel-5-star
++ Chunk Splitting - https://stackblitz.com/edit/gondel-lazy-load
 
 ## License
 
