@@ -17,6 +17,7 @@
     "build": "npm-run-all build:clean build:esm build:rollup"
   },
   "dependencies": {
+    "@types/enquire.js": "2.1.1",
     "enquire.js": "2.1.6"
   },
   "peerDependencies": {
