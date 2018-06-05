@@ -607,7 +607,6 @@ var GondelBaseComponent = /** @class */ (function () {
      * Stop method
      */
     GondelBaseComponent.prototype.stop = function () { };
-    
     return GondelBaseComponent;
 }());
 

@@ -12,7 +12,8 @@
   "dependencies": {
     "@gondel/core": "*",
     "@gondel/plugin-hot": "*",
-    "@gondel/plugin-events": "*"
+    "@gondel/plugin-events": "*",
+    "@gondel/plugin-media-queries": "*"
   },
   "devDependencies": {
     "@babel/core": "7.0.0-beta.40",
