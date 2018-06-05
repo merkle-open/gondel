@@ -97,6 +97,8 @@ function generateMediaQueries(breakPoints: { [key: string]: number }) {
       queryString = `(min-width: ${px2em(min)})`;
     } else if (max) {
       queryString = `(max-width: ${px2em(max)})`;
+    } else {
+      throw new Error("The smallest provided viewport must not be set to Infinity");
     }
 
     return { name: breakpointName, query: queryString, min, max };
