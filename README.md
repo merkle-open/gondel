@@ -49,6 +49,10 @@ Gondel follows the [rollup recommendations](https://github.com/rollup/rollup/wik
 
 Gondel is fully typed and exports optional typescript declaration files for typescript projects.
 
+# Plugins
+
+- [Media Queries Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/media-queries) - Provide a custom gondel event which will fire once a given media query is met - [Demo](https://stackblitz.com/edit/gondel-media-query?file=components%2Fbutton.js)
+
 # Contributing to Gondel
 
 Feel free to contribute to gondel.  
