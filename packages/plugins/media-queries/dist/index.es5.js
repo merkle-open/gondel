@@ -69,6 +69,22 @@ function isElement(domNode) {
     return domNode.nodeType !== undefined;
 }
 /**
+ * Inspired by the RXJS anchor approach by using symbols (if supported) or strings
+ * for internal fixtures.
+ *
+ * @param {string=g} namespace
+ * @param {string?} addition
+ * @see https://github.com/ReactiveX/rxjs/blob/master/src/internal/symbol/rxSubscriber.ts
+ */
+function getGondelAttribute(namespace, addition) {
+    if (namespace === void 0) { namespace = "g"; }
+    var id = "__gondel_" + (addition ? addition + "_" : "") + namespace + "__";
+    if (Symbol && typeof Symbol.for === "function") {
+        return Symbol.for(id);
+    }
+    return id;
+}
+/**
  * This function normalizes takes one of the following:
  *  + document query result
  *  + dom node array
@@ -96,7 +112,7 @@ function getFirstDomNode(domNode) {
 function getComponentByDomNode(domNode, namespace) {
     if (namespace === void 0) { namespace = "g"; }
     var firstNode = getFirstDomNode(domNode);
-    var gondelComponent = firstNode["_gondel_" + namespace];
+    var gondelComponent = firstNode[getGondelAttribute(namespace)];
     // Stop if this dom node is not known to gondel
     if (gondelComponent && gondelComponent._ctx) {
         return gondelComponent;
