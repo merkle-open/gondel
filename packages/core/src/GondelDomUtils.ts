@@ -1,6 +1,7 @@
 import { startComponentsFromRegistry } from "./GondelComponentStarter";
 import { GondelComponent } from "./GondelComponent";
 import { componentRegistries } from "./GondelComponentRegistry";
+
 export type ArrayLikeHtmlElement = Element | Element[] | NodeListOf<Element> | ArrayLike<Element>;
 
 /**
@@ -58,15 +59,15 @@ export function stopComponents(domContext?: ArrayLikeHtmlElement, namespace: str
 /**
  * Returns the gondel instance for the given HtmlELement
  */
-export function getComponentByDomNode(
+export function getComponentByDomNode<T extends GondelComponent>(
   domNode: ArrayLikeHtmlElement,
   namespace: string = "g"
-): GondelComponent | undefined {
+): T | undefined {
   const firstNode = getFirstDomNode(domNode);
   const gondelComponent = (firstNode as any)[`_gondel_${namespace}`];
   // Stop if this dom node is not known to gondel
   if (gondelComponent && gondelComponent._ctx) {
-    return gondelComponent as GondelComponent;
+    return gondelComponent as T;
   }
   return;
 }
@@ -74,10 +75,10 @@ export function getComponentByDomNode(
 /**
  * Returns the gondel instance for the given HtmlELement once it is booted
  */
-export function getComponentByDomNodeAsync(
+export function getComponentByDomNodeAsync<T extends GondelComponent>(
   domNode: ArrayLikeHtmlElement,
   namespace: string = "g"
-): Promise<GondelComponent> {
+): Promise<T> {
   const firstNode = getFirstDomNode(domNode);
   const gondelComponent = (firstNode as any)[`_gondelA_${namespace}`];
   // Stop if this dom node is not known to gondel
@@ -86,7 +87,7 @@ export function getComponentByDomNodeAsync(
   }
   // or the component is already booted up return it
   if (gondelComponent._ctx) {
-    return Promise.resolve(gondelComponent as GondelComponent);
+    return Promise.resolve(gondelComponent as T);
   }
   // Wait the component to boot up and return it
   return gondelComponent.then(() => (firstNode as any)[`_gondel_${namespace}`]);

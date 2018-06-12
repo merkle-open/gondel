@@ -1,4 +1,8 @@
-export type IGondelComponent = new (context: HTMLElement, componentName: string) => GondelComponent;
+export interface IGondelComponent {
+  new (context: HTMLElement, componentName: string): GondelComponent;
+  // used for registry to DOM mapping
+  componentName: string;
+}
 
 export type StartMethod =
   // Async boot

@@ -8,6 +8,7 @@ import { GondelComponentRegistry } from "./GondelComponentRegistry";
 import { GondelComponent } from "./GondelComponent";
 import { fireGondelPluginEvent, fireAsyncGondelPluginEvent } from "./GondelPluginUtils";
 import { triggerPublicEvent } from "./GondelEventEmitter";
+
 const noop = () => {};
 const Deferred = (function() {
   this.promise = new Promise(resolve => {

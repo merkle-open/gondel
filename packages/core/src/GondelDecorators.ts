@@ -6,9 +6,20 @@ import { addRootEventListener, removeRootEventListernerForComponent } from "./Go
 import { addGondelPluginEventListener } from "./GondelPluginUtils";
 import { registerComponent } from "./index";
 
-export function Component(componentName: string, namespace?: string) {
+/**
+ * TODO: Can we deprecate the param componentName in favour of the static field componentName?
+ * @param componentName
+ * @param namespace
+ */
+export function Component(componentName?: string, namespace?: string) {
   return function(constructor: IGondelComponent) {
-    registerComponent(componentName, namespace, constructor);
+    if (!constructor.componentName) {
+      throw new Error(
+        `Could not register component, check if ${constructor.name}.componentName is defined.`
+      );
+    }
+
+    registerComponent(constructor.componentName, namespace, constructor);
   };
 }
 
