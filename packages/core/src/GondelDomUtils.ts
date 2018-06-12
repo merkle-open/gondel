@@ -69,7 +69,7 @@ export function stopComponents(domContext?: ArrayLikeHtmlElement, namespace: str
   const components = findComponents(domContext, undefined, namespace);
   const rootComponent = domContext && getComponentByDomNode(domContext);
   if (rootComponent) {
-    components.unshift(rootComponent);
+    components.unshift(rootComponent as any);
   }
   components.forEach(component => component.stop!());
 }
@@ -118,9 +118,9 @@ export function findComponents<T extends GondelComponent & IGondelComponent>(
   domNode: ArrayLikeHtmlElement = document.documentElement,
   component?: T,
   namespace: string = "g"
-): Array<GondelComponent> {
+): Array<T> {
   const firstNode = getFirstDomNode(domNode);
-  const components: Array<GondelComponent> = [];
+  const components: Array<T> = [];
   const attribute = getGondelAttribute(namespace);
   const nodes = firstNode.querySelectorAll(
     `[data-${namespace}-name${component ? `="${component.componentName}"` : ""}]`

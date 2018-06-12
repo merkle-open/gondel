@@ -133,7 +133,7 @@ function startComponentsFromRegistry(gondelComponentRegistry, domContext, namesp
  * Returns true if the given domNode is neither booting nor booted
  */
 function isPristineGondelDomNode(domNode, namespace) {
-    return !domNode.hasOwnProperty(getGondelAttribute(namespace, 'async'));
+    return !domNode.hasOwnProperty(getGondelAttribute(namespace, "async"));
 }
 /**
  * Mark the given dom node as controlled by gondel
@@ -141,7 +141,7 @@ function isPristineGondelDomNode(domNode, namespace) {
 function attachGondelBootingFlag(domNode, bootingFlag, namespace) {
     // The name `A` mean async
     // to allow waiting for asyncronous booted components
-    domNode[getGondelAttribute(namespace, 'async')] = bootingFlag;
+    domNode[getGondelAttribute(namespace, "async")] = bootingFlag;
 }
 /**
  * Constructs a new component
@@ -187,7 +187,7 @@ function stopStartedComponent(component, internalStopMethod, namespace) {
     triggerPublicEvent(namespace + "Stop", component, component._ctx);
     // Remove the component instance from the html element
     delete component._ctx[getGondelAttribute(namespace)];
-    delete component._ctx[getGondelAttribute(namespace, 'async')];
+    delete component._ctx[getGondelAttribute(namespace, "async")];
     component._stopped = true;
     fireGondelPluginEvent("stop", component, { namespace: namespace }, internalStopMethod.bind(component));
 }
@@ -260,9 +260,9 @@ function isElement(domNode) {
  * @see https://github.com/ReactiveX/rxjs/blob/master/src/internal/symbol/rxSubscriber.ts
  */
 function getGondelAttribute(namespace, addition) {
-    if (namespace === void 0) { namespace = 'g'; }
-    var id = "__gondel_" + (addition ? addition + '_' : '') + namespace + "__";
-    if (Symbol && typeof Symbol.for === 'function') {
+    if (namespace === void 0) { namespace = "g"; }
+    var id = "__gondel_" + (addition ? addition + "_" : "") + namespace + "__";
+    if (Symbol && typeof Symbol.for === "function") {
         return Symbol.for(id);
     }
     return id;
@@ -323,7 +323,7 @@ function getComponentByDomNode(domNode, namespace) {
 function getComponentByDomNodeAsync(domNode, namespace) {
     if (namespace === void 0) { namespace = "g"; }
     var firstNode = getFirstDomNode(domNode);
-    var gondelComponent = firstNode[getGondelAttribute(namespace, 'async')];
+    var gondelComponent = firstNode[getGondelAttribute(namespace, "async")];
     // Stop if this dom node is not known to gondel
     if (!gondelComponent) {
         return Promise.reject(undefined);

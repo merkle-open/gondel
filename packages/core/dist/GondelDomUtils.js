@@ -15,9 +15,9 @@ function isElement(domNode) {
  * @see https://github.com/ReactiveX/rxjs/blob/master/src/internal/symbol/rxSubscriber.ts
  */
 export function getGondelAttribute(namespace, addition) {
-    if (namespace === void 0) { namespace = 'g'; }
-    var id = "__gondel_" + (addition ? addition + '_' : '') + namespace + "__";
-    if (Symbol && typeof Symbol.for === 'function') {
+    if (namespace === void 0) { namespace = "g"; }
+    var id = "__gondel_" + (addition ? addition + "_" : "") + namespace + "__";
+    if (Symbol && typeof Symbol.for === "function") {
         return Symbol.for(id);
     }
     return id;
@@ -78,7 +78,7 @@ export function getComponentByDomNode(domNode, namespace) {
 export function getComponentByDomNodeAsync(domNode, namespace) {
     if (namespace === void 0) { namespace = "g"; }
     var firstNode = getFirstDomNode(domNode);
-    var gondelComponent = firstNode[getGondelAttribute(namespace, 'async')];
+    var gondelComponent = firstNode[getGondelAttribute(namespace, "async")];
     // Stop if this dom node is not known to gondel
     if (!gondelComponent) {
         return Promise.reject(undefined);

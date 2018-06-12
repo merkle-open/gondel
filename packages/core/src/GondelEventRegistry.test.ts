@@ -12,7 +12,7 @@ import {
   getEventRegistry
 } from "./GondelEventRegistry";
 
-import { GondelBaseComponent, IGondelComponent } from "./GondelComponent";
+import { GondelBaseComponent } from "./GondelComponent";
 
 describe("GondelEventRegistry", () => {
   const domEventRegistryG = getEventRegistry("g");
@@ -52,7 +52,7 @@ describe("GondelEventRegistry", () => {
       buttonElement.setAttribute("data-g-name", "Button");
       document.documentElement.appendChild(buttonElement);
       startComponents(buttonElement);
-      buttonComponent = getComponentByDomNode(buttonElement) as Button;
+      buttonComponent = getComponentByDomNode<Button>(buttonElement)!;
     });
 
     afterEach(() => {

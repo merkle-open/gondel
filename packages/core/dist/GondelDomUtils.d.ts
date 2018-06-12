@@ -37,4 +37,4 @@ export declare function getComponentByDomNodeAsync<T extends GondelComponent>(do
 /**
  * Returns all components inside the given node
  */
-export declare function findComponents<T extends GondelComponent & IGondelComponent>(domNode?: ArrayLikeHtmlElement, component?: T, namespace?: string): Array<GondelComponent>;
+export declare function findComponents<T extends GondelComponent & IGondelComponent>(domNode?: ArrayLikeHtmlElement, component?: T, namespace?: string): Array<T>;
