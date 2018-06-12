@@ -28,8 +28,9 @@ function createMockElement(namespace: string) {
 describe("GondelComponentStarter", () => {
   describe("#component - e2e", () => {
     it("should call the constructor during start", () => {
-      @Component("Button")
+      @Component()
       class Button extends GondelBaseComponent {
+        static componentName = "Button";
         _wasConstructed: boolean;
         constructor() {
           super();
@@ -43,8 +44,9 @@ describe("GondelComponentStarter", () => {
     });
 
     it("should call the start method during start", () => {
-      @Component("Button")
+      @Component()
       class Button extends GondelBaseComponent {
+        static componentName = "Button";
         _wasStarted: boolean;
         start() {
           this._wasStarted = true;
@@ -57,8 +59,9 @@ describe("GondelComponentStarter", () => {
     });
 
     it("should resolve the boot after sync start", () => {
-      @Component("Button")
+      @Component()
       class Button extends GondelBaseComponent {
+        static componentName = "Button";
         _wasStarted: boolean;
         start() {
           this._wasStarted = true;
@@ -72,8 +75,9 @@ describe("GondelComponentStarter", () => {
     });
 
     it("should resolve the boot after async start", () => {
-      @Component("Button")
+      @Component()
       class Button extends GondelBaseComponent {
+        static componentName = "Button";
         _wasStarted: boolean;
         start(resolve: any) {
           setTimeout(() => {
@@ -90,8 +94,9 @@ describe("GondelComponentStarter", () => {
     });
 
     it("should resolve the boot after async promise start", () => {
-      @Component("Button")
+      @Component()
       class Button extends GondelBaseComponent {
+        static componentName = "Button";
         _wasStarted: boolean;
         start() {
           return new Promise(resolve => {
@@ -110,8 +115,9 @@ describe("GondelComponentStarter", () => {
     });
 
     it("should call the sync method after start", () => {
-      @Component("Button")
+      @Component()
       class Button extends GondelBaseComponent {
+        static componentName = "Button";
         _wasSynced: boolean;
         sync() {
           this._wasSynced = true;
@@ -125,8 +131,10 @@ describe("GondelComponentStarter", () => {
     });
 
     it("should add a stop method to stop the component", () => {
-      @Component("Button")
-      class Button extends GondelBaseComponent {}
+      @Component()
+      class Button extends GondelBaseComponent {
+        static componentName = "Button";
+      }
       const buttonElement = createMockElement("g");
       startComponents(buttonElement);
       const button = getComponentByDomNode(buttonElement) as Button;
@@ -135,8 +143,10 @@ describe("GondelComponentStarter", () => {
     });
 
     it("should add a the default namespace", () => {
-      @Component("Button")
-      class Button extends GondelBaseComponent {}
+      @Component()
+      class Button extends GondelBaseComponent {
+        static componentName = "Button";
+      }
       const buttonElement = createMockElement("g");
       startComponents(buttonElement);
       const button = getComponentByDomNode(buttonElement) as Button;
@@ -144,8 +154,10 @@ describe("GondelComponentStarter", () => {
     });
 
     it("should add a custom namespace", () => {
-      @Component("Button", "x")
-      class Button extends GondelBaseComponent {}
+      @Component(undefined, "x")
+      class Button extends GondelBaseComponent {
+        static componentName = "Button";
+      }
       const buttonElement = createMockElement("x");
       startComponents(buttonElement, "x");
       const button = getComponentByDomNode(buttonElement, "x") as Button;
@@ -153,8 +165,10 @@ describe("GondelComponentStarter", () => {
     });
 
     it("should add a the component name", () => {
-      @Component("Button")
-      class Button extends GondelBaseComponent {}
+      @Component()
+      class Button extends GondelBaseComponent {
+        static componentName = "Button";
+      }
       const buttonElement = createMockElement("g");
       startComponents(buttonElement);
       const button = getComponentByDomNode(buttonElement) as Button;
@@ -162,8 +176,10 @@ describe("GondelComponentStarter", () => {
     });
 
     it("should add a reference to the dom element", () => {
-      @Component("Button")
-      class Button extends GondelBaseComponent {}
+      @Component()
+      class Button extends GondelBaseComponent {
+        static componentName = "Button";
+      }
       const buttonElement = createMockElement("g");
       startComponents(buttonElement);
       const button = getComponentByDomNode(buttonElement) as Button;
@@ -172,8 +188,10 @@ describe("GondelComponentStarter", () => {
 
     it("should throw if a component is not registered", () => {
       const buttonElement = createMockElement("zzz");
-      @Component("FancyComponent", "zzz")
-      class FancyComponent extends GondelBaseComponent {}
+      @Component(undefined, "zzz")
+      class FancyComponent extends GondelBaseComponent {
+        static componentName = "FancyComponent";
+      }
       let errorMessage = "No error";
       try {
         startComponents(undefined, "zzz");

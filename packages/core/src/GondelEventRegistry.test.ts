@@ -19,6 +19,8 @@ describe("GondelEventRegistry", () => {
 
   describe("#addRootEventListener - e2e", () => {
     class Button extends GondelBaseComponent {
+      static componentName = "Button";
+
       eventCount: number = 0;
       eventHistory: Array<string> = [];
 
@@ -38,7 +40,7 @@ describe("GondelEventRegistry", () => {
     let buttonElement: HTMLDivElement;
     let buttonComponent: Button;
     beforeEach(() => {
-      registerComponent("Button", Button);
+      registerComponent(Button);
       buttonElement = document.createElement("div");
       buttonElement.innerHTML = `
         <span class='child'>

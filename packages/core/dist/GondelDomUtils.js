@@ -77,13 +77,13 @@ export function getComponentByDomNodeAsync(domNode, namespace) {
 /**
  * Returns all components inside the given node
  */
-export function findComponents(domNode, componentName, namespace) {
+export function findComponents(domNode, component, namespace) {
     if (domNode === void 0) { domNode = document.documentElement; }
     if (namespace === void 0) { namespace = "g"; }
     var firstNode = getFirstDomNode(domNode);
     var components = [];
     var attribute = "_gondel_" + namespace;
-    var nodes = firstNode.querySelectorAll("[data-" + namespace + "-name" + (componentName ? "=\"" + componentName + "\"" : "") + "]");
+    var nodes = firstNode.querySelectorAll("[data-" + namespace + "-name" + (component ? "=\"" + component.componentName + "\"" : "") + "]");
     for (var i = 0; i < nodes.length; i++) {
         var node = nodes[i];
         var gondelComponentInstance = node[attribute];

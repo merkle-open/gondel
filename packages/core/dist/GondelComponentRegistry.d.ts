@@ -22,5 +22,4 @@ export declare class GondelComponentRegistry {
 export declare const componentRegistries: {
     [key: string]: GondelComponentRegistry;
 };
-export declare function registerComponent(componentName: string, component: IGondelComponent): void;
-export declare function registerComponent(componentName: string, namespace: string | undefined, component: IGondelComponent): void;
+export declare function registerComponent(component: IGondelComponent, namespace?: string): void;

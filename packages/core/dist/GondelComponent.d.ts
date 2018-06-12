@@ -1,5 +1,4 @@
-export declare type IGondelComponent = new (context: HTMLElement, componentName: string) => GondelComponent;
-export interface IGondelComponentBlueprint {
+export interface IGondelComponent {
     new (context: HTMLElement, componentName: string): GondelComponent;
     componentName: string;
 }

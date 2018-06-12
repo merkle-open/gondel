@@ -155,7 +155,7 @@ function constructComponent(domNode, gondelComponentRegisty, namespace) {
     var componentInstance = new GondelComponent(domNode, componentName);
     componentInstance._ctx = domNode;
     componentInstance._namespace = namespace;
-    componentInstance._componentName = componentName;
+    componentInstance._componentName = componentName; // TODO: is this needed when a static property on ctor define its value?
     // Add stop method
     componentInstance.stop = stopStartedComponent.bind(null, componentInstance, componentInstance.stop || noop, namespace);
     // Create a circular reference which will allow access to the componentInstance from ctx
@@ -222,14 +222,9 @@ var GondelComponentRegistry = /** @class */ (function () {
     return GondelComponentRegistry;
 }());
 var componentRegistries = (window.__gondelRegistries = window.__gondelRegistries || {});
-function registerComponent() {
-    var args = arguments;
-    // The componentName is always the first argument
-    var componentName = args[0];
-    // Use namespace from the second argument or fallback to the default "g" if it is missing
-    var namespace = typeof args[1] === "string" ? args[1] : "g";
-    // The last argument is always the component class
-    var component = args[args.length - 1];
+function registerComponent(component, namespace) {
+    if (namespace === void 0) { namespace = "g"; }
+    var componentName = component.componentName;
     if (!componentRegistries[namespace]) {
         componentRegistries[namespace] = new GondelComponentRegistry();
     }
@@ -325,13 +320,13 @@ function getComponentByDomNodeAsync(domNode, namespace) {
 /**
  * Returns all components inside the given node
  */
-function findComponents(domNode, componentName, namespace) {
+function findComponents(domNode, component, namespace) {
     if (domNode === void 0) { domNode = document.documentElement; }
     if (namespace === void 0) { namespace = "g"; }
     var firstNode = getFirstDomNode(domNode);
     var components = [];
     var attribute = "_gondel_" + namespace;
-    var nodes = firstNode.querySelectorAll("[data-" + namespace + "-name" + (componentName ? "=\"" + componentName + "\"" : "") + "]");
+    var nodes = firstNode.querySelectorAll("[data-" + namespace + "-name" + (component ? "=\"" + component.componentName + "\"" : "") + "]");
     for (var i = 0; i < nodes.length; i++) {
         var node = nodes[i];
         var gondelComponentInstance = node[attribute];
@@ -528,16 +523,15 @@ function removeRootEventListernerForComponent(namespace, gondelComponentName) {
 // Because of how decorators work @EventListeners is executed before the class is registred
 // so we need to provide a hrm compatible approch initialize and reinitialize the events
 /**
- * TODO: Can we deprecate the param componentName in favour of the static field componentName?
- * @param componentName
- * @param namespace
+ * Register a gondel component to the registry
+ * @param {string} namespace   The gondel components namespace
  */
 function Component(componentName, namespace) {
     return function (constructor) {
         if (!constructor.componentName) {
             throw new Error("Could not register component, check if " + constructor.name + ".componentName is defined.");
         }
-        registerComponent(constructor.componentName, namespace, constructor);
+        registerComponent(constructor, namespace);
     };
 }
 var areEventsHookedIntoCore = false;

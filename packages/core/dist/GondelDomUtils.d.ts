@@ -1,4 +1,4 @@
-import { GondelComponent } from "./GondelComponent";
+import { IGondelComponent, GondelComponent } from "./GondelComponent";
 export declare type ArrayLikeHtmlElement = Element | Element[] | NodeListOf<Element> | ArrayLike<Element>;
 /**
  * This function normalizes takes one of the following:
@@ -28,4 +28,4 @@ export declare function getComponentByDomNodeAsync<T extends GondelComponent>(do
 /**
  * Returns all components inside the given node
  */
-export declare function findComponents(domNode?: ArrayLikeHtmlElement, componentName?: string, namespace?: string): Array<GondelComponent>;
+export declare function findComponents<T extends GondelComponent & IGondelComponent>(domNode?: ArrayLikeHtmlElement, component?: T, namespace?: string): Array<GondelComponent>;

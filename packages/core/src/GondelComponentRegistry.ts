@@ -38,28 +38,19 @@ export const componentRegistries: {
   [key: string]: GondelComponentRegistry;
 } = ((window as any).__gondelRegistries = (window as any).__gondelRegistries || {});
 
-export function registerComponent(componentName: string, component: IGondelComponent): void;
-export function registerComponent(
-  componentName: string,
-  namespace: string | undefined,
-  component: IGondelComponent
-): void;
-export function registerComponent() {
-  const args = arguments;
-  // The componentName is always the first argument
-  const componentName = args[0] as string;
-  // Use namespace from the second argument or fallback to the default "g" if it is missing
-  const namespace = typeof args[1] === "string" ? args[1] : "g";
-  // The last argument is always the component class
-  let component = args[args.length - 1] as IGondelComponent;
+export function registerComponent(component: IGondelComponent, namespace: string = "g") {
+  const componentName = component.componentName;
+
   if (!componentRegistries[namespace]) {
     componentRegistries[namespace] = new GondelComponentRegistry();
   }
+
   // If this component was already registered we remove the previous one
   // and notify all plugins - this is especially usefull for hot component replacement
   if (componentRegistries[namespace].getComponent(componentName)) {
     fireGondelPluginEvent("unregister", component, { componentName, namespace });
   }
+
   // Let plugins know about the new component
   fireGondelPluginEvent(
     "register",

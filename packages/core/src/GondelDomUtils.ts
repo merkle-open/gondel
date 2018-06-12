@@ -1,5 +1,5 @@
 import { startComponentsFromRegistry } from "./GondelComponentStarter";
-import { GondelComponent } from "./GondelComponent";
+import { IGondelComponent, GondelComponent } from "./GondelComponent";
 import { componentRegistries } from "./GondelComponentRegistry";
 
 export type ArrayLikeHtmlElement = Element | Element[] | NodeListOf<Element> | ArrayLike<Element>;
@@ -96,20 +96,20 @@ export function getComponentByDomNodeAsync<T extends GondelComponent>(
 /**
  * Returns all components inside the given node
  */
-export function findComponents(
+export function findComponents<T extends GondelComponent & IGondelComponent>(
   domNode: ArrayLikeHtmlElement = document.documentElement,
-  componentName?: string,
+  component?: T,
   namespace: string = "g"
 ): Array<GondelComponent> {
   const firstNode = getFirstDomNode(domNode);
   const components: Array<GondelComponent> = [];
   const attribute = `_gondel_${namespace}`;
   const nodes = firstNode.querySelectorAll(
-    `[data-${namespace}-name${componentName ? `="${componentName}"` : ""}]`
+    `[data-${namespace}-name${component ? `="${component.componentName}"` : ""}]`
   );
   for (let i = 0; i < nodes.length; i++) {
     const node = nodes[i];
-    const gondelComponentInstance = (node as any)[attribute] as GondelComponent;
+    const gondelComponentInstance = (node as any)[attribute] as T & GondelComponent;
     // Verify that the component is fully booted
     if (gondelComponentInstance && gondelComponentInstance._ctx === node) {
       components.push(gondelComponentInstance);

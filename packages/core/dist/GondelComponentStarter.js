@@ -82,7 +82,7 @@ export function constructComponent(domNode, gondelComponentRegisty, namespace) {
     var componentInstance = new GondelComponent(domNode, componentName);
     componentInstance._ctx = domNode;
     componentInstance._namespace = namespace;
-    componentInstance._componentName = componentName;
+    componentInstance._componentName = componentName; // TODO: is this needed when a static property on ctor define its value?
     // Add stop method
     componentInstance.stop = stopStartedComponent.bind(null, componentInstance, componentInstance.stop || noop, namespace);
     // Create a circular reference which will allow access to the componentInstance from ctx

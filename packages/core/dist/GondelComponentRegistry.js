@@ -23,14 +23,9 @@ var GondelComponentRegistry = /** @class */ (function () {
 }());
 export { GondelComponentRegistry };
 export var componentRegistries = (window.__gondelRegistries = window.__gondelRegistries || {});
-export function registerComponent() {
-    var args = arguments;
-    // The componentName is always the first argument
-    var componentName = args[0];
-    // Use namespace from the second argument or fallback to the default "g" if it is missing
-    var namespace = typeof args[1] === "string" ? args[1] : "g";
-    // The last argument is always the component class
-    var component = args[args.length - 1];
+export function registerComponent(component, namespace) {
+    if (namespace === void 0) { namespace = "g"; }
+    var componentName = component.componentName;
     if (!componentRegistries[namespace]) {
         componentRegistries[namespace] = new GondelComponentRegistry();
     }

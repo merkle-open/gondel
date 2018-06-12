@@ -28,15 +28,19 @@ function createMockElement(namespace: string) {
 describe("GondelDecorators", () => {
   describe("#component - e2e", () => {
     it("should add the component for the default 'g' namespace", () => {
-      @Component("Button")
-      class Button extends GondelBaseComponent {}
+      @Component()
+      class Button extends GondelBaseComponent {
+        static componentName = "Button";
+      }
       const button = createMockElement("g");
       expect(button.constructor).toBe(Button);
     });
 
     it("should add the component for a custom 't' namespace", () => {
-      @Component("Button", "t")
-      class Button extends GondelBaseComponent {}
+      @Component(undefined, "t")
+      class Button extends GondelBaseComponent {
+        static componentName = "Button";
+      }
       const button = createMockElement("t");
       expect(button.constructor).toBe(Button);
     });
@@ -44,8 +48,9 @@ describe("GondelDecorators", () => {
 
   describe("#event - e2e", () => {
     it("should add a event listener for the default 'g' namespace", () => {
-      @Component("Button")
+      @Component()
       class Button extends GondelBaseComponent {
+        static componentName = "Button";
         _wasClicked = false;
         @EventListener("click")
         _handler() {
@@ -60,8 +65,9 @@ describe("GondelDecorators", () => {
     });
 
     it("should add a event listener for the custom 't' namespace", () => {
-      @Component("Button", "t")
+      @Component(undefined, "t")
       class Button extends GondelBaseComponent {
+        static componentName = "Button";
         _wasClicked = false;
         @EventListener("click")
         _handler() {
@@ -78,8 +84,9 @@ describe("GondelDecorators", () => {
     it("should trow an error if a handler does not start with _", () => {
       let errorMessage;
       try {
-        @Component("Button")
+        @Component()
         class Button extends GondelBaseComponent {
+          static componentName = "Button";
           _wasClicked = false;
           @EventListener("click")
           handler() {
