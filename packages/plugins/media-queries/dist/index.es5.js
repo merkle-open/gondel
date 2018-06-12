@@ -152,6 +152,10 @@ var matches = Element.prototype.matches ||
 
 // Because of how decorators work @EventListeners is executed before the class is registred
 // so we need to provide a hrm compatible approch initialize and reinitialize the events
+/**
+ * Register a gondel component to the registry
+ * @param {string} namespace   The gondel components namespace
+ */
 
 /**
  * The @EventListener decorator will add all event names to a static variable
