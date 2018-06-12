@@ -1,5 +1,10 @@
-import { GondelComponent, IGondelComponent } from "./GondelComponent";
-export declare function Component(componentName: string, namespace?: string): (constructor: IGondelComponent) => void;
+import { GondelComponent, IGondelComponentBlueprint } from "./GondelComponent";
+/**
+ * TODO: Can we deprecate the param componentName in favour of the static field componentName?
+ * @param componentName
+ * @param namespace
+ */
+export declare function Component(componentName?: string, namespace?: string): (constructor: IGondelComponentBlueprint) => void;
 /**
  * The @EventListener decorator will add all event names to a static variable
  */

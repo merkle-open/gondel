@@ -1,4 +1,8 @@
 export declare type IGondelComponent = new (context: HTMLElement, componentName: string) => GondelComponent;
+export interface IGondelComponentBlueprint {
+    new (context: HTMLElement, componentName: string): GondelComponent;
+    componentName: string;
+}
 export declare type StartMethod = ((resolve: Function, reject?: Function) => void) | (() => Promise<any>) | (() => void);
 export interface GondelComponent {
     _ctx: HTMLElement;

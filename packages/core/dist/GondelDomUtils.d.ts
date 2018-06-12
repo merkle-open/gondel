@@ -20,11 +20,11 @@ export declare function stopComponents(domContext?: ArrayLikeHtmlElement, namesp
 /**
  * Returns the gondel instance for the given HtmlELement
  */
-export declare function getComponentByDomNode(domNode: ArrayLikeHtmlElement, namespace?: string): GondelComponent | undefined;
+export declare function getComponentByDomNode<T extends GondelComponent>(domNode: ArrayLikeHtmlElement, namespace?: string): T | undefined;
 /**
  * Returns the gondel instance for the given HtmlELement once it is booted
  */
-export declare function getComponentByDomNodeAsync(domNode: ArrayLikeHtmlElement, namespace?: string): Promise<GondelComponent>;
+export declare function getComponentByDomNodeAsync<T extends GondelComponent>(domNode: ArrayLikeHtmlElement, namespace?: string): Promise<T>;
 /**
  * Returns all components inside the given node
  */

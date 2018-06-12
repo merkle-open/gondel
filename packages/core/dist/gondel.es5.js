@@ -527,9 +527,17 @@ function removeRootEventListernerForComponent(namespace, gondelComponentName) {
 
 // Because of how decorators work @EventListeners is executed before the class is registred
 // so we need to provide a hrm compatible approch initialize and reinitialize the events
+/**
+ * TODO: Can we deprecate the param componentName in favour of the static field componentName?
+ * @param componentName
+ * @param namespace
+ */
 function Component(componentName, namespace) {
     return function (constructor) {
-        registerComponent(componentName, namespace, constructor);
+        if (!constructor.componentName) {
+            throw new Error("Could not register component, check if " + constructor.name + ".componentName is defined.");
+        }
+        registerComponent(constructor.componentName, namespace, constructor);
     };
 }
 var areEventsHookedIntoCore = false;
