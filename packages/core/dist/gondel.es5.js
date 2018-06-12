@@ -133,7 +133,7 @@ function startComponentsFromRegistry(gondelComponentRegistry, domContext, namesp
  * Returns true if the given domNode is neither booting nor booted
  */
 function isPristineGondelDomNode(domNode, namespace) {
-    return !domNode.hasOwnProperty("_gondelA_" + namespace);
+    return !domNode.hasOwnProperty(getGondelAttribute(namespace, 'async'));
 }
 /**
  * Mark the given dom node as controlled by gondel
@@ -141,7 +141,7 @@ function isPristineGondelDomNode(domNode, namespace) {
 function attachGondelBootingFlag(domNode, bootingFlag, namespace) {
     // The name `A` mean async
     // to allow waiting for asyncronous booted components
-    domNode["_gondelA_" + namespace] = bootingFlag;
+    domNode[getGondelAttribute(namespace, 'async')] = bootingFlag;
 }
 /**
  * Constructs a new component
@@ -155,11 +155,13 @@ function constructComponent(domNode, gondelComponentRegisty, namespace) {
     var componentInstance = new GondelComponent(domNode, componentName);
     componentInstance._ctx = domNode;
     componentInstance._namespace = namespace;
-    componentInstance._componentName = componentName; // TODO: is this needed when a static property on ctor define its value?
+    // Adopt component name from blueprint
+    // TODO: is this needed anymore?
+    componentInstance._componentName = GondelComponent.componentName;
     // Add stop method
     componentInstance.stop = stopStartedComponent.bind(null, componentInstance, componentInstance.stop || noop, namespace);
     // Create a circular reference which will allow access to the componentInstance from ctx
-    domNode["_gondel_" + namespace] = componentInstance;
+    domNode[getGondelAttribute(namespace)] = componentInstance;
     return componentInstance;
 }
 /**
@@ -184,8 +186,8 @@ function startConstructedComponent(component) {
 function stopStartedComponent(component, internalStopMethod, namespace) {
     triggerPublicEvent(namespace + "Stop", component, component._ctx);
     // Remove the component instance from the html element
-    delete component._ctx["_gondel_" + namespace];
-    delete component._ctx["_gondelA_" + namespace];
+    delete component._ctx[getGondelAttribute(namespace)];
+    delete component._ctx[getGondelAttribute(namespace, 'async')];
     component._stopped = true;
     fireGondelPluginEvent("stop", component, { namespace: namespace }, internalStopMethod.bind(component));
 }
@@ -250,6 +252,22 @@ function isElement(domNode) {
     return domNode.nodeType !== undefined;
 }
 /**
+ * Inspired by the RXJS anchor approach by using symbols (if supported) or strings
+ * for internal fixtures.
+ *
+ * @param {string=g} namespace
+ * @param {string?} addition
+ * @see https://github.com/ReactiveX/rxjs/blob/master/src/internal/symbol/rxSubscriber.ts
+ */
+function getGondelAttribute(namespace, addition) {
+    if (namespace === void 0) { namespace = 'g'; }
+    var id = "__gondel_" + (addition ? addition + '_' : '') + namespace + "__";
+    if (Symbol && typeof Symbol.for === 'function') {
+        return Symbol.for(id);
+    }
+    return id;
+}
+/**
  * This function normalizes takes one of the following:
  *  + document query result
  *  + dom node array
@@ -292,7 +310,7 @@ function stopComponents(domContext, namespace) {
 function getComponentByDomNode(domNode, namespace) {
     if (namespace === void 0) { namespace = "g"; }
     var firstNode = getFirstDomNode(domNode);
-    var gondelComponent = firstNode["_gondel_" + namespace];
+    var gondelComponent = firstNode[getGondelAttribute(namespace)];
     // Stop if this dom node is not known to gondel
     if (gondelComponent && gondelComponent._ctx) {
         return gondelComponent;
@@ -305,7 +323,7 @@ function getComponentByDomNode(domNode, namespace) {
 function getComponentByDomNodeAsync(domNode, namespace) {
     if (namespace === void 0) { namespace = "g"; }
     var firstNode = getFirstDomNode(domNode);
-    var gondelComponent = firstNode["_gondelA_" + namespace];
+    var gondelComponent = firstNode[getGondelAttribute(namespace, 'async')];
     // Stop if this dom node is not known to gondel
     if (!gondelComponent) {
         return Promise.reject(undefined);
@@ -315,7 +333,7 @@ function getComponentByDomNodeAsync(domNode, namespace) {
         return Promise.resolve(gondelComponent);
     }
     // Wait the component to boot up and return it
-    return gondelComponent.then(function () { return firstNode["_gondel_" + namespace]; });
+    return gondelComponent.then(function () { return firstNode[getGondelAttribute(namespace)]; });
 }
 /**
  * Returns all components inside the given node
@@ -325,7 +343,7 @@ function findComponents(domNode, component, namespace) {
     if (namespace === void 0) { namespace = "g"; }
     var firstNode = getFirstDomNode(domNode);
     var components = [];
-    var attribute = "_gondel_" + namespace;
+    var attribute = getGondelAttribute(namespace);
     var nodes = firstNode.querySelectorAll("[data-" + namespace + "-name" + (component ? "=\"" + component.componentName + "\"" : "") + "]");
     for (var i = 0; i < nodes.length; i++) {
         var node = nodes[i];
@@ -616,6 +634,7 @@ var GondelBaseComponent = /** @class */ (function () {
 
 exports.addGondelPluginEventListener = addGondelPluginEventListener;
 exports.registerComponent = registerComponent;
+exports.getGondelAttribute = getGondelAttribute;
 exports.getFirstDomNode = getFirstDomNode;
 exports.startComponents = startComponents;
 exports.stopComponents = stopComponents;

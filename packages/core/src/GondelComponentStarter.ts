@@ -8,6 +8,7 @@ import { GondelComponentRegistry } from "./GondelComponentRegistry";
 import { GondelComponent } from "./GondelComponent";
 import { fireGondelPluginEvent, fireAsyncGondelPluginEvent } from "./GondelPluginUtils";
 import { triggerPublicEvent } from "./GondelEventEmitter";
+import { getGondelAttribute } from "./GondelDomUtils";
 
 const noop = () => {};
 const Deferred = (function() {
@@ -87,7 +88,7 @@ export function startComponentsFromRegistry(
  * Returns true if the given domNode is neither booting nor booted
  */
 export function isPristineGondelDomNode(domNode: HTMLElement, namespace: string) {
-  return !domNode.hasOwnProperty("_gondelA_" + namespace);
+  return !domNode.hasOwnProperty(getGondelAttribute(namespace, "async"));
 }
 
 /**
@@ -100,7 +101,7 @@ export function attachGondelBootingFlag(
 ) {
   // The name `A` mean async
   // to allow waiting for asyncronous booted components
-  (domNode as any)["_gondelA_" + namespace] = bootingFlag;
+  (domNode as any)[getGondelAttribute(namespace, "async")] = bootingFlag;
 }
 
 /**
@@ -119,7 +120,9 @@ export function constructComponent(
   const componentInstance = new GondelComponent(domNode, componentName);
   componentInstance._ctx = domNode;
   componentInstance._namespace = namespace;
-  componentInstance._componentName = componentName; // TODO: is this needed when a static property on ctor define its value?
+  // Adopt component name from blueprint
+  // TODO: is this needed anymore?
+  componentInstance._componentName = GondelComponent.componentName;
   // Add stop method
   componentInstance.stop = stopStartedComponent.bind(
     null,
@@ -128,7 +131,7 @@ export function constructComponent(
     namespace
   );
   // Create a circular reference which will allow access to the componentInstance from ctx
-  (domNode as any)["_gondel_" + namespace] = componentInstance;
+  (domNode as any)[getGondelAttribute(namespace)] = componentInstance;
   return componentInstance;
 }
 
@@ -161,8 +164,8 @@ export function stopStartedComponent(
 ) {
   triggerPublicEvent(`${namespace}Stop`, component, component._ctx);
   // Remove the component instance from the html element
-  delete (component._ctx as any)[`_gondel_${namespace}`];
-  delete (component._ctx as any)[`_gondelA_${namespace}`];
+  delete (component._ctx as any)[getGondelAttribute(namespace)];
+  delete (component._ctx as any)[getGondelAttribute(namespace, "async")];
   component._stopped = true;
   fireGondelPluginEvent("stop", component, { namespace }, internalStopMethod.bind(component));
 }

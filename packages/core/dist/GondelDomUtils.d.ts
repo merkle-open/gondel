@@ -1,6 +1,15 @@
 import { IGondelComponent, GondelComponent } from "./GondelComponent";
 export declare type ArrayLikeHtmlElement = Element | Element[] | NodeListOf<Element> | ArrayLike<Element>;
 /**
+ * Inspired by the RXJS anchor approach by using symbols (if supported) or strings
+ * for internal fixtures.
+ *
+ * @param {string=g} namespace
+ * @param {string?} addition
+ * @see https://github.com/ReactiveX/rxjs/blob/master/src/internal/symbol/rxSubscriber.ts
+ */
+export declare function getGondelAttribute(namespace?: string, addition?: string): string;
+/**
  * This function normalizes takes one of the following:
  *  + document query result
  *  + dom node array

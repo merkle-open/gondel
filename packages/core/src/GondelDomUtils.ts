@@ -12,6 +12,24 @@ function isElement(domNode: ArrayLikeHtmlElement): domNode is Element {
 }
 
 /**
+ * Inspired by the RXJS anchor approach by using symbols (if supported) or strings
+ * for internal fixtures.
+ *
+ * @param {string=g} namespace
+ * @param {string?} addition
+ * @see https://github.com/ReactiveX/rxjs/blob/master/src/internal/symbol/rxSubscriber.ts
+ */
+export function getGondelAttribute(namespace: string = "g", addition?: string): string {
+  const id = `__gondel_${addition ? addition + "_" : ""}${namespace}__`;
+
+  if (Symbol && typeof Symbol.for === "function") {
+    return (<any>Symbol.for(id)) as string;
+  }
+
+  return id;
+}
+
+/**
  * This function normalizes takes one of the following:
  *  + document query result
  *  + dom node array
@@ -64,7 +82,7 @@ export function getComponentByDomNode<T extends GondelComponent>(
   namespace: string = "g"
 ): T | undefined {
   const firstNode = getFirstDomNode(domNode);
-  const gondelComponent = (firstNode as any)[`_gondel_${namespace}`];
+  const gondelComponent = (firstNode as any)[getGondelAttribute(namespace)];
   // Stop if this dom node is not known to gondel
   if (gondelComponent && gondelComponent._ctx) {
     return gondelComponent as T;
@@ -80,7 +98,7 @@ export function getComponentByDomNodeAsync<T extends GondelComponent>(
   namespace: string = "g"
 ): Promise<T> {
   const firstNode = getFirstDomNode(domNode);
-  const gondelComponent = (firstNode as any)[`_gondelA_${namespace}`];
+  const gondelComponent = (firstNode as any)[getGondelAttribute(namespace, "async")];
   // Stop if this dom node is not known to gondel
   if (!gondelComponent) {
     return Promise.reject(undefined);
@@ -90,7 +108,7 @@ export function getComponentByDomNodeAsync<T extends GondelComponent>(
     return Promise.resolve(gondelComponent as T);
   }
   // Wait the component to boot up and return it
-  return gondelComponent.then(() => (firstNode as any)[`_gondel_${namespace}`]);
+  return gondelComponent.then(() => (firstNode as any)[getGondelAttribute(namespace)]);
 }
 
 /**
@@ -103,7 +121,7 @@ export function findComponents<T extends GondelComponent & IGondelComponent>(
 ): Array<GondelComponent> {
   const firstNode = getFirstDomNode(domNode);
   const components: Array<GondelComponent> = [];
-  const attribute = `_gondel_${namespace}`;
+  const attribute = getGondelAttribute(namespace);
   const nodes = firstNode.querySelectorAll(
     `[data-${namespace}-name${component ? `="${component.componentName}"` : ""}]`
   );
