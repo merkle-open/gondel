@@ -1,6 +1,3 @@
-export interface IGondelComponentConstructor<T = GondelComponent> {
-    new (context: HTMLElement, componentName: string): T;
-}
 export interface IGondelComponent<T = GondelComponent> {
     new (context: HTMLElement, componentName: string): T;
 }

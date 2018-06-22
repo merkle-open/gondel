@@ -10,6 +10,7 @@ import { registerComponent } from "./index";
 export function Component(componentName, namespace) {
     if (namespace === void 0) { namespace = "g"; }
     return function (constructor) {
+        // (<any>constructor).__identification = {};
         registerComponent(componentName, constructor, namespace);
     };
 }
@@ -72,7 +73,7 @@ export function EventListener(eventName, selector) {
             hookEventDecoratorInCore();
         }
         if (handler.substr(0, 1) !== "_") {
-            throw new Error("Invalid handler name '" + handler + "' use '_" + handler + "' instead.");
+            throw new Error("Invalid handler name, use '_' prefix (https://git.io/f4D4a).");
         }
         if (!target.__events) {
             target.__events = [];

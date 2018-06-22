@@ -41,13 +41,14 @@ export function getFirstDomNode(domNode) {
  * @param gondelComponent
  * @param namespace
  */
-function getComponentName(gondelComponent, namespace) {
-    if (!gondelComponent._identifier) {
-        throw new Error('1 Unregistered component has no identifier.');
+function getComponentName(component, namespace) {
+    if (!component.__identification) {
+        throw new Error("Unregistered component has no identifier (https://git.io/f4DKv)");
     }
-    var identification = gondelComponent.__identification;
+    var identification = component
+        .__identification;
     if (!identification[namespace]) {
-        throw new Error('2 No component for namespace ' + namespace);
+        throw new Error("No component for '" + namespace + "' (https://git.io/f4DKf)");
     }
     return identification[namespace];
 }
@@ -91,9 +92,7 @@ export function getComponentByDomNode(domNode, namespace) {
     if (gondelComponent && gondelComponent._ctx) {
         return gondelComponent;
     }
-    throw new Error("Could not find any gondel component in namespace " + namespace + " on node " + firstNode.nodeName + ". " +
-        "This usually happens when the DOM content was modified by a third-party tool." +
-        "Use 'isComponentMounted' to check if the component is mounted.");
+    throw new Error("Component not found in DOM (https://git.io/f4D44).");
 }
 /**
  * Returns the gondel instance for the given HtmlELement once it is booted
@@ -119,7 +118,11 @@ export function findComponents(domNode, component, namespace) {
     var firstNode = getFirstDomNode(domNode);
     var components = [];
     var attribute = getGondelAttribute(namespace);
-    var nodes = firstNode.querySelectorAll("[data-" + namespace + "-name" + (component ? "=\"" + (typeof component === "string" ? component : getComponentName(component, namespace)) + "\"" : "") + "]");
+    var nodes = firstNode.querySelectorAll("[data-" + namespace + "-name" + (component
+        ? "=\"" + (typeof component === "string"
+            ? component
+            : getComponentName(component, namespace)) + "\""
+        : "") + "]");
     for (var i = 0; i < nodes.length; i++) {
         var node = nodes[i];
         var gondelComponentInstance = node[attribute];
@@ -128,7 +131,7 @@ export function findComponents(domNode, component, namespace) {
             components.push(gondelComponentInstance);
         }
     }
-    if (typeof component === 'string') {
+    if (typeof component === "string") {
         return components;
     }
     return components;

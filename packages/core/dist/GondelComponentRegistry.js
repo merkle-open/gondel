@@ -28,7 +28,7 @@ export function registerComponent(componentName, component, namespace) {
     // Add an identifier to the constructor
     // for mapping the class to a dom query selector
     var identifiedComponent = component;
-    if (!identifiedComponent.hasOwnProperty('__identification')) {
+    if (!identifiedComponent.hasOwnProperty("__identification")) {
         identifiedComponent.__identification = {};
     }
     identifiedComponent.__identification[namespace] = componentName;

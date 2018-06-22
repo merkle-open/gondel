@@ -78,7 +78,7 @@ export function constructComponent(domNode, gondelComponentRegisty, namespace) {
     var componentName = domNode.getAttribute("data-" + namespace + "-name");
     var GondelComponent = gondelComponentRegisty.getComponent(componentName);
     if (GondelComponent === undefined) {
-        throw new Error("Failed to boot component - " + componentName + " is not registred");
+        throw new Error("Boot failed, " + componentName + " not registered (https://git.io/f4D4G).");
     }
     var componentInstance = new GondelComponent(domNode, componentName);
     componentInstance._ctx = domNode;

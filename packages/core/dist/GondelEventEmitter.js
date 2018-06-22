@@ -8,13 +8,7 @@ export function triggerPublicEvent(eventName, gondelComponent, target, eventData
     var event = document.createEvent("Event");
     var eventTarget = target ? getFirstDomNode(target) : gondelComponent._ctx;
     if (eventName[0] !== gondelComponent._namespace) {
-        throw new Error("Invalid event name '" +
-            eventName +
-            "' - use '" +
-            gondelComponent._namespace +
-            eventName.charAt(0).toUpperCase() +
-            eventName.slice(1) +
-            "'");
+        throw new Error("Invalid event name " + eventName + " (https://git.io/f4Drw)");
     }
     event.initEvent(eventName, canBubble, true);
     event.data = {

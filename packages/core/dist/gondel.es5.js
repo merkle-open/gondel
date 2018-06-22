@@ -21,7 +21,7 @@ function fireGondelPluginEvent(eventName, initialValue, data, callback) {
     // Add a guard to prevent asyncron plugin listeners
     // to simplify the usage of fireGondelPluginEvent
     if (!isSyncron) {
-        throw new Error("Async plugin listener");
+        throw new Error("Async plugin listener (https://git.io/f4Dor)");
     }
     return callbackResult;
 }
@@ -55,13 +55,7 @@ function triggerPublicEvent(eventName, gondelComponent, target, eventData, canBu
     var event = document.createEvent("Event");
     var eventTarget = target ? getFirstDomNode(target) : gondelComponent._ctx;
     if (eventName[0] !== gondelComponent._namespace) {
-        throw new Error("Invalid event name '" +
-            eventName +
-            "' - use '" +
-            gondelComponent._namespace +
-            eventName.charAt(0).toUpperCase() +
-            eventName.slice(1) +
-            "'");
+        throw new Error("Invalid event name " + eventName + " (https://git.io/f4Drw)");
     }
     event.initEvent(eventName, canBubble, true);
     event.data = {
@@ -150,7 +144,7 @@ function constructComponent(domNode, gondelComponentRegisty, namespace) {
     var componentName = domNode.getAttribute("data-" + namespace + "-name");
     var GondelComponent = gondelComponentRegisty.getComponent(componentName);
     if (GondelComponent === undefined) {
-        throw new Error("Failed to boot component - " + componentName + " is not registred");
+        throw new Error("Boot failed, " + componentName + " not registered (https://git.io/f4D4G).");
     }
     var componentInstance = new GondelComponent(domNode, componentName);
     componentInstance._ctx = domNode;
@@ -228,7 +222,7 @@ function registerComponent(componentName, component, namespace) {
     // Add an identifier to the constructor
     // for mapping the class to a dom query selector
     var identifiedComponent = component;
-    if (!identifiedComponent.hasOwnProperty('__identification')) {
+    if (!identifiedComponent.hasOwnProperty("__identification")) {
         identifiedComponent.__identification = {};
     }
     identifiedComponent.__identification[namespace] = componentName;
@@ -291,13 +285,14 @@ function getFirstDomNode(domNode) {
  * @param gondelComponent
  * @param namespace
  */
-function getComponentName(gondelComponent, namespace) {
-    if (!gondelComponent._identifier) {
-        throw new Error('1 Unregistered component has no identifier.');
+function getComponentName(component, namespace) {
+    if (!component.__identification) {
+        throw new Error("Unregistered component has no identifier (https://git.io/f4DKv)");
     }
-    var identification = gondelComponent.__identification;
+    var identification = component
+        .__identification;
     if (!identification[namespace]) {
-        throw new Error('2 No component for namespace ' + namespace);
+        throw new Error("No component for '" + namespace + "' (https://git.io/f4DKf)");
     }
     return identification[namespace];
 }
@@ -341,9 +336,7 @@ function getComponentByDomNode(domNode, namespace) {
     if (gondelComponent && gondelComponent._ctx) {
         return gondelComponent;
     }
-    throw new Error("Could not find any gondel component in namespace " + namespace + " on node " + firstNode.nodeName + ". " +
-        "This usually happens when the DOM content was modified by a third-party tool." +
-        "Use 'isComponentMounted' to check if the component is mounted.");
+    throw new Error("Component not found in DOM (https://git.io/f4D44).");
 }
 /**
  * Returns the gondel instance for the given HtmlELement once it is booted
@@ -369,7 +362,11 @@ function findComponents(domNode, component, namespace) {
     var firstNode = getFirstDomNode(domNode);
     var components = [];
     var attribute = getGondelAttribute(namespace);
-    var nodes = firstNode.querySelectorAll("[data-" + namespace + "-name" + (component ? "=\"" + (typeof component === "string" ? component : getComponentName(component, namespace)) + "\"" : "") + "]");
+    var nodes = firstNode.querySelectorAll("[data-" + namespace + "-name" + (component
+        ? "=\"" + (typeof component === "string"
+            ? component
+            : getComponentName(component, namespace)) + "\""
+        : "") + "]");
     for (var i = 0; i < nodes.length; i++) {
         var node = nodes[i];
         var gondelComponentInstance = node[attribute];
@@ -378,7 +375,7 @@ function findComponents(domNode, component, namespace) {
             components.push(gondelComponentInstance);
         }
     }
-    if (typeof component === 'string') {
+    if (typeof component === "string") {
         return components;
     }
     return components;
@@ -575,6 +572,7 @@ function removeRootEventListernerForComponent(namespace, gondelComponentName) {
 function Component(componentName, namespace) {
     if (namespace === void 0) { namespace = "g"; }
     return function (constructor) {
+        // (<any>constructor).__identification = {};
         registerComponent(componentName, constructor, namespace);
     };
 }
@@ -637,7 +635,7 @@ function EventListener(eventName, selector) {
             hookEventDecoratorInCore();
         }
         if (handler.substr(0, 1) !== "_") {
-            throw new Error("Invalid handler name '" + handler + "' use '_" + handler + "' instead.");
+            throw new Error("Invalid handler name, use '_' prefix (https://git.io/f4D4a).");
         }
         if (!target.__events) {
             target.__events = [];
