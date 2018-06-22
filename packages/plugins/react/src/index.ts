@@ -28,6 +28,7 @@ export class GondelReactComponent<S> extends GondelBaseComponent
   _setInternalState: (config: S) => void | undefined;
 
   state: S;
+  __identification = {};
   protected setState(state: S) {
     this.state = Object.assign({}, this.state, state);
     if (this._setInternalState) {
@@ -140,6 +141,6 @@ export class GondelReactComponent<S> extends GondelBaseComponent
   componentDidCatch?(error: Error, errorInfo: React.ErrorInfo): void;
 
   protected render(): any {
-    throw new Error(`${this._componentName} is missing an initialRender method`);
+    throw new Error(`${this._componentName}'s render method is missing (https://git.io/f4DKo)`);
   }
 }

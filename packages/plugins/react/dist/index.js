@@ -34,6 +34,7 @@ var GondelReactComponent = /** @class */ (function (_super) {
     __extends(GondelReactComponent, _super);
     function GondelReactComponent(ctx) {
         var _this = _super.call(this) || this;
+        _this.__identification = {};
         // Overwrite the current start method
         var originalStart = _this.start;
         var ReactDOMPromise = import(/* webpackPrefetch: true, webpackChunkName: 'ReactDom' */ "react-dom").then(function (ReactDOM) { return ReactDOM.default; });

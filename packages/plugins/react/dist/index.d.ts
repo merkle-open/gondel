@@ -7,6 +7,7 @@ import { ComponentLifecycle } from "react";
 export declare class GondelReactComponent<S> extends GondelBaseComponent implements ComponentLifecycle<null, S> {
     _setInternalState: (config: S) => void | undefined;
     state: S;
+    __identification: {};
     protected setState(state: S): void;
     constructor(ctx: HTMLElement);
     /**
