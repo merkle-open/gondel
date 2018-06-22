@@ -53,12 +53,12 @@ export function getFirstDomNode(domNode: ArrayLikeHtmlElement): HTMLElement {
  * @param gondelComponent
  * @param namespace
  */
-function getComponentName(gondelComponent: IGondelComponent, namespace: string): string {
-  if (!(gondelComponent as any).__identifier) {
+function getComponentName(component: IGondelComponent, namespace: string): string {
+  if (!(component as any).__identification) {
     throw new Error("Unregistered component has no identifier (https://git.io/f4DKv)");
   }
 
-  const identification = (gondelComponent as IGondelComponent & IGondelComponentWithIdentification)
+  const identification = (component as IGondelComponent & IGondelComponentWithIdentification)
     .__identification;
 
   if (!identification[namespace]) {
