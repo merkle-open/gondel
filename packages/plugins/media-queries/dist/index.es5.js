@@ -106,6 +106,7 @@ function getFirstDomNode(domNode) {
  * Stop all nodes in the given context
  */
 
+
 /**
  * Returns the gondel instance for the given HtmlELement
  */
@@ -117,14 +118,12 @@ function getComponentByDomNode(domNode, namespace) {
     if (gondelComponent && gondelComponent._ctx) {
         return gondelComponent;
     }
-    return;
+    throw new Error("Could not find any gondel component in namespace " + namespace + " on node " + firstNode.nodeName + ". " +
+        "This usually happens when the DOM content was modified by a third-party tool." +
+        "Use 'isComponentMounted' to check if the component is mounted.");
 }
 /**
  * Returns the gondel instance for the given HtmlELement once it is booted
- */
-
-/**
- * Returns all components inside the given node
  */
 
 /**
