@@ -2,10 +2,8 @@ import { Component } from "@gondel/core";
 import { GondelReactComponent } from "@gondel/plugin-react";
 import React from 'react';
 
-@Component()
+@Component('DemoApp')
 export class DemoApp extends GondelReactComponent<{ title: string }> {
-  static componentName = 'DemoApp';
-
   App: React.ComponentClass;
 
   async start() {
@@ -19,6 +17,8 @@ export class DemoApp extends GondelReactComponent<{ title: string }> {
   }
 
   setTitle(newTitle: string) {
-    this.setState({title: newTitle});
+    this.setState({
+      title: newTitle
+    });
   }
 }
