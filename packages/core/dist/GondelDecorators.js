@@ -10,7 +10,6 @@ import { registerComponent } from "./index";
 export function Component(componentName, namespace) {
     if (namespace === void 0) { namespace = "g"; }
     return function (constructor) {
-        // (<any>constructor).__identification = {};
         registerComponent(componentName, constructor, namespace);
     };
 }
