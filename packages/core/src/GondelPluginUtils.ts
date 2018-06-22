@@ -55,7 +55,7 @@ export function fireGondelPluginEvent<T, U>(
   // Add a guard to prevent asyncron plugin listeners
   // to simplify the usage of fireGondelPluginEvent
   if (!isSyncron) {
-    throw new Error("Async plugin listener");
+    throw new Error("Async plugin listener (https://git.io/f4Dor)");
   }
   return callbackResult as any;
 }

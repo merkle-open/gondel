@@ -1,4 +1,4 @@
-import { IGondelComponent, GondelComponent } from "./GondelComponent";
+import { GondelComponent } from "./GondelComponent";
 export declare type ArrayLikeHtmlElement = Element | Element[] | NodeListOf<Element> | ArrayLike<Element>;
 /**
  * Inspired by the RXJS anchor approach by using symbols (if supported) or strings
@@ -26,10 +26,11 @@ export declare function startComponents(domContext?: ArrayLikeHtmlElement, names
  * Stop all nodes in the given context
  */
 export declare function stopComponents(domContext?: ArrayLikeHtmlElement, namespace?: string): void;
+export declare function isComponentMounted(domNode: ArrayLikeHtmlElement, namespace?: string): boolean;
 /**
  * Returns the gondel instance for the given HtmlELement
  */
-export declare function getComponentByDomNode<T extends GondelComponent>(domNode: ArrayLikeHtmlElement, namespace?: string): T | undefined;
+export declare function getComponentByDomNode<T extends GondelComponent>(domNode: ArrayLikeHtmlElement, namespace?: string): T;
 /**
  * Returns the gondel instance for the given HtmlELement once it is booted
  */
@@ -37,4 +38,7 @@ export declare function getComponentByDomNodeAsync<T extends GondelComponent>(do
 /**
  * Returns all components inside the given node
  */
-export declare function findComponents<T extends GondelComponent & IGondelComponent>(domNode?: ArrayLikeHtmlElement, component?: T, namespace?: string): Array<T>;
+export declare function findComponents(domNode?: ArrayLikeHtmlElement, component?: string, namespace?: string): Array<GondelComponent>;
+export declare function findComponents<T extends GondelComponent>(domNode?: ArrayLikeHtmlElement, component?: {
+    new (): T;
+}, namespace?: string): Array<T>;

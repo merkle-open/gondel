@@ -156,8 +156,7 @@ function constructComponent(domNode, gondelComponentRegisty, namespace) {
     componentInstance._ctx = domNode;
     componentInstance._namespace = namespace;
     // Adopt component name from blueprint
-    // TODO: is this needed anymore?
-    componentInstance._componentName = GondelComponent.componentName;
+    componentInstance._componentName = GondelComponent.__identification[namespace];
     // Add stop method
     componentInstance.stop = stopStartedComponent.bind(null, componentInstance, componentInstance.stop || noop, namespace);
     // Create a circular reference which will allow access to the componentInstance from ctx
@@ -224,9 +223,15 @@ var GondelComponentRegistry = /** @class */ (function () {
     return GondelComponentRegistry;
 }());
 var componentRegistries = (window.__gondelRegistries = window.__gondelRegistries || {});
-function registerComponent(component, namespace) {
+function registerComponent(componentName, component, namespace) {
     if (namespace === void 0) { namespace = "g"; }
-    var componentName = component.componentName;
+    // Add an identifier to the constructor
+    // for mapping the class to a dom query selector
+    var identifiedComponent = component;
+    if (!identifiedComponent.hasOwnProperty('__identification')) {
+        identifiedComponent.__identification = {};
+    }
+    identifiedComponent.__identification[namespace] = componentName;
     if (!componentRegistries[namespace]) {
         componentRegistries[namespace] = new GondelComponentRegistry();
     }
@@ -241,7 +246,7 @@ function registerComponent(component, namespace) {
         namespace: namespace,
         gondelComponentRegistry: componentRegistries[namespace]
     }, function (component) {
-        componentRegistries[namespace].registerComponent(componentName, component);
+        componentRegistries[namespace].registerComponent(componentName, identifiedComponent);
     });
 }
 
@@ -282,6 +287,21 @@ function getFirstDomNode(domNode) {
     return domNode[0];
 }
 /**
+ *
+ * @param gondelComponent
+ * @param namespace
+ */
+function getComponentName(gondelComponent, namespace) {
+    if (!gondelComponent._identifier) {
+        throw new Error('1 Unregistered component has no identifier.');
+    }
+    var identification = gondelComponent.__identification;
+    if (!identification[namespace]) {
+        throw new Error('2 No component for namespace ' + namespace);
+    }
+    return identification[namespace];
+}
+/**
  * Start all nodes in the given context
  */
 function startComponents(domContext, namespace) {
@@ -304,6 +324,12 @@ function stopComponents(domContext, namespace) {
     }
     components.forEach(function (component) { return component.stop(); });
 }
+function isComponentMounted(domNode, namespace) {
+    if (namespace === void 0) { namespace = "g"; }
+    var firstNode = getFirstDomNode(domNode);
+    var gondelComponent = firstNode[getGondelAttribute(namespace)];
+    return gondelComponent && gondelComponent._ctx;
+}
 /**
  * Returns the gondel instance for the given HtmlELement
  */
@@ -315,7 +341,9 @@ function getComponentByDomNode(domNode, namespace) {
     if (gondelComponent && gondelComponent._ctx) {
         return gondelComponent;
     }
-    return;
+    throw new Error("Could not find any gondel component in namespace " + namespace + " on node " + firstNode.nodeName + ". " +
+        "This usually happens when the DOM content was modified by a third-party tool." +
+        "Use 'isComponentMounted' to check if the component is mounted.");
 }
 /**
  * Returns the gondel instance for the given HtmlELement once it is booted
@@ -335,16 +363,13 @@ function getComponentByDomNodeAsync(domNode, namespace) {
     // Wait the component to boot up and return it
     return gondelComponent.then(function () { return firstNode[getGondelAttribute(namespace)]; });
 }
-/**
- * Returns all components inside the given node
- */
 function findComponents(domNode, component, namespace) {
     if (domNode === void 0) { domNode = document.documentElement; }
     if (namespace === void 0) { namespace = "g"; }
     var firstNode = getFirstDomNode(domNode);
     var components = [];
     var attribute = getGondelAttribute(namespace);
-    var nodes = firstNode.querySelectorAll("[data-" + namespace + "-name" + (component ? "=\"" + component.componentName + "\"" : "") + "]");
+    var nodes = firstNode.querySelectorAll("[data-" + namespace + "-name" + (component ? "=\"" + (typeof component === "string" ? component : getComponentName(component, namespace)) + "\"" : "") + "]");
     for (var i = 0; i < nodes.length; i++) {
         var node = nodes[i];
         var gondelComponentInstance = node[attribute];
@@ -352,6 +377,9 @@ function findComponents(domNode, component, namespace) {
         if (gondelComponentInstance && gondelComponentInstance._ctx === node) {
             components.push(gondelComponentInstance);
         }
+    }
+    if (typeof component === 'string') {
+        return components;
     }
     return components;
 }
@@ -545,11 +573,9 @@ function removeRootEventListernerForComponent(namespace, gondelComponentName) {
  * @param {string} namespace   The gondel components namespace
  */
 function Component(componentName, namespace) {
+    if (namespace === void 0) { namespace = "g"; }
     return function (constructor) {
-        if (!constructor.componentName) {
-            throw new Error("Could not register component, check if " + constructor.name + ".componentName is defined.");
-        }
-        registerComponent(constructor, namespace);
+        registerComponent(componentName, constructor, namespace);
     };
 }
 var areEventsHookedIntoCore = false;
@@ -627,6 +653,10 @@ var GondelBaseComponent = /** @class */ (function () {
      * Stop method
      */
     GondelBaseComponent.prototype.stop = function () { };
+    /**
+     * The components initial identification mappings
+     */
+    GondelBaseComponent.__identification = {};
     return GondelBaseComponent;
 }());
 
@@ -638,6 +668,7 @@ exports.getGondelAttribute = getGondelAttribute;
 exports.getFirstDomNode = getFirstDomNode;
 exports.startComponents = startComponents;
 exports.stopComponents = stopComponents;
+exports.isComponentMounted = isComponentMounted;
 exports.getComponentByDomNode = getComponentByDomNode;
 exports.getComponentByDomNodeAsync = getComponentByDomNodeAsync;
 exports.findComponents = findComponents;

@@ -8,11 +8,9 @@ import { registerComponent } from "./index";
  * @param {string} namespace   The gondel components namespace
  */
 export function Component(componentName, namespace) {
+    if (namespace === void 0) { namespace = "g"; }
     return function (constructor) {
-        if (!constructor.componentName) {
-            throw new Error("Could not register component, check if " + constructor.name + ".componentName is defined.");
-        }
-        registerComponent(constructor, namespace);
+        registerComponent(componentName, constructor, namespace);
     };
 }
 var areEventsHookedIntoCore = false;

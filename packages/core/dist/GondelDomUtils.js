@@ -37,6 +37,21 @@ export function getFirstDomNode(domNode) {
     return domNode[0];
 }
 /**
+ *
+ * @param gondelComponent
+ * @param namespace
+ */
+function getComponentName(gondelComponent, namespace) {
+    if (!gondelComponent._identifier) {
+        throw new Error('1 Unregistered component has no identifier.');
+    }
+    var identification = gondelComponent.__identification;
+    if (!identification[namespace]) {
+        throw new Error('2 No component for namespace ' + namespace);
+    }
+    return identification[namespace];
+}
+/**
  * Start all nodes in the given context
  */
 export function startComponents(domContext, namespace) {
@@ -59,6 +74,12 @@ export function stopComponents(domContext, namespace) {
     }
     components.forEach(function (component) { return component.stop(); });
 }
+export function isComponentMounted(domNode, namespace) {
+    if (namespace === void 0) { namespace = "g"; }
+    var firstNode = getFirstDomNode(domNode);
+    var gondelComponent = firstNode[getGondelAttribute(namespace)];
+    return gondelComponent && gondelComponent._ctx;
+}
 /**
  * Returns the gondel instance for the given HtmlELement
  */
@@ -70,7 +91,9 @@ export function getComponentByDomNode(domNode, namespace) {
     if (gondelComponent && gondelComponent._ctx) {
         return gondelComponent;
     }
-    return;
+    throw new Error("Could not find any gondel component in namespace " + namespace + " on node " + firstNode.nodeName + ". " +
+        "This usually happens when the DOM content was modified by a third-party tool." +
+        "Use 'isComponentMounted' to check if the component is mounted.");
 }
 /**
  * Returns the gondel instance for the given HtmlELement once it is booted
@@ -90,16 +113,13 @@ export function getComponentByDomNodeAsync(domNode, namespace) {
     // Wait the component to boot up and return it
     return gondelComponent.then(function () { return firstNode[getGondelAttribute(namespace)]; });
 }
-/**
- * Returns all components inside the given node
- */
 export function findComponents(domNode, component, namespace) {
     if (domNode === void 0) { domNode = document.documentElement; }
     if (namespace === void 0) { namespace = "g"; }
     var firstNode = getFirstDomNode(domNode);
     var components = [];
     var attribute = getGondelAttribute(namespace);
-    var nodes = firstNode.querySelectorAll("[data-" + namespace + "-name" + (component ? "=\"" + component.componentName + "\"" : "") + "]");
+    var nodes = firstNode.querySelectorAll("[data-" + namespace + "-name" + (component ? "=\"" + (typeof component === "string" ? component : getComponentName(component, namespace)) + "\"" : "") + "]");
     for (var i = 0; i < nodes.length; i++) {
         var node = nodes[i];
         var gondelComponentInstance = node[attribute];
@@ -107,6 +127,9 @@ export function findComponents(domNode, component, namespace) {
         if (gondelComponentInstance && gondelComponentInstance._ctx === node) {
             components.push(gondelComponentInstance);
         }
+    }
+    if (typeof component === 'string') {
+        return components;
     }
     return components;
 }

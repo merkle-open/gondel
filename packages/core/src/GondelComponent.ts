@@ -1,7 +1,11 @@
-export interface IGondelComponent {
-  new (context: HTMLElement, componentName: string): GondelComponent;
-  // used for registry to DOM mapping
-  componentName: string;
+export interface IGondelComponent<T = GondelComponent> {
+  new (context: HTMLElement, componentName: string): T;
+}
+
+export interface IGondelComponentWithIdentification {
+  __identification: {
+    [namespace: string]: string;
+  };
 }
 
 export type StartMethod =
@@ -30,6 +34,10 @@ export interface GondelComponent {
 }
 
 export class GondelBaseComponent implements GondelComponent {
+  /**
+   * The components initial identification mappings
+   */
+  static __identification = {};
   /**
    * The component context
    */

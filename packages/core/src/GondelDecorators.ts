@@ -1,4 +1,8 @@
-import { GondelComponent, IGondelComponent } from "./GondelComponent";
+import {
+  GondelComponent,
+  IGondelComponent,
+  IGondelComponentWithIdentification
+} from "./GondelComponent";
 import { GondelComponentRegistry } from "./GondelComponentRegistry";
 import { addRootEventListener, removeRootEventListernerForComponent } from "./GondelEventRegistry";
 // Because of how decorators work @EventListeners is executed before the class is registred
@@ -10,15 +14,9 @@ import { registerComponent } from "./index";
  * Register a gondel component to the registry
  * @param {string} namespace   The gondel components namespace
  */
-export function Component(componentName?: string, namespace?: string) {
+export function Component(componentName: string, namespace: string = "g") {
   return function(constructor: IGondelComponent) {
-    if (!constructor.componentName) {
-      throw new Error(
-        `Could not register component, check if ${constructor.name}.componentName is defined.`
-      );
-    }
-
-    registerComponent(constructor, namespace);
+    registerComponent(componentName, constructor, namespace);
   };
 }
 
@@ -112,7 +110,7 @@ export function EventListener(eventName: string, selector?: string | object) {
       hookEventDecoratorInCore();
     }
     if (handler.substr(0, 1) !== "_") {
-      throw new Error(`Invalid handler name '${handler}' use '_${handler}' instead.`);
+      throw new Error(`Invalid handler name, use '_' prefix (https://git.io/f4D4a).`);
     }
     if (!target.__events) {
       target.__events = [];

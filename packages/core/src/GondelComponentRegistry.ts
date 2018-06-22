@@ -2,11 +2,15 @@
  * The component registry allows to store
  * gondel components by an unique name
  */
-import { IGondelComponent, GondelComponent } from "./GondelComponent";
+import {
+  IGondelComponent,
+  GondelComponent,
+  IGondelComponentWithIdentification
+} from "./GondelComponent";
 import { fireGondelPluginEvent } from "./GondelPluginUtils";
 
 export class GondelComponentRegistry {
-  _components: { [componentName: string]: IGondelComponent };
+  _components: { [componentName: string]: IGondelComponent & IGondelComponentWithIdentification };
   _activeComponents: { [componentName: string]: boolean };
 
   constructor() {
@@ -14,7 +18,10 @@ export class GondelComponentRegistry {
     this._activeComponents = {};
   }
 
-  registerComponent(name: string, gondelComponent: IGondelComponent) {
+  registerComponent(
+    name: string,
+    gondelComponent: IGondelComponent & IGondelComponentWithIdentification
+  ) {
     this._components[name] = gondelComponent;
   }
 
@@ -38,8 +45,18 @@ export const componentRegistries: {
   [key: string]: GondelComponentRegistry;
 } = ((window as any).__gondelRegistries = (window as any).__gondelRegistries || {});
 
-export function registerComponent(component: IGondelComponent, namespace: string = "g") {
-  const componentName = component.componentName;
+export function registerComponent(
+  componentName: string,
+  component: IGondelComponent,
+  namespace: string = "g"
+) {
+  // Add an identifier to the constructor
+  // for mapping the class to a dom query selector
+  const identifiedComponent = component as IGondelComponent & IGondelComponentWithIdentification;
+  if (!identifiedComponent.hasOwnProperty("__identification")) {
+    identifiedComponent.__identification = {};
+  }
+  identifiedComponent.__identification[namespace] = componentName;
 
   if (!componentRegistries[namespace]) {
     componentRegistries[namespace] = new GondelComponentRegistry();
@@ -61,7 +78,7 @@ export function registerComponent(component: IGondelComponent, namespace: string
       gondelComponentRegistry: componentRegistries[namespace]
     },
     function(component) {
-      componentRegistries[namespace].registerComponent(componentName, component);
+      componentRegistries[namespace].registerComponent(componentName, identifiedComponent);
     }
   );
 }

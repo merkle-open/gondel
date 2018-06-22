@@ -1,5 +1,9 @@
 import { startComponentsFromRegistry } from "./GondelComponentStarter";
-import { IGondelComponent, GondelComponent } from "./GondelComponent";
+import {
+  IGondelComponent,
+  GondelComponent,
+  IGondelComponentWithIdentification
+} from "./GondelComponent";
 import { componentRegistries } from "./GondelComponentRegistry";
 
 export type ArrayLikeHtmlElement = Element | Element[] | NodeListOf<Element> | ArrayLike<Element>;
@@ -45,6 +49,26 @@ export function getFirstDomNode(domNode: ArrayLikeHtmlElement): HTMLElement {
 }
 
 /**
+ *
+ * @param gondelComponent
+ * @param namespace
+ */
+function getComponentName(gondelComponent: IGondelComponent, namespace: string): string {
+  if (!(gondelComponent as any).__identifier) {
+    throw new Error("Unregistered component has no identifier (https://git.io/f4DKv)");
+  }
+
+  const identification = (gondelComponent as IGondelComponent & IGondelComponentWithIdentification)
+    .__identification;
+
+  if (!identification[namespace]) {
+    throw new Error(`No component for '${namespace}' (https://git.io/f4DKf)`);
+  }
+
+  return identification[namespace];
+}
+
+/**
  * Start all nodes in the given context
  */
 export function startComponents(
@@ -74,20 +98,31 @@ export function stopComponents(domContext?: ArrayLikeHtmlElement, namespace: str
   components.forEach(component => component.stop!());
 }
 
+export function isComponentMounted(
+  domNode: ArrayLikeHtmlElement,
+  namespace: string = "g"
+): boolean {
+  const firstNode = getFirstDomNode(domNode);
+  const gondelComponent = (firstNode as any)[getGondelAttribute(namespace)];
+
+  return gondelComponent && gondelComponent._ctx;
+}
+
 /**
  * Returns the gondel instance for the given HtmlELement
  */
 export function getComponentByDomNode<T extends GondelComponent>(
   domNode: ArrayLikeHtmlElement,
   namespace: string = "g"
-): T | undefined {
+): T {
   const firstNode = getFirstDomNode(domNode);
   const gondelComponent = (firstNode as any)[getGondelAttribute(namespace)];
   // Stop if this dom node is not known to gondel
   if (gondelComponent && gondelComponent._ctx) {
     return gondelComponent as T;
   }
-  return;
+
+  throw new Error(`Component not found in DOM (https://git.io/f4D44).`);
 }
 
 /**
@@ -114,16 +149,35 @@ export function getComponentByDomNodeAsync<T extends GondelComponent>(
 /**
  * Returns all components inside the given node
  */
-export function findComponents<T extends GondelComponent & IGondelComponent>(
+
+export function findComponents(
+  domNode?: ArrayLikeHtmlElement,
+  component?: string,
+  namespace?: string
+): Array<GondelComponent>;
+export function findComponents<T extends GondelComponent>(
+  domNode?: ArrayLikeHtmlElement,
+  component?: { new (): T },
+  namespace?: string
+): Array<T>;
+export function findComponents<T extends GondelComponent>(
   domNode: ArrayLikeHtmlElement = document.documentElement,
-  component?: T,
+  component?: { new (): T } | string,
   namespace: string = "g"
-): Array<T> {
+): Array<T | GondelComponent> {
   const firstNode = getFirstDomNode(domNode);
-  const components: Array<T> = [];
+  const components: Array<T | GondelComponent> = [];
   const attribute = getGondelAttribute(namespace);
   const nodes = firstNode.querySelectorAll(
-    `[data-${namespace}-name${component ? `="${component.componentName}"` : ""}]`
+    `[data-${namespace}-name${
+      component
+        ? `="${
+            typeof component === "string"
+              ? component
+              : getComponentName(component as IGondelComponent<T>, namespace)
+          }"`
+        : ""
+    }]`
   );
   for (let i = 0; i < nodes.length; i++) {
     const node = nodes[i];
@@ -133,5 +187,10 @@ export function findComponents<T extends GondelComponent & IGondelComponent>(
       components.push(gondelComponentInstance);
     }
   }
-  return components;
+
+  if (typeof component === "string") {
+    return components as Array<GondelComponent>;
+  }
+
+  return components as Array<T & GondelComponent>;
 }

@@ -23,17 +23,11 @@ export function triggerPublicEvent(
 ): boolean {
   const event = <UxEvent>document.createEvent("Event");
   const eventTarget = target ? getFirstDomNode(target) : gondelComponent._ctx;
+
   if (eventName[0] !== gondelComponent._namespace) {
-    throw new Error(
-      "Invalid event name '" +
-        eventName +
-        "' - use '" +
-        gondelComponent._namespace +
-        eventName.charAt(0).toUpperCase() +
-        eventName.slice(1) +
-        "'"
-    );
+    throw new Error(`Invalid event name ${eventName} (https://git.io/f4Drw)`);
   }
+
   event.initEvent(eventName, canBubble, true);
   event.data = {
     component: gondelComponent,
@@ -41,5 +35,6 @@ export function triggerPublicEvent(
     namespace: gondelComponent._namespace,
     eventData: eventData
   };
+
   return eventTarget.dispatchEvent(event);
 }

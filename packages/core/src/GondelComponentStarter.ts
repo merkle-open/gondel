@@ -115,14 +115,13 @@ export function constructComponent(
   const componentName = domNode.getAttribute(`data-${namespace}-name`)!;
   const GondelComponent = gondelComponentRegisty.getComponent(componentName);
   if (GondelComponent === undefined) {
-    throw new Error(`Failed to boot component - ${componentName} is not registred`);
+    throw new Error(`Boot failed, ${componentName} not registered (https://git.io/f4D4G).`);
   }
   const componentInstance = new GondelComponent(domNode, componentName);
   componentInstance._ctx = domNode;
   componentInstance._namespace = namespace;
   // Adopt component name from blueprint
-  // TODO: is this needed anymore?
-  componentInstance._componentName = GondelComponent.componentName;
+  componentInstance._componentName = GondelComponent.__identification[namespace];
   // Add stop method
   componentInstance.stop = stopStartedComponent.bind(
     null,

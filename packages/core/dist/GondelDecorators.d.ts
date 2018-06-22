@@ -3,7 +3,7 @@ import { GondelComponent, IGondelComponent } from "./GondelComponent";
  * Register a gondel component to the registry
  * @param {string} namespace   The gondel components namespace
  */
-export declare function Component(componentName?: string, namespace?: string): (constructor: IGondelComponent) => void;
+export declare function Component(componentName: string, namespace?: string): (constructor: IGondelComponent<GondelComponent>) => void;
 /**
  * The @EventListener decorator will add all event names to a static variable
  */

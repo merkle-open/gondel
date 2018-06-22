@@ -84,8 +84,7 @@ export function constructComponent(domNode, gondelComponentRegisty, namespace) {
     componentInstance._ctx = domNode;
     componentInstance._namespace = namespace;
     // Adopt component name from blueprint
-    // TODO: is this needed anymore?
-    componentInstance._componentName = GondelComponent.componentName;
+    componentInstance._componentName = GondelComponent.__identification[namespace];
     // Add stop method
     componentInstance.stop = stopStartedComponent.bind(null, componentInstance, componentInstance.stop || noop, namespace);
     // Create a circular reference which will allow access to the componentInstance from ctx

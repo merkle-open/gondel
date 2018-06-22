@@ -1,6 +1,13 @@
-export interface IGondelComponent {
-    new (context: HTMLElement, componentName: string): GondelComponent;
-    componentName: string;
+export interface IGondelComponentConstructor<T = GondelComponent> {
+    new (context: HTMLElement, componentName: string): T;
+}
+export interface IGondelComponent<T = GondelComponent> {
+    new (context: HTMLElement, componentName: string): T;
+}
+export interface IGondelComponentWithIdentification {
+    __identification: {
+        [namespace: string]: string;
+    };
 }
 export declare type StartMethod = ((resolve: Function, reject?: Function) => void) | (() => Promise<any>) | (() => void);
 export interface GondelComponent {
@@ -13,6 +20,10 @@ export interface GondelComponent {
     sync?(): void;
 }
 export declare class GondelBaseComponent implements GondelComponent {
+    /**
+     * The components initial identification mappings
+     */
+    static __identification: {};
     /**
      * The component context
      */
