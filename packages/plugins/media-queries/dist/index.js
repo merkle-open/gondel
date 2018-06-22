@@ -101,7 +101,7 @@ function generateMediaQueries(breakPoints, unit) {
         else {
             // This should only happen if the user did a miss configuration
             // with only a single breakpoint which is set to infinity
-            throw new Error("The smallest provided viewport must not be set to Infinity");
+            throw new Error("Smallest viewport must not be Infinity (https://git.io/f4DKn)");
         }
         return { name: breakpointName, query: queryString, min: min, max: max };
     });

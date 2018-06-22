@@ -84,7 +84,7 @@ var GondelReactComponent = /** @class */ (function (_super) {
         }
     };
     GondelReactComponent.prototype.render = function () {
-        throw new Error(this._componentName + " is missing an initialRender method");
+        throw new Error(this._componentName + "'s render method is missing (https://git.io/f4DKo)");
     };
     return GondelReactComponent;
 }(GondelBaseComponent));

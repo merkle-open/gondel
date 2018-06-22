@@ -118,9 +118,7 @@ function getComponentByDomNode(domNode, namespace) {
     if (gondelComponent && gondelComponent._ctx) {
         return gondelComponent;
     }
-    throw new Error("Could not find any gondel component in namespace " + namespace + " on node " + firstNode.nodeName + ". " +
-        "This usually happens when the DOM content was modified by a third-party tool." +
-        "Use 'isComponentMounted' to check if the component is mounted.");
+    throw new Error("Component not found in DOM (https://git.io/f4D44).");
 }
 /**
  * Returns the gondel instance for the given HtmlELement once it is booted
@@ -280,7 +278,7 @@ function generateMediaQueries(breakPoints, unit) {
         else {
             // This should only happen if the user did a miss configuration
             // with only a single breakpoint which is set to infinity
-            throw new Error("The smallest provided viewport must not be set to Infinity");
+            throw new Error("Smallest viewport must not be Infinity (https://git.io/f4DKn)");
         }
         return { name: breakpointName, query: queryString, min: min, max: max };
     });
