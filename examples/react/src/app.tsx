@@ -1,6 +1,6 @@
 import * as React from "react";
-import Button from "./components/button-react";
-import GondelButton from "./components/button";
+import Button from "./button-react";
+import GondelButton from "./button";
 import {
   isComponentMounted,
   findComponents,
