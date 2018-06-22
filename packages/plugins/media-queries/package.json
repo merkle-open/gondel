@@ -1,6 +1,6 @@
 {
   "name": "@gondel/plugin-media-queries",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Provide a custom gondel event which will fire once a given media query is met",
   "bugs": "https://github.com/namics/gondel/issues",
   "homepage": "https://github.com/namics/gondel/tree/master/packages/plugins/media-queries",

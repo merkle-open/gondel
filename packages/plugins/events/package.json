@@ -1,6 +1,6 @@
 {
   "name": "@gondel/plugin-events",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Provide additional custom events",
   "bugs": "https://github.com/namics/gondel/issues",
   "homepage": "https://github.com/namics/gondel",
