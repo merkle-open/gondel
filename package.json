@@ -12,7 +12,7 @@
     "commitmsg": "conventional-changelog-lint -e",
     "install": "lerna bootstrap --hoist",
     "precommit": "lint-staged",
-    "prettier": "prettier --write **/src/*.ts",
+    "prettier": "prettier --write **/src/*.{ts,tsx}",
     "posttest": "prettier --list-different **/src/*.ts",
     "test": "lerna run test",
     "test:watch": "lerna run --parallel test:watch"

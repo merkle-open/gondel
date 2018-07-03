@@ -16,7 +16,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     }
     return t;
 };
-import React, { Component } from 'react';
+import React, { Component } from "react";
 var AppWrapper = /** @class */ (function (_super) {
     __extends(AppWrapper, _super);
     function AppWrapper(props) {
@@ -27,14 +27,14 @@ var AppWrapper = /** @class */ (function (_super) {
         _this.state = props.config;
         // Forward react life cycle hooks
         [
-            'componentWillMount',
-            'componentDidMount',
-            'componentWillReceiveProps',
-            'shouldComponentUpdate',
-            'componentWillUpdate',
-            'componentDidUpdate',
-            'componentWillUnmount',
-            'componentDidCatch',
+            "componentWillMount",
+            "componentDidMount",
+            "componentWillReceiveProps",
+            "shouldComponentUpdate",
+            "componentWillUpdate",
+            "componentDidUpdate",
+            "componentWillUnmount",
+            "componentDidCatch"
         ].forEach(function (reactHook) {
             if (!_this.props[reactHook]) {
                 return;
