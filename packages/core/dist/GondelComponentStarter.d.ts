@@ -1,5 +1,5 @@
-import { GondelComponentRegistry } from "./GondelComponentRegistry";
 import { GondelComponent } from "./GondelComponent";
+import { GondelComponentRegistry } from "./GondelComponentRegistry";
 /**
  * Start all components of the gondel component registry
  * for the given dom context

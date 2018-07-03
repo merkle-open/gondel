@@ -4,10 +4,11 @@
  * The component starter is responsible for booting up
  * all components found in the DOM
  */
-import { GondelComponentRegistry } from "./GondelComponentRegistry";
 import { GondelComponent } from "./GondelComponent";
-import { fireGondelPluginEvent, fireAsyncGondelPluginEvent } from "./GondelPluginUtils";
+import { GondelComponentRegistry } from "./GondelComponentRegistry";
+import { internalGondelAsyncRefAttribute, internalGondelRefAttribute } from "./GondelDomUtils";
 import { triggerPublicEvent } from "./GondelEventEmitter";
+import { fireGondelPluginEvent } from "./GondelPluginUtils";
 const noop = () => {};
 const Deferred = (function() {
   this.promise = new Promise(resolve => {
@@ -86,7 +87,7 @@ export function startComponentsFromRegistry(
  * Returns true if the given domNode is neither booting nor booted
  */
 export function isPristineGondelDomNode(domNode: HTMLElement, namespace: string) {
-  return !domNode.hasOwnProperty("_gondelA_" + namespace);
+  return !domNode.hasOwnProperty(internalGondelAsyncRefAttribute + namespace);
 }
 
 /**
@@ -99,7 +100,7 @@ export function attachGondelBootingFlag(
 ) {
   // The name `A` mean async
   // to allow waiting for asyncronous booted components
-  (domNode as any)["_gondelA_" + namespace] = bootingFlag;
+  (domNode as any)[internalGondelAsyncRefAttribute + namespace] = bootingFlag;
 }
 
 /**
@@ -160,8 +161,8 @@ export function stopStartedComponent(
 ) {
   triggerPublicEvent(`${namespace}Stop`, component, component._ctx);
   // Remove the component instance from the html element
-  delete (component._ctx as any)[`_gondel_${namespace}`];
-  delete (component._ctx as any)[`_gondelA_${namespace}`];
+  delete (component._ctx as any)[internalGondelRefAttribute + namespace];
+  delete (component._ctx as any)[internalGondelAsyncRefAttribute + namespace];
   component._stopped = true;
   fireGondelPluginEvent("stop", component, { namespace }, internalStopMethod.bind(component));
 }

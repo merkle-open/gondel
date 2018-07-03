@@ -31,6 +31,8 @@ function addGondelPluginEventListener(eventName, eventListenerCallback) {
     };
 }
 
+var componentRegistries = (window.__gondelRegistries = window.__gondelRegistries || {});
+
 /**
  * Submit an event which might be caught by foreign gondel, angular or react components
  */
@@ -60,7 +62,7 @@ function addGondelPluginEventListener(eventName, eventListenerCallback) {
  * Stops a started component
  */
 
-var componentRegistries = (window.__gondelRegistries = window.__gondelRegistries || {});
+var internalGondelRefAttribute = "_gondel_";
 
 /**
  * Returns true if the given object is a single Element
@@ -96,7 +98,7 @@ function getFirstDomNode(domNode) {
 function getComponentByDomNode(domNode, namespace) {
     if (namespace === void 0) { namespace = "g"; }
     var firstNode = getFirstDomNode(domNode);
-    var gondelComponent = firstNode["_gondel_" + namespace];
+    var gondelComponent = firstNode[internalGondelRefAttribute + namespace];
     // Stop if this dom node is not known to gondel
     if (gondelComponent && gondelComponent._ctx) {
         return gondelComponent;

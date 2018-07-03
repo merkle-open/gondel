@@ -1,7 +1,10 @@
-import { startComponentsFromRegistry } from "./GondelComponentStarter";
 import { GondelComponent } from "./GondelComponent";
 import { componentRegistries } from "./GondelComponentRegistry";
+import { startComponentsFromRegistry } from "./GondelComponentStarter";
 export type ArrayLikeHtmlElement = Element | Element[] | NodeListOf<Element> | ArrayLike<Element>;
+
+export const internalGondelRefAttribute = "_gondel_";
+export const internalGondelAsyncRefAttribute = "_gondelA_";
 
 /**
  * Returns true if the given object is a single Element
@@ -63,7 +66,7 @@ export function getComponentByDomNode(
   namespace: string = "g"
 ): GondelComponent | undefined {
   const firstNode = getFirstDomNode(domNode);
-  const gondelComponent = (firstNode as any)[`_gondel_${namespace}`];
+  const gondelComponent = (firstNode as any)[internalGondelRefAttribute + namespace];
   // Stop if this dom node is not known to gondel
   if (gondelComponent && gondelComponent._ctx) {
     return gondelComponent as GondelComponent;
@@ -79,7 +82,7 @@ export function getComponentByDomNodeAsync(
   namespace: string = "g"
 ): Promise<GondelComponent> {
   const firstNode = getFirstDomNode(domNode);
-  const gondelComponent = (firstNode as any)[`_gondelA_${namespace}`];
+  const gondelComponent = (firstNode as any)[internalGondelAsyncRefAttribute + namespace];
   // Stop if this dom node is not known to gondel
   if (!gondelComponent) {
     return Promise.reject(undefined);
@@ -89,7 +92,7 @@ export function getComponentByDomNodeAsync(
     return Promise.resolve(gondelComponent as GondelComponent);
   }
   // Wait the component to boot up and return it
-  return gondelComponent.then(() => (firstNode as any)[`_gondel_${namespace}`]);
+  return gondelComponent.then(() => (firstNode as any)[internalGondelRefAttribute + namespace]);
 }
 
 /**

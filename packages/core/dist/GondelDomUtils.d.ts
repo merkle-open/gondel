@@ -1,5 +1,7 @@
 import { GondelComponent } from "./GondelComponent";
 export declare type ArrayLikeHtmlElement = Element | Element[] | NodeListOf<Element> | ArrayLike<Element>;
+export declare const internalGondelRefAttribute = "_gondel_";
+export declare const internalGondelAsyncRefAttribute = "_gondelA_";
 /**
  * This function normalizes takes one of the following:
  *  + document query result

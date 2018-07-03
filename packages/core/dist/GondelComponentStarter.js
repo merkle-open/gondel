@@ -1,5 +1,6 @@
-import { fireGondelPluginEvent } from "./GondelPluginUtils";
+import { internalGondelAsyncRefAttribute, internalGondelRefAttribute } from "./GondelDomUtils";
 import { triggerPublicEvent } from "./GondelEventEmitter";
+import { fireGondelPluginEvent } from "./GondelPluginUtils";
 var noop = function () { };
 var Deferred = function () {
     var _this = this;
@@ -60,7 +61,7 @@ export function startComponentsFromRegistry(gondelComponentRegistry, domContext,
  * Returns true if the given domNode is neither booting nor booted
  */
 export function isPristineGondelDomNode(domNode, namespace) {
-    return !domNode.hasOwnProperty("_gondelA_" + namespace);
+    return !domNode.hasOwnProperty(internalGondelAsyncRefAttribute + namespace);
 }
 /**
  * Mark the given dom node as controlled by gondel
@@ -68,7 +69,7 @@ export function isPristineGondelDomNode(domNode, namespace) {
 export function attachGondelBootingFlag(domNode, bootingFlag, namespace) {
     // The name `A` mean async
     // to allow waiting for asyncronous booted components
-    domNode["_gondelA_" + namespace] = bootingFlag;
+    domNode[internalGondelAsyncRefAttribute + namespace] = bootingFlag;
 }
 /**
  * Constructs a new component
@@ -111,8 +112,8 @@ export function startConstructedComponent(component) {
 export function stopStartedComponent(component, internalStopMethod, namespace) {
     triggerPublicEvent(namespace + "Stop", component, component._ctx);
     // Remove the component instance from the html element
-    delete component._ctx["_gondel_" + namespace];
-    delete component._ctx["_gondelA_" + namespace];
+    delete component._ctx[internalGondelRefAttribute + namespace];
+    delete component._ctx[internalGondelAsyncRefAttribute + namespace];
     component._stopped = true;
     fireGondelPluginEvent("stop", component, { namespace: namespace }, internalStopMethod.bind(component));
 }

@@ -59,13 +59,16 @@
         document.body.appendChild(button);
       });
 
+      const testEnvironment = document.createElement('div');
       for (let i = 0; i < componentsToBoot; i++) {
         const div = document.createElement('div')
         div.innerHTML = 'Click me - ' + i;
         div.setAttribute('data-g-name', 'Demo');
         div.setAttribute('data-t-name', 'Demo');
-        document.body.appendChild(div);
+        testEnvironment.appendChild(div);
       }
+      document.body.appendChild(testEnvironment);
+      requestAnimationFrame(() => console.log('Ready'));
     </script>
   </body>
 </html>

@@ -1,5 +1,7 @@
-import { startComponentsFromRegistry } from "./GondelComponentStarter";
 import { componentRegistries } from "./GondelComponentRegistry";
+import { startComponentsFromRegistry } from "./GondelComponentStarter";
+export var internalGondelRefAttribute = "_gondel_";
+export var internalGondelAsyncRefAttribute = "_gondelA_";
 /**
  * Returns true if the given object is a single Element
  */
@@ -49,7 +51,7 @@ export function stopComponents(domContext, namespace) {
 export function getComponentByDomNode(domNode, namespace) {
     if (namespace === void 0) { namespace = "g"; }
     var firstNode = getFirstDomNode(domNode);
-    var gondelComponent = firstNode["_gondel_" + namespace];
+    var gondelComponent = firstNode[internalGondelRefAttribute + namespace];
     // Stop if this dom node is not known to gondel
     if (gondelComponent && gondelComponent._ctx) {
         return gondelComponent;
@@ -62,7 +64,7 @@ export function getComponentByDomNode(domNode, namespace) {
 export function getComponentByDomNodeAsync(domNode, namespace) {
     if (namespace === void 0) { namespace = "g"; }
     var firstNode = getFirstDomNode(domNode);
-    var gondelComponent = firstNode["_gondelA_" + namespace];
+    var gondelComponent = firstNode[internalGondelAsyncRefAttribute + namespace];
     // Stop if this dom node is not known to gondel
     if (!gondelComponent) {
         return Promise.reject(undefined);
@@ -72,7 +74,7 @@ export function getComponentByDomNodeAsync(domNode, namespace) {
         return Promise.resolve(gondelComponent);
     }
     // Wait the component to boot up and return it
-    return gondelComponent.then(function () { return firstNode["_gondel_" + namespace]; });
+    return gondelComponent.then(function () { return firstNode[internalGondelRefAttribute + namespace]; });
 }
 /**
  * Returns all components inside the given node
