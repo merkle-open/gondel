@@ -164,6 +164,10 @@ var matches = Element.prototype.matches ||
 /**
  * This is a plugin to initialize enquire.js and fire a viewportChange event when triggering a breakpoint
  */
+/**
+ * The VIEWPORT_ENTERED will be fired if a new viewport is entered
+ */
+var VIEWPORT_ENTERED = "@gondel/plugin-media-queries--viewport-entered";
 var currentViewport;
 /**
  * This function returns all components for the given eventRegistry which can be found in the dom.
@@ -325,7 +329,7 @@ function initMediaQueriesPlugin(options) {
     addGondelPluginEventListener("registerEvent", function addViewportChangeEvent(isNativeEvent, _a, resolve) {
         var eventName = _a.eventName, namespace = _a.namespace, eventRegistry = _a.eventRegistry;
         // Ignore all events but the viewportChange event
-        if (eventName !== "viewportChange") {
+        if (eventName !== VIEWPORT_ENTERED) {
             resolve(isNativeEvent);
             return;
         }
@@ -335,6 +339,7 @@ function initMediaQueriesPlugin(options) {
     });
 }
 
+exports.VIEWPORT_ENTERED = VIEWPORT_ENTERED;
 exports.getCurrentViewport = getCurrentViewport;
 exports.initMediaQueriesPlugin = initMediaQueriesPlugin;
 

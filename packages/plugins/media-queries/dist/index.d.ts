@@ -1,4 +1,8 @@
 /**
+ * The VIEWPORT_ENTERED will be fired if a new viewport is entered
+ */
+export declare const VIEWPORT_ENTERED = "@gondel/plugin-media-queries--viewport-entered";
+/**
  * This function returns the current viewport
  */
 export declare function getCurrentViewport(): string;

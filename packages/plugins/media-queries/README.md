@@ -6,9 +6,9 @@
 [![Commitizen friendly][commitizen-image]][commitizen-url] 
 [![Prettier](https://img.shields.io/badge/Code%20Style-Prettier-green.svg)](https://github.com/prettier/prettier)
 
-Installation
+## Installation
 
-```
+```js
 import {initMediaQueriesPlugin} from '@gondel/plugin-media-queries';
 
 initMediaQueriesPlugin({ 
@@ -26,12 +26,16 @@ initMediaQueriesPlugin({
 
 Please note: the provided breakpoints need to be the maximum value of each viewport in px.
 
-## Viewport change
-
-The general viewport change event is fired if the viewport matches one of the provided breakpoints
+## Viewport entered
 
 ```js
-  @EventListener('viewportChange')
+  import { VIEWPORT_ENTERED } from '@gondel/plugin-media-queries';
+```
+
+The general viewport entered event is fired if the viewport switches into one of the provided breakpoints
+
+```js
+  @EventListener(VIEWPORT_ENTERED)
   handleViewportChange(event) {
      console.log(event.viewport);
   }
@@ -42,7 +46,7 @@ The general viewport change event is fired if the viewport matches one of the pr
 Additionally, the event listener can be restricted to just one specific viewport
 
 ```js
-  @EventListener('viewportChange', 'medium')
+  @EventListener(VIEWPORT_ENTERED, 'medium')
   handleViewportChange(event) {
      console.log('You are now on the medium viewport');
   }
@@ -50,10 +54,14 @@ Additionally, the event listener can be restricted to just one specific viewport
 
 ## getCurrentViewport
 
+```js
+  import { getCurrentViewport } from '@gondel/plugin-media-queries';
+```
+
 Additionally you can always get the current viewport name by using the
 `getCurrentViewport` helper.
 
-```
+```js
 start() {
   console.log(getCurrentViewport());
   // output's e.g. "medium"
