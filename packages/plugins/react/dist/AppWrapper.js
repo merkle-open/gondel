@@ -48,10 +48,8 @@ var AppWrapper = /** @class */ (function (_super) {
         return _this;
     }
     AppWrapper.prototype.render = function () {
-        if (!this.props.children) {
-            return null;
-        }
-        return this.props.children(this.state);
+        var children = this.props.children;
+        return children ? children(this.state) : null;
     };
     return AppWrapper;
 }(Component));

@@ -1,7 +1,6 @@
 # React Lazy Plugin
 
 This tiny plugin bootstraps React widgets and apps using Gondel.  
-The only difference to `@gondel/react` is the lazy load of `react-dom`.
 
 ## Usage
 
@@ -14,14 +13,14 @@ html
 js
 
 ```
-import {GondelReactComponent} from '@gondel/plugin-react-lazy';
-import {Component} from '@gondel/core';
+import { GondelReactComponent } from '@gondel/plugin-react';
+import { Component } from '@gondel/core';
 import { App } from './App';
 import React from 'react';
 
 @Component('DemoWidget')
 export class DemoWidget extends GondelReactComponent {
-  intitialRender() {
+  render() {
     return (
       <App />
     )
@@ -46,14 +45,14 @@ html
 js
 
 ```
-import {GondelReactComponent} from '@gondel/plugin-react-lazy';
-import {Component} from '@gondel/core';
+import { GondelReactComponent } from '@gondel/plugin-react';
+import { Component } from '@gondel/core';
 import React from 'react';
 import { App } from './App';
 
 @Component('DemoWidget')
 export class DemoWidget extends GondelReactComponent {
-  intitialRender(config) {
+  render(config) {
     return (
       <App config={config} />
     )
@@ -79,31 +78,21 @@ html
 js
 
 ```
-import {GondelReactComponent} from '@gondel/plugin-react-lazy';
+import {GondelReactComponent} from '@gondel/plugin-react';
 import {Component} from '@gondel/core';
 import React from 'react';
 
 @Component('DemoWidget')
 export class DemoWidget extends GondelReactComponent {
-  intitialRender(config) {
-    return import('./App').then(({ App }) => (
+  async start() {
+      this.App = await import('./App').App;
+  }
+
+  render(config) {
+    const App = this.App;
+    return 
       <App config={config} />
     ));
-  }
-}
-```
-
-js (with async/await)
-```
-import {GondelReactComponent} from '@gondel/plugin-react-lazy';
-import {Component} from '@gondel/core';
-import React from 'react';
-
-@Component('DemoWidget')
-export class DemoWidget extends GondelReactComponent {
-  intitialRender(config) {
-    const { App } = await import('./App');
-    return <App config={config} />;
   }
 }
 ```

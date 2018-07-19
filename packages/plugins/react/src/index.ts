@@ -12,17 +12,6 @@ function isPromise<T>(obj: {} | Promise<T>): obj is Promise<T> {
   return (<Promise<T>>obj).then !== undefined;
 }
 
-/**
- * If the given value is a promise wait for it otherwise execute the callback synchronously
- */
-function unwrapPromiseApp<T, U>(app: T | Promise<T>, callback: (app: T) => Promise<U>): Promise<U> {
-  if (isPromise(app)) {
-    return app.then(callback);
-  } else {
-    return Promise.resolve(callback(app));
-  }
-}
-
 export class GondelReactComponent<S> extends GondelBaseComponent
   implements ComponentLifecycle<null, S> {
   _setInternalState: (config: S) => void | undefined;

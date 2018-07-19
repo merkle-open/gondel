@@ -19,17 +19,6 @@ import { createRenderAbleAppWrapper } from "./AppWrapper";
 function isPromise(obj) {
     return obj.then !== undefined;
 }
-/**
- * If the given value is a promise wait for it otherwise execute the callback synchronously
- */
-function unwrapPromiseApp(app, callback) {
-    if (isPromise(app)) {
-        return app.then(callback);
-    }
-    else {
-        return Promise.resolve(callback(app));
-    }
-}
 var GondelReactComponent = /** @class */ (function (_super) {
     __extends(GondelReactComponent, _super);
     function GondelReactComponent(ctx) {
