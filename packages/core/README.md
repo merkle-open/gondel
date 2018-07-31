@@ -7,23 +7,26 @@
 
 # 🚡 Gondel
 
-[Gondel](https://en.wikipedia.org/wiki/Gondola) is a tiny (2kb) library to bootstrap frontend components.  
-With gondel you will be able to build high quality components for SPAs and enterprise backend solutions.  
-Gondel components can be used with React, Angular and even third party markup (Java, C#, PHP, ...).
+[Gondel](https://en.wikipedia.org/wiki/Gondola) is a tiny (2kb) non-intrusive library to help you modularize your code.  
+It does **not** ship with a rendering engine to be a perfect fit for most client side rendering engines (e.g. React or Angular) and server side rendering engines (e.g. Java or PHP)
 
-# ⚠ Caution ⚠
+## Installation
 
-Please be aware that this project is currently in alpha stage.
+```bash
+npm i @gondel/core
+```
 
-# Demo
+## Hello World
 
-This demo will listen to all `change` events coming from elements with `data-g-name="Input"` and will add/remove a `has-content` class.
+This button will listen to all `click events` events coming from all elements with `data-g-name="Button"` and will
+show an alert message.
 
 HTML
 
 ```html
- <input data-g-name="Input" />
- <input data-g-name="Input" />
+ <button data-g-name="Input">Click me</button>
+
+ <button data-g-name="Input">Or click me</button>
 ```
 
 JS
@@ -31,25 +34,27 @@ JS
 ```js
 import {component, event, GondelBaseComponent} from '@gondel/core';
 
-// The @Component decorator will connect the class with `data-g-name="Input"` elements.
-@Component('Input')
-export class Input extends GondelBaseComponent {
-
-  @EventListener('change') 
+// The @Component decorator will connect the class with `data-g-name="Button"` elements.
+@Component('Button')
+export class Button extends GondelBaseComponent {
+  @EventListener('click') 
   _handleChange(event) {
-    // this._ctx is automatically set to the html element with the data-g-name attribute
-    this._ctx.classList.toggle("has-content", this._ctx.value.length > 0);
+    alert('Hello World')
   }
 }
 ```
 
-# Module format 
+## Module format 
 
 Gondel follows the [rollup recommendations](https://github.com/rollup/rollup/wiki/pkg.module) which includes on the one hand ESM for bundle size optimisations and on the other hand a UMD version to be compatible with every former javascript bundling/concatenation strategy.
 
 Gondel is fully typed and exports optional typescript declaration files for typescript projects.
 
-# Contributing to Gondel
+## Plugins
+
+- [Media Queries Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/media-queries) - Provide a custom gondel event which will fire once a given media query is met - [Demo](https://stackblitz.com/edit/gondel-media-query?file=components%2Fbutton.js)
+
+## Contributing to Gondel
 
 Feel free to contribute to gondel.  
 The following commands will get you started:
@@ -65,15 +70,17 @@ Running tests:
 npm run test:watch
 ```
 
-# Playground
+## Playground
 
 https://stackblitz.com/fork/gondel
 
-# Examples
+## Examples
 
-+ Gondel 5 Star - https://stackblitz.com/edit/gondel-5-star
++ Gondel 5 Star - [https://stackblitz.com/edit/gondel-5-star](https://stackblitz.com/edit/gondel-5-star?file=components%2Frating.js)
++ Chunk Splitting - [https://stackblitz.com/edit/gondel-lazy-load](https://stackblitz.com/edit/gondel-lazy-load?file=components%2Fbutton.js)
++ Media Queries - [https://stackblitz.com/edit/gondel-media-query](https://stackblitz.com/edit/gondel-media-query?file=components%2Fbutton.js)
 
-## License
+### License
 
 [MIT license](http://opensource.org/licenses/MIT)
 
