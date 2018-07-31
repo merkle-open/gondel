@@ -28,7 +28,7 @@ Well, first you need to modify your HTML code a bit. Let's say you have the foll
 To initialize gondel on the `<div>` element, you need to decorate your markup by adding a `data-g-name` attribute to the corresponding element, like so:
 
 ```html
-<div data-g-name="example">
+<div data-g-name="Example">
     I am the example markup, hear me roar.
 </div>
 ```
@@ -101,4 +101,4 @@ This will initialize Gondel, scan the page for elements containing the `data-g-n
 
 ## Live example
 You can also find this code example live on StackBlitz:
-https://stackblitz.com/edit/js-6sn3wb
+https://stackblitz.com/edit/gondel-intro-example
