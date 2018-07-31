@@ -49,7 +49,7 @@ var AppWrapper = /** @class */ (function (_super) {
     }
     AppWrapper.prototype.render = function () {
         var children = this.props.children;
-        return typeof children === 'function' ? children(this.state) : children;
+        return typeof children === "function" ? children(this.state) : children;
     };
     return AppWrapper;
 }(Component));

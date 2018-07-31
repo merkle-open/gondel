@@ -37,7 +37,7 @@ export class AppWrapper<TConfig> extends Component<Props<TConfig>, TConfig> {
 
   render() {
     const children = this.props.children;
-    return typeof children === 'function' ? children(this.state) : children;
+    return typeof children === "function" ? children(this.state) : children;
   }
 }
 

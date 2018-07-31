@@ -78,7 +78,13 @@ export function startComponentsFromRegistry(
       return fireGondelPluginEvent("sync", gondelComponents, { namespace });
     });
   // Resolve the booting deferred
-  gondelComponentStartPromise.then(bootingDeferred.resolve, bootingDeferred.resolve);
+  gondelComponentStartPromise
+    .then(bootingDeferred.resolve, bootingDeferred.resolve)
+    // Rethrow errors (if any)
+    // otherwise the browser dev tools won't show
+    // important bootstrap errors
+    .then(() => gondelComponentStartPromise);
+
   // Return a promise of all started components
   return gondelComponentStartPromise;
 }
