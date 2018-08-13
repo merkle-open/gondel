@@ -70,7 +70,7 @@ start() {
 
 # Known Issues
 
-The `initMediaQueriesPlugin` has to be called you call `startComponents`.
+The `initMediaQueriesPlugin` has to be called before you call `startComponents`.
 
 ## License
 
