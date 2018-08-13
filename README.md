@@ -79,6 +79,9 @@ https://stackblitz.com/fork/gondel
 + Gondel 5 Star - [https://stackblitz.com/edit/gondel-5-star](https://stackblitz.com/edit/gondel-5-star?file=components%2Frating.js)
 + Chunk Splitting - [https://stackblitz.com/edit/gondel-lazy-load](https://stackblitz.com/edit/gondel-lazy-load?file=components%2Fbutton.js)
 + Media Queries - [https://stackblitz.com/edit/gondel-media-query](https://stackblitz.com/edit/gondel-media-query?file=components%2Fbutton.js)
++ Communication Parent - Child (user based) [https://stackblitz.com/edit/gondel-communication-parent-child-user-based](https://stackblitz.com/edit/gondel-communication-parent-child-user-based)
++ Communication Parent - Child (promise based) [https://stackblitz.com/edit/gondel-communication-parent-child-promise-based](https://stackblitz.com/edit/gondel-communication-parent-child-promise-based)
++ Communication Child - Parent [https://stackblitz.com/edit/gondel-communication-child-parent](https://stackblitz.com/edit/gondel-communication-child-parent)
 
 ### License
 
