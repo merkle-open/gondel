@@ -81,7 +81,9 @@ https://stackblitz.com/fork/gondel
 + Media Queries - [https://stackblitz.com/edit/gondel-media-query](https://stackblitz.com/edit/gondel-media-query?file=components%2Fbutton.js)
 + Communication Parent - Child (user based) [https://stackblitz.com/edit/gondel-communication-parent-child-user-based](https://stackblitz.com/edit/gondel-communication-parent-child-user-based)
 + Communication Parent - Child (promise based) [https://stackblitz.com/edit/gondel-communication-parent-child-promise-based](https://stackblitz.com/edit/gondel-communication-parent-child-promise-based)
-+ Communication Child - Parent [https://stackblitz.com/edit/gondel-communication-child-parent](https://stackblitz.com/edit/gondel-communication-child-parent)
++ Communication Child - Parent (use getComponentByDomNode) [https://stackblitz.com/edit/gondel-communication-child-parent-component-by-dom-node](https://stackblitz.com/edit/gondel-communication-child-parent-component-by-dom-node)
++ Communication Child - Parent (use public event) [https://stackblitz.com/edit/gondel-communication-child-parent-public-event](https://stackblitz.com/edit/gondel-communication-child-parent-public-event)
++ Event target vs. currentTarget [https://stackblitz.com/edit/gondel-target-vs-currenttarget](https://stackblitz.com/edit/gondel-target-vs-currenttarget)
 
 ### License
 
