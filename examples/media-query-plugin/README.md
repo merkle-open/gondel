@@ -4,4 +4,4 @@ In this example the media query plugin will notify the `current-viewport` compon
 
 Try it your self:
 
-https://codesandbox.io/s/github/namics/gondel/tree/master/examples/current-viewport
+https://codesandbox.io/s/github/namics/gondel/tree/master/examples/media-query-plugin
