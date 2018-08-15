@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.ts",
   "scripts": {
     "start": "webpack-serve --open --config ./webpack.config.js"
   },
@@ -17,7 +17,7 @@
   "devDependencies": {
     "html-webpack-plugin": "3.0.4",
     "ts-loader": "4.0.0",
-    "typescript": "2.8.3",
+    "typescript": "3.0.1",
     "webpack": "4.0.1",
     "webpack-cli": "2.0.10",
     "webpack-serve": "0.1.5"

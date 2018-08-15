@@ -1,3 +1,7 @@
+/**
+ * The event registry provides a way to bind events ahead of time
+ * with a very small foot print during launch to improve the time to interaction
+ */
 export declare type IEventHandlerRegistry = {
     [namespace: string]: INamespacedEventHandlerRegistry;
 };

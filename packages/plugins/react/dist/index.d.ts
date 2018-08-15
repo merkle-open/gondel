@@ -1,4 +1,3 @@
-/// <reference types="react" />
 /**
  * This is a plugin which allows a simplified usage of gondel together with react
  */
