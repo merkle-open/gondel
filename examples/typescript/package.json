@@ -20,6 +20,7 @@
     "typescript": "3.0.1",
     "webpack": "4.0.1",
     "webpack-cli": "2.0.10",
-    "webpack-serve": "0.1.5"
+    "webpack-serve": "0.1.5",
+    "react-scripts-ts": "2.17.0"
   }
 }
