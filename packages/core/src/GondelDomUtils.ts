@@ -59,19 +59,43 @@ export function stopComponents(domContext?: ArrayLikeHtmlElement, namespace: str
 }
 
 /**
+ * Checks if a component is mounted on a certain DOM node
+ */
+export function componentIsMounted(
+  domNode: ArrayLikeHtmlElement,
+  namespace: string = "g"
+): boolean {
+  const firstNode = getFirstDomNode(domNode);
+  const gondelComponent = (firstNode as any)[internalGondelRefAttribute + namespace];
+
+  if (!gondelComponent || !gondelComponent._ctx) {
+    // no anchor prop found or ctx missing. function is needed
+    // that we can type the `getComponentByDomNode` without possible
+    // returnal of undefined.
+    return false;
+  }
+
+  return true;
+}
+
+/**
  * Returns the gondel instance for the given HtmlELement
  */
 export function getComponentByDomNode<T extends GondelComponent>(
   domNode: ArrayLikeHtmlElement,
   namespace: string = "g"
-): T | undefined {
+): T {
   const firstNode = getFirstDomNode(domNode);
   const gondelComponent = (firstNode as any)[internalGondelRefAttribute + namespace];
   // Stop if this dom node is not known to gondel
   if (gondelComponent && gondelComponent._ctx) {
     return gondelComponent as T;
   }
-  return;
+
+  throw new Error(
+    `Could not find any gondel component under ${firstNode}, 
+    please check if your component is mounted via 'componentIsMounted'`
+  );
 }
 
 /**
