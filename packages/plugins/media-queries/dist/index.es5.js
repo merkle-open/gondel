@@ -60,7 +60,7 @@
         if (gondelComponent && gondelComponent._ctx) {
             return gondelComponent;
         }
-        return;
+        throw new Error("Could not find any gondel component under " + firstNode.nodeName + " in namespace \"" + namespace + "\", \n    please check if your component is mounted via 'hasMountedGondelComponent'");
     }
 
     /**

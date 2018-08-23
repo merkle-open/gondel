@@ -46,6 +46,21 @@ export function stopComponents(domContext, namespace) {
     components.forEach(function (component) { return component.stop(); });
 }
 /**
+ * Checks if a component is mounted on a certain DOM node
+ */
+export function hasMountedGondelComponent(domNode, namespace) {
+    if (namespace === void 0) { namespace = "g"; }
+    var firstNode = getFirstDomNode(domNode);
+    var gondelComponent = firstNode[internalGondelRefAttribute + namespace];
+    if (!gondelComponent || !gondelComponent._ctx) {
+        // no anchor prop found or ctx missing. function is needed
+        // that we can type the `getComponentByDomNode` without possible
+        // returnal of undefined.
+        return false;
+    }
+    return true;
+}
+/**
  * Returns the gondel instance for the given HtmlELement
  */
 export function getComponentByDomNode(domNode, namespace) {
@@ -56,7 +71,7 @@ export function getComponentByDomNode(domNode, namespace) {
     if (gondelComponent && gondelComponent._ctx) {
         return gondelComponent;
     }
-    return;
+    throw new Error("Could not find any gondel component under " + firstNode.nodeName + " in namespace \"" + namespace + "\", \n    please check if your component is mounted via 'hasMountedGondelComponent'");
 }
 /**
  * Returns the gondel instance for the given HtmlELement once it is booted

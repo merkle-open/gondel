@@ -20,9 +20,13 @@ export declare function startComponents(domContext?: ArrayLikeHtmlElement, names
  */
 export declare function stopComponents(domContext?: ArrayLikeHtmlElement, namespace?: string): void;
 /**
+ * Checks if a component is mounted on a certain DOM node
+ */
+export declare function hasMountedGondelComponent(domNode: ArrayLikeHtmlElement, namespace?: string): boolean;
+/**
  * Returns the gondel instance for the given HtmlELement
  */
-export declare function getComponentByDomNode<T extends GondelComponent>(domNode: ArrayLikeHtmlElement, namespace?: string): T | undefined;
+export declare function getComponentByDomNode<T extends GondelComponent>(domNode: ArrayLikeHtmlElement, namespace?: string): T;
 /**
  * Returns the gondel instance for the given HtmlELement once it is booted
  */

@@ -61,7 +61,7 @@ export function stopComponents(domContext?: ArrayLikeHtmlElement, namespace: str
 /**
  * Checks if a component is mounted on a certain DOM node
  */
-export function componentIsMounted(
+export function hasMountedGondelComponent(
   domNode: ArrayLikeHtmlElement,
   namespace: string = "g"
 ): boolean {
@@ -93,8 +93,8 @@ export function getComponentByDomNode<T extends GondelComponent>(
   }
 
   throw new Error(
-    `Could not find any gondel component under ${firstNode}, 
-    please check if your component is mounted via 'componentIsMounted'`
+    `Could not find any gondel component under ${firstNode.nodeName} in namespace "${namespace}", 
+    please check if your component is mounted via 'hasMountedGondelComponent'`
   );
 }
 

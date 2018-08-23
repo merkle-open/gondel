@@ -10,6 +10,7 @@ import {
 } from "./index";
 
 import { GondelBaseComponent, IGondelComponent } from "./GondelComponent";
+import { hasMountedGondelComponent } from "./GondelDomUtils";
 
 function createMockElement(namespace: string) {
   const buttonElement = document.createElement("div");
@@ -131,7 +132,7 @@ describe("GondelComponentStarter", () => {
       startComponents(buttonElement);
       const button = getComponentByDomNode<Button>(buttonElement);
       button.stop();
-      expect(getComponentByDomNode(buttonElement)).toBe(undefined);
+      expect(hasMountedGondelComponent(buttonElement)).toBe(false);
     });
 
     it("should add a the default namespace", () => {
@@ -152,7 +153,7 @@ describe("GondelComponentStarter", () => {
       expect(button._namespace).toBe("x");
     });
 
-    it("should add a the component name", () => {
+    it("should add the component name", () => {
       @Component("Button")
       class Button extends GondelBaseComponent {}
       const buttonElement = createMockElement("g");
@@ -181,6 +182,15 @@ describe("GondelComponentStarter", () => {
         errorMessage = error.toString();
       }
       expect(errorMessage).toBe("Error: Failed to boot component - Button is not registred");
+    });
+
+    it("should check the mounted state correctly", () => {
+      @Component("Button")
+      class Button extends GondelBaseComponent {}
+      const buttonElement = createMockElement("g");
+      startComponents(buttonElement);
+      const isMounted = hasMountedGondelComponent(buttonElement);
+      expect(isMounted).toEqual(true);
     });
   });
 });
