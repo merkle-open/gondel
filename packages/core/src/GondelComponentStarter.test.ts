@@ -38,7 +38,7 @@ describe("GondelComponentStarter", () => {
       }
       const buttonElement = createMockElement("g");
       startComponents();
-      const button = getComponentByDomNode(buttonElement) as Button;
+      const button = getComponentByDomNode<Button>(buttonElement);
       expect(button._wasConstructed).toBe(true);
     });
 
@@ -52,7 +52,7 @@ describe("GondelComponentStarter", () => {
       }
       const buttonElement = createMockElement("g");
       startComponents();
-      const button = getComponentByDomNode(buttonElement) as Button;
+      const button = getComponentByDomNode<Button>(buttonElement);
       expect(button._wasStarted).toBe(true);
     });
 
@@ -129,7 +129,7 @@ describe("GondelComponentStarter", () => {
       class Button extends GondelBaseComponent {}
       const buttonElement = createMockElement("g");
       startComponents(buttonElement);
-      const button = getComponentByDomNode(buttonElement) as Button;
+      const button = getComponentByDomNode<Button>(buttonElement);
       button.stop();
       expect(getComponentByDomNode(buttonElement)).toBe(undefined);
     });
@@ -139,7 +139,7 @@ describe("GondelComponentStarter", () => {
       class Button extends GondelBaseComponent {}
       const buttonElement = createMockElement("g");
       startComponents(buttonElement);
-      const button = getComponentByDomNode(buttonElement) as Button;
+      const button = getComponentByDomNode<Button>(buttonElement);
       expect(button._namespace).toBe("g");
     });
 
@@ -148,7 +148,7 @@ describe("GondelComponentStarter", () => {
       class Button extends GondelBaseComponent {}
       const buttonElement = createMockElement("x");
       startComponents(buttonElement, "x");
-      const button = getComponentByDomNode(buttonElement, "x") as Button;
+      const button = getComponentByDomNode<Button>(buttonElement, "x");
       expect(button._namespace).toBe("x");
     });
 
@@ -157,7 +157,7 @@ describe("GondelComponentStarter", () => {
       class Button extends GondelBaseComponent {}
       const buttonElement = createMockElement("g");
       startComponents(buttonElement);
-      const button = getComponentByDomNode(buttonElement) as Button;
+      const button = getComponentByDomNode<Button>(buttonElement);
       expect(button._componentName).toBe("Button");
     });
 
@@ -166,7 +166,7 @@ describe("GondelComponentStarter", () => {
       class Button extends GondelBaseComponent {}
       const buttonElement = createMockElement("g");
       startComponents(buttonElement);
-      const button = getComponentByDomNode(buttonElement) as Button;
+      const button = getComponentByDomNode<Button>(buttonElement);
       expect(button._ctx).toBe(buttonElement);
     });
 
