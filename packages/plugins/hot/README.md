@@ -1,8 +1,16 @@
 # Hot Loader
 
-Allows to hot reaload gondel components
+Adds support for hot-module-reloading (hmr) for Gondel components.  
 
-Add the following code to your entry point:
+## Installation
+
+```
+npm i --save-dev @gondel/plugin-hot
+```
+
+## Usage 
+
+Add the follwoing code to your your entry point:
 
 ```js
 import {hot} from '@gondel/plugin-hot';
