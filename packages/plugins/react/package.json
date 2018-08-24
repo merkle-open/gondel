@@ -15,6 +15,10 @@
     "build:esm": "tsc --project ./tsconfig.json --declaration --esModuleInterop --declarationDir dist/ --sourceMap --outDir dist/",
     "build": "npm-run-all build:clean build:esm"
   },
+  "files": [
+    "src/",
+    "dist/"
+  ],
   "peerDependencies": {
     "@gondel/core": "*",
     "react": "*",
