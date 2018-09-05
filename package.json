@@ -15,7 +15,8 @@
     "prettier": "prettier --write **/src/*.{ts,tsx}",
     "posttest": "prettier --list-different **/src/*.ts",
     "test": "lerna run test",
-    "test:watch": "lerna run --parallel test:watch"
+    "test:watch": "lerna run --parallel test:watch",
+    "release": "lerna publish --ignore \"*-example\" --ignore \"@gondel/plugin-events\" --conventional-commits"
   },
   "license": "MIT",
   "lint-staged": {

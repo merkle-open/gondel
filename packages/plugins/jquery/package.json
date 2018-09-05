@@ -1,6 +1,6 @@
 {
   "name": "@gondel/plugin-jquery",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Provide jQuery helper for Gondel components",
   "bugs": "https://github.com/namics/gondel/issues",
   "homepage": "https://github.com/namics/gondel",
