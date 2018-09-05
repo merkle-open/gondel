@@ -418,6 +418,7 @@
                     return handlerQueue.push({
                         index: index,
                         ctx: parents[index],
+                        target: parents[index],
                         handlerOptions: handlers[selectorName]
                     });
                 }
@@ -428,6 +429,7 @@
                         return handlerQueue.push({
                             index: i,
                             ctx: parents[index],
+                            target: parents[i],
                             handlerOptions: handlers[selectorName]
                         });
                     }
@@ -467,6 +469,9 @@
      * This function must be used by core or only by plugins
      */
     function executeHandlers(handlers, event, namespace) {
+        /** Store wether the original Event was modified to provide the correct currentTarget */
+        var eventObjectRequiresCleanup = false;
+        /** Store optional callback results which are executed together to allow grouped redraws */
         var results = [];
         for (var i = 0; i < handlers.length && !event.cancelBubble; i++) {
             var handlerObject = handlers[i];
@@ -474,6 +479,12 @@
             var gondelComponent = getComponentByDomNode(handlerObject.ctx, namespace);
             // Skip if the component wasn't started or if it was stopped
             if (gondelComponent) {
+                // See https://stackoverflow.com/questions/52057726/what-is-the-best-way-to-alter-a-native-browser-event
+                Object.defineProperty(event, "currentTarget", {
+                    value: handlerObject.target,
+                    configurable: true
+                });
+                eventObjectRequiresCleanup = true;
                 for (var j = 0; j < handlerOptions.length && !event.cancelBubble; j++) {
                     var handlerResult = gondelComponent[handlerOptions[j].handlerName].call(gondelComponent, event);
                     if (typeof handlerResult === "function") {
@@ -486,6 +497,11 @@
         results.forEach(function (result) {
             result();
         });
+        // Cleanup the event object
+        if (eventObjectRequiresCleanup) {
+            // See https://stackoverflow.com/questions/52057726/what-is-the-best-way-to-alter-a-native-browser-event
+            delete event.currentTarget;
+        }
     }
     /**
      * Add a event lister to the <html> element
@@ -575,7 +591,7 @@
         });
         addGondelPluginEventListener("start", function (gondelComponents, _a, next) {
             var newComponentNames = _a.newComponentNames, gondelComponentRegistry = _a.gondelComponentRegistry, namespace = _a.namespace;
-            var components = newComponentNames.forEach(function (componentName) {
+            newComponentNames.forEach(function (componentName) {
                 var gondelComponent = gondelComponentRegistry.getComponent(componentName);
                 // The decorator will store the event information in two different places.
                 // For ES6 classes it is using __events

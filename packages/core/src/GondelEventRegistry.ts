@@ -25,6 +25,19 @@ export type INamespacedEventHandlerRegistry = {
   };
 };
 
+/**
+ * The current context information neccessary to
+ * execute an event
+ */
+export type IEventExecutionContext = {
+  ctx: HTMLElement;
+  /**
+   * The current listener target
+   */
+  target: HTMLElement;
+  handlerOptions: Array<IHandlerOption>;
+};
+
 export type IHandlerOption = {
   selector?: string;
   handlerName: string;
@@ -60,7 +73,7 @@ export function getHandlers(
   attributeName: string,
   eventHandlerRegistry: INamespacedEventHandlerRegistry,
   target: HTMLElement
-): Array<{ ctx: HTMLElement; handlerOptions: Array<IHandlerOption> }> {
+): Array<IEventExecutionContext> {
   const parents = getParentElements(target);
   // Find all selectors which have been registred for this event type
   // and which have a gondel component in one of the parrent nodes
@@ -82,6 +95,7 @@ export function getHandlers(
   const handlerQueue: Array<{
     index: number;
     ctx: HTMLElement;
+    target: HTMLElement;
     handlerOptions: Array<IHandlerOption>;
   }> = [];
   selectorsOfFoundComponents.forEach(({ index, handlers }) => {
@@ -92,6 +106,7 @@ export function getHandlers(
         return handlerQueue.push({
           index,
           ctx: parents[index],
+          target: parents[index],
           handlerOptions: handlers[selectorName]
         });
       }
@@ -102,6 +117,7 @@ export function getHandlers(
           return handlerQueue.push({
             index: i,
             ctx: parents[index],
+            target: parents[i],
             handlerOptions: handlers[selectorName]
           });
         }
@@ -150,10 +166,13 @@ export function getEventRegistry(namespace: string) {
  * This function must be used by core or only by plugins
  */
 export function executeHandlers(
-  handlers: Array<{ ctx: HTMLElement; handlerOptions: Array<IHandlerOption> }>,
+  handlers: Array<IEventExecutionContext>,
   event: Event,
   namespace: string
 ) {
+  /** Store wether the original Event was modified to provide the correct currentTarget */
+  let eventObjectRequiresCleanup = false;
+  /** Store optional callback results which are executed together to allow grouped redraws */
   const results = [];
   for (let i = 0; i < handlers.length && !event.cancelBubble; i++) {
     const handlerObject = handlers[i];
@@ -161,6 +180,12 @@ export function executeHandlers(
     const gondelComponent = getComponentByDomNode(handlerObject.ctx, namespace);
     // Skip if the component wasn't started or if it was stopped
     if (gondelComponent) {
+      // See https://stackoverflow.com/questions/52057726/what-is-the-best-way-to-alter-a-native-browser-event
+      Object.defineProperty(event, "currentTarget", {
+        value: handlerObject.target,
+        configurable: true
+      });
+      eventObjectRequiresCleanup = true;
       for (let j = 0; j < handlerOptions.length && !event.cancelBubble; j++) {
         const handlerResult = (gondelComponent as any)[handlerOptions[j].handlerName].call(
           gondelComponent,
@@ -176,6 +201,11 @@ export function executeHandlers(
   results.forEach(result => {
     result();
   });
+  // Cleanup the event object
+  if (eventObjectRequiresCleanup) {
+    // See https://stackoverflow.com/questions/52057726/what-is-the-best-way-to-alter-a-native-browser-event
+    delete (event as any).currentTarget;
+  }
 }
 
 /**

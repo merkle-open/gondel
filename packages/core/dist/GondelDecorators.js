@@ -39,7 +39,7 @@ function hookEventDecoratorInCore() {
     });
     addGondelPluginEventListener("start", function (gondelComponents, _a, next) {
         var newComponentNames = _a.newComponentNames, gondelComponentRegistry = _a.gondelComponentRegistry, namespace = _a.namespace;
-        var components = newComponentNames.forEach(function (componentName) {
+        newComponentNames.forEach(function (componentName) {
             var gondelComponent = gondelComponentRegistry.getComponent(componentName);
             // The decorator will store the event information in two different places.
             // For ES6 classes it is using __events
