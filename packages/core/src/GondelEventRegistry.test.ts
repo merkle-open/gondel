@@ -1,18 +1,17 @@
-import {
-  startComponents,
-  stopComponents,
-  getComponentByDomNode,
-  registerComponent,
-  triggerPublicEvent
-} from "./index";
+import { GondelBaseComponent } from "./GondelComponent";
 import {
   addRootEventListener,
+  getEventRegistry,
   removeRootEventListener,
-  removeRootEventListernerForComponent,
-  getEventRegistry
+  removeRootEventListernerForComponent
 } from "./GondelEventRegistry";
-
-import { GondelBaseComponent, IGondelComponent } from "./GondelComponent";
+import {
+  getComponentByDomNode,
+  registerComponent,
+  startComponents,
+  stopComponents,
+  triggerPublicEvent
+} from "./index";
 
 describe("GondelEventRegistry", () => {
   const domEventRegistryG = getEventRegistry("g");
@@ -21,13 +20,16 @@ describe("GondelEventRegistry", () => {
     class Button extends GondelBaseComponent {
       eventCount: number = 0;
       eventHistory: Array<string> = [];
+      eventTargetHistory: Array<EventTarget | null> = [];
 
-      _handleEvent() {
+      _handleEvent(event: Event) {
         this.eventCount++;
         this.eventHistory.push("_handleEvent");
+        this.eventTargetHistory.push(event.currentTarget);
       }
-      _handleAnotherEvent() {
+      _handleAnotherEvent(event: Event) {
         this.eventHistory.push("_handleAnotherEvent");
+        this.eventTargetHistory.push(event.currentTarget);
         return () => {
           this.eventCount++;
           this.eventHistory.push("_handleAnotherEventPostHandler");
@@ -117,6 +119,17 @@ describe("GondelEventRegistry", () => {
       buttonElement.querySelector(".grand-child")!.dispatchEvent(event);
       // Count events catched:
       expect(buttonComponent.eventCount).toEqual(1);
+    });
+
+    it("should overwrite the currentTarget when forwarding parent events", () => {
+      addRootEventListener("g", "click", "Button", "_handleEvent", ".child");
+      // Fire event
+      const event = document.createEvent("Event");
+      event.initEvent("click", true, true);
+      buttonElement.querySelector(".grand-child")!.dispatchEvent(event);
+      // Verify that the eventTarget is .child instead of .grand-child
+      const child = buttonElement.querySelector(".child");
+      expect(buttonComponent.eventTargetHistory).toEqual([child]);
     });
 
     it("should not forward events from ctx to a child element", () => {
