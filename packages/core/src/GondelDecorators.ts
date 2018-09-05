@@ -66,7 +66,7 @@ function hookEventDecoratorInCore() {
     },
     next
   ) {
-    const components = newComponentNames.forEach(componentName => {
+    newComponentNames.forEach(componentName => {
       const gondelComponent = gondelComponentRegistry.getComponent(componentName);
       // The decorator will store the event information in two different places.
       // For ES6 classes it is using __events

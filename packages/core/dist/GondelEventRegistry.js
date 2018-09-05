@@ -57,6 +57,7 @@ export function getHandlers(attributeName, eventHandlerRegistry, target) {
                 return handlerQueue.push({
                     index: index,
                     ctx: parents[index],
+                    target: parents[index],
                     handlerOptions: handlers[selectorName]
                 });
             }
@@ -67,6 +68,7 @@ export function getHandlers(attributeName, eventHandlerRegistry, target) {
                     return handlerQueue.push({
                         index: i,
                         ctx: parents[index],
+                        target: parents[i],
                         handlerOptions: handlers[selectorName]
                     });
                 }
@@ -106,6 +108,9 @@ export function getEventRegistry(namespace) {
  * This function must be used by core or only by plugins
  */
 export function executeHandlers(handlers, event, namespace) {
+    /** Store wether the original Event was modified to provide the correct currentTarget */
+    var eventObjectRequiresCleanup = false;
+    /** Store optional callback results which are executed together to allow grouped redraws */
     var results = [];
     for (var i = 0; i < handlers.length && !event.cancelBubble; i++) {
         var handlerObject = handlers[i];
@@ -113,6 +118,12 @@ export function executeHandlers(handlers, event, namespace) {
         var gondelComponent = getComponentByDomNode(handlerObject.ctx, namespace);
         // Skip if the component wasn't started or if it was stopped
         if (gondelComponent) {
+            // See https://stackoverflow.com/questions/52057726/what-is-the-best-way-to-alter-a-native-browser-event
+            Object.defineProperty(event, "currentTarget", {
+                value: handlerObject.target,
+                configurable: true
+            });
+            eventObjectRequiresCleanup = true;
             for (var j = 0; j < handlerOptions.length && !event.cancelBubble; j++) {
                 var handlerResult = gondelComponent[handlerOptions[j].handlerName].call(gondelComponent, event);
                 if (typeof handlerResult === "function") {
@@ -125,6 +136,11 @@ export function executeHandlers(handlers, event, namespace) {
     results.forEach(function (result) {
         result();
     });
+    // Cleanup the event object
+    if (eventObjectRequiresCleanup) {
+        // See https://stackoverflow.com/questions/52057726/what-is-the-best-way-to-alter-a-native-browser-event
+        delete event.currentTarget;
+    }
 }
 /**
  * Add a event lister to the <html> element
