@@ -24,9 +24,9 @@ show an alert message.
 HTML
 
 ```html
- <button data-g-name="Input">Click me</button>
+ <button data-g-name="Button">Click me</button>
 
- <button data-g-name="Input">Or click me</button>
+ <button data-g-name="Button">Or click me</button>
 ```
 
 JS
