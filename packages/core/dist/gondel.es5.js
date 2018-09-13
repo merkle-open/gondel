@@ -375,13 +375,20 @@
     };
     var domEventRegistry = window.__gondelDomEvents || {};
     window.__gondelDomEvents = domEventRegistry;
-    /* istanbul ignore next : Browser polyfill can't be tested */
-    var matches = Element.prototype.matches ||
-        Element.prototype.matchesSelector ||
-        Element.prototype.mozMatchesSelector ||
-        Element.prototype.msMatchesSelector ||
-        Element.prototype.oMatchesSelector ||
-        Element.prototype.webkitMatchesSelector;
+    // Polyfill for element.prototype.matches
+    var matchesCssSelector = function (element, selector) {
+        var elementPrototype = window.Element.prototype;
+        /* istanbul ignore next : Browser polyfill can't be tested */
+        var elementMatches = elementPrototype.matches ||
+            elementPrototype.matchesSelector ||
+            elementPrototype.mozMatchesSelector ||
+            elementPrototype.msMatchesSelector ||
+            elementPrototype.webkitMatchesSelector;
+        // Cache the function and call it
+        return (matchesCssSelector = function (element, selector) {
+            return elementMatches.call(element, selector);
+        })(element, selector);
+    };
     function getParentElements(startElement) {
         var nodes = [];
         for (var element = startElement; element; element = element.parentElement) {
@@ -425,7 +432,7 @@
                 // Iterate backwards over the children of the component to find an element
                 // which matches the selector for the current handler
                 for (var i = index; --i >= 0;) {
-                    if (matches.call(parents[i], selectorName)) {
+                    if (matchesCssSelector(parents[i], selectorName)) {
                         return handlerQueue.push({
                             index: i,
                             ctx: parents[index],

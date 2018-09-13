@@ -69,13 +69,6 @@
      */
     var domEventRegistry = window.__gondelDomEvents || {};
     window.__gondelDomEvents = domEventRegistry;
-    /* istanbul ignore next : Browser polyfill can't be tested */
-    var matches = Element.prototype.matches ||
-        Element.prototype.matchesSelector ||
-        Element.prototype.mozMatchesSelector ||
-        Element.prototype.msMatchesSelector ||
-        Element.prototype.oMatchesSelector ||
-        Element.prototype.webkitMatchesSelector;
 
     // Export helpers to hook into the gondel frameworks (should only be used by plugins)
 
