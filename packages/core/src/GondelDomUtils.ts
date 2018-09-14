@@ -1,5 +1,5 @@
 import { GondelComponent } from "./GondelComponent";
-import { componentRegistries } from "./GondelComponentRegistry";
+import { getComponentRegistry } from "./GondelComponentRegistry";
 import { startComponentsFromRegistry } from "./GondelComponentStarter";
 export type ArrayLikeHtmlElement = Element | Element[] | NodeListOf<Element> | ArrayLike<Element>;
 
@@ -35,10 +35,7 @@ export function startComponents(
   domContext?: ArrayLikeHtmlElement,
   namespace: string = "g"
 ): Promise<Array<GondelComponent>> {
-  if (!componentRegistries[namespace]) {
-    return Promise.resolve([]);
-  }
-  const registry = componentRegistries[namespace];
+  const registry = getComponentRegistry(namespace);
   return startComponentsFromRegistry(
     registry,
     domContext ? getFirstDomNode(domContext) : document.documentElement,
@@ -93,7 +90,7 @@ export function getComponentByDomNode<T extends GondelComponent>(
   }
 
   throw new Error(
-    `Could not find any gondel component under ${firstNode.nodeName} in namespace "${namespace}", 
+    `Could not find any gondel component under ${firstNode.nodeName} in namespace "${namespace}",
     please check if your component is mounted via 'hasMountedGondelComponent'`
   );
 }

@@ -26,8 +26,6 @@
         };
     }
 
-    var componentRegistries = (window.__gondelRegistries = window.__gondelRegistries || {});
-
     var internalGondelRefAttribute = "_gondel_";
     /**
      * Returns true if the given object is a single Element
@@ -60,15 +58,13 @@
         if (gondelComponent && gondelComponent._ctx) {
             return gondelComponent;
         }
-        throw new Error("Could not find any gondel component under " + firstNode.nodeName + " in namespace \"" + namespace + "\", \n    please check if your component is mounted via 'hasMountedGondelComponent'");
+        throw new Error("Could not find any gondel component under " + firstNode.nodeName + " in namespace \"" + namespace + "\",\n    please check if your component is mounted via 'hasMountedGondelComponent'");
     }
 
     /**
      * The event registry provides a way to bind events ahead of time
      * with a very small foot print during launch to improve the time to interaction
      */
-    var domEventRegistry = window.__gondelDomEvents || {};
-    window.__gondelDomEvents = domEventRegistry;
 
     // Export helpers to hook into the gondel frameworks (should only be used by plugins)
 

@@ -64,7 +64,17 @@
         };
         return GondelComponentRegistry;
     }());
-    var componentRegistries = (window.__gondelRegistries = window.__gondelRegistries || {});
+    var _componentRegistries;
+    function getComponentRegistry(namespace) {
+        if (!_componentRegistries) {
+            _componentRegistries = window["__\ud83d\udea1Registries"] || {};
+            window["__\ud83d\udea1Registries"] = _componentRegistries;
+        }
+        if (!_componentRegistries[namespace]) {
+            _componentRegistries[namespace] = new GondelComponentRegistry();
+        }
+        return _componentRegistries[namespace];
+    }
     function registerComponent() {
         var args = arguments;
         // The componentName is always the first argument
@@ -73,21 +83,19 @@
         var namespace = typeof args[1] === "string" ? args[1] : "g";
         // The last argument is always the component class
         var component = args[args.length - 1];
-        if (!componentRegistries[namespace]) {
-            componentRegistries[namespace] = new GondelComponentRegistry();
-        }
+        var gondelComponentRegistry = getComponentRegistry(namespace);
         // If this component was already registered we remove the previous one
         // and notify all plugins - this is especially usefull for hot component replacement
-        if (componentRegistries[namespace].getComponent(componentName)) {
+        if (gondelComponentRegistry.getComponent(componentName)) {
             fireGondelPluginEvent("unregister", component, { componentName: componentName, namespace: namespace });
         }
         // Let plugins know about the new component
         fireGondelPluginEvent("register", component, {
             componentName: componentName,
             namespace: namespace,
-            gondelComponentRegistry: componentRegistries[namespace]
+            gondelComponentRegistry: gondelComponentRegistry
         }, function (component) {
-            componentRegistries[namespace].registerComponent(componentName, component);
+            gondelComponentRegistry.registerComponent(componentName, component);
         });
     }
 
@@ -276,10 +284,7 @@
      */
     function startComponents(domContext, namespace) {
         if (namespace === void 0) { namespace = "g"; }
-        if (!componentRegistries[namespace]) {
-            return Promise.resolve([]);
-        }
-        var registry = componentRegistries[namespace];
+        var registry = getComponentRegistry(namespace);
         return startComponentsFromRegistry(registry, domContext ? getFirstDomNode(domContext) : document.documentElement, namespace);
     }
     /**
@@ -320,7 +325,7 @@
         if (gondelComponent && gondelComponent._ctx) {
             return gondelComponent;
         }
-        throw new Error("Could not find any gondel component under " + firstNode.nodeName + " in namespace \"" + namespace + "\", \n    please check if your component is mounted via 'hasMountedGondelComponent'");
+        throw new Error("Could not find any gondel component under " + firstNode.nodeName + " in namespace \"" + namespace + "\",\n    please check if your component is mounted via 'hasMountedGondelComponent'");
     }
     /**
      * Returns the gondel instance for the given HtmlELement once it is booted
@@ -373,8 +378,6 @@
         focus: "focusin",
         blur: "focusout"
     };
-    var domEventRegistry = window.__gondelDomEvents || {};
-    window.__gondelDomEvents = domEventRegistry;
     // Polyfill for element.prototype.matches
     var matchesCssSelector = function (element, selector) {
         var elementPrototype = window.Element.prototype;
@@ -461,15 +464,20 @@
         var handlers = getHandlers(attributeName, eventHandlerRegistry, target);
         executeHandlers(handlers, event, namespace);
     }
+    var _domEventRegistry;
     /**
      * Returns the namespace registry for the given namespace..
      * This function must be used only by core or plugins
      */
     function getEventRegistry(namespace) {
-        if (!domEventRegistry[namespace]) {
-            domEventRegistry[namespace] = {};
+        if (!_domEventRegistry) {
+            _domEventRegistry = window["__\ud83d\udea1DomEvents"] || {};
+            window["__\ud83d\udea1DomEvents"] = _domEventRegistry;
         }
-        return domEventRegistry[namespace];
+        if (!_domEventRegistry[namespace]) {
+            _domEventRegistry[namespace] = {};
+        }
+        return _domEventRegistry[namespace];
     }
     /**
      * Notify components
@@ -515,7 +523,7 @@
      * The listener will always call handleEvent with the domEventRegistry for the given event
      */
     function startListeningForEvent(eventName, namespace) {
-        document.documentElement.addEventListener(eventNameMapping[eventName] || eventName, handleEvent.bind(null, namespace, "data-" + namespace + "-name", domEventRegistry[namespace][eventName]));
+        document.documentElement.addEventListener(eventNameMapping[eventName] || eventName, handleEvent.bind(null, namespace, "data-" + namespace + "-name", getEventRegistry(namespace)[eventName]));
     }
     /**
      * Add an event to the Gondel EventRegistry

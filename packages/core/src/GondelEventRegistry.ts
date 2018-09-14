@@ -43,12 +43,6 @@ export type IHandlerOption = {
   handlerName: string;
 };
 
-const domEventRegistry: {
-  [eventName: string]: IEventHandlerRegistry;
-} =
-  (window as any).__gondelDomEvents || {};
-(window as any).__gondelDomEvents = domEventRegistry;
-
 // Polyfill for element.prototype.matches
 let matchesCssSelector = (element: Element, selector: string): true => {
   const elementPrototype = (window as any).Element.prototype;
@@ -157,15 +151,23 @@ function handleEvent(
   executeHandlers(handlers, event, namespace);
 }
 
+let _domEventRegistry: {
+  [eventName: string]: IEventHandlerRegistry;
+};
+
 /**
  * Returns the namespace registry for the given namespace..
  * This function must be used only by core or plugins
  */
-export function getEventRegistry(namespace: string) {
-  if (!domEventRegistry[namespace]) {
-    domEventRegistry[namespace] = {};
+export function getEventRegistry(namespace: string): IEventHandlerRegistry {
+  if (!_domEventRegistry) {
+    _domEventRegistry = (window as any)["__\ud83d\udea1DomEvents"] || {};
+    (window as any)["__\ud83d\udea1DomEvents"] = _domEventRegistry;
   }
-  return domEventRegistry[namespace];
+  if (!_domEventRegistry[namespace]) {
+    _domEventRegistry[namespace] = {};
+  }
+  return _domEventRegistry[namespace];
 }
 
 /**
@@ -226,7 +228,7 @@ function startListeningForEvent(eventName: string, namespace: string) {
       null,
       namespace,
       `data-${namespace}-name`,
-      domEventRegistry[namespace][eventName]
+      getEventRegistry(namespace)[eventName]
     )
   );
 }

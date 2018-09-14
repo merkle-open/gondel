@@ -34,9 +34,19 @@ export class GondelComponentRegistry {
   }
 }
 
-export const componentRegistries: {
+let _componentRegistries: {
   [key: string]: GondelComponentRegistry;
-} = ((window as any).__gondelRegistries = (window as any).__gondelRegistries || {});
+};
+export function getComponentRegistry(namespace: string) {
+  if (!_componentRegistries) {
+    _componentRegistries = (window as any)["__\ud83d\udea1Registries"] || {};
+    (window as any)["__\ud83d\udea1Registries"] = _componentRegistries;
+  }
+  if (!_componentRegistries[namespace]) {
+    _componentRegistries[namespace] = new GondelComponentRegistry();
+  }
+  return _componentRegistries[namespace];
+}
 
 export function registerComponent(componentName: string, component: IGondelComponent): void;
 export function registerComponent(
@@ -49,15 +59,13 @@ export function registerComponent() {
   // The componentName is always the first argument
   const componentName = args[0] as string;
   // Use namespace from the second argument or fallback to the default "g" if it is missing
-  const namespace = typeof args[1] === "string" ? args[1] : "g";
+  const namespace: string = typeof args[1] === "string" ? args[1] : "g";
   // The last argument is always the component class
   let component = args[args.length - 1] as IGondelComponent;
-  if (!componentRegistries[namespace]) {
-    componentRegistries[namespace] = new GondelComponentRegistry();
-  }
+  const gondelComponentRegistry = getComponentRegistry(namespace);
   // If this component was already registered we remove the previous one
   // and notify all plugins - this is especially usefull for hot component replacement
-  if (componentRegistries[namespace].getComponent(componentName)) {
+  if (gondelComponentRegistry.getComponent(componentName)) {
     fireGondelPluginEvent("unregister", component, { componentName, namespace });
   }
   // Let plugins know about the new component
@@ -67,10 +75,10 @@ export function registerComponent() {
     {
       componentName,
       namespace,
-      gondelComponentRegistry: componentRegistries[namespace]
+      gondelComponentRegistry
     },
     function(component) {
-      componentRegistries[namespace].registerComponent(componentName, component);
+      gondelComponentRegistry.registerComponent(componentName, component);
     }
   );
 }
