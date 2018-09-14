@@ -4,14 +4,34 @@
  */
 import { IGondelComponent, GondelComponent } from "./GondelComponent";
 import { fireGondelPluginEvent } from "./GondelPluginUtils";
+import { addRegistryToBootloader } from "./GondelAutoStart";
+
+const GLOBAL_GONDEL_REGISTRY_NAMESPACE = "__\ud83d\udea1Registries";
+
+export const enum RegistryBootMode {
+  /**
+   * The Registry was already booted
+   */
+  alreadyBooted,
+  /**
+   * The registry has to be booted by explicitly calling startComponents()
+   */
+  manual,
+  /**
+   * The registry will start once the dom was load
+   */
+  onDomReady
+}
 
 export class GondelComponentRegistry {
   _components: { [componentName: string]: IGondelComponent };
   _activeComponents: { [componentName: string]: boolean };
+  _bootMode: RegistryBootMode;
 
   constructor() {
     this._components = {};
     this._activeComponents = {};
+    this._bootMode = RegistryBootMode.onDomReady;
   }
 
   registerComponent(name: string, gondelComponent: IGondelComponent) {
@@ -32,6 +52,10 @@ export class GondelComponentRegistry {
   setActiveState(name: string, isActive: boolean) {
     this._activeComponents[name] = isActive;
   }
+
+  setBootMode(bootMode: RegistryBootMode) {
+    this._bootMode = bootMode;
+  }
 }
 
 let _componentRegistries: {
@@ -39,11 +63,12 @@ let _componentRegistries: {
 };
 export function getComponentRegistry(namespace: string) {
   if (!_componentRegistries) {
-    _componentRegistries = (window as any)["__\ud83d\udea1Registries"] || {};
-    (window as any)["__\ud83d\udea1Registries"] = _componentRegistries;
+    _componentRegistries = (window as any)[GLOBAL_GONDEL_REGISTRY_NAMESPACE] || {};
+    (window as any)[GLOBAL_GONDEL_REGISTRY_NAMESPACE] = _componentRegistries;
   }
   if (!_componentRegistries[namespace]) {
     _componentRegistries[namespace] = new GondelComponentRegistry();
+    addRegistryToBootloader(namespace);
   }
   return _componentRegistries[namespace];
 }

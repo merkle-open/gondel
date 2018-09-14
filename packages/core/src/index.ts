@@ -16,3 +16,6 @@ export * from "./GondelComponent";
 
 // Export a helper which allows registring components without using decorators
 export { registerComponent } from "./GondelComponentRegistry";
+
+// Allow to disable the autobooting feature
+export { disableAutoStart } from "./GondelAutoStart";

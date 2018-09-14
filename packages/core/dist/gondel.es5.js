@@ -42,63 +42,6 @@
         };
     }
 
-    var GondelComponentRegistry = /** @class */ (function () {
-        function GondelComponentRegistry() {
-            this._components = {};
-            this._activeComponents = {};
-        }
-        GondelComponentRegistry.prototype.registerComponent = function (name, gondelComponent) {
-            this._components[name] = gondelComponent;
-        };
-        GondelComponentRegistry.prototype.unregisterComponent = function (name) {
-            delete this._components[name];
-        };
-        GondelComponentRegistry.prototype.getComponent = function (name) {
-            return this._components[name];
-        };
-        /**
-         * Set if a component is used
-         */
-        GondelComponentRegistry.prototype.setActiveState = function (name, isActive) {
-            this._activeComponents[name] = isActive;
-        };
-        return GondelComponentRegistry;
-    }());
-    var _componentRegistries;
-    function getComponentRegistry(namespace) {
-        if (!_componentRegistries) {
-            _componentRegistries = window["__\ud83d\udea1Registries"] || {};
-            window["__\ud83d\udea1Registries"] = _componentRegistries;
-        }
-        if (!_componentRegistries[namespace]) {
-            _componentRegistries[namespace] = new GondelComponentRegistry();
-        }
-        return _componentRegistries[namespace];
-    }
-    function registerComponent() {
-        var args = arguments;
-        // The componentName is always the first argument
-        var componentName = args[0];
-        // Use namespace from the second argument or fallback to the default "g" if it is missing
-        var namespace = typeof args[1] === "string" ? args[1] : "g";
-        // The last argument is always the component class
-        var component = args[args.length - 1];
-        var gondelComponentRegistry = getComponentRegistry(namespace);
-        // If this component was already registered we remove the previous one
-        // and notify all plugins - this is especially usefull for hot component replacement
-        if (gondelComponentRegistry.getComponent(componentName)) {
-            fireGondelPluginEvent("unregister", component, { componentName: componentName, namespace: namespace });
-        }
-        // Let plugins know about the new component
-        fireGondelPluginEvent("register", component, {
-            componentName: componentName,
-            namespace: namespace,
-            gondelComponentRegistry: gondelComponentRegistry
-        }, function (component) {
-            gondelComponentRegistry.registerComponent(componentName, component);
-        });
-    }
-
     /**
      * Submit an event which might be caught by foreign gondel, angular or react components
      */
@@ -204,9 +147,9 @@
     /**
      * Constructs a new component
      */
-    function constructComponent(domNode, gondelComponentRegisty, namespace) {
+    function constructComponent(domNode, gondelComponentRegistry, namespace) {
         var componentName = domNode.getAttribute("data-" + namespace + "-name");
-        var GondelComponent = gondelComponentRegisty.getComponent(componentName);
+        var GondelComponent = gondelComponentRegistry.getComponent(componentName);
         if (GondelComponent === undefined) {
             throw new Error("Failed to boot component - " + componentName + " is not registred");
         }
@@ -255,6 +198,101 @@
         components.forEach(function (component) { return (componentNameHelper[component._componentName] = true); });
         var componentNames = Object.keys(componentNameHelper);
         return componentNames.filter(function (componentName) { return !registry._activeComponents[componentName]; });
+    }
+
+    /**
+     * By default Gondel will run startComponents on DOMContentLoaded
+     * To gain more controll over the boot behaviour tihs function can be called
+     * to disable the auto start
+     */
+    function disableAutoStart(namespace) {
+        if (namespace === void 0) { namespace = "g"; }
+        getComponentRegistry(namespace).setBootMode(1 /* manual */);
+    }
+    /**
+     * Wait for document ready and boot the registry
+     */
+    function addRegistryToBootloader(namespace) {
+        // Use new Promise to wait for the next tick
+        var boot = function () {
+            Promise.resolve().then(function () {
+                var gondelComponentRegistry = getComponentRegistry(namespace);
+                if (gondelComponentRegistry._bootMode === 2 /* onDomReady */) {
+                    gondelComponentRegistry.setBootMode(0 /* alreadyBooted */);
+                    startComponentsFromRegistry(gondelComponentRegistry, document.documentElement, namespace);
+                }
+            });
+        };
+        // Boot if document is complete or once it completes
+        if (document.readyState == "complete") {
+            boot();
+        }
+        else {
+            document.addEventListener("DOMContentLoaded", boot, false);
+        }
+    }
+
+    var GLOBAL_GONDEL_REGISTRY_NAMESPACE = "__\ud83d\udea1Registries";
+    var GondelComponentRegistry = /** @class */ (function () {
+        function GondelComponentRegistry() {
+            this._components = {};
+            this._activeComponents = {};
+            this._bootMode = 2 /* onDomReady */;
+        }
+        GondelComponentRegistry.prototype.registerComponent = function (name, gondelComponent) {
+            this._components[name] = gondelComponent;
+        };
+        GondelComponentRegistry.prototype.unregisterComponent = function (name) {
+            delete this._components[name];
+        };
+        GondelComponentRegistry.prototype.getComponent = function (name) {
+            return this._components[name];
+        };
+        /**
+         * Set if a component is used
+         */
+        GondelComponentRegistry.prototype.setActiveState = function (name, isActive) {
+            this._activeComponents[name] = isActive;
+        };
+        GondelComponentRegistry.prototype.setBootMode = function (bootMode) {
+            this._bootMode = bootMode;
+        };
+        return GondelComponentRegistry;
+    }());
+    var _componentRegistries;
+    function getComponentRegistry(namespace) {
+        if (!_componentRegistries) {
+            _componentRegistries = window[GLOBAL_GONDEL_REGISTRY_NAMESPACE] || {};
+            window[GLOBAL_GONDEL_REGISTRY_NAMESPACE] = _componentRegistries;
+        }
+        if (!_componentRegistries[namespace]) {
+            _componentRegistries[namespace] = new GondelComponentRegistry();
+            addRegistryToBootloader(namespace);
+        }
+        return _componentRegistries[namespace];
+    }
+    function registerComponent() {
+        var args = arguments;
+        // The componentName is always the first argument
+        var componentName = args[0];
+        // Use namespace from the second argument or fallback to the default "g" if it is missing
+        var namespace = typeof args[1] === "string" ? args[1] : "g";
+        // The last argument is always the component class
+        var component = args[args.length - 1];
+        var gondelComponentRegistry = getComponentRegistry(namespace);
+        // If this component was already registered we remove the previous one
+        // and notify all plugins - this is especially usefull for hot component replacement
+        if (gondelComponentRegistry.getComponent(componentName)) {
+            fireGondelPluginEvent("unregister", component, { componentName: componentName, namespace: namespace });
+        }
+        // Let plugins know about the new component
+        fireGondelPluginEvent("register", component, {
+            componentName: componentName,
+            namespace: namespace,
+            gondelComponentRegistry: gondelComponentRegistry
+        }, function (component) {
+            gondelComponentRegistry.registerComponent(componentName, component);
+        });
     }
 
     var internalGondelRefAttribute = "_gondel_";
@@ -657,6 +695,7 @@
 
     exports.addGondelPluginEventListener = addGondelPluginEventListener;
     exports.registerComponent = registerComponent;
+    exports.disableAutoStart = disableAutoStart;
     exports.internalGondelRefAttribute = internalGondelRefAttribute;
     exports.internalGondelAsyncRefAttribute = internalGondelAsyncRefAttribute;
     exports.getFirstDomNode = getFirstDomNode;
