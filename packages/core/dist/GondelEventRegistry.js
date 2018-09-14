@@ -12,8 +12,6 @@ var eventNameMapping = {
     focus: "focusin",
     blur: "focusout"
 };
-var domEventRegistry = window.__gondelDomEvents || {};
-window.__gondelDomEvents = domEventRegistry;
 // Polyfill for element.prototype.matches
 var matchesCssSelector = function (element, selector) {
     var elementPrototype = window.Element.prototype;
@@ -100,15 +98,20 @@ function handleEvent(namespace, attributeName, eventHandlerRegistry, event) {
     var handlers = getHandlers(attributeName, eventHandlerRegistry, target);
     executeHandlers(handlers, event, namespace);
 }
+var _domEventRegistry;
 /**
  * Returns the namespace registry for the given namespace..
  * This function must be used only by core or plugins
  */
 export function getEventRegistry(namespace) {
-    if (!domEventRegistry[namespace]) {
-        domEventRegistry[namespace] = {};
+    if (!_domEventRegistry) {
+        _domEventRegistry = window["__\ud83d\udea1DomEvents"] || {};
+        window["__\ud83d\udea1DomEvents"] = _domEventRegistry;
     }
-    return domEventRegistry[namespace];
+    if (!_domEventRegistry[namespace]) {
+        _domEventRegistry[namespace] = {};
+    }
+    return _domEventRegistry[namespace];
 }
 /**
  * Notify components
@@ -154,7 +157,7 @@ export function executeHandlers(handlers, event, namespace) {
  * The listener will always call handleEvent with the domEventRegistry for the given event
  */
 function startListeningForEvent(eventName, namespace) {
-    document.documentElement.addEventListener(eventNameMapping[eventName] || eventName, handleEvent.bind(null, namespace, "data-" + namespace + "-name", domEventRegistry[namespace][eventName]));
+    document.documentElement.addEventListener(eventNameMapping[eventName] || eventName, handleEvent.bind(null, namespace, "data-" + namespace + "-name", getEventRegistry(namespace)[eventName]));
 }
 /**
  * Add an event to the Gondel EventRegistry

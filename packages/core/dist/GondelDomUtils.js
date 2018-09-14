@@ -1,4 +1,4 @@
-import { componentRegistries } from "./GondelComponentRegistry";
+import { getComponentRegistry } from "./GondelComponentRegistry";
 import { startComponentsFromRegistry } from "./GondelComponentStarter";
 export var internalGondelRefAttribute = "_gondel_";
 export var internalGondelAsyncRefAttribute = "_gondelA_";
@@ -27,10 +27,7 @@ export function getFirstDomNode(domNode) {
  */
 export function startComponents(domContext, namespace) {
     if (namespace === void 0) { namespace = "g"; }
-    if (!componentRegistries[namespace]) {
-        return Promise.resolve([]);
-    }
-    var registry = componentRegistries[namespace];
+    var registry = getComponentRegistry(namespace);
     return startComponentsFromRegistry(registry, domContext ? getFirstDomNode(domContext) : document.documentElement, namespace);
 }
 /**
@@ -71,7 +68,7 @@ export function getComponentByDomNode(domNode, namespace) {
     if (gondelComponent && gondelComponent._ctx) {
         return gondelComponent;
     }
-    throw new Error("Could not find any gondel component under " + firstNode.nodeName + " in namespace \"" + namespace + "\", \n    please check if your component is mounted via 'hasMountedGondelComponent'");
+    throw new Error("Could not find any gondel component under " + firstNode.nodeName + " in namespace \"" + namespace + "\",\n    please check if your component is mounted via 'hasMountedGondelComponent'");
 }
 /**
  * Returns the gondel instance for the given HtmlELement once it is booted

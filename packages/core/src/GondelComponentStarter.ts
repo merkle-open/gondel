@@ -114,11 +114,11 @@ export function attachGondelBootingFlag(
  */
 export function constructComponent(
   domNode: HTMLElement,
-  gondelComponentRegisty: GondelComponentRegistry,
+  gondelComponentRegistry: GondelComponentRegistry,
   namespace: string
 ) {
   const componentName = domNode.getAttribute(`data-${namespace}-name`)!;
-  const GondelComponent = gondelComponentRegisty.getComponent(componentName);
+  const GondelComponent = gondelComponentRegistry.getComponent(componentName);
   if (GondelComponent === undefined) {
     throw new Error(`Failed to boot component - ${componentName} is not registred`);
   }

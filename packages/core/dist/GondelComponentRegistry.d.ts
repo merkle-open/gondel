@@ -19,8 +19,6 @@ export declare class GondelComponentRegistry {
      */
     setActiveState(name: string, isActive: boolean): void;
 }
-export declare const componentRegistries: {
-    [key: string]: GondelComponentRegistry;
-};
+export declare function getComponentRegistry(namespace: string): GondelComponentRegistry;
 export declare function registerComponent(componentName: string, component: IGondelComponent): void;
 export declare function registerComponent(componentName: string, namespace: string | undefined, component: IGondelComponent): void;

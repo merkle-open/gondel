@@ -22,7 +22,17 @@ var GondelComponentRegistry = /** @class */ (function () {
     return GondelComponentRegistry;
 }());
 export { GondelComponentRegistry };
-export var componentRegistries = (window.__gondelRegistries = window.__gondelRegistries || {});
+var _componentRegistries;
+export function getComponentRegistry(namespace) {
+    if (!_componentRegistries) {
+        _componentRegistries = window["__\ud83d\udea1Registries"] || {};
+        window["__\ud83d\udea1Registries"] = _componentRegistries;
+    }
+    if (!_componentRegistries[namespace]) {
+        _componentRegistries[namespace] = new GondelComponentRegistry();
+    }
+    return _componentRegistries[namespace];
+}
 export function registerComponent() {
     var args = arguments;
     // The componentName is always the first argument
@@ -31,21 +41,19 @@ export function registerComponent() {
     var namespace = typeof args[1] === "string" ? args[1] : "g";
     // The last argument is always the component class
     var component = args[args.length - 1];
-    if (!componentRegistries[namespace]) {
-        componentRegistries[namespace] = new GondelComponentRegistry();
-    }
+    var gondelComponentRegistry = getComponentRegistry(namespace);
     // If this component was already registered we remove the previous one
     // and notify all plugins - this is especially usefull for hot component replacement
-    if (componentRegistries[namespace].getComponent(componentName)) {
+    if (gondelComponentRegistry.getComponent(componentName)) {
         fireGondelPluginEvent("unregister", component, { componentName: componentName, namespace: namespace });
     }
     // Let plugins know about the new component
     fireGondelPluginEvent("register", component, {
         componentName: componentName,
         namespace: namespace,
-        gondelComponentRegistry: componentRegistries[namespace]
+        gondelComponentRegistry: gondelComponentRegistry
     }, function (component) {
-        componentRegistries[namespace].registerComponent(componentName, component);
+        gondelComponentRegistry.registerComponent(componentName, component);
     });
 }
 //# sourceMappingURL=GondelComponentRegistry.js.map
