@@ -31,12 +31,12 @@ export function gondelJQueryMixin(BaseClass) {
  * BaseComponent with JqueryMixin
   * Usage:
    ```
-class MyComponent extends GondelJqueyComponent {
+class MyComponent extends GondelJqueryComponent {
   start() {
     console.log(this.$ctx);
   }
 }
    ```
  */
-export var GondelJqueyComponent = gondelJQueryMixin(GondelBaseComponent);
+export var GondelJqueryComponent = gondelJQueryMixin(GondelBaseComponent);
 //# sourceMappingURL=index.js.map

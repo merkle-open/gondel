@@ -32,11 +32,11 @@ export function gondelJQueryMixin<
  * BaseComponent with JqueryMixin
   * Usage:
    ```
-class MyComponent extends GondelJqueyComponent {
+class MyComponent extends GondelJqueryComponent {
   start() {
     console.log(this.$ctx);
   }
 }
    ```
  */
-export const GondelJqueyComponent = gondelJQueryMixin(GondelBaseComponent);
+export const GondelJqueryComponent = gondelJQueryMixin(GondelBaseComponent);

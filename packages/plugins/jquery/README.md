@@ -17,9 +17,9 @@ npm i --save @gondel/plugin-jquery
 ### Class
 
 ```js
-import { GondelJqueyComponent } from '@gondel/plugin-jquery';
+import { GondelJqueryComponent } from '@gondel/plugin-jquery';
 
-class MyComponent extends GondelJqueyComponent {
+class MyComponent extends GondelJqueryComponent {
   start() {
     console.log(this.$ctx);
   }

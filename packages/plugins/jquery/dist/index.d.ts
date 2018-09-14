@@ -21,13 +21,13 @@ export declare function gondelJQueryMixin<T extends GondelBaseComponent, U exten
  * BaseComponent with JqueryMixin
   * Usage:
    ```
-class MyComponent extends GondelJqueyComponent {
+class MyComponent extends GondelJqueryComponent {
   start() {
     console.log(this.$ctx);
   }
 }
    ```
  */
-export declare const GondelJqueyComponent: new (context: HTMLElement, componentName: string) => GondelBaseComponent & {
+export declare const GondelJqueryComponent: new (context: HTMLElement, componentName: string) => GondelBaseComponent & {
     $ctx: JQuery<HTMLElement>;
 };
