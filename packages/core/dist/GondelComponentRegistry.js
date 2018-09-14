@@ -1,8 +1,11 @@
 import { fireGondelPluginEvent } from "./GondelPluginUtils";
+import { addRegistryToBootloader } from "./GondelAutoStart";
+var GLOBAL_GONDEL_REGISTRY_NAMESPACE = "__\ud83d\udea1Registries";
 var GondelComponentRegistry = /** @class */ (function () {
     function GondelComponentRegistry() {
         this._components = {};
         this._activeComponents = {};
+        this._bootMode = 2 /* onDomReady */;
     }
     GondelComponentRegistry.prototype.registerComponent = function (name, gondelComponent) {
         this._components[name] = gondelComponent;
@@ -19,17 +22,21 @@ var GondelComponentRegistry = /** @class */ (function () {
     GondelComponentRegistry.prototype.setActiveState = function (name, isActive) {
         this._activeComponents[name] = isActive;
     };
+    GondelComponentRegistry.prototype.setBootMode = function (bootMode) {
+        this._bootMode = bootMode;
+    };
     return GondelComponentRegistry;
 }());
 export { GondelComponentRegistry };
 var _componentRegistries;
 export function getComponentRegistry(namespace) {
     if (!_componentRegistries) {
-        _componentRegistries = window["__\ud83d\udea1Registries"] || {};
-        window["__\ud83d\udea1Registries"] = _componentRegistries;
+        _componentRegistries = window[GLOBAL_GONDEL_REGISTRY_NAMESPACE] || {};
+        window[GLOBAL_GONDEL_REGISTRY_NAMESPACE] = _componentRegistries;
     }
     if (!_componentRegistries[namespace]) {
         _componentRegistries[namespace] = new GondelComponentRegistry();
+        addRegistryToBootloader(namespace);
     }
     return _componentRegistries[namespace];
 }

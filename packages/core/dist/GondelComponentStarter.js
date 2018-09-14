@@ -79,9 +79,9 @@ export function attachGondelBootingFlag(domNode, bootingFlag, namespace) {
 /**
  * Constructs a new component
  */
-export function constructComponent(domNode, gondelComponentRegisty, namespace) {
+export function constructComponent(domNode, gondelComponentRegistry, namespace) {
     var componentName = domNode.getAttribute("data-" + namespace + "-name");
-    var GondelComponent = gondelComponentRegisty.getComponent(componentName);
+    var GondelComponent = gondelComponentRegistry.getComponent(componentName);
     if (GondelComponent === undefined) {
         throw new Error("Failed to boot component - " + componentName + " is not registred");
     }

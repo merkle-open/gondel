@@ -1,16 +1,13 @@
 import {
   startComponents,
-  stopComponents,
   getComponentByDomNode,
   getComponentByDomNodeAsync,
-  registerComponent,
-  triggerPublicEvent,
-  Component,
-  EventListener
+  Component
 } from "./index";
 
 import { GondelBaseComponent, IGondelComponent } from "./GondelComponent";
 import { hasMountedGondelComponent } from "./GondelDomUtils";
+import { disableAutoStart } from "./GondelAutoStart";
 
 function createMockElement(namespace: string) {
   const buttonElement = document.createElement("div");
@@ -25,6 +22,8 @@ function createMockElement(namespace: string) {
   document.documentElement.appendChild(buttonElement);
   return buttonElement;
 }
+
+disableAutoStart("zzz");
 
 describe("GondelComponentStarter", () => {
   describe("#component - e2e", () => {
@@ -191,6 +190,51 @@ describe("GondelComponentStarter", () => {
       startComponents(buttonElement);
       const isMounted = hasMountedGondelComponent(buttonElement);
       expect(isMounted).toEqual(true);
+    });
+  });
+
+  describe("#component - e2e - before dom ready", () => {
+    beforeEach(() => {
+      // Fake ready state
+      Object.defineProperty(document, "readyState", { value: "loading", configurable: true });
+    });
+    afterEach(() => {
+      // Reset ready state
+      delete (document as any).readyState;
+    });
+
+    it("should start the components once the page was load", done => {
+      @Component("Button", "autostart-1")
+      class Button extends GondelBaseComponent {}
+      const buttonElement = createMockElement("autostart-1");
+      // Trigger onload
+      const event = new Event("DOMContentLoaded");
+      event.initEvent("DOMContentLoaded", false, false);
+      document.dispatchEvent(event);
+      expect(hasMountedGondelComponent(buttonElement, "autostart-1")).toBe(false);
+      // Wait for the async boot:
+      setTimeout(() => {
+        expect(hasMountedGondelComponent(buttonElement, "autostart-1")).toBe(true);
+        const button = getComponentByDomNode<Button>(buttonElement, "autostart-1");
+        expect(button._ctx).toBe(buttonElement);
+        done();
+      });
+    });
+
+    it("should not start the components if the auto start is disabled", done => {
+      disableAutoStart("autostart-2");
+      @Component("Button", "autostart-2")
+      class Button extends GondelBaseComponent {}
+      const buttonElement = createMockElement("autostart-2");
+      // Trigger onload
+      const event = new Event("DOMContentLoaded");
+      event.initEvent("DOMContentLoaded", false, false);
+      document.dispatchEvent(event);
+      // Wait for the async boot:
+      setTimeout(() => {
+        expect(hasMountedGondelComponent(buttonElement, "autostart-2")).toBe(false);
+        done();
+      });
     });
   });
 });
