@@ -41,7 +41,10 @@ const siteConfig = {
     {doc: 'intro', label: 'Docs'},
     {doc: 'doc4', label: 'API'},
     {page: 'help', label: 'Help'},
-    {blog: true, label: 'Blog'},
+    {
+      href: 'https://github.com/namics/gondel',
+      label: 'GitHub',
+    },
   ],
 
   // If you have users set above, you add it here:
