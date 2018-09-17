@@ -6,7 +6,7 @@
     <generator>Feed for Node.js</generator>
     <link rel="alternate" href="https://gondel.js.org//blog"/>
     <subtitle>The best place to stay up-to-date with the latest Gondel news and events.</subtitle>
-    <logo>https://gondel.js.org//img/docusaurus.svg</logo>
+    <logo>https://gondel.js.org//img/gondel.png</logo>
     <rights>Copyright © 2018 Namics</rights>
     <entry>
         <title type="html"><![CDATA[New Version 1.0.0]]></title>
