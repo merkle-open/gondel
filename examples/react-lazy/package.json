@@ -1,7 +1,7 @@
 {
   "name": "gondel-react-lazy-example",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,19 +10,19 @@
   "author": "Jan Nicklas",
   "license": "MIT",
   "dependencies": {
-    "@gondel/core": "*",
-    "@gondel/plugin-hot": "*",
-    "@gondel/plugin-react": "*",
+    "@gondel/core": "^0.0.4",
+    "@gondel/plugin-hot": "^0.0.4",
+    "@gondel/plugin-react": "^0.0.4",
     "react-awesome-button": "4.2.0"
   },
   "devDependencies": {
+    "css-loader": "0.28.11",
     "html-webpack-plugin": "3.0.4",
+    "style-loader": "0.21.0",
     "ts-loader": "4.0.0",
     "typescript": "3.0.1",
     "webpack": "4.0.1",
     "webpack-cli": "2.0.10",
-    "webpack-serve": "0.1.5",
-    "style-loader": "0.21.0",
-    "css-loader": "0.28.11"
+    "webpack-serve": "0.1.5"
   }
 }
