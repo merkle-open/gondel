@@ -140,7 +140,7 @@ const Features = props => (
         },
         {
           title: 'VanillaJs',
-          content: 'Gondel is has zero dependencies and can be used without any framework',
+          content: 'Gondel has zero dependencies and can be used without any framework',
           image: imgUrl('js.svg'),
           imageAlign: 'top',
         },
