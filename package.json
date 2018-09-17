@@ -14,7 +14,7 @@
     "posttest": "prettier --list-different **/src/*.{ts,tsx}",
     "test": "lerna run test",
     "test:watch": "lerna run --parallel test:watch",
-    "release": "lerna publish --ignore \"*-example\" --ignore \"@gondel/plugin-events\" --conventional-commits"
+    "release": "lerna publish --conventional-commits"
   },
   "license": "MIT",
   "husky": {
