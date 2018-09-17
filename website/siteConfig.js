@@ -24,14 +24,14 @@ const siteConfig = {
   title: 'Gondel' /* title for your website */,
   tagline: 'Documentation for Gondel',
   url: 'https://gondel.js.org/' /* your website url */,
-  baseUrl: 'https://namics.github.io/gondel/' /* base url for your project */,
+  baseUrl: '/' /* base url for your project */,
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',
 
   // Used for publishing and more
   projectName: 'gondel',
-  organizationName: 'Namics',
+  organizationName: 'namics',
   // For top-level user or org sites, the organization is still the same.
   // e.g., for the https://JoelMarcey.github.io site, it would be set like...
   //   organizationName: 'JoelMarcey'
