@@ -17,6 +17,7 @@ const siteConfig = require(process.cwd() + '/siteConfig.js');
 function imgUrl(img) {
   return siteConfig.baseUrl + 'img/' + img;
 }
+const pre = "```";
 
 function docUrl(doc, language) {
   return siteConfig.baseUrl + 'docs/' + (language ? language + '/' : '') + doc;
@@ -76,13 +77,12 @@ class HomeSplash extends React.Component {
     let language = this.props.language || '';
     return (
       <SplashContainer>
-        <Logo img_src={imgUrl('docusaurus.svg')} />
+        <Logo img_src={imgUrl('gondel.png')} />
         <div className="inner">
           <ProjectTitle />
           <PromoSection>
             <Button href="#try">Try It Out</Button>
             <Button href={docUrl('intro.html', language)}>Introduction</Button>
-            <Button href={docUrl('doc2.html', language)}>Example Link 2</Button>
           </PromoSection>
         </div>
       </SplashContainer>
@@ -100,50 +100,94 @@ const Block = props => (
 );
 
 const Features = props => (
-  <Block layout="fourColumn">
-    {[
-      {
-        content: 'This is the content of my feature',
-        image: imgUrl('docusaurus.svg'),
-        imageAlign: 'top',
-        title: 'Feature One',
-      },
-      {
-        content: 'The content of my second feature',
-        image: imgUrl('docusaurus.svg'),
-        imageAlign: 'top',
-        title: 'Feature Two',
-      },
-    ]}
-  </Block>
+  <React.Fragment>
+    <Block layout="fourColumn">
+      {[
+        {
+          title: 'No Vendor Lockin',
+          content: `Gondel works with almost every frontend and backend framework.
+  Gondel UI Components are not only reusable with React Angular or Vue but also with unflexible backend solutions`,
+          image: imgUrl('open.svg'),
+          imageAlign: 'top',
+        },
+        {
+          title: 'Modular',
+          content: 'Gondel allows you to built independent and reusable components.',
+          image: imgUrl('modular.svg'),
+          imageAlign: 'top',
+        },
+        {
+          title: 'Fast',
+          content: 'Gondel is treeshakable and has less than 3kb gziped',
+          image: imgUrl('fast.png'),
+          imageAlign: 'top',
+        },
+      ]}
+    </Block>
+    <Block layout="fourColumn">
+      {[
+        {
+          title: 'Optional Typings',
+          content: `Gondel ships with optional typings for typescript`,
+          image: imgUrl('ts.png'),
+          imageAlign: 'top',
+        },
+        {
+          title: 'Support for JSX',
+          content: 'Gondel provides a react plugin for client side rendering',
+          image: imgUrl('react.svg'),
+          imageAlign: 'top',
+        },
+        {
+          title: 'VanillaJs',
+          content: 'Gondel is has zero dependencies and can be used without any framework',
+          image: imgUrl('js.svg'),
+          imageAlign: 'top',
+        },
+      ]}
+    </Block>
+  </React.Fragment>
 );
 
-const FeatureCallout = props => (
-  <div
-    className="productShowcaseSection paddingBottom"
-    style={{textAlign: 'center'}}>
-    <h2>Feature Callout</h2>
-    <MarkdownBlock>These are features of this project</MarkdownBlock>
-  </div>
-);
+
+const codeExampleJs =`${pre}javascript
+import Component, EventListener, GondelBaseComponent from '@gondel/core';
+
+// The @Component decorator will connect the class with \`data-g-name="Button"\` elements.
+@Component('Button')
+export class Button extends GondelBaseComponent {
+  @EventListener('click')
+  _handleChange(event) {
+    alert('Hello World')
+  }
+}
+${pre}`;
+
+const codeExampleHTML =`${pre}html
+<button data-g-name="Button">Click me</button>
+
+<button data-g-name="Button">Or click me</button>
+${pre}`;
 
 const LearnHow = props => (
-  <Block background="light">
-    {[
-      {
-        content: 'Talk about learning how to use this',
-        image: imgUrl('docusaurus.svg'),
-        imageAlign: 'right',
-        title: 'Learn How',
-      },
-    ]}
-  </Block>
+  <Container
+    padding={['bottom', 'top']}
+    id='try'>
+    <h2>Hello World</h2>
+    <MarkdownBlock>
+      {codeExampleJs}
+    </MarkdownBlock>
+    <MarkdownBlock>
+        {codeExampleHTML}
+    </MarkdownBlock>
+  </Container>
 );
 
 const TryOut = props => (
   <Container
     padding={['bottom', 'top']}
     id='try'>
+      <h2>codesandbox</h2>
       <iframe
         src="https://codesandbox.io/embed/github/namics/gondel/tree/master/examples/typescript?codemirror=1&module=/src/components/button.ts"
         style={{width: '100%', height:500, border:0, borderRadius: '4px', overflow:'hidden'}}
@@ -157,7 +201,7 @@ const Description = props => (
     {[
       {
         content: 'This is another description of how this project is useful',
-        image: imgUrl('docusaurus.svg'),
+        image: imgUrl('gondel.png'),
         imageAlign: 'right',
         title: 'Description',
       },
@@ -204,10 +248,9 @@ class Index extends React.Component {
         <HomeSplash language={language} />
         <div className="mainContainer">
           <Features />
-          <FeatureCallout />
           <LearnHow />
           <TryOut />
-          <Description />
+          {/* <Description /> *}
           {/* <Showcase language={language} /> */}
         </div>
       </div>
