@@ -141,16 +141,15 @@ const LearnHow = props => (
 );
 
 const TryOut = props => (
-  <Block id="try">
-    {[
-      {
-        content: 'Talk about trying this out',
-        image: imgUrl('docusaurus.svg'),
-        imageAlign: 'left',
-        title: 'Try it Out',
-      },
-    ]}
-  </Block>
+  <Container
+    padding={['bottom', 'top']}
+    id='try'>
+      <iframe
+        src="https://codesandbox.io/embed/github/namics/gondel/tree/master/examples/typescript?codemirror=1&module=/src/components/button.ts"
+        style={{width: '100%', height:500, border:0, borderRadius: '4px', overflow:'hidden'}}
+        sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
+      </iframe>
+  </Container>
 );
 
 const Description = props => (
