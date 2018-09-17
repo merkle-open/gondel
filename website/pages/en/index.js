@@ -151,7 +151,7 @@ const Features = props => (
 
 
 const codeExampleJs =`${pre}javascript
-import Component, EventListener, GondelBaseComponent from '@gondel/core';
+import { Component, EventListener, GondelBaseComponent } from '@gondel/core';
 
 // The @Component decorator will connect the class with \`data-g-name="Button"\` elements.
 @Component('Button')
