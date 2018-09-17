@@ -86,7 +86,7 @@ function convertBreakpointsToEm<T extends { [key: string]: number }>(breakpoints
  * Convert pixel to em
  */
 function px2em(pixelValue: number) {
-  return Math.round(pixelValue / 16 * 100) / 1000;
+  return Math.round((pixelValue / 16) * 100) / 1000;
 }
 
 /**

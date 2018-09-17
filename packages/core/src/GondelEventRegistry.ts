@@ -101,29 +101,31 @@ export function getHandlers(
   }> = [];
   selectorsOfFoundComponents.forEach(({ index, handlers }) => {
     const selectorNames = Object.keys(handlers);
-    selectorNames.forEach((selectorName): any => {
-      // If no selector is given the handler does always match
-      if (!selectorName) {
-        return handlerQueue.push({
-          index,
-          ctx: parents[index],
-          target: parents[index],
-          handlerOptions: handlers[selectorName]
-        });
-      }
-      // Iterate backwards over the children of the component to find an element
-      // which matches the selector for the current handler
-      for (let i = index; --i >= 0; ) {
-        if (matchesCssSelector(parents[i], selectorName)) {
+    selectorNames.forEach(
+      (selectorName): any => {
+        // If no selector is given the handler does always match
+        if (!selectorName) {
           return handlerQueue.push({
-            index: i,
+            index,
             ctx: parents[index],
-            target: parents[i],
+            target: parents[index],
             handlerOptions: handlers[selectorName]
           });
         }
+        // Iterate backwards over the children of the component to find an element
+        // which matches the selector for the current handler
+        for (let i = index; --i >= 0; ) {
+          if (matchesCssSelector(parents[i], selectorName)) {
+            return handlerQueue.push({
+              index: i,
+              ctx: parents[index],
+              target: parents[i],
+              handlerOptions: handlers[selectorName]
+            });
+          }
+        }
       }
-    });
+    );
   });
   // Break if we couldn't find any matching element
   if (handlerQueue.length === 0) {
