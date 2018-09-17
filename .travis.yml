@@ -2,6 +2,6 @@ language: node_js
 node_js:
   - "8"
 script:
-  - npm run build
-  - npm test
-  - npx size-limit
+  - travis_retry npm run build
+  - travis_retry npm test
+  - travis_retry npx size-limit
