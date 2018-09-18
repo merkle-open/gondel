@@ -1,0 +1,40 @@
+.rating {
+  --rating: 0;
+  position: relative;
+  display: block;
+  padding-top: 20%;
+}
+
+.rating:before,
+.rating:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1' width='535' height='110'><defs><linearGradient id='a'><stop offset='0' stop-color='#fc0'/><stop offset='1' stop-color='#ff6e00'/></linearGradient><radialGradient cx='80' cy='242.587' r='97.352' fx='80' fy='242.587' xlink:href='#a' gradientUnits='userSpaceOnUse' gradientTransform='matrix(1 0 0 .951 0 11.873)'/><radialGradient xlink:href='#a' gradientUnits='userSpaceOnUse' gradientTransform='matrix(1 0 0 .951 0 11.873)' cx='80' cy='242.587' fx='80' fy='242.587' r='97.352'/><radialGradient xlink:href='#a' id='b' gradientUnits='userSpaceOnUse' gradientTransform='matrix(.54 0 0 .514 13.686 -69.593)' cx='80' cy='242.587' fx='80' fy='242.587' r='97.352'/></defs><path d='M56.888 5l12.409 38.199 40.164-.002-32.495 23.606 12.414 38.197-32.492-23.61-32.492 23.61 12.414-38.197-32.495-23.606 40.164.002 12.409-38.199z' id='c' fill='url(#b)' fill-rule='evenodd'/><use transform='translate(105.306)' width='535' height='110' xlink:href='#c'/><use transform='translate(210.612)' width='535' height='110' xlink:href='#c'/><use transform='translate(315.918)' width='535' height='110' xlink:href='#c'/><use transform='translate(421.223)' width='535' height='110' xlink:href='#c'/></svg>");
+  background-size: 100% 100%;
+  filter: brightness(0%);
+  pointer-events: none;
+}
+
+.rating:after {
+  width: calc(var(--rating) * 20%);
+  background-size: calc(1000% / (var(--rating) * 2)) 100%;
+  filter: brightness(100%);
+}
+
+.rating__input {
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.rating__input::-webkit-slider-thumb {
+  width: 40px;
+  height: 40px;
+}
