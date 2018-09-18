@@ -4,11 +4,6 @@ import { Input } from "./input";
 
 @Component("Form")
 export class Form extends GondelBaseComponent {
-  @EventListener("key", "Escape")
-  _clearForm() {
-    this._getInputs().forEach(input => input.setValue(""));
-    this._handleChange();
-  }
 
   @EventListener("submit")
   _handleSubmit(event) {
@@ -17,7 +12,7 @@ export class Form extends GondelBaseComponent {
   }
 
   @EventListener("gInput")
-  _handleChange(event?) {
+  _handleChange() {
     const hasEmptyElements = this._getInputs().some(input => !input.getValue());
     this._getSubmitButton().setIsEnabled(!hasEmptyElements);
   }
