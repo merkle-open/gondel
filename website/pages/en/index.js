@@ -90,6 +90,14 @@ class HomeSplash extends React.Component {
   }
 }
 
+const CodeSanbox = props => (
+  <iframe
+        src={`https://codesandbox.io/embed/github/namics/gondel/tree/master/${props.example}?codemirror=1&module=${props.sourceFile}`}
+        style={{width: '100%', height:500, border:0, borderRadius: '4px', overflow:'hidden'}}
+        sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
+      </iframe>
+)
+
 const Block = props => (
   <Container
     padding={['bottom', 'top']}
@@ -187,12 +195,10 @@ const TryOut = props => (
   <Container
     padding={['bottom', 'top']}
     id='try'>
-      <h2>codesandbox</h2>
-      <iframe
-        src="https://codesandbox.io/embed/github/namics/gondel/tree/master/examples/typescript?codemirror=1&module=/src/components/button.ts"
-        style={{width: '100%', height:500, border:0, borderRadius: '4px', overflow:'hidden'}}
-        sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
-      </iframe>
+      <h2>CodeSandbox - Five Star</h2>
+      <CodeSanbox example="examples/five-star" sourceFile="/src/index.js" />
+      <h2>CodeSandbox - Form Validation</h2>
+      <CodeSanbox example="examples/typescript" sourceFile="/src/components/button.ts" />
   </Container>
 );
 
