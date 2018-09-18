@@ -1,23 +1,34 @@
 <html>
-  <body>
-    <form data-g-name="Form">
 
-      <label>
-        Name:
-        <div>
-          <input data-g-name="Input">
-        </div>
-      </label>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
 
-      <label>
-        Age:
-        <div>
-          <input data-g-name="Input">
-        </div>
-      </label>
-        
-      <button data-g-name="Button" disabled>Register</button>
+<body>
+  <div class="card" style="max-width: 300px">
+    <div class="card-body">
 
-    </form>
-  </body>
+      <form data-g-name="Form">
+
+        <label>
+          Name*:
+          <div>
+            <input data-g-name="Input" class="field">
+          </div>
+        </label>
+
+        <label>
+          Age*:
+          <div>
+            <input data-g-name="Input" class="field">
+          </div>
+        </label>
+
+        <button data-g-name="Button" class="btn btn-primary" disabled>Register</button>
+
+      </form>
+    </div>
+  </div>
+</body>
+
 </html>
