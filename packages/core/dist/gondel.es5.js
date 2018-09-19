@@ -331,9 +331,8 @@
     function stopComponents(domContext, namespace) {
         if (namespace === void 0) { namespace = "g"; }
         var components = findComponents(domContext, undefined, namespace);
-        var rootComponent = domContext && getComponentByDomNode(domContext);
-        if (rootComponent) {
-            components.unshift(rootComponent);
+        if (domContext && hasMountedGondelComponent(domContext)) {
+            components.unshift(getComponentByDomNode(domContext));
         }
         components.forEach(function (component) { return component.stop(); });
     }
