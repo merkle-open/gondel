@@ -133,7 +133,7 @@
      * Convert pixel to em
      */
     function px2em(pixelValue) {
-        return Math.round(pixelValue / 16 * 100) / 1000;
+        return Math.round((pixelValue / 16) * 100) / 1000;
     }
     /**
      * This function generate mediaQueries from breakPoints
