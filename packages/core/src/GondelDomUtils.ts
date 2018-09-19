@@ -48,9 +48,8 @@ export function startComponents(
  */
 export function stopComponents(domContext?: ArrayLikeHtmlElement, namespace: string = "g") {
   const components = findComponents(domContext, undefined, namespace);
-  const rootComponent = domContext && getComponentByDomNode(domContext);
-  if (rootComponent) {
-    components.unshift(rootComponent);
+  if (domContext && hasMountedGondelComponent(domContext)) {
+    components.unshift(getComponentByDomNode(domContext));
   }
   components.forEach(component => component.stop!());
 }
