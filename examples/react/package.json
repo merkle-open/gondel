@@ -1,7 +1,7 @@
 {
   "name": "gondel-react-example",
   "private": true,
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,8 +10,8 @@
   "author": "Jan Nicklas",
   "license": "MIT",
   "dependencies": {
-    "@gondel/core": "^0.0.4",
-    "@gondel/plugin-hot": "^0.0.4",
+    "@gondel/core": "^0.0.5",
+    "@gondel/plugin-hot": "^0.0.5",
     "@types/react": "16.0.40",
     "@types/react-dom": "16.0.4",
     "react": "16.3.2",

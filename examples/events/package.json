@@ -1,7 +1,7 @@
 {
   "name": "gondel-events-example",
   "private": true,
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,10 +10,10 @@
   "author": "Jan Nicklas",
   "license": "MIT",
   "dependencies": {
-    "@gondel/core": "^0.0.4",
-    "@gondel/plugin-events": "^0.0.4",
-    "@gondel/plugin-hot": "^0.0.4",
-    "@gondel/plugin-media-queries": "^0.0.4"
+    "@gondel/core": "^0.0.5",
+    "@gondel/plugin-events": "^0.0.5",
+    "@gondel/plugin-hot": "^0.0.5",
+    "@gondel/plugin-media-queries": "^0.0.5"
   },
   "devDependencies": {
     "@babel/core": "7.0.0-beta.40",
