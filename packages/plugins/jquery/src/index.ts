@@ -20,9 +20,10 @@ export function gondelJQueryMixin<
   U extends new (context: HTMLElement, componentName: string) => T
 >(BaseClass: U) {
   class WithJquery extends (BaseClass as IGondelComponent) {
+    $ctx: JQuery<HTMLElement>;
     constructor(ctx: HTMLElement, componentName: string) {
       super(ctx, componentName);
-      (this as any).$ctx = $(ctx);
+      this.$ctx = $(ctx);
     }
   }
   return WithJquery as new (context: HTMLElement, componentName: string) => T & { $ctx: JQuery };
@@ -39,4 +40,10 @@ class MyComponent extends GondelJqueryComponent {
 }
    ```
  */
-export const GondelJqueryComponent = gondelJQueryMixin(GondelBaseComponent);
+export class GondelJqueryComponent<TElement = HTMLElement> extends GondelBaseComponent<TElement> {
+  $ctx: JQuery<TElement>;
+  constructor(ctx: TElement, componentName: string) {
+    super(ctx, componentName);
+    this.$ctx = $(ctx);
+  }
+}

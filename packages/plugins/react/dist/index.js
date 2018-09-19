@@ -24,8 +24,8 @@ function isPromise(obj) {
 }
 var GondelReactComponent = /** @class */ (function (_super) {
     __extends(GondelReactComponent, _super);
-    function GondelReactComponent(ctx) {
-        var _this = _super.call(this) || this;
+    function GondelReactComponent(ctx, componentName) {
+        var _this = _super.call(this, ctx, componentName) || this;
         // Overwrite the current start method
         var originalStart = _this.start;
         var ReactDOMPromise = import(/* webpackPrefetch: true, webpackChunkName: 'ReactDom' */ "react-dom").then(function (ReactDOM) { return ReactDOM.default; });

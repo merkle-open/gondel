@@ -5,4 +5,4 @@ export declare function Component(componentName: string, namespace?: string): (c
  */
 export declare function EventListener(eventName: string, selector?: string | object): <T extends {
     __events?: [string, string, string | object | undefined][] | undefined;
-} & GondelComponent>(target: T, handler: string) => void;
+} & GondelComponent<HTMLElement>>(target: T, handler: string) => void;

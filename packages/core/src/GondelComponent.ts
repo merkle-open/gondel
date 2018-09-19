@@ -8,9 +8,9 @@ export type StartMethod =
   // Sync boot
   | (() => void);
 
-export interface GondelComponent {
+export interface GondelComponent<TElement = HTMLElement> {
   // The component context
-  _ctx: HTMLElement;
+  _ctx: TElement;
   // The namespace e.g. 'g'
   _namespace: string;
   // The componentname e.g. 'Input'
@@ -25,11 +25,12 @@ export interface GondelComponent {
   sync?(): void;
 }
 
-export class GondelBaseComponent implements GondelComponent {
+export class GondelBaseComponent<TElement = HTMLElement> implements GondelComponent<TElement> {
+  constructor(domNode: TElement, componentName: string) {}
   /**
    * The component context
    */
-  _ctx: HTMLElement;
+  _ctx: TElement;
   /**
    * The namespace e.g. 'g'
    */
