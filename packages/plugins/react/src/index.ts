@@ -24,8 +24,8 @@ export class GondelReactComponent<S> extends GondelBaseComponent
     }
   }
 
-  constructor(ctx: HTMLElement) {
-    super();
+  constructor(ctx: HTMLElement, componentName: string) {
+    super(ctx, componentName);
     // Overwrite the current start method
     const originalStart = (this as any).start;
     const ReactDOMPromise = import(/* webpackPrefetch: true, webpackChunkName: 'ReactDom' */ "react-dom").then(

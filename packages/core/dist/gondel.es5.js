@@ -681,7 +681,7 @@
     }
 
     var GondelBaseComponent = /** @class */ (function () {
-        function GondelBaseComponent() {
+        function GondelBaseComponent(domNode, componentName) {
         }
         /**
          * Stop method

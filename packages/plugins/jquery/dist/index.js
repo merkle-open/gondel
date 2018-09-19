@@ -38,5 +38,14 @@ class MyComponent extends GondelJqueryComponent {
 }
    ```
  */
-export var GondelJqueryComponent = gondelJQueryMixin(GondelBaseComponent);
+var GondelJqueryComponent = /** @class */ (function (_super) {
+    tslib_1.__extends(GondelJqueryComponent, _super);
+    function GondelJqueryComponent(ctx, componentName) {
+        var _this = _super.call(this, ctx, componentName) || this;
+        _this.$ctx = $(ctx);
+        return _this;
+    }
+    return GondelJqueryComponent;
+}(GondelBaseComponent));
+export { GondelJqueryComponent };
 //# sourceMappingURL=index.js.map

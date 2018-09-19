@@ -31,8 +31,8 @@ describe("GondelComponentStarter", () => {
       @Component("Button")
       class Button extends GondelBaseComponent {
         _wasConstructed: boolean;
-        constructor() {
-          super();
+        constructor(ctx: HTMLElement, componentName: string) {
+          super(ctx, componentName);
           this._wasConstructed = true;
         }
       }

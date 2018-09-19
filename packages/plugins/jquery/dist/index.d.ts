@@ -28,6 +28,7 @@ class MyComponent extends GondelJqueryComponent {
 }
    ```
  */
-export declare const GondelJqueryComponent: new (context: HTMLElement, componentName: string) => GondelBaseComponent & {
-    $ctx: JQuery<HTMLElement>;
-};
+export declare class GondelJqueryComponent<TElement = HTMLElement> extends GondelBaseComponent<TElement> {
+    $ctx: JQuery<TElement>;
+    constructor(ctx: TElement, componentName: string);
+}
