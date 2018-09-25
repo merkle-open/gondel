@@ -58,10 +58,15 @@ const Logo = props => (
 );
 
 const ProjectTitle = props => (
-  <h2 className="projectTitle">
-    {siteConfig.title}
-    <small>{siteConfig.tagline}</small>
-  </h2>
+  <React.Fragment>
+    <h2 className="projectTitle">
+      {siteConfig.title}
+      <small>{siteConfig.tagline}</small>
+    </h2>
+    <a href="https://npmjs.org/package/@gondel/core"><img src="https://badge.fury.io/js/%40gondel%2Fcore.svg" /> </a>
+    <a href="https://unpkg.com/@gondel/core/dist/gondel.es5.min.js"><img src="http://img.badgesize.io/namics/gondel/master/packages/core/dist/gondel.es5.min.js.svg?compression=gzip&label=gzip%20size" /> </a>
+    <a href="http://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-green.svg" /> </a>
+  </React.Fragment>
 );
 
 const PromoSection = props => (
