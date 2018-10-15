@@ -1,4 +1,4 @@
-import { componentRegistries } from "./GondelComponentRegistry";
+import { getComponentRegistry } from "./GondelComponentRegistry";
 import { startComponentsFromRegistry } from "./GondelComponentStarter";
 export var internalGondelRefAttribute = "_gondel_";
 export var internalGondelAsyncRefAttribute = "_gondelA_";
@@ -27,10 +27,7 @@ export function getFirstDomNode(domNode) {
  */
 export function startComponents(domContext, namespace) {
     if (namespace === void 0) { namespace = "g"; }
-    if (!componentRegistries[namespace]) {
-        return Promise.resolve([]);
-    }
-    var registry = componentRegistries[namespace];
+    var registry = getComponentRegistry(namespace);
     return startComponentsFromRegistry(registry, domContext ? getFirstDomNode(domContext) : document.documentElement, namespace);
 }
 /**
@@ -39,11 +36,25 @@ export function startComponents(domContext, namespace) {
 export function stopComponents(domContext, namespace) {
     if (namespace === void 0) { namespace = "g"; }
     var components = findComponents(domContext, undefined, namespace);
-    var rootComponent = domContext && getComponentByDomNode(domContext);
-    if (rootComponent) {
-        components.unshift(rootComponent);
+    if (domContext && hasMountedGondelComponent(domContext)) {
+        components.unshift(getComponentByDomNode(domContext));
     }
     components.forEach(function (component) { return component.stop(); });
+}
+/**
+ * Checks if a component is mounted on a certain DOM node
+ */
+export function hasMountedGondelComponent(domNode, namespace) {
+    if (namespace === void 0) { namespace = "g"; }
+    var firstNode = getFirstDomNode(domNode);
+    var gondelComponent = firstNode[internalGondelRefAttribute + namespace];
+    if (!gondelComponent || !gondelComponent._ctx) {
+        // no anchor prop found or ctx missing. function is needed
+        // that we can type the `getComponentByDomNode` without possible
+        // returnal of undefined.
+        return false;
+    }
+    return true;
 }
 /**
  * Returns the gondel instance for the given HtmlELement
@@ -56,7 +67,7 @@ export function getComponentByDomNode(domNode, namespace) {
     if (gondelComponent && gondelComponent._ctx) {
         return gondelComponent;
     }
-    return;
+    throw new Error("Could not find any gondel component under " + firstNode.nodeName + " in namespace \"" + namespace + "\",\n    please check if your component is mounted via 'hasMountedGondelComponent'");
 }
 /**
  * Returns the gondel instance for the given HtmlELement once it is booted

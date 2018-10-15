@@ -1,4 +1,3 @@
-/// <reference types="react" />
 /**
  * This is a plugin which allows a simplified usage of gondel together with react
  */
@@ -8,7 +7,7 @@ export declare class GondelReactComponent<S> extends GondelBaseComponent impleme
     _setInternalState: (config: S) => void | undefined;
     state: S;
     protected setState(state: S): void;
-    constructor(ctx: HTMLElement);
+    constructor(ctx: HTMLElement, componentName: string);
     /**
      * Called immediately before mounting occurs, and before `Component#render`.
      * Avoid introducing any side-effects or subscriptions in this method.

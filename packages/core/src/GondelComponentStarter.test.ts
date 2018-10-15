@@ -1,15 +1,13 @@
 import {
   startComponents,
-  stopComponents,
   getComponentByDomNode,
   getComponentByDomNodeAsync,
-  registerComponent,
-  triggerPublicEvent,
-  Component,
-  EventListener
+  Component
 } from "./index";
 
 import { GondelBaseComponent, IGondelComponent } from "./GondelComponent";
+import { hasMountedGondelComponent } from "./GondelDomUtils";
+import { disableAutoStart } from "./GondelAutoStart";
 
 function createMockElement(namespace: string) {
   const buttonElement = document.createElement("div");
@@ -25,20 +23,22 @@ function createMockElement(namespace: string) {
   return buttonElement;
 }
 
+disableAutoStart("zzz");
+
 describe("GondelComponentStarter", () => {
   describe("#component - e2e", () => {
     it("should call the constructor during start", () => {
       @Component("Button")
       class Button extends GondelBaseComponent {
         _wasConstructed: boolean;
-        constructor() {
-          super();
+        constructor(ctx: HTMLElement, componentName: string) {
+          super(ctx, componentName);
           this._wasConstructed = true;
         }
       }
       const buttonElement = createMockElement("g");
       startComponents();
-      const button = getComponentByDomNode(buttonElement) as Button;
+      const button = getComponentByDomNode<Button>(buttonElement);
       expect(button._wasConstructed).toBe(true);
     });
 
@@ -52,7 +52,7 @@ describe("GondelComponentStarter", () => {
       }
       const buttonElement = createMockElement("g");
       startComponents();
-      const button = getComponentByDomNode(buttonElement) as Button;
+      const button = getComponentByDomNode<Button>(buttonElement);
       expect(button._wasStarted).toBe(true);
     });
 
@@ -129,9 +129,9 @@ describe("GondelComponentStarter", () => {
       class Button extends GondelBaseComponent {}
       const buttonElement = createMockElement("g");
       startComponents(buttonElement);
-      const button = getComponentByDomNode(buttonElement) as Button;
+      const button = getComponentByDomNode<Button>(buttonElement);
       button.stop();
-      expect(getComponentByDomNode(buttonElement)).toBe(undefined);
+      expect(hasMountedGondelComponent(buttonElement)).toBe(false);
     });
 
     it("should add a the default namespace", () => {
@@ -139,7 +139,7 @@ describe("GondelComponentStarter", () => {
       class Button extends GondelBaseComponent {}
       const buttonElement = createMockElement("g");
       startComponents(buttonElement);
-      const button = getComponentByDomNode(buttonElement) as Button;
+      const button = getComponentByDomNode<Button>(buttonElement);
       expect(button._namespace).toBe("g");
     });
 
@@ -148,16 +148,16 @@ describe("GondelComponentStarter", () => {
       class Button extends GondelBaseComponent {}
       const buttonElement = createMockElement("x");
       startComponents(buttonElement, "x");
-      const button = getComponentByDomNode(buttonElement, "x") as Button;
+      const button = getComponentByDomNode<Button>(buttonElement, "x");
       expect(button._namespace).toBe("x");
     });
 
-    it("should add a the component name", () => {
+    it("should add the component name", () => {
       @Component("Button")
       class Button extends GondelBaseComponent {}
       const buttonElement = createMockElement("g");
       startComponents(buttonElement);
-      const button = getComponentByDomNode(buttonElement) as Button;
+      const button = getComponentByDomNode<Button>(buttonElement);
       expect(button._componentName).toBe("Button");
     });
 
@@ -166,7 +166,7 @@ describe("GondelComponentStarter", () => {
       class Button extends GondelBaseComponent {}
       const buttonElement = createMockElement("g");
       startComponents(buttonElement);
-      const button = getComponentByDomNode(buttonElement) as Button;
+      const button = getComponentByDomNode<Button>(buttonElement);
       expect(button._ctx).toBe(buttonElement);
     });
 
@@ -181,6 +181,60 @@ describe("GondelComponentStarter", () => {
         errorMessage = error.toString();
       }
       expect(errorMessage).toBe("Error: Failed to boot component - Button is not registred");
+    });
+
+    it("should check the mounted state correctly", () => {
+      @Component("Button")
+      class Button extends GondelBaseComponent {}
+      const buttonElement = createMockElement("g");
+      startComponents(buttonElement);
+      const isMounted = hasMountedGondelComponent(buttonElement);
+      expect(isMounted).toEqual(true);
+    });
+  });
+
+  describe("#component - e2e - before dom ready", () => {
+    beforeEach(() => {
+      // Fake ready state
+      Object.defineProperty(document, "readyState", { value: "loading", configurable: true });
+    });
+    afterEach(() => {
+      // Reset ready state
+      delete (document as any).readyState;
+    });
+
+    it("should start the components once the page was load", done => {
+      @Component("Button", "autostart-1")
+      class Button extends GondelBaseComponent {}
+      const buttonElement = createMockElement("autostart-1");
+      // Trigger onload
+      const event = new Event("DOMContentLoaded");
+      event.initEvent("DOMContentLoaded", false, false);
+      document.dispatchEvent(event);
+      expect(hasMountedGondelComponent(buttonElement, "autostart-1")).toBe(false);
+      // Wait for the async boot:
+      setTimeout(() => {
+        expect(hasMountedGondelComponent(buttonElement, "autostart-1")).toBe(true);
+        const button = getComponentByDomNode<Button>(buttonElement, "autostart-1");
+        expect(button._ctx).toBe(buttonElement);
+        done();
+      });
+    });
+
+    it("should not start the components if the auto start is disabled", done => {
+      disableAutoStart("autostart-2");
+      @Component("Button", "autostart-2")
+      class Button extends GondelBaseComponent {}
+      const buttonElement = createMockElement("autostart-2");
+      // Trigger onload
+      const event = new Event("DOMContentLoaded");
+      event.initEvent("DOMContentLoaded", false, false);
+      document.dispatchEvent(event);
+      // Wait for the async boot:
+      setTimeout(() => {
+        expect(hasMountedGondelComponent(buttonElement, "autostart-2")).toBe(false);
+        done();
+      });
     });
   });
 });

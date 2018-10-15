@@ -12,8 +12,14 @@ export function Component(componentName: string, namespace?: string) {
   };
 }
 
-/** [eventName, handler, selector] */
-type EventOption = [string, string, string | object | undefined];
+type EventOption = [
+  // EventName:
+  string,
+  // Handler
+  string,
+  // optional Selector or advanced event informations
+  string | object | undefined
+];
 let areEventsHookedIntoCore = false;
 function hookEventDecoratorInCore() {
   areEventsHookedIntoCore = true;
@@ -30,10 +36,10 @@ function hookEventDecoratorInCore() {
     // The decorator will store the event information in two different places.
     // For ES6 classes it is using __events
     // For ES5 prototype classes and transpiled ES6 classes it is using prototype.__events
-    const componentEventOptions =
+    const componentEventOptions: Array<EventOption> =
       (component.prototype && component.prototype.__events) || component.__events;
     if (componentEventOptions) {
-      componentEventOptions.forEach((eventOptions: EventOption) => {
+      componentEventOptions.forEach(eventOptions => {
         addRootEventListener(
           namespace,
           /* event name: */ eventOptions[0],
@@ -66,7 +72,7 @@ function hookEventDecoratorInCore() {
     },
     next
   ) {
-    const components = newComponentNames.forEach(componentName => {
+    newComponentNames.forEach(componentName => {
       const gondelComponent = gondelComponentRegistry.getComponent(componentName);
       // The decorator will store the event information in two different places.
       // For ES6 classes it is using __events

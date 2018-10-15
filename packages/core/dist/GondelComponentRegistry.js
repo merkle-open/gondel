@@ -1,8 +1,11 @@
 import { fireGondelPluginEvent } from "./GondelPluginUtils";
+import { addRegistryToBootloader } from "./GondelAutoStart";
+var GLOBAL_GONDEL_REGISTRY_NAMESPACE = "__\ud83d\udea1Registries";
 var GondelComponentRegistry = /** @class */ (function () {
     function GondelComponentRegistry() {
         this._components = {};
         this._activeComponents = {};
+        this._bootMode = 2 /* onDomReady */;
     }
     GondelComponentRegistry.prototype.registerComponent = function (name, gondelComponent) {
         this._components[name] = gondelComponent;
@@ -19,10 +22,24 @@ var GondelComponentRegistry = /** @class */ (function () {
     GondelComponentRegistry.prototype.setActiveState = function (name, isActive) {
         this._activeComponents[name] = isActive;
     };
+    GondelComponentRegistry.prototype.setBootMode = function (bootMode) {
+        this._bootMode = bootMode;
+    };
     return GondelComponentRegistry;
 }());
 export { GondelComponentRegistry };
-export var componentRegistries = (window.__gondelRegistries = window.__gondelRegistries || {});
+var _componentRegistries;
+export function getComponentRegistry(namespace) {
+    if (!_componentRegistries) {
+        _componentRegistries = window[GLOBAL_GONDEL_REGISTRY_NAMESPACE] || {};
+        window[GLOBAL_GONDEL_REGISTRY_NAMESPACE] = _componentRegistries;
+    }
+    if (!_componentRegistries[namespace]) {
+        _componentRegistries[namespace] = new GondelComponentRegistry();
+        addRegistryToBootloader(namespace);
+    }
+    return _componentRegistries[namespace];
+}
 export function registerComponent() {
     var args = arguments;
     // The componentName is always the first argument
@@ -31,21 +48,19 @@ export function registerComponent() {
     var namespace = typeof args[1] === "string" ? args[1] : "g";
     // The last argument is always the component class
     var component = args[args.length - 1];
-    if (!componentRegistries[namespace]) {
-        componentRegistries[namespace] = new GondelComponentRegistry();
-    }
+    var gondelComponentRegistry = getComponentRegistry(namespace);
     // If this component was already registered we remove the previous one
     // and notify all plugins - this is especially usefull for hot component replacement
-    if (componentRegistries[namespace].getComponent(componentName)) {
+    if (gondelComponentRegistry.getComponent(componentName)) {
         fireGondelPluginEvent("unregister", component, { componentName: componentName, namespace: namespace });
     }
     // Let plugins know about the new component
     fireGondelPluginEvent("register", component, {
         componentName: componentName,
         namespace: namespace,
-        gondelComponentRegistry: componentRegistries[namespace]
+        gondelComponentRegistry: gondelComponentRegistry
     }, function (component) {
-        componentRegistries[namespace].registerComponent(componentName, component);
+        gondelComponentRegistry.registerComponent(componentName, component);
     });
 }
 //# sourceMappingURL=GondelComponentRegistry.js.map

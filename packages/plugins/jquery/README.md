@@ -1,31 +1,40 @@
 # jQuery Plugin
 
+Gondel is written in vanilla js.  
+For projects where jQuery is already included the jQuery plugin will allow you easy
+access to the current ctx.
 
-## Setup
+
+## Installation
 
 ```
-import * as $ from 'jQuery';
-import {init} from '@gondel/plugin-jquery';
-init($);
+npm i --save @gondel/plugin-jquery
 ```
+
 
 ## Usage
 
+### Class
+
+```js
+import { GondelJqueryComponent } from '@gondel/plugin-jquery';
+
+class MyComponent extends GondelJqueryComponent {
+  start() {
+    console.log(this.$ctx);
+  }
+}
 ```
 
-@Component('Button')
-export default class Button extends GondelBaseComponent {
- 
-  @EventListener('mouseover') 
-  _handleMouseOver(event) {
-    this.$ctx.css('border', '1px solid orange');
+### Mixin
+
+
+```js
+import { gondelJQueryMixin } from '@gondel/plugin-jquery';
+
+class MyComponent extends gondelJQueryMixin(GondelBaseComponent) {
+  start() {
+    console.log(this.$ctx);
   }
-
-  @EventListener('mouseout') 
-  _handleMouseOut(event) {
-    this.$ctx.css('border', '');
-  }
-
-};
-
+}
 ```

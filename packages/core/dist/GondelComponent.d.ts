@@ -1,7 +1,7 @@
 export declare type IGondelComponent = new (context: HTMLElement, componentName: string) => GondelComponent;
 export declare type StartMethod = ((resolve: Function, reject?: Function) => void) | (() => Promise<any>) | (() => void);
-export interface GondelComponent {
-    _ctx: HTMLElement;
+export interface GondelComponent<TElement = HTMLElement> {
+    _ctx: TElement;
     _namespace: string;
     _componentName: string;
     _stopped: boolean;
@@ -9,11 +9,12 @@ export interface GondelComponent {
     stop?(): void;
     sync?(): void;
 }
-export declare class GondelBaseComponent implements GondelComponent {
+export declare class GondelBaseComponent<TElement = HTMLElement> implements GondelComponent<TElement> {
+    constructor(domNode: TElement, componentName: string);
     /**
      * The component context
      */
-    _ctx: HTMLElement;
+    _ctx: TElement;
     /**
      * The namespace e.g. 'g'
      */

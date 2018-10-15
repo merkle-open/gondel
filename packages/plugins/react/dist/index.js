@@ -1,7 +1,10 @@
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -21,8 +24,8 @@ function isPromise(obj) {
 }
 var GondelReactComponent = /** @class */ (function (_super) {
     __extends(GondelReactComponent, _super);
-    function GondelReactComponent(ctx) {
-        var _this = _super.call(this) || this;
+    function GondelReactComponent(ctx, componentName) {
+        var _this = _super.call(this, ctx, componentName) || this;
         // Overwrite the current start method
         var originalStart = _this.start;
         var ReactDOMPromise = import(/* webpackPrefetch: true, webpackChunkName: 'ReactDom' */ "react-dom").then(function (ReactDOM) { return ReactDOM.default; });

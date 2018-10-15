@@ -1,18 +1,49 @@
 /**
- * This is a demo plugin which adds a _$ctx for demonstration purposes
+ * This plugin provides utils for Gondel jQuery integrations
  */
-import { GondelComponent, addGondelPluginEventListener } from "@gondel/core";
+import { GondelBaseComponent, IGondelComponent } from "@gondel/core";
 import $ from "jquery";
 
-export function init() {
-  addGondelPluginEventListener("start", function addJquery(
-    components: Array<GondelComponent>,
-    data: any,
-    resolve: (components: Array<GondelComponent>) => void
-  ) {
-    components.forEach(component => {
-      (component as any).$ctx = $(component._ctx);
-    });
-    resolve(components);
-  });
+/**
+ * Class mixin https://basarat.gitbooks.io/typescript/docs/types/mixins.html
+ * Usage:
+   ```
+class MyComponent extends gondelJQueryMixin(GondelBaseComponent) {
+  start() {
+    console.log(this.$ctx);
+  }
+}
+   ```
+ */
+export function gondelJQueryMixin<
+  T extends GondelBaseComponent,
+  U extends new (context: HTMLElement, componentName: string) => T
+>(BaseClass: U) {
+  class WithJquery extends (BaseClass as IGondelComponent) {
+    $ctx: JQuery<HTMLElement>;
+    constructor(ctx: HTMLElement, componentName: string) {
+      super(ctx, componentName);
+      this.$ctx = $(ctx);
+    }
+  }
+  return WithJquery as new (context: HTMLElement, componentName: string) => T & { $ctx: JQuery };
+}
+
+/**
+ * BaseComponent with JqueryMixin
+  * Usage:
+   ```
+class MyComponent extends GondelJqueryComponent {
+  start() {
+    console.log(this.$ctx);
+  }
+}
+   ```
+ */
+export class GondelJqueryComponent<TElement = HTMLElement> extends GondelBaseComponent<TElement> {
+  $ctx: JQuery<TElement>;
+  constructor(ctx: TElement, componentName: string) {
+    super(ctx, componentName);
+    this.$ctx = $(ctx);
+  }
 }

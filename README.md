@@ -24,15 +24,15 @@ show an alert message.
 HTML
 
 ```html
- <button data-g-name="Input">Click me</button>
+ <button data-g-name="Button">Click me</button>
 
- <button data-g-name="Input">Or click me</button>
+ <button data-g-name="Button">Or click me</button>
 ```
 
 JS
 
 ```js
-import {component, event, GondelBaseComponent} from '@gondel/core';
+import {Component, EventListener, GondelBaseComponent} from '@gondel/core';
 
 // The @Component decorator will connect the class with `data-g-name="Button"` elements.
 @Component('Button')
@@ -78,8 +78,8 @@ https://stackblitz.com/fork/gondel
 
 + Gondel 5 Star - [https://stackblitz.com/edit/gondel-5-star](https://stackblitz.com/edit/gondel-5-star?file=components%2Frating.js)
 + Chunk Splitting - [https://stackblitz.com/edit/gondel-lazy-load](https://stackblitz.com/edit/gondel-lazy-load?file=components%2Fbutton.js)
-+ Media Queries - [https://stackblitz.com/edit/gondel-media-query](https://stackblitz.com/edit/gondel-media-query?file=components%2Fbutton.js)
-+ Communication Parent - Child (user based) [https://stackblitz.com/edit/gondel-communication-parent-child-user-based](https://stackblitz.com/edit/gondel-communication-parent-child-user-based)
++ Media Queries - [CodeSandbox](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/media-query-plugin)
+ Communication Parent - Child (user based) [https://stackblitz.com/edit/gondel-communication-parent-child-user-based](https://stackblitz.com/edit/gondel-communication-parent-child-user-based)
 + Communication Parent - Child (promise based) [https://stackblitz.com/edit/gondel-communication-parent-child-promise-based](https://stackblitz.com/edit/gondel-communication-parent-child-promise-based)
 + Communication Child - Parent (use getComponentByDomNode) [https://stackblitz.com/edit/gondel-communication-child-parent-component-by-dom-node](https://stackblitz.com/edit/gondel-communication-child-parent-component-by-dom-node)
 + Communication Child - Parent (use public event) [https://stackblitz.com/edit/gondel-communication-child-parent-public-event](https://stackblitz.com/edit/gondel-communication-child-parent-public-event)

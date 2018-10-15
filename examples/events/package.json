@@ -1,7 +1,7 @@
 {
   "name": "gondel-events-example",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.0.6",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,10 +10,10 @@
   "author": "Jan Nicklas",
   "license": "MIT",
   "dependencies": {
-    "@gondel/core": "*",
-    "@gondel/plugin-hot": "*",
-    "@gondel/plugin-events": "*",
-    "@gondel/plugin-media-queries": "*"
+    "@gondel/core": "^0.0.6",
+    "@gondel/plugin-events": "^0.0.6",
+    "@gondel/plugin-hot": "^0.0.6",
+    "@gondel/plugin-media-queries": "^0.0.6"
   },
   "devDependencies": {
     "@babel/core": "7.0.0-beta.40",
@@ -24,7 +24,7 @@
     "babel-loader": "8.0.0-beta.0",
     "html-webpack-plugin": "3.0.4",
     "ts-loader": "4.0.0",
-    "typescript": "2.8.3",
+    "typescript": "3.0.1",
     "webpack": "4.0.1",
     "webpack-cli": "2.0.10",
     "webpack-serve": "0.1.5"

@@ -1,7 +1,7 @@
 {
   "name": "gondel-react-example",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.0.6",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,13 +10,12 @@
   "author": "Jan Nicklas",
   "license": "MIT",
   "dependencies": {
-    "@gondel/core": "*",
-    "@gondel/plugin-hot": "*",
-    "@gondel/plugin-events": "*",
+    "@gondel/core": "^0.0.6",
+    "@gondel/plugin-hot": "^0.0.6",
     "@types/react": "16.0.40",
     "@types/react-dom": "16.0.4",
     "react": "16.3.2",
-    "react-dom": "16.3.2"
+    "react-dom": "16.3.3"
   },
   "devDependencies": {
     "@babel/core": "7.0.0-beta.40",
@@ -27,7 +26,7 @@
     "babel-loader": "8.0.0-beta.0",
     "html-webpack-plugin": "3.0.4",
     "ts-loader": "4.0.0",
-    "typescript": "2.8.3",
+    "typescript": "3.0.1",
     "webpack": "4.0.1",
     "webpack-cli": "2.0.10",
     "webpack-serve": "0.1.5"

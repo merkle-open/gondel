@@ -1,14 +1,51 @@
+import * as tslib_1 from "tslib";
 /**
- * This is a demo plugin which adds a _$ctx for demonstration purposes
+ * This plugin provides utils for Gondel jQuery integrations
  */
-import { addGondelPluginEventListener } from "@gondel/core";
+import { GondelBaseComponent } from "@gondel/core";
 import $ from "jquery";
-export function init() {
-    addGondelPluginEventListener("start", function addJquery(components, data, resolve) {
-        components.forEach(function (component) {
-            component.$ctx = $(component._ctx);
-        });
-        resolve(components);
-    });
+/**
+ * Class mixin https://basarat.gitbooks.io/typescript/docs/types/mixins.html
+ * Usage:
+   ```
+class MyComponent extends gondelJQueryMixin(GondelBaseComponent) {
+  start() {
+    console.log(this.$ctx);
+  }
 }
+   ```
+ */
+export function gondelJQueryMixin(BaseClass) {
+    var WithJquery = /** @class */ (function (_super) {
+        tslib_1.__extends(WithJquery, _super);
+        function WithJquery(ctx, componentName) {
+            var _this = _super.call(this, ctx, componentName) || this;
+            _this.$ctx = $(ctx);
+            return _this;
+        }
+        return WithJquery;
+    }(BaseClass));
+    return WithJquery;
+}
+/**
+ * BaseComponent with JqueryMixin
+  * Usage:
+   ```
+class MyComponent extends GondelJqueryComponent {
+  start() {
+    console.log(this.$ctx);
+  }
+}
+   ```
+ */
+var GondelJqueryComponent = /** @class */ (function (_super) {
+    tslib_1.__extends(GondelJqueryComponent, _super);
+    function GondelJqueryComponent(ctx, componentName) {
+        var _this = _super.call(this, ctx, componentName) || this;
+        _this.$ctx = $(ctx);
+        return _this;
+    }
+    return GondelJqueryComponent;
+}(GondelBaseComponent));
+export { GondelJqueryComponent };
 //# sourceMappingURL=index.js.map

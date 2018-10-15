@@ -16,7 +16,7 @@ export declare function attachGondelBootingFlag(domNode: HTMLElement, bootingFla
 /**
  * Constructs a new component
  */
-export declare function constructComponent(domNode: HTMLElement, gondelComponentRegisty: GondelComponentRegistry, namespace: string): GondelComponent;
+export declare function constructComponent(domNode: HTMLElement, gondelComponentRegistry: GondelComponentRegistry, namespace: string): GondelComponent<HTMLElement>;
 /**
  * Start a component after it was constructed
  */

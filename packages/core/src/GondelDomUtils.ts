@@ -1,5 +1,5 @@
 import { GondelComponent } from "./GondelComponent";
-import { componentRegistries } from "./GondelComponentRegistry";
+import { getComponentRegistry } from "./GondelComponentRegistry";
 import { startComponentsFromRegistry } from "./GondelComponentStarter";
 export type ArrayLikeHtmlElement = Element | Element[] | NodeListOf<Element> | ArrayLike<Element>;
 
@@ -35,10 +35,7 @@ export function startComponents(
   domContext?: ArrayLikeHtmlElement,
   namespace: string = "g"
 ): Promise<Array<GondelComponent>> {
-  if (!componentRegistries[namespace]) {
-    return Promise.resolve([]);
-  }
-  const registry = componentRegistries[namespace];
+  const registry = getComponentRegistry(namespace);
   return startComponentsFromRegistry(
     registry,
     domContext ? getFirstDomNode(domContext) : document.documentElement,
@@ -51,36 +48,59 @@ export function startComponents(
  */
 export function stopComponents(domContext?: ArrayLikeHtmlElement, namespace: string = "g") {
   const components = findComponents(domContext, undefined, namespace);
-  const rootComponent = domContext && getComponentByDomNode(domContext);
-  if (rootComponent) {
-    components.unshift(rootComponent);
+  if (domContext && hasMountedGondelComponent(domContext)) {
+    components.unshift(getComponentByDomNode(domContext));
   }
   components.forEach(component => component.stop!());
 }
 
 /**
- * Returns the gondel instance for the given HtmlELement
+ * Checks if a component is mounted on a certain DOM node
  */
-export function getComponentByDomNode(
+export function hasMountedGondelComponent(
   domNode: ArrayLikeHtmlElement,
   namespace: string = "g"
-): GondelComponent | undefined {
+): boolean {
+  const firstNode = getFirstDomNode(domNode);
+  const gondelComponent = (firstNode as any)[internalGondelRefAttribute + namespace];
+
+  if (!gondelComponent || !gondelComponent._ctx) {
+    // no anchor prop found or ctx missing. function is needed
+    // that we can type the `getComponentByDomNode` without possible
+    // returnal of undefined.
+    return false;
+  }
+
+  return true;
+}
+
+/**
+ * Returns the gondel instance for the given HtmlELement
+ */
+export function getComponentByDomNode<T extends GondelComponent>(
+  domNode: ArrayLikeHtmlElement,
+  namespace: string = "g"
+): T {
   const firstNode = getFirstDomNode(domNode);
   const gondelComponent = (firstNode as any)[internalGondelRefAttribute + namespace];
   // Stop if this dom node is not known to gondel
   if (gondelComponent && gondelComponent._ctx) {
-    return gondelComponent as GondelComponent;
+    return gondelComponent as T;
   }
-  return;
+
+  throw new Error(
+    `Could not find any gondel component under ${firstNode.nodeName} in namespace "${namespace}",
+    please check if your component is mounted via 'hasMountedGondelComponent'`
+  );
 }
 
 /**
  * Returns the gondel instance for the given HtmlELement once it is booted
  */
-export function getComponentByDomNodeAsync(
+export function getComponentByDomNodeAsync<T extends GondelComponent>(
   domNode: ArrayLikeHtmlElement,
   namespace: string = "g"
-): Promise<GondelComponent> {
+): Promise<T> {
   const firstNode = getFirstDomNode(domNode);
   const gondelComponent = (firstNode as any)[internalGondelAsyncRefAttribute + namespace];
   // Stop if this dom node is not known to gondel
@@ -89,7 +109,7 @@ export function getComponentByDomNodeAsync(
   }
   // or the component is already booted up return it
   if (gondelComponent._ctx) {
-    return Promise.resolve(gondelComponent as GondelComponent);
+    return Promise.resolve(gondelComponent as T);
   }
   // Wait the component to boot up and return it
   return gondelComponent.then(() => (firstNode as any)[internalGondelRefAttribute + namespace]);
@@ -98,20 +118,20 @@ export function getComponentByDomNodeAsync(
 /**
  * Returns all components inside the given node
  */
-export function findComponents(
+export function findComponents<T extends GondelComponent>(
   domNode: ArrayLikeHtmlElement = document.documentElement,
   componentName?: string,
   namespace: string = "g"
-): Array<GondelComponent> {
+): Array<T> {
   const firstNode = getFirstDomNode(domNode);
-  const components: Array<GondelComponent> = [];
+  const components: Array<T> = [];
   const attribute = `_gondel_${namespace}`;
   const nodes = firstNode.querySelectorAll(
     `[data-${namespace}-name${componentName ? `="${componentName}"` : ""}]`
   );
   for (let i = 0; i < nodes.length; i++) {
     const node = nodes[i];
-    const gondelComponentInstance = (node as any)[attribute] as GondelComponent;
+    const gondelComponentInstance = (node as any)[attribute] as T;
     // Verify that the component is fully booted
     if (gondelComponentInstance && gondelComponentInstance._ctx === node) {
       components.push(gondelComponentInstance);

@@ -2,9 +2,11 @@ import { Component, GondelBaseComponent } from "@gondel/core";
 
 @Component("Button")
 export class Button extends GondelBaseComponent {
+
   start() {
     console.log("started");
   }
+
   stop() {
     console.log("stopped");
   }

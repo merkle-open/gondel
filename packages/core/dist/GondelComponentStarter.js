@@ -55,9 +55,9 @@ export function startComponentsFromRegistry(gondelComponentRegistry, domContext,
     // Resolve the booting deferred
     gondelComponentStartPromise
         .then(bootingDeferred.resolve, bootingDeferred.resolve)
-        // To tell browsers that the error was not handled
-        // we have to return the original promise
-        // otherwise this would hide important bootstrap errors
+        // Rethrow errors (if any)
+        // otherwise the browser dev tools won't show
+        // important bootstrap errors
         .then(function () { return gondelComponentStartPromise; });
     // Return a promise of all started components
     return gondelComponentStartPromise;
@@ -79,9 +79,9 @@ export function attachGondelBootingFlag(domNode, bootingFlag, namespace) {
 /**
  * Constructs a new component
  */
-export function constructComponent(domNode, gondelComponentRegisty, namespace) {
+export function constructComponent(domNode, gondelComponentRegistry, namespace) {
     var componentName = domNode.getAttribute("data-" + namespace + "-name");
-    var GondelComponent = gondelComponentRegisty.getComponent(componentName);
+    var GondelComponent = gondelComponentRegistry.getComponent(componentName);
     if (GondelComponent === undefined) {
         throw new Error("Failed to boot component - " + componentName + " is not registred");
     }
