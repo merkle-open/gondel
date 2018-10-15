@@ -79,7 +79,7 @@ https://stackblitz.com/fork/gondel
 + Gondel 5 Star - [https://stackblitz.com/edit/gondel-5-star](https://stackblitz.com/edit/gondel-5-star?file=components%2Frating.js)
 + Chunk Splitting - [https://stackblitz.com/edit/gondel-lazy-load](https://stackblitz.com/edit/gondel-lazy-load?file=components%2Fbutton.js)
 + Media Queries - [CodeSandbox](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/media-query-plugin)
- Communication Parent - Child (user based) [https://stackblitz.com/edit/gondel-communication-parent-child-user-based](https://stackblitz.com/edit/gondel-communication-parent-child-user-based)
++ Communication Parent - Child (user based) [https://stackblitz.com/edit/gondel-communication-parent-child-user-based](https://stackblitz.com/edit/gondel-communication-parent-child-user-based)
 + Communication Parent - Child (promise based) [https://stackblitz.com/edit/gondel-communication-parent-child-promise-based](https://stackblitz.com/edit/gondel-communication-parent-child-promise-based)
 + Communication Child - Parent (use getComponentByDomNode) [https://stackblitz.com/edit/gondel-communication-child-parent-component-by-dom-node](https://stackblitz.com/edit/gondel-communication-child-parent-component-by-dom-node)
 + Communication Child - Parent (use public event) [https://stackblitz.com/edit/gondel-communication-child-parent-public-event](https://stackblitz.com/edit/gondel-communication-child-parent-public-event)
