@@ -10,11 +10,11 @@
   "types": "./dist/index.d.ts",
   "license": "MIT",
   "scripts": {
+    "build": "npm-run-all build:*",
     "build:clean": "rimraf dist",
-    "build:rollup": "rollup -c rollup.config.js",
     "build:types": "tsc --project ./tsconfig.json --declaration --esModuleInterop --target es5 --declarationDir dist/ --sourceMap --outDir dist/",
+    "build:rollup": "rollup -c rollup.config.js",
     "build:min": "rollup -c rollup.config.min.js",
-    "build": "npm-run-all build:clean build:types build:rollup build:min",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -30,7 +30,7 @@
     "rollup-plugin-uglify": "6.0.0",
     "ts-jest": "23.10.4",
     "tslib": "1.9.3",
-    "typescript": "3.1.5"
+    "typescript": "3.0.3"
   },
   "jest": {
     "globals": {
