@@ -11,22 +11,22 @@
   "license": "MIT",
   "dependencies": {
     "@gondel/core": "^0.0.6",
-    "@types/react": "16.0.40",
-    "@types/react-dom": "16.0.4",
+    "@types/react": "16.4.18",
+    "@types/react-dom": "16.0.9",
     "funnies": "2.0.0",
-    "react": "16.3.2",
-    "react-dom": "16.3.3"
+    "react": "16.6.0",
+    "react-dom": "16.6.0"
   },
   "devDependencies": {
-    "@babel/core": "7.0.0-beta.40",
-    "@babel/plugin-proposal-class-properties": "7.0.0-beta.40",
-    "@babel/plugin-proposal-decorators": "7.0.0-beta.40",
-    "@babel/preset-env": "7.0.0-beta.40",
-    "@babel/preset-react": "7.0.0-beta.40",
-    "babel-loader": "8.0.0-beta.0",
-    "html-webpack-plugin": "3.0.4",
-    "webpack": "4.0.1",
-    "webpack-cli": "2.0.10",
-    "webpack-serve": "0.1.5"
+    "@babel/core": "7.1.2",
+    "@babel/plugin-proposal-class-properties": "7.1.0",
+    "@babel/plugin-proposal-decorators": "7.1.2",
+    "@babel/preset-env": "7.1.0",
+    "@babel/preset-react": "7.0.0",
+    "babel-loader": "8.0.4",
+    "html-webpack-plugin": "3.2.0",
+    "webpack": "4.23.1",
+    "webpack-cli": "3.1.2",
+    "webpack-serve": "2.0.2"
   }
 }

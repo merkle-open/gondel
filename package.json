@@ -7,9 +7,12 @@
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
     "build": "lerna run build",
-    "clean": "lerna clean",
+    "clean": "npx npm-run-all clean:*",
+    "clean:lerna": "lerna clean --yes",
+    "clean:lock": "rimraf **/package-lock.json",
+    "clean:modules": "npx rimraf node_modules",
     "commit": "git-cz",
-    "install": "lerna bootstrap --hoist",
+    "postinstall": "npm run bootstrap",
     "prettier": "prettier --write **/src/*.{ts,tsx}",
     "posttest": "prettier --list-different **/src/*.{ts,tsx}",
     "test": "lerna run test",
@@ -46,13 +49,14 @@
     }
   ],
   "devDependencies": {
-    "commitizen": "2.10.1",
+    "commitizen": "3.0.4",
     "conventional-changelog-lint": "2.1.1",
     "cz-conventional-changelog": "2.1.0",
-    "husky": "1.0.0-rc.14",
-    "lerna": "3.4.0",
-    "lint-staged": "7.2.2",
-    "prettier": "1.14.2",
+    "husky": "1.1.2",
+    "lerna": "3.4.3",
+    "lint-staged": "8.0.4",
+    "prettier": "1.14.3",
+    "rimraf": "2.6.2",
     "standard-version": "4.4.0"
   }
 }
