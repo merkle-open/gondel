@@ -121,13 +121,23 @@ describe("GondelEventRegistry", () => {
       expect(buttonComponent.eventCount).toEqual(1);
     });
 
+    it("should overwrite the currentTarget", () => {
+      addRootEventListener("g", "click", "Button", "_handleEvent");
+      // Fire event
+      const event = document.createEvent("Event");
+      event.initEvent("click", true, true);
+      buttonElement.querySelector(".grand-child")!.dispatchEvent(event);
+      // Verify that the eventTarget is the Button instead of .grand-child or html
+      expect(buttonComponent.eventTargetHistory).toEqual([buttonElement]);
+    });
+
     it("should overwrite the currentTarget when forwarding parent events", () => {
       addRootEventListener("g", "click", "Button", "_handleEvent", ".child");
       // Fire event
       const event = document.createEvent("Event");
       event.initEvent("click", true, true);
       buttonElement.querySelector(".grand-child")!.dispatchEvent(event);
-      // Verify that the eventTarget is .child instead of .grand-child
+      // Verify that the eventTarget is .child instead of .grand-child or html
       const child = buttonElement.querySelector(".child");
       expect(buttonComponent.eventTargetHistory).toEqual([child]);
     });
