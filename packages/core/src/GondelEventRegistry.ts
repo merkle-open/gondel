@@ -3,7 +3,7 @@
  * with a very small foot print during launch to improve the time to interaction
  */
 
-import { getComponentByDomNode } from "./GondelDomUtils";
+import { extractComponent } from "./GondelDomUtils";
 import { fireGondelPluginEvent } from "./GondelPluginUtils";
 
 /**
@@ -188,7 +188,7 @@ export function executeHandlers(
   for (let i = 0; i < handlers.length && !event.cancelBubble; i++) {
     const handlerObject = handlers[i];
     const handlerOptions = handlerObject.handlerOptions;
-    const gondelComponent = getComponentByDomNode(handlerObject.ctx, namespace);
+    const gondelComponent = extractComponent(handlerObject.ctx, namespace);
     // Skip if the component wasn't started or if it was stopped
     if (gondelComponent) {
       // See https://stackoverflow.com/questions/52057726/what-is-the-best-way-to-alter-a-native-browser-event
@@ -224,7 +224,7 @@ export function executeHandlers(
  * The listener will always call handleEvent with the domEventRegistry for the given event
  */
 function startListeningForEvent(eventName: string, namespace: string) {
-  document.documentElement.addEventListener(
+  document.documentElement!.addEventListener(
     (eventNameMapping as { [key: string]: string })[eventName] || eventName,
     handleEvent.bind(
       null,

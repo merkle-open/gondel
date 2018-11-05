@@ -1,14 +1,6 @@
-import {
-  startComponents,
-  stopComponents,
-  getComponentByDomNode,
-  registerComponent,
-  triggerPublicEvent,
-  Component,
-  EventListener
-} from "./index";
+import { startComponents, getComponentByDomNode, Component, EventListener } from "./index";
 
-import { GondelBaseComponent, IGondelComponent } from "./GondelComponent";
+import { GondelBaseComponent } from "./GondelComponent";
 
 function createMockElement(namespace: string) {
   const buttonElement = document.createElement("div");

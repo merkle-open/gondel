@@ -38,7 +38,7 @@ export function startComponents(
   const registry = getComponentRegistry(namespace);
   return startComponentsFromRegistry(
     registry,
-    domContext ? getFirstDomNode(domContext) : document.documentElement,
+    domContext ? getFirstDomNode(domContext) : document.documentElement!,
     namespace
   );
 }
@@ -81,17 +81,32 @@ export function getComponentByDomNode<T extends GondelComponent>(
   domNode: ArrayLikeHtmlElement,
   namespace: string = "g"
 ): T {
-  const firstNode = getFirstDomNode(domNode);
-  const gondelComponent = (firstNode as any)[internalGondelRefAttribute + namespace];
+  const gondelComponent = extractComponent<T>(getFirstDomNode(domNode), namespace);
+  if (!gondelComponent) {
+    throw new Error(
+      `Could not find a started gondel component in namespace "${namespace}",
+please check if your component is mounted via 'hasMountedGondelComponent'`
+    );
+  }
+  return gondelComponent;
+}
+
+/**
+ * Internal helper function of getComponentByDomNode
+ *
+ * Returns the gondel instance from a known HtmlElement
+ * This function is an internal helper with a possible undefined
+ * return value.
+ */
+export function extractComponent<T extends GondelComponent>(
+  element: HTMLElement,
+  namespace: string
+): T | void {
+  const gondelComponent = (element as any)[internalGondelRefAttribute + namespace];
   // Stop if this dom node is not known to gondel
   if (gondelComponent && gondelComponent._ctx) {
     return gondelComponent as T;
   }
-
-  throw new Error(
-    `Could not find any gondel component under ${firstNode.nodeName} in namespace "${namespace}",
-    please check if your component is mounted via 'hasMountedGondelComponent'`
-  );
 }
 
 /**
@@ -119,7 +134,7 @@ export function getComponentByDomNodeAsync<T extends GondelComponent>(
  * Returns all components inside the given node
  */
 export function findComponents<T extends GondelComponent>(
-  domNode: ArrayLikeHtmlElement = document.documentElement,
+  domNode: ArrayLikeHtmlElement = document.documentElement!,
   componentName?: string,
   namespace: string = "g"
 ): Array<T> {
