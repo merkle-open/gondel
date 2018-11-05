@@ -122,7 +122,7 @@ export function executeHandlers(handlers, event, namespace) {
     var eventObjectRequiresCleanup = false;
     /** Store optional callback results which are executed together to allow grouped redraws */
     var results = [];
-    for (var i = 0; i < handlers.length && !event.cancelBubble; i++) {
+    var _loop_1 = function (i) {
         var handlerObject = handlers[i];
         var handlerOptions = handlerObject.handlerOptions;
         var gondelComponent = extractComponent(handlerObject.ctx, namespace);
@@ -130,7 +130,7 @@ export function executeHandlers(handlers, event, namespace) {
         if (gondelComponent) {
             // See https://stackoverflow.com/questions/52057726/what-is-the-best-way-to-alter-a-native-browser-event
             Object.defineProperty(event, "currentTarget", {
-                value: handlerObject.target,
+                get: function () { return handlerObject.target; },
                 configurable: true
             });
             eventObjectRequiresCleanup = true;
@@ -141,6 +141,9 @@ export function executeHandlers(handlers, event, namespace) {
                 }
             }
         }
+    };
+    for (var i = 0; i < handlers.length && !event.cancelBubble; i++) {
+        _loop_1(i);
     }
     // Execute all callbacks to allow grouping write events
     results.forEach(function (result) {

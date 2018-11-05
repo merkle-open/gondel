@@ -193,7 +193,7 @@ export function executeHandlers(
     if (gondelComponent) {
       // See https://stackoverflow.com/questions/52057726/what-is-the-best-way-to-alter-a-native-browser-event
       Object.defineProperty(event, "currentTarget", {
-        value: handlerObject.target,
+        get: () => handlerObject.target,
         configurable: true
       });
       eventObjectRequiresCleanup = true;
