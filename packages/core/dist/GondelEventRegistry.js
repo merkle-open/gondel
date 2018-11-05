@@ -2,7 +2,7 @@
  * The event registry provides a way to bind events ahead of time
  * with a very small foot print during launch to improve the time to interaction
  */
-import { getComponentByDomNode } from "./GondelDomUtils";
+import { extractComponent } from "./GondelDomUtils";
 import { fireGondelPluginEvent } from "./GondelPluginUtils";
 /**
  * Only real browser events are supported.
@@ -125,7 +125,7 @@ export function executeHandlers(handlers, event, namespace) {
     for (var i = 0; i < handlers.length && !event.cancelBubble; i++) {
         var handlerObject = handlers[i];
         var handlerOptions = handlerObject.handlerOptions;
-        var gondelComponent = getComponentByDomNode(handlerObject.ctx, namespace);
+        var gondelComponent = extractComponent(handlerObject.ctx, namespace);
         // Skip if the component wasn't started or if it was stopped
         if (gondelComponent) {
             // See https://stackoverflow.com/questions/52057726/what-is-the-best-way-to-alter-a-native-browser-event

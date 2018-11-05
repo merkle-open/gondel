@@ -356,13 +356,25 @@
      */
     function getComponentByDomNode(domNode, namespace) {
         if (namespace === void 0) { namespace = "g"; }
-        var firstNode = getFirstDomNode(domNode);
-        var gondelComponent = firstNode[internalGondelRefAttribute + namespace];
+        var gondelComponent = extractComponent(getFirstDomNode(domNode), namespace);
+        if (!gondelComponent) {
+            throw new Error("Could not find a started gondel component in namespace \"" + namespace + "\",\nplease check if your component is mounted via 'hasMountedGondelComponent'");
+        }
+        return gondelComponent;
+    }
+    /**
+     * Internal helper function of getComponentByDomNode
+     *
+     * Returns the gondel instance from a known HtmlElement
+     * This function is an internal helper with a possible undefined
+     * return value.
+     */
+    function extractComponent(element, namespace) {
+        var gondelComponent = element[internalGondelRefAttribute + namespace];
         // Stop if this dom node is not known to gondel
         if (gondelComponent && gondelComponent._ctx) {
             return gondelComponent;
         }
-        throw new Error("Could not find any gondel component under " + firstNode.nodeName + " in namespace \"" + namespace + "\",\n    please check if your component is mounted via 'hasMountedGondelComponent'");
     }
     /**
      * Returns the gondel instance for the given HtmlELement once it is booted
@@ -528,7 +540,7 @@
         for (var i = 0; i < handlers.length && !event.cancelBubble; i++) {
             var handlerObject = handlers[i];
             var handlerOptions = handlerObject.handlerOptions;
-            var gondelComponent = getComponentByDomNode(handlerObject.ctx, namespace);
+            var gondelComponent = extractComponent(handlerObject.ctx, namespace);
             // Skip if the component wasn't started or if it was stopped
             if (gondelComponent) {
                 // See https://stackoverflow.com/questions/52057726/what-is-the-best-way-to-alter-a-native-browser-event
@@ -693,10 +705,6 @@
     // Export helpers to hook into the gondel frameworks (should only be used by plugins)
 
     exports.addGondelPluginEventListener = addGondelPluginEventListener;
-    exports.registerComponent = registerComponent;
-    exports.disableAutoStart = disableAutoStart;
-    exports.internalGondelRefAttribute = internalGondelRefAttribute;
-    exports.internalGondelAsyncRefAttribute = internalGondelAsyncRefAttribute;
     exports.getFirstDomNode = getFirstDomNode;
     exports.startComponents = startComponents;
     exports.stopComponents = stopComponents;
@@ -704,6 +712,8 @@
     exports.getComponentByDomNode = getComponentByDomNode;
     exports.getComponentByDomNodeAsync = getComponentByDomNodeAsync;
     exports.findComponents = findComponents;
+    exports.registerComponent = registerComponent;
+    exports.disableAutoStart = disableAutoStart;
     exports.Component = Component$$1;
     exports.EventListener = EventListener$$1;
     exports.triggerPublicEvent = triggerPublicEvent;

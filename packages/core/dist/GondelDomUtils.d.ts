@@ -28,6 +28,14 @@ export declare function hasMountedGondelComponent(domNode: ArrayLikeHtmlElement,
  */
 export declare function getComponentByDomNode<T extends GondelComponent>(domNode: ArrayLikeHtmlElement, namespace?: string): T;
 /**
+ * Internal helper function of getComponentByDomNode
+ *
+ * Returns the gondel instance from a known HtmlElement
+ * This function is an internal helper with a possible undefined
+ * return value.
+ */
+export declare function extractComponent<T extends GondelComponent>(element: HTMLElement, namespace: string): T | void;
+/**
  * Returns the gondel instance for the given HtmlELement once it is booted
  */
 export declare function getComponentByDomNodeAsync<T extends GondelComponent>(domNode: ArrayLikeHtmlElement, namespace?: string): Promise<T>;
