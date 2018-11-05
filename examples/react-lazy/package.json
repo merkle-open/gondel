@@ -1,7 +1,7 @@
 {
   "name": "gondel-react-lazy-example",
   "private": true,
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,9 +10,9 @@
   "author": "Jan Nicklas",
   "license": "MIT",
   "dependencies": {
-    "@gondel/core": "^0.0.6",
-    "@gondel/plugin-hot": "^0.0.6",
-    "@gondel/plugin-react": "^0.0.6",
+    "@gondel/core": "^0.0.7",
+    "@gondel/plugin-hot": "^0.0.7",
+    "@gondel/plugin-react": "^0.0.7",
     "react-awesome-button": "5.0.0"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 {
   "name": "gondel-five-star-example",
   "private": true,
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "@babel/plugin-proposal-decorators": "7.1.2",
-    "@gondel/core": "^0.0.6"
+    "@gondel/core": "^0.0.7"
   },
   "devDependencies": {
     "common-config-webpack-plugin": "0.4.4",

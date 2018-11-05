@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.7](https://github.com/namics/gondel/compare/v0.0.6...v0.0.7) (2018-11-05)
+
+
+### Bug Fixes
+
+* **core:** Overwrite currentTarget using a getter ([41a859f](https://github.com/namics/gondel/commit/41a859f)), closes [#11](https://github.com/namics/gondel/issues/11)
+* **core:** Prevent errors during the event handling ([a560c64](https://github.com/namics/gondel/commit/a560c64))
+
+
+
+
+
 <a name="0.0.6"></a>
 ## [0.0.6](https://github.com/namics/gondel/compare/v0.0.5...v0.0.6) (2018-09-25)
 

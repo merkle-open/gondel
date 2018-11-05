@@ -1,7 +1,7 @@
 {
   "name": "gondel-media-query-example",
   "private": true,
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,8 +10,8 @@
   "author": "Jan Nicklas",
   "license": "MIT",
   "dependencies": {
-    "@gondel/core": "^0.0.6",
-    "@gondel/plugin-media-queries": "^0.0.6",
+    "@gondel/core": "^0.0.7",
+    "@gondel/plugin-media-queries": "^0.0.7",
     "@types/react": "16.4.18",
     "@types/react-dom": "16.0.9",
     "react": "16.6.0",
