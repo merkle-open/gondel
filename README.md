@@ -54,10 +54,20 @@ Gondel is fully typed and exports optional typescript declaration files for type
 
 - [Media Queries Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/media-queries) - Provide a custom gondel event which will fire once a given media query is met - [Demo](https://stackblitz.com/edit/gondel-media-query?file=components%2Fbutton.js)
 
+## Playground
+
+https://stackblitz.com/fork/gondel
+
+## Examples
+
++ Gondel 5 Star - [https://stackblitz.com/edit/gondel-5-star](https://stackblitz.com/edit/gondel-5-star?file=components%2Frating.js)
++ Chunk Splitting - [https://stackblitz.com/edit/gondel-lazy-load](https://stackblitz.com/edit/gondel-lazy-load?file=components%2Fbutton.js)
++ Media Queries - [CodeSandbox](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/media-query-plugin)
+
 ## Contributing to Gondel
 
-Feel free to contribute to gondel.  
-The following commands will get you started:
+All contributions are welcome: use-cases, documentation, code, patches, bug reports, feature requests, etc.  
+The following commands will get you started to work locally:
 
 ```
 npm install
@@ -70,19 +80,6 @@ Running tests:
 npm run test:watch
 ```
 
-## Playground
-
-https://stackblitz.com/fork/gondel
-
-## Examples
-
-+ Gondel 5 Star - [https://stackblitz.com/edit/gondel-5-star](https://stackblitz.com/edit/gondel-5-star?file=components%2Frating.js)
-+ Chunk Splitting - [https://stackblitz.com/edit/gondel-lazy-load](https://stackblitz.com/edit/gondel-lazy-load?file=components%2Fbutton.js)
-+ Media Queries - [CodeSandbox](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/media-query-plugin)
-
-## Contributors
-
-All contributions are welcome: use-cases, documentation, code, patches, bug reports, feature requests, etc.  
 Thanks to all who have contributed ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)) so far:
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
