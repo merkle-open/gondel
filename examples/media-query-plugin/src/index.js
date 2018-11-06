@@ -2,7 +2,7 @@ import {startComponents} from '@gondel/core';
 import {initMediaQueriesPlugin} from '@gondel/plugin-media-queries';
 import './components/current-viewport';
 
-initMediaQueriesPlugin({ 
+initMediaQueriesPlugin({
   breakPoints: {
     xxsmall: 480,
     xsmall: 768,
@@ -15,6 +15,3 @@ initMediaQueriesPlugin({
 });
 
 startComponents();
-
-
-
