@@ -80,6 +80,18 @@ https://stackblitz.com/fork/gondel
 + Chunk Splitting - [https://stackblitz.com/edit/gondel-lazy-load](https://stackblitz.com/edit/gondel-lazy-load?file=components%2Fbutton.js)
 + Media Queries - [CodeSandbox](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/media-query-plugin)
 
+## Contributors
+
+All contributions are welcome: use-cases, documentation, code, patches, bug reports, feature requests, etc.  
+Thanks to all who have contributed ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)) so far:
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+| [<img src="https://avatars2.githubusercontent.com/u/4113649?v=4" width="100px;"/><br /><sub><b>Jan Nicklas</b></sub>](https://twitter.com/jantimon)<br />[💻](https://github.com/namics/gondel/commits?author=jantimon "Code") [📖](https://github.com/namics/gondel/commits?author=jantimon "Documentation") [🐛](https://github.com/namics/gondel/issues?q=author%3Ajantimon "Bug reports") [💡](#example-jantimon "Examples") [🚇](#infra-jantimon "Infrastructure (Hosting, Build-Tools, etc)") [🔌](#plugin-jantimon "Plugin/utility libraries") [⚠️](https://github.com/namics/gondel/commits?author=jantimon "Tests") [👀](#review-jantimon "Reviewed Pull Requests") | [<img src="https://avatars1.githubusercontent.com/u/149406?v=4" width="100px;"/><br /><sub><b>Ernst Ammann</b></sub>](https://github.com/ernscht)<br />[💻](https://github.com/namics/gondel/commits?author=ernscht "Code") [📖](https://github.com/namics/gondel/commits?author=ernscht "Documentation") [🚇](#infra-ernscht "Infrastructure (Hosting, Build-Tools, etc)") [📦](#platform-ernscht "Packaging/porting to new platform") [👀](#review-ernscht "Reviewed Pull Requests") | [<img src="https://avatars1.githubusercontent.com/u/9339019?v=4" width="100px;"/><br /><sub><b>Dušan Perković</b></sub>](https://github.com/noblica)<br />[💻](https://github.com/namics/gondel/commits?author=noblica "Code") [📖](https://github.com/namics/gondel/commits?author=noblica "Documentation") [🔌](#plugin-noblica "Plugin/utility libraries") [🤔](#ideas-noblica "Ideas, Planning, & Feedback") [⚠️](https://github.com/namics/gondel/commits?author=noblica "Tests") | [<img src="https://avatars1.githubusercontent.com/u/4563751?v=4" width="100px;"/><br /><sub><b>Jan R. Biasi</b></sub>](https://aviormusic.com)<br />[💻](https://github.com/namics/gondel/commits?author=janbiasi "Code") [📖](https://github.com/namics/gondel/commits?author=janbiasi "Documentation") [🤔](#ideas-janbiasi "Ideas, Planning, & Feedback") [⚠️](https://github.com/namics/gondel/commits?author=janbiasi "Tests") [👀](#review-janbiasi "Reviewed Pull Requests") | [<img src="https://avatars1.githubusercontent.com/u/3381820?v=4" width="100px;"/><br /><sub><b>Jan Widmer</b></sub>](https://github.com/janwidmer)<br />[💻](https://github.com/namics/gondel/commits?author=janwidmer "Code") [📖](https://github.com/namics/gondel/commits?author=janwidmer "Documentation") [💡](#example-janwidmer "Examples") [🤔](#ideas-janwidmer "Ideas, Planning, & Feedback") [🔌](#plugin-janwidmer "Plugin/utility libraries") | [<img src="https://avatars1.githubusercontent.com/u/3457712?v=4" width="100px;"/><br /><sub><b>Claudio Bianucci</b></sub>](https://github.com/chezdev)<br />[💻](https://github.com/namics/gondel/commits?author=chezdev "Code") [🤔](#ideas-chezdev "Ideas, Planning, & Feedback") |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+
 ### License
 
 [MIT license](http://opensource.org/licenses/MIT)

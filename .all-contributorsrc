@@ -1,0 +1,91 @@
+{
+  "projectName": "gondel",
+  "projectOwner": "namics",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "jantimon",
+      "name": "Jan Nicklas",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/4113649?v=4",
+      "profile": "https://twitter.com/jantimon",
+      "contributions": [
+        "code",
+        "doc",
+        "bug",
+        "example",
+        "infra",
+        "plugin",
+        "test",
+        "review"
+      ]
+    },
+    {
+      "login": "ernscht",
+      "name": "Ernst Ammann",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/149406?v=4",
+      "profile": "https://github.com/ernscht",
+      "contributions": [
+        "code",
+        "doc",
+        "infra",
+        "platform",
+        "review"
+      ]
+    },
+    {
+      "login": "noblica",
+      "name": "Dušan Perković",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/9339019?v=4",
+      "profile": "https://github.com/noblica",
+      "contributions": [
+        "code",
+        "doc",
+        "plugin",
+        "ideas",
+        "test"
+      ]
+    },
+    {
+      "login": "janbiasi",
+      "name": "Jan R. Biasi",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/4563751?v=4",
+      "profile": "https://aviormusic.com",
+      "contributions": [
+        "code",
+        "doc",
+        "ideas",
+        "test",
+        "review"
+      ]
+    },
+    {
+      "login": "janwidmer",
+      "name": "Jan Widmer",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/3381820?v=4",
+      "profile": "https://github.com/janwidmer",
+      "contributions": [
+        "code",
+        "doc",
+        "example",
+        "ideas",
+        "plugin"
+      ]
+    },
+    {
+      "login": "chezdev",
+      "name": "Claudio Bianucci",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/3457712?v=4",
+      "profile": "https://github.com/chezdev",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
+    }
+  ]
+}

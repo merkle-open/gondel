@@ -11,6 +11,7 @@
     "clean:lerna": "lerna clean --yes",
     "clean:lock": "rimraf **/package-lock.json",
     "clean:modules": "npx rimraf node_modules",
+    "contributors": "npx all-contributors-cli generate",
     "commit": "git-cz",
     "postinstall": "npm run bootstrap",
     "prettier": "prettier --write **/src/*.{ts,tsx}",
