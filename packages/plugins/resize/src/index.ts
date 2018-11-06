@@ -137,7 +137,7 @@ const resize = (eventRegistry: INamespacedEventHandlerRegistry, namespace: strin
       startResizeWatching(event);
     } else if (!frameIsRequested) {
       frameIsRequested = true;
-      window.requestAnimationFrame(fireResizeEvent.bind(event));
+      window.requestAnimationFrame(fireResizeEvent.bind(null, event));
     }
     clearTimeout(resizeDoneTimer);
     resizeDoneTimer = setTimeout(stopResizeWatching, 250);
