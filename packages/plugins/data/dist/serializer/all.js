@@ -1,5 +1,5 @@
 var _a;
-import { serialize as serializeJSON, deserialize as deserializeJSON } from './JSON';
+import { serialize as serializeJSON, deserialize as deserializeJSON } from "./JSON";
 export var Serializer;
 (function (Serializer) {
     Serializer["JSON"] = "JSON";

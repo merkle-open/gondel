@@ -14,7 +14,7 @@ export function hookDataDecoratorIntoCore() {
                 var propertyKey = _a[0], attributeKey = _a[1], customSerializer = _a[2];
                 var serializer;
                 if (customSerializer) {
-                    if (typeof customSerializer !== 'object') {
+                    if (typeof customSerializer !== "object") {
                         serializer = Serializers[customSerializer];
                     }
                     else {

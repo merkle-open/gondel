@@ -1,4 +1,4 @@
-import { areDataBindingsHookedIntoCore, hookDataDecoratorIntoCore } from './DataPlugin';
+import { areDataBindingsHookedIntoCore, hookDataDecoratorIntoCore } from "./DataPlugin";
 /**
  * The @data prop decorator will save the selected value into the given variable at start
  */

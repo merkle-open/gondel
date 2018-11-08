@@ -5,8 +5,10 @@
     (factory((global.gondelPluginData = {}),global.gondel));
 }(this, (function (exports,core) { 'use strict';
 
-    var serialize = function (value) { return value ? JSON.stringify(value) : ''; };
-    var deserialize = function (value) { return value ? JSON.parse(value) : void 0; };
+    var serialize = function (value) { return (value ? JSON.stringify(value) : ""); };
+    var deserialize = function (value) {
+        return value ? JSON.parse(value) : void 0;
+    };
 
     var _a;
     (function (Serializer) {
@@ -33,7 +35,7 @@
                     var propertyKey = _a[0], attributeKey = _a[1], customSerializer = _a[2];
                     var serializer;
                     if (customSerializer) {
-                        if (typeof customSerializer !== 'object') {
+                        if (typeof customSerializer !== "object") {
                             serializer = Serializers[customSerializer];
                         }
                         else {
