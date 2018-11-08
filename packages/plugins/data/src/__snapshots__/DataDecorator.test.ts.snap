@@ -1,0 +1,294 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@gondel/plugin-data @data Serializers Custom - should work with custom serializers (encrypted example) 1`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-config="{\\"hello\\":\\"World!\\",\\"id\\":123}"
+    data-environment="TEST"
+    data-g-name="Button"
+    data-text="2c8bd89c2e314f7f2245e04c"
+  >
+    
+      
+    <span
+      class="child"
+    >
+      
+        
+      <span
+        class="grand-child"
+      >
+        Click me
+      </span>
+      
+      
+    </span>
+    
+      
+    <span
+      class="sibling"
+    >
+      
+      
+    </span>
+    
+    
+  </div>,
+  "_namespace": "g",
+  "stop": [Function],
+  "text": "Hello World!",
+}
+`;
+
+exports[`@gondel/plugin-data @data Serializers Custom - should work with custom serializers (encrypted example) 2`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-config="{\\"hello\\":\\"World!\\",\\"id\\":123}"
+    data-environment="TEST"
+    data-g-name="Button"
+    data-text="2c8bd89c2e317e623f44a419fae65c94a74781a690d4d46071e8"
+  >
+    
+      
+    <span
+      class="child"
+    >
+      
+        
+      <span
+        class="grand-child"
+      >
+        Click me
+      </span>
+      
+      
+    </span>
+    
+      
+    <span
+      class="sibling"
+    >
+      
+      
+    </span>
+    
+    
+  </div>,
+  "_namespace": "g",
+  "stop": [Function],
+  "text": "Hello from the other Side!",
+}
+`;
+
+exports[`@gondel/plugin-data @data Serializers JSON - should work with JSONs 1`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-config="{\\"hello\\":\\"World!\\",\\"id\\":123}"
+    data-environment="TEST"
+    data-g-name="Button"
+    data-text="2c8bd89c2e314f7f2245e04c"
+  >
+    
+      
+    <span
+      class="child"
+    >
+      
+        
+      <span
+        class="grand-child"
+      >
+        Click me
+      </span>
+      
+      
+    </span>
+    
+      
+    <span
+      class="sibling"
+    >
+      
+      
+    </span>
+    
+    
+  </div>,
+  "_namespace": "g",
+  "config": Object {
+    "hello": "World!",
+    "id": 123,
+  },
+  "stop": [Function],
+}
+`;
+
+exports[`@gondel/plugin-data @data Serializers JSON - should work with JSONs 2`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-config="{\\"hello\\":\\"World!\\",\\"id\\":999}"
+    data-environment="TEST"
+    data-g-name="Button"
+    data-text="2c8bd89c2e314f7f2245e04c"
+  >
+    
+      
+    <span
+      class="child"
+    >
+      
+        
+      <span
+        class="grand-child"
+      >
+        Click me
+      </span>
+      
+      
+    </span>
+    
+      
+    <span
+      class="sibling"
+    >
+      
+      
+    </span>
+    
+    
+  </div>,
+  "_namespace": "g",
+  "config": Object {
+    "hello": "World!",
+    "id": 999,
+  },
+  "stop": [Function],
+}
+`;
+
+exports[`@gondel/plugin-data @data should read values from the data attribute correctly 1`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-config="{\\"hello\\":\\"World!\\",\\"id\\":123}"
+    data-environment="TEST"
+    data-g-name="Button"
+    data-text="2c8bd89c2e314f7f2245e04c"
+  >
+    
+      
+    <span
+      class="child"
+    >
+      
+        
+      <span
+        class="grand-child"
+      >
+        Click me
+      </span>
+      
+      
+    </span>
+    
+      
+    <span
+      class="sibling"
+    >
+      
+      
+    </span>
+    
+    
+  </div>,
+  "_namespace": "g",
+  "env": "TEST",
+  "stop": [Function],
+}
+`;
+
+exports[`@gondel/plugin-data @data should set values inside the data attribute correctly 1`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-config="{\\"hello\\":\\"World!\\",\\"id\\":123}"
+    data-environment="TEST"
+    data-g-name="Button"
+    data-text="2c8bd89c2e314f7f2245e04c"
+  >
+    
+      
+    <span
+      class="child"
+    >
+      
+        
+      <span
+        class="grand-child"
+      >
+        Click me
+      </span>
+      
+      
+    </span>
+    
+      
+    <span
+      class="sibling"
+    >
+      
+      
+    </span>
+    
+    
+  </div>,
+  "_namespace": "g",
+  "env": "TEST",
+  "stop": [Function],
+}
+`;
+
+exports[`@gondel/plugin-data @data should set values inside the data attribute correctly 2`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-config="{\\"hello\\":\\"World!\\",\\"id\\":123}"
+    data-environment="PROD"
+    data-g-name="Button"
+    data-text="2c8bd89c2e314f7f2245e04c"
+  >
+    
+      
+    <span
+      class="child"
+    >
+      
+        
+      <span
+        class="grand-child"
+      >
+        Click me
+      </span>
+      
+      
+    </span>
+    
+      
+    <span
+      class="sibling"
+    >
+      
+      
+    </span>
+    
+    
+  </div>,
+  "_namespace": "g",
+  "env": "PROD",
+  "stop": [Function],
+}
+`;
