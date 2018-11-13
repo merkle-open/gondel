@@ -1,5 +1,5 @@
 import { addGondelPluginEventListener, GondelComponent } from "@gondel/core";
-import { Serializer, Serializers, ISerializer } from "./serializer/all";
+import { ISerializer } from "./DataDecorator";
 
 export type DataBindingConfig = [
   // Property key
@@ -7,7 +7,7 @@ export type DataBindingConfig = [
   // Attribute key
   string,
   // Serialization options
-  Serializer | ISerializer | void
+  ISerializer | void
 ];
 
 export let areDataBindingsHookedIntoCore = false;
@@ -30,37 +30,37 @@ export function hookDataDecoratorIntoCore() {
       }
 
       componentDataBindings.forEach(
-        ([propertyKey, attributeKey, customSerializer]: DataBindingConfig) => {
-          let serializer: ISerializer | void;
-
-          if (customSerializer) {
-            if (typeof customSerializer !== "object") {
-              serializer = Serializers[customSerializer];
-            } else {
-              serializer = customSerializer;
-            }
-          }
-
+        ([propertyKey, attributeKey, serializer]: DataBindingConfig) => {
+          let initialValue = (gondelComponent as any)[propertyKey];
           Object.defineProperty(gondelComponent, propertyKey, {
             enumerable: true,
             configurable: false,
             get() {
-              const value = gondelComponent._ctx.getAttribute(`data-${attributeKey}`);
+              const value = gondelComponent._ctx.getAttribute(attributeKey);
 
-              if (serializer && value) {
+              if (serializer && value !== null) {
                 return serializer.deserialize(value);
               }
 
               return value;
             },
             set(value: any) {
+              if (value === undefined) {
+                gondelComponent._ctx.removeAttribute(attributeKey);
+              }
+
               if (serializer) {
                 value = serializer.serialize(value);
               }
 
-              gondelComponent._ctx.setAttribute(`data-${attributeKey}`, value);
+              gondelComponent._ctx.setAttribute(attributeKey, value);
             }
           });
+          if (initialValue) {
+            (gondelComponent as any)[propertyKey] =
+              (gondelComponent as any)[propertyKey] || initialValue;
+            initialValue = undefined;
+          }
         }
       );
     });

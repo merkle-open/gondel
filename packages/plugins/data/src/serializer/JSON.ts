@@ -1,4 +1,7 @@
-export const serialize = (value: any): string => (value ? JSON.stringify(value) : "");
+export const serialize = (value: any): string => JSON.stringify(value);
+export const deserialize = <T extends any = any>(value: string): T => JSON.parse(value);
 
-export const deserialize = <T extends any = any>(value: string): T =>
-  value ? JSON.parse(value) : void 0;
+export default {
+  serialize,
+  deserialize
+};

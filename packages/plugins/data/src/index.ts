@@ -2,4 +2,8 @@
 export { data } from "./DataDecorator";
 
 // serialization utilities
-export { ISerializer, Serializer } from "./serializer/all";
+import JSONSerializer from "./serializer/JSON";
+import BooleanSerializer from "./serializer/Boolean";
+import NumberSerializer from "./serializer/Number";
+
+export { JSONSerializer, BooleanSerializer, NumberSerializer };
