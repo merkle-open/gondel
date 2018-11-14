@@ -12,21 +12,23 @@ type Model = {
 @Component("Search")
 export class Search extends GondelBaseComponent {
   // data-language
-  @data public _dataLanguage = 'de'; 
+  @data
+  public _dataLanguage = "de";
 
   // data-endpoint
-  @data private dataEndpoint: string;
-  
+  @data
+  private dataEndpoint: string;
+
   // data-host
-  @data("host") 
+  @data("host")
   private host: string;
 
   // data-results
-  @data('results', JSONSerializer)
+  @data("results", JSONSerializer)
   results: Model | {};
 
   // data-status-code
-  @data('status-code', NumberSerializer) 
+  @data("status-code", NumberSerializer)
   httpStatusCode: number;
 
   private selectedSearchID: string;
@@ -39,7 +41,7 @@ export class Search extends GondelBaseComponent {
 
   private async _search(): Promise<void> {
     if (!this.selectedSearchID) {
-      (document.getElementById("results")!.innerHTML = "please enter a valid ID");
+      document.getElementById("results")!.innerHTML = "please enter a valid ID";
       return;
     }
 
@@ -48,7 +50,7 @@ export class Search extends GondelBaseComponent {
     this.httpStatusCode = response.status;
 
     if (response.status === 404) {
-      (document.getElementById("results")!.innerHTML = "no results found :(");
+      document.getElementById("results")!.innerHTML = "no results found :(";
       this.results = {};
       return;
     }
@@ -59,7 +61,7 @@ export class Search extends GondelBaseComponent {
   private async renderResults(response: Response) {
     const $results = document.getElementById("results");
     const result: Model = await response.json();
-    
+
     this.results = result;
     $results!.innerHTML = `
       <h2>${result.title} (ID: ${result.id})</h2>
