@@ -1,5 +1,5 @@
 import { Component, EventListener, GondelBaseComponent, findComponents } from "@gondel/core";
-import { data } from "@gondel/plugin-data";
+import { data, JSONSerializer, NumberSerializer } from "@gondel/plugin-data";
 import { Input } from "./input";
 
 type Model = {
@@ -11,10 +11,23 @@ type Model = {
 
 @Component("Search")
 export class Search extends GondelBaseComponent {
-  @data("host")
+  // data-language
+  @data public _dataLanguage = 'de'; 
+
+  // data-endpoint
+  @data private dataEndpoint: string;
+  
+  // data-host
+  @data("host") 
   private host: string;
-  @data("endpoint")
-  private endpoint: string;
+
+  // data-results
+  @data('results', JSONSerializer)
+  results: Model | {};
+
+  // data-status-code
+  @data('status-code', NumberSerializer) 
+  httpStatusCode: number;
 
   private selectedSearchID: string;
 
@@ -24,16 +37,20 @@ export class Search extends GondelBaseComponent {
     this._search();
   }
 
-  private async _search() {
+  private async _search(): Promise<void> {
     if (!this.selectedSearchID) {
-      return (document.getElementById("results")!.innerHTML = "please enter a valid ID");
+      (document.getElementById("results")!.innerHTML = "please enter a valid ID");
+      return;
     }
 
-    const requestURL = `${this.host}/${this.endpoint}/${this.selectedSearchID}`;
+    const requestURL = `${this.host}/${this.dataEndpoint}/${this.selectedSearchID}`;
     const response = await fetch(requestURL);
+    this.httpStatusCode = response.status;
 
     if (response.status === 404) {
-      return (document.getElementById("results")!.innerHTML = "no results found :(");
+      (document.getElementById("results")!.innerHTML = "no results found :(");
+      this.results = {};
+      return;
     }
 
     this.renderResults(response);
@@ -42,7 +59,8 @@ export class Search extends GondelBaseComponent {
   private async renderResults(response: Response) {
     const $results = document.getElementById("results");
     const result: Model = await response.json();
-
+    
+    this.results = result;
     $results!.innerHTML = `
       <h2>${result.title} (ID: ${result.id})</h2>
       <p>${result.body}</p>
