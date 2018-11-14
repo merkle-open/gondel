@@ -6,13 +6,13 @@ This tiny plugin bootstraps React widgets and apps using Gondel.
 
 html
 
-```
+```html
   <div data-g-name="DemoWidget">Loading..</div>
 ```
 
 js
 
-```
+```js
 import { GondelReactComponent } from '@gondel/plugin-react';
 import { Component } from '@gondel/core';
 import { App } from './App';
@@ -35,7 +35,7 @@ The following pattern allows you to pass a basic configuration from the dom to y
 
 html
 
-```
+```html
   <div data-g-name="DemoWidget">
     <script type="text/json">{ "foo":"bar" }</script>
     Loading..
@@ -44,7 +44,7 @@ html
 
 js
 
-```
+```js
 import { GondelReactComponent } from '@gondel/plugin-react';
 import { Component } from '@gondel/core';
 import React from 'react';
@@ -68,7 +68,7 @@ the following pattern:
 
 html
 
-```
+```html
   <div data-g-name="DemoWidget">
     <script type="text/json">{ "foo":"bar" }</script>
     Loading..
@@ -77,7 +77,7 @@ html
 
 js
 
-```
+```js
 import {GondelReactComponent} from '@gondel/plugin-react';
 import {Component} from '@gondel/core';
 import React from 'react';
@@ -95,4 +95,67 @@ export class DemoWidget extends GondelReactComponent {
     ));
   }
 }
+```
+
+
+## Component linking
+
+It's also possible to link a gondel component to a react component without using a render method.
+
+### Sync linking example
+
+```js
+import {GondelReactComponent} from '@gondel/plugin-react';
+import {Component} from '@gondel/core';
+import {App} from './App';
+import React from 'react';
+
+@Component('DemoWidget')
+export class DemoWidget extends GondelReactComponent {
+  App = App;
+}
+```
+
+### Async linking example
+
+```js
+import {GondelReactComponent} from '@gondel/plugin-react';
+import {Component} from '@gondel/core';
+import React from 'react';
+
+@Component('DemoWidget')
+export class DemoWidget extends GondelReactComponent {
+  async start() {
+      this.App = await import('./App').App;
+  }
+}
+```
+
+
+## Manipulating state
+
+It is possible to manipulate the state inside a public method.
+
+```js
+import {GondelReactComponent} from '@gondel/plugin-react';
+import {Component} from '@gondel/core';
+import {App} from './App';
+import React from 'react';
+
+@Component('DemoWidget')
+export class DemoWidget extends GondelReactComponent<{counter: number}> {
+  App = App;
+
+  setCounter(counter: number) {
+      this.setState({counter})
+  }
+}
+```
+
+With this public method it is now possible to set the counter using
+get component by using [`getComponentByDomNode`](https://gondel.js.org/docs/api.html#getcomponentbydomnode-domnode-namespace-gondelbasecomponent):
+
+
+```js
+getComponentByDomNode(domElement).setCounter(10)
 ```

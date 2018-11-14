@@ -15,12 +15,13 @@ var __extends = (this && this.__extends) || (function () {
  * This is a plugin which allows a simplified usage of gondel together with react
  */
 import { GondelBaseComponent } from "@gondel/core";
+import React from "react";
 import { createRenderAbleAppWrapper } from "./AppWrapper";
 /**
  * Returns true if the given object is promise like
  */
 function isPromise(obj) {
-    return obj.then !== undefined;
+    return obj !== undefined && obj.then !== undefined;
 }
 var GondelReactComponent = /** @class */ (function (_super) {
     __extends(GondelReactComponent, _super);
@@ -46,23 +47,25 @@ var GondelReactComponent = /** @class */ (function (_super) {
             });
             // Render the app
             var renderAppPromise = originalStartPromise.then(function () { return ReactDOMPromise; }).then(function (ReactDOM) {
-                ReactDOM.render(createRenderAbleAppWrapper({
-                    children: _this.render.bind(_this),
-                    onHasState: function (setInternalState) {
-                        _this._setInternalState = setInternalState;
-                    },
-                    componentWillUnmount: function () {
-                        delete _this._setInternalState;
-                        _this.componentWillUnmount && _this.componentWillUnmount();
-                    },
-                    componentDidMount: _this.componentDidMount && _this.componentDidMount.bind(_this),
-                    componentWillReceiveProps: _this.componentWillReceiveProps && _this.componentWillReceiveProps.bind(_this),
-                    shouldComponentUpdate: _this.shouldComponentUpdate && _this.shouldComponentUpdate.bind(_this),
-                    componentWillUpdate: _this.componentWillUpdate && _this.componentWillUpdate.bind(_this),
-                    componentDidUpdate: _this.componentDidUpdate && _this.componentDidUpdate.bind(_this),
-                    componentDidCatch: _this.componentDidCatch && _this.componentDidCatch.bind(_this),
-                    config: _this.state
-                }), _this._ctx);
+                // Render only if the app was not stopped
+                _this._stopped ||
+                    ReactDOM.render(createRenderAbleAppWrapper({
+                        children: _this.render.bind(_this),
+                        onHasState: function (setInternalState) {
+                            _this._setInternalState = setInternalState;
+                        },
+                        componentWillUnmount: function () {
+                            delete _this._setInternalState;
+                            _this.componentWillUnmount && _this.componentWillUnmount();
+                        },
+                        componentDidMount: _this.componentDidMount && _this.componentDidMount.bind(_this),
+                        componentWillReceiveProps: _this.componentWillReceiveProps && _this.componentWillReceiveProps.bind(_this),
+                        shouldComponentUpdate: _this.shouldComponentUpdate && _this.shouldComponentUpdate.bind(_this),
+                        componentWillUpdate: _this.componentWillUpdate && _this.componentWillUpdate.bind(_this),
+                        componentDidUpdate: _this.componentDidUpdate && _this.componentDidUpdate.bind(_this),
+                        componentDidCatch: _this.componentDidCatch && _this.componentDidCatch.bind(_this),
+                        config: _this.state
+                    }), _this._ctx);
             });
             return renderAppPromise;
         };
@@ -70,12 +73,17 @@ var GondelReactComponent = /** @class */ (function (_super) {
     }
     GondelReactComponent.prototype.setState = function (state) {
         this.state = Object.assign({}, this.state, state);
+        // Handover the state to react
+        // if the component was already rendered
         if (this._setInternalState) {
             this._setInternalState(this.state);
         }
     };
     GondelReactComponent.prototype.render = function () {
-        throw new Error(this._componentName + " is missing an initialRender method");
+        if (this.App) {
+            return React.createElement(this.App, this.state);
+        }
+        throw new Error(this._componentName + " is missing a render method");
     };
     return GondelReactComponent;
 }(GondelBaseComponent));

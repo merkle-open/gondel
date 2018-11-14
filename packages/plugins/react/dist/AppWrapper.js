@@ -27,9 +27,6 @@ var AppWrapper = /** @class */ (function (_super) {
     __extends(AppWrapper, _super);
     function AppWrapper(props) {
         var _this = _super.call(this, props) || this;
-        _this.updateConfig = function (config) {
-            _this.setState(config);
-        };
         _this.state = props.config;
         // Forward react life cycle hooks
         [
@@ -50,7 +47,7 @@ var AppWrapper = /** @class */ (function (_super) {
             };
         });
         // Notify the Gondel component that the state can be set
-        props.onHasState && props.onHasState(_this.updateConfig.bind(_this));
+        props.onHasState && props.onHasState(_this.setState.bind(_this));
         return _this;
     }
     AppWrapper.prototype.render = function () {

@@ -2,23 +2,26 @@
  * This is a plugin which allows a simplified usage of gondel together with react
  */
 import { GondelBaseComponent } from "@gondel/core";
-import { ComponentLifecycle } from "react";
+import React, { ComponentLifecycle, StatelessComponent, ComponentClass } from "react";
 import { createRenderAbleAppWrapper } from "./AppWrapper";
 
 /**
  * Returns true if the given object is promise like
  */
-function isPromise<T>(obj: {} | Promise<T>): obj is Promise<T> {
-  return (<Promise<T>>obj).then !== undefined;
+function isPromise<T>(obj: {} | Promise<T> | undefined | string | number): obj is Promise<T> {
+  return obj !== undefined && (<Promise<T>>obj).then !== undefined;
 }
 
-export class GondelReactComponent<S> extends GondelBaseComponent
-  implements ComponentLifecycle<null, S> {
-  _setInternalState: (config: S) => void | undefined;
+export class GondelReactComponent<State> extends GondelBaseComponent
+  implements ComponentLifecycle<null, State> {
+  _setInternalState: (config: State) => void | undefined;
+  App?: StatelessComponent<Readonly<State>> | ComponentClass<Readonly<State>, any>;
 
-  state: S;
-  protected setState(state: S) {
+  state: Readonly<State>;
+  setState(state: Partial<State>) {
     this.state = Object.assign({}, this.state, state);
+    // Handover the state to react
+    // if the component was already rendered
     if (this._setInternalState) {
       this._setInternalState(this.state);
     }
@@ -33,7 +36,7 @@ export class GondelReactComponent<S> extends GondelBaseComponent
     );
     const configScript = ctx.querySelector("script[type='text/json']");
     this.state = configScript ? JSON.parse(configScript.innerHTML) : {};
-    (this as any).start = function(this: GondelReactComponent<S>) {
+    (this as any).start = function(this: GondelReactComponent<State>) {
       // Wait for the original start promise to allow lazy loading
       const originalStartPromise = new Promise((resolve, reject) => {
         if (!originalStart) {
@@ -48,28 +51,30 @@ export class GondelReactComponent<S> extends GondelBaseComponent
 
       // Render the app
       const renderAppPromise = originalStartPromise.then(() => ReactDOMPromise).then(ReactDOM => {
-        ReactDOM.render(
-          createRenderAbleAppWrapper({
-            children: this.render.bind(this),
-            onHasState: setInternalState => {
-              this._setInternalState = setInternalState;
-            },
-            componentWillUnmount: () => {
-              delete this._setInternalState;
-              this.componentWillUnmount && this.componentWillUnmount();
-            },
-            componentDidMount: this.componentDidMount && this.componentDidMount.bind(this),
-            componentWillReceiveProps:
-              this.componentWillReceiveProps && this.componentWillReceiveProps.bind(this),
-            shouldComponentUpdate:
-              this.shouldComponentUpdate && this.shouldComponentUpdate.bind(this),
-            componentWillUpdate: this.componentWillUpdate && this.componentWillUpdate.bind(this),
-            componentDidUpdate: this.componentDidUpdate && this.componentDidUpdate.bind(this),
-            componentDidCatch: this.componentDidCatch && this.componentDidCatch.bind(this),
-            config: this.state
-          }),
-          this._ctx
-        );
+        // Render only if the app was not stopped
+        this._stopped ||
+          ReactDOM.render(
+            createRenderAbleAppWrapper({
+              children: this.render.bind(this),
+              onHasState: setInternalState => {
+                this._setInternalState = setInternalState;
+              },
+              componentWillUnmount: () => {
+                delete this._setInternalState;
+                this.componentWillUnmount && this.componentWillUnmount();
+              },
+              componentDidMount: this.componentDidMount && this.componentDidMount.bind(this),
+              componentWillReceiveProps:
+                this.componentWillReceiveProps && this.componentWillReceiveProps.bind(this),
+              shouldComponentUpdate:
+                this.shouldComponentUpdate && this.shouldComponentUpdate.bind(this),
+              componentWillUpdate: this.componentWillUpdate && this.componentWillUpdate.bind(this),
+              componentDidUpdate: this.componentDidUpdate && this.componentDidUpdate.bind(this),
+              componentDidCatch: this.componentDidCatch && this.componentDidCatch.bind(this),
+              config: this.state
+            }),
+            this._ctx
+          );
       });
       return renderAppPromise;
     };
@@ -104,7 +109,7 @@ export class GondelReactComponent<S> extends GondelBaseComponent
    */
   shouldComponentUpdate?(
     nextProps: Readonly<null>,
-    nextState: Readonly<S>,
+    nextState: Readonly<State>,
     nextContext: any
   ): boolean;
   /**
@@ -112,11 +117,19 @@ export class GondelReactComponent<S> extends GondelBaseComponent
    *
    * Note: You cannot call `Component#setState` here.
    */
-  componentWillUpdate?(nextProps: Readonly<null>, nextState: Readonly<S>, nextContext: any): void;
+  componentWillUpdate?(
+    nextProps: Readonly<null>,
+    nextState: Readonly<State>,
+    nextContext: any
+  ): void;
   /**
    * Called immediately after updating occurs. Not called for the initial render.
    */
-  componentDidUpdate?(prevProps: Readonly<null>, prevState: Readonly<S>, prevContext: any): void;
+  componentDidUpdate?(
+    prevProps: Readonly<null>,
+    prevState: Readonly<State>,
+    prevContext: any
+  ): void;
   /**
    * Called immediately before a component is destroyed. Perform any necessary cleanup in this method, such as
    * cancelled network requests, or cleaning up any DOM elements created in `componentDidMount`.
@@ -128,7 +141,10 @@ export class GondelReactComponent<S> extends GondelBaseComponent
    */
   componentDidCatch?(error: Error, errorInfo: React.ErrorInfo): void;
 
-  protected render(): any {
-    throw new Error(`${this._componentName} is missing an initialRender method`);
+  render(): any {
+    if (this.App) {
+      return React.createElement(this.App, this.state);
+    }
+    throw new Error(`${this._componentName} is missing a render method`);
   }
 }

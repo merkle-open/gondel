@@ -29,12 +29,8 @@ export class AppWrapper<TConfig> extends Component<Props<TConfig>, TConfig> {
       };
     });
     // Notify the Gondel component that the state can be set
-    props.onHasState && props.onHasState(this.updateConfig.bind(this));
+    props.onHasState && props.onHasState(this.setState.bind(this));
   }
-  updateConfig = (config: TConfig) => {
-    this.setState(config);
-  };
-
   render() {
     const children = this.props.children;
     return typeof children === "function" ? children(this.state) : children;
