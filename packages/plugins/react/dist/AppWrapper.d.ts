@@ -6,7 +6,6 @@ export interface Props<S> extends React.ComponentLifecycle<null, S> {
 }
 export declare class AppWrapper<TConfig> extends Component<Props<TConfig>, TConfig> {
     constructor(props: Props<TConfig>);
-    updateConfig: (config: TConfig) => void;
     render(): JSX.Element | (string & ((props: TConfig) => JSX.Element)) | (number & ((props: TConfig) => JSX.Element)) | (false & ((props: TConfig) => JSX.Element)) | (true & ((props: TConfig) => JSX.Element)) | (React.ReactNodeArray & ((props: TConfig) => JSX.Element)) | undefined;
 }
 export declare function createRenderAbleAppWrapper<TConfig>(props: Props<TConfig>): JSX.Element;
