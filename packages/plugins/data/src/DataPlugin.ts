@@ -17,8 +17,8 @@ export function hookDataDecoratorIntoCore() {
 
   addGondelPluginEventListener("start", function(
     gondelComponents: GondelComponent<HTMLElement>[],
-    _,
-    next
+    _: any | undefined,
+    next: (result: any) => any
   ) {
     gondelComponents.forEach((gondelComponent: GondelComponent) => {
       const componentDataBindings =

@@ -5,22 +5,6 @@
     (factory((global.gondelPluginData = {}),global.gondel));
 }(this, (function (exports,core) { 'use strict';
 
-    var serialize = function (value) { return (value ? JSON.stringify(value) : ""); };
-    var deserialize = function (value) {
-        return value ? JSON.parse(value) : void 0;
-    };
-
-    var _a;
-    (function (Serializer) {
-        Serializer["JSON"] = "JSON";
-    })(exports.Serializer || (exports.Serializer = {}));
-    var Serializers = (_a = {},
-        _a[exports.Serializer.JSON] = {
-            serialize: serialize,
-            deserialize: deserialize
-        },
-        _a);
-
     var areDataBindingsHookedIntoCore = false;
     function hookDataDecoratorIntoCore() {
         areDataBindingsHookedIntoCore = true;
@@ -32,57 +16,113 @@
                     return next(gondelComponents);
                 }
                 componentDataBindings.forEach(function (_a) {
-                    var propertyKey = _a[0], attributeKey = _a[1], customSerializer = _a[2];
-                    var serializer;
-                    if (customSerializer) {
-                        if (typeof customSerializer !== "object") {
-                            serializer = Serializers[customSerializer];
-                        }
-                        else {
-                            serializer = customSerializer;
-                        }
-                    }
+                    var propertyKey = _a[0], attributeKey = _a[1], serializer = _a[2];
+                    var initialValue = gondelComponent[propertyKey];
                     Object.defineProperty(gondelComponent, propertyKey, {
                         enumerable: true,
                         configurable: false,
                         get: function () {
-                            var value = gondelComponent._ctx.getAttribute("data-" + attributeKey);
-                            if (serializer && value) {
+                            var value = gondelComponent._ctx.getAttribute(attributeKey);
+                            if (serializer && value !== null) {
                                 return serializer.deserialize(value);
                             }
                             return value;
                         },
                         set: function (value) {
+                            if (value === undefined) {
+                                gondelComponent._ctx.removeAttribute(attributeKey);
+                            }
                             if (serializer) {
                                 value = serializer.serialize(value);
                             }
-                            gondelComponent._ctx.setAttribute("data-" + attributeKey, value);
+                            gondelComponent._ctx.setAttribute(attributeKey, value);
                         }
                     });
+                    if (initialValue) {
+                        gondelComponent[propertyKey] =
+                            gondelComponent[propertyKey] || initialValue;
+                        initialValue = undefined;
+                    }
                 });
             });
             next(gondelComponents);
         });
     }
 
-    /**
-     * The @data prop decorator will save the selected value into the given variable at start
-     */
-    function data(attributeKey, serializer) {
-        return function (target, propertyKey) {
-            if (!areDataBindingsHookedIntoCore) {
-                // prevent multiple hook listeners
-                hookDataDecoratorIntoCore();
-            }
-            if (!target.__dataBindings) {
-                target.__dataBindings = [];
-            }
-            target.__dataBindings.push([propertyKey, attributeKey, serializer]);
-        };
+    function data(targetOrAttributeKey, propertyKeyOrSerializer) {
+        // First case will be used if we have a custom attribute and a valid serializer (which is typeof ISerializer)
+        if (typeof targetOrAttributeKey === "string" && typeof propertyKeyOrSerializer !== "string") {
+            var customAttributeKey_1 = targetOrAttributeKey;
+            var serializer_1 = propertyKeyOrSerializer;
+            return function (target, propertyKey) {
+                if (!areDataBindingsHookedIntoCore) {
+                    // prevent multiple hook listeners
+                    hookDataDecoratorIntoCore();
+                }
+                if (!target.__dataBindings) {
+                    target.__dataBindings = [];
+                }
+                var attributeKey = "data-" + customAttributeKey_1;
+                target.__dataBindings.push([propertyKey, attributeKey, serializer_1]);
+            };
+        }
+        if (typeof targetOrAttributeKey === "string" || typeof propertyKeyOrSerializer !== "string") {
+            // this case should not occur, the only case could be a respec of the decorators
+            throw new Error("Unexpected usage of @data");
+        }
+        // We only have a simple decorator which will need to autobind values via prop-key
+        var target = targetOrAttributeKey;
+        var propertyKey = propertyKeyOrSerializer;
+        if (!areDataBindingsHookedIntoCore) {
+            // prevent multiple hook listeners
+            hookDataDecoratorIntoCore();
+        }
+        if (!target.__dataBindings) {
+            target.__dataBindings = [];
+        }
+        var attributeKey = convertPropertyKeyToDataAttributeKey(propertyKey);
+        target.__dataBindings.push([propertyKey, attributeKey, undefined]);
     }
+    /**
+     * Will convert any possible property to a valid data attribute
+     * @param {string} propertyKey    the prop to convert
+     */
+    function convertPropertyKeyToDataAttributeKey(propertyKey) {
+        if (propertyKey.substr(0, 1) === "_") {
+            propertyKey = propertyKey.substr(1);
+        }
+        if (propertyKey.substr(0, 4) !== "data") {
+            throw new Error(propertyKey + "\" has an invalid format please use @data dataSomeProp (data-some-prop) for valid bindings.");
+        }
+        return propertyKey.replace(/([a-zA-Z])(?=[A-Z])/g, "$1-").toLowerCase();
+    }
+
+    var serialize = function (value) { return JSON.stringify(value); };
+    var deserialize = function (value) { return JSON.parse(value); };
+    var _JSON = {
+        serialize: serialize,
+        deserialize: deserialize
+    };
+
+    var serialize$1 = function (value) { return "" + value; };
+    var deserialize$1 = function (value) { return value === "true"; };
+    var _Boolean = {
+        serialize: serialize$1,
+        deserialize: deserialize$1
+    };
+
+    var serialize$2 = function (value) { return "" + value; };
+    var deserialize$2 = function (value) { return parseFloat(value); };
+    var _Number = {
+        serialize: serialize$2,
+        deserialize: deserialize$2
+    };
 
     // the main @data decorator
 
+    exports.JSONSerializer = _JSON;
+    exports.BooleanSerializer = _Boolean;
+    exports.NumberSerializer = _Number;
     exports.data = data;
 
     Object.defineProperty(exports, '__esModule', { value: true });
