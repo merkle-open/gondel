@@ -14,7 +14,7 @@
     "contributors": "npx all-contributors-cli generate",
     "commit": "git-cz",
     "postinstall": "npm run bootstrap",
-    "prettier": "prettier --write **/src/*.{ts,tsx}",
+    "prettier": "prettier --write **/src/**/*.{ts,tsx}",
     "posttest": "prettier --list-different **/src/*.{ts,tsx}",
     "test": "lerna run test",
     "test:watch": "lerna run --parallel test:watch",

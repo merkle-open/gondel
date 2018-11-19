@@ -4,7 +4,6 @@ import { Input } from "./input";
 
 @Component("Form")
 export class Form extends GondelBaseComponent {
-
   @EventListener("submit")
   _handleSubmit(event) {
     alert("Submitted");

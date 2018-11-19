@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.json",
+  "paths": {
+    "@gondel/core/*": ["../../packages/core/src/*"],
+    "@gondel/plugin-*/*": ["../../packages/plugins/*/*"]
+  },
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noImplicitReturns": false
+  }
+}

@@ -1,0 +1,160 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@gondel/plugin-data @data should automatically convert property key to data value 1`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-config="{\\"hello\\":\\"World!\\",\\"id\\":123}"
+    data-environment="TEST"
+    data-g-name="Button"
+    data-language="es"
+    data-text="2c8bd89c2e314f7f2245e04c"
+  />,
+  "_namespace": "g",
+  "dataEnvironment": "TEST",
+  "dataLanguage": "es",
+  "stop": [Function],
+}
+`;
+
+exports[`@gondel/plugin-data Serializers Custom - should work with custom serializers (encrypted example) 1`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-config="{\\"hello\\":\\"World!\\",\\"id\\":123}"
+    data-environment="TEST"
+    data-g-name="Button"
+    data-text="2c8bd89c2e314f7f2245e04c"
+  />,
+  "_namespace": "g",
+  "stop": [Function],
+  "text": "Hello World!",
+}
+`;
+
+exports[`@gondel/plugin-data Serializers Custom - should work with custom serializers (encrypted example) 2`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-config="{\\"hello\\":\\"World!\\",\\"id\\":123}"
+    data-environment="TEST"
+    data-g-name="Button"
+    data-text="2c8bd89c2e317e623f44a419fae65c94a74781a690d4d46071e8"
+  />,
+  "_namespace": "g",
+  "stop": [Function],
+  "text": "Hello from the other Side!",
+}
+`;
+
+exports[`@gondel/plugin-data Serializers JSON - should work with JSONs 1`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-config="{\\"hello\\":\\"World!\\",\\"id\\":123}"
+    data-environment="TEST"
+    data-g-name="Button"
+    data-text="2c8bd89c2e314f7f2245e04c"
+  />,
+  "_namespace": "g",
+  "config": Object {
+    "hello": "World!",
+    "id": 123,
+  },
+  "stop": [Function],
+}
+`;
+
+exports[`@gondel/plugin-data Serializers JSON - should work with JSONs 2`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-config="{\\"hello\\":\\"World!\\",\\"id\\":999}"
+    data-environment="TEST"
+    data-g-name="Button"
+    data-text="2c8bd89c2e314f7f2245e04c"
+  />,
+  "_namespace": "g",
+  "config": Object {
+    "hello": "World!",
+    "id": 999,
+  },
+  "stop": [Function],
+}
+`;
+
+exports[`@gondel/plugin-data should allow/auto-convert private-like-values with underscore prefix 1`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-config="{\\"hello\\":\\"World!\\",\\"id\\":123}"
+    data-environment="TEST"
+    data-g-name="Button"
+    data-text="2c8bd89c2e314f7f2245e04c"
+  />,
+  "_dataEnvironment": "TEST",
+  "_namespace": "g",
+  "stop": [Function],
+}
+`;
+
+exports[`@gondel/plugin-data should read values from the data attribute correctly 1`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-config="{\\"hello\\":\\"World!\\",\\"id\\":123}"
+    data-environment="TEST"
+    data-g-name="Button"
+    data-text="2c8bd89c2e314f7f2245e04c"
+  />,
+  "_namespace": "g",
+  "env": "TEST",
+  "stop": [Function],
+}
+`;
+
+exports[`@gondel/plugin-data should set values inside the data attribute correctly 1`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-config="{\\"hello\\":\\"World!\\",\\"id\\":123}"
+    data-environment="TEST"
+    data-g-name="Button"
+    data-text="2c8bd89c2e314f7f2245e04c"
+  />,
+  "_namespace": "g",
+  "env": "TEST",
+  "stop": [Function],
+}
+`;
+
+exports[`@gondel/plugin-data should set values inside the data attribute correctly 2`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-config="{\\"hello\\":\\"World!\\",\\"id\\":123}"
+    data-environment="PROD"
+    data-g-name="Button"
+    data-text="2c8bd89c2e314f7f2245e04c"
+  />,
+  "_namespace": "g",
+  "env": "PROD",
+  "stop": [Function],
+}
+`;
+
+exports[`@gondel/plugin-data should use default values from the class if no attr provided 1`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-config="{\\"hello\\":\\"World!\\",\\"id\\":123}"
+    data-environment="TEST"
+    data-g-name="Button"
+    data-some-invalid-element="initial-value"
+    data-text="2c8bd89c2e314f7f2245e04c"
+  />,
+  "_namespace": "g",
+  "dataSomeInvalidElement": "initial-value",
+  "stop": [Function],
+}
+`;
