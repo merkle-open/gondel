@@ -15,7 +15,6 @@ export default {
   },
   external: ['@gondel/core'],
   plugins: [
-    resolve(),
-    //uglify()
+    resolve()
   ]
 };

@@ -13,15 +13,15 @@ type Model = {
 export class Search extends GondelBaseComponent {
   // data-language
   @data
-  public _dataLanguage = "de";
+  _dataLanguage = "de";
 
   // data-endpoint
   @data
-  private dataEndpoint: string;
+  dataEndpoint: string;
 
   // data-host
   @data("host")
-  private host: string;
+  host: string;
 
   // data-results
   @data("results", JSONSerializer)

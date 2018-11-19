@@ -24,17 +24,16 @@ $ yarn add @gondel/plugin-data
 ```ts
 @Component('Search')
 class Search extends GondelBaseComponent {
-    @data('endpoint')
-    _dataEndpoint: string;
+    @data _dataEndpoint: string;
 
     @data('lang')
-    private language: 'de' | 'en';
+    language: 'de' | 'en';
 
     @data('config', JSONSerializer)
-    private config: { someJSON: string };
+    config: { someJSON: string };
 
     @data('result-count', SomeCustomSerializer)
-    private resultCount: number;
+    resultCount: number;
 
     async someMethodToWorkWith() {
         const results = await call(`${this._dataEndpoint}/${this.language}/search?query=bla`);
@@ -55,8 +54,9 @@ class Search extends GondelBaseComponent {
 
 For basic bindings we recommend using the decorator as the simple `@data` decorator. It will bind the property key to the HTML in a pretty simple way:
 
-* `dataMyProperty` will become `data-my-property`
-* `_dataPrivateProp` will become `data-private-prop`
+* `@data('my-property') someVar` will become `data-my-property`
+* `@data dataMyProperty` will be connected to `data-my-property`
+* `@data _dataPrivateProp` will be connected to `data-private-prop`
 
 If you won't follow the rules, the package will throw a reasonable error at you to correct your prop key naming. If you don't want to represent the data attribute from the markup the same way in your code please check the section below for how to use custom attribute keys for props. This decorator will expose a non-configurable enumerable property on your gondel component which is bound to the dedicated attribute.
 

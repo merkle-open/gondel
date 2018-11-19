@@ -53,7 +53,7 @@ Gondel is fully typed and exports optional typescript declaration files for type
 ## Plugins
 
 - [Media Queries Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/media-queries) - Provide a custom gondel event which will fire once a given media query is met - [Demo](https://stackblitz.com/edit/gondel-media-query?file=components%2Fbutton.js)
-- [Data Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/data) - Easy dual binding for data attributes - [Demo](#demo-na-atm)
+- [Data Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/data) - Easy dual binding for data attributes - [Demo](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/data-plugin)
 
 ## Playground
 
