@@ -66,7 +66,7 @@ Use it with your desired data-attribute key to create the binding between your c
 ```ts
 // place this inside your component
 @data('my-value')
-private myValue: string;
+myValue: string;
 
 // and it will be bound to:
 // <node data-my-value="..."></node>
@@ -92,7 +92,7 @@ const CustomSerializer: ISerializer = {
 
 // ... then use it like this:
 @data('some-property', CustomSerializer)
-private value: string;
+value: string;
 
 // 🎉 voilà!
 ```
