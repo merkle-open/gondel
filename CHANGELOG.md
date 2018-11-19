@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.8](https://github.com/namics/gondel/compare/v0.0.7...v0.0.8) (2018-11-19)
+
+
+### Features
+
+* **react-plugin:** Allow to skip the render method for pure linking components ([3e1c4d7](https://github.com/namics/gondel/commit/3e1c4d7))
+
+
+
+
+
 ## [0.0.7](https://github.com/namics/gondel/compare/v0.0.6...v0.0.7) (2018-11-05)
 
 
