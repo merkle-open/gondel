@@ -12,7 +12,7 @@
     "dist/",
     "src/"
   ],
-  "author": "Jan Biasi",
+  "author": "Jan Biasi <biasijan@gmail.com>",
   "license": "MIT",
   "scripts": {
     "test": "jest",
