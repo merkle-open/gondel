@@ -5,7 +5,7 @@
   "description": "Gondel Monorepo",
   "main": "index.js",
   "scripts": {
-    "bootstrap": "lerna bootstrap --hoist",
+    "bootstrap": "lerna bootstrap --no-ci --hoist",
     "build": "lerna run build",
     "clean": "npx npm-run-all clean:*",
     "clean:lerna": "lerna clean --yes",
