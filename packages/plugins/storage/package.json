@@ -1,0 +1,64 @@
+{
+  "name": "@gondel/plugin-storage",
+  "version": "0.0.8",
+  "description": "Provide auto-bindings for data attributes located on your gondel DOM node",
+  "bugs": "https://github.com/namics/gondel/issues",
+  "homepage": "https://github.com/namics/gondel/tree/master/packages/plugins/data",
+  "repository": "https://github.com/namics/gondel.git",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/",
+    "src/"
+  ],
+  "author": "Jan Biasi <biasijan@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "build": "npm-run-all build:*",
+    "build:clean": "rimraf dist",
+    "build:types": "tsc --project ./tsconfig.json --declaration --esModuleInterop --declarationDir dist/ --sourceMap --outDir dist/",
+    "build:rollup": "rollup -c rollup.config.js",
+    "build:min": "rollup -c rollup.config.min.js"
+  },
+  "peerDependencies": {
+    "@gondel/core": "*"
+  },
+  "devDependencies": {
+    "@gondel/core": "^0.0.8",
+    "@types/jest": "23.3.9",
+    "jest": "23.6.0",
+    "npm-run-all": "4.1.3",
+    "rimraf": "2.6.2",
+    "rollup": "0.66.6",
+    "rollup-plugin-node-resolve": "3.4.0",
+    "rollup-plugin-uglify": "6.0.0",
+    "ts-jest": "23.10.4",
+    "tslib": "1.9.3",
+    "typescript": "3.0.3"
+  },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "diagnostics": true
+      }
+    },
+    "transform": {
+      "^.+\\.ts?$": "ts-jest"
+    },
+    "testRegex": "\\.test\\.ts$",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx,js,jsx}"
+    ],
+    "coverageDirectory": "coverage",
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json",
+      "node"
+    ]
+  }
+}

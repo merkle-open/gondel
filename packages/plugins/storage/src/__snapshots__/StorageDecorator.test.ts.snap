@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@gondel/plugin-data @storage should bind to the localstorage 1`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-g-name="Button"
+  />,
+  "_namespace": "g",
+  "stop": [Function],
+}
+`;
+
+exports[`@gondel/plugin-data @storage should bind to the localstorage 2`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-g-name="Button"
+  />,
+  "_namespace": "g",
+  "stop": [Function],
+}
+`;
+
+exports[`@gondel/plugin-data @storage() syncs to all components on getter call 1`] = `
+A {
+  "_componentName": "A",
+  "_ctx": <div
+    data-g-name="A"
+  />,
+  "_namespace": "g",
+  "stop": [Function],
+}
+`;
+
+exports[`@gondel/plugin-data @storage() syncs to all components on getter call 2`] = `
+B {
+  "_componentName": "B",
+  "_ctx": <div
+    data-g-name="B"
+  />,
+  "_namespace": "g",
+  "stop": [Function],
+}
+`;
+
+exports[`@gondel/plugin-data @storage() syncs to all components on getter call 3`] = `"{\\"testProp\\":\\"hellow there!\\",\\"anotherTestProp\\":\\"{\\\\\\"a\\\\\\":10,\\\\\\"b\\\\\\":\\\\\\"test\\\\\\",\\\\\\"c\\\\\\":[1,\\\\\\"10\\\\\\",{\\\\\\"d\\\\\\":[5]}]}\\",\\"custom_test_custom\\":\\"10\\"}"`;
+
+exports[`@gondel/plugin-data @storage() syncs to all components on getter call 4`] = `"{\\"testProp\\":\\"hellow there!\\",\\"anotherTestProp\\":\\"{\\\\\\"a\\\\\\":10,\\\\\\"b\\\\\\":\\\\\\"test\\\\\\",\\\\\\"c\\\\\\":[1,\\\\\\"10\\\\\\",{\\\\\\"d\\\\\\":[5]}]}\\",\\"custom_test_custom\\":\\"10\\",\\"sync\\":\\"Hello from A\\"}"`;
+
+exports[`@gondel/plugin-data @storage() syncs to all components on getter call 5`] = `"{\\"testProp\\":\\"hellow there!\\",\\"anotherTestProp\\":\\"{\\\\\\"a\\\\\\":10,\\\\\\"b\\\\\\":\\\\\\"test\\\\\\",\\\\\\"c\\\\\\":[1,\\\\\\"10\\\\\\",{\\\\\\"d\\\\\\":[5]}]}\\",\\"custom_test_custom\\":\\"10\\",\\"sync\\":\\"Hello from B\\"}"`;
+
+exports[`@gondel/plugin-data @storage() with custom adapter 1`] = `"{\\"testProp\\":\\"hellow there!\\",\\"anotherTestProp\\":\\"{\\\\\\"a\\\\\\":10,\\\\\\"b\\\\\\":\\\\\\"test\\\\\\",\\\\\\"c\\\\\\":[1,\\\\\\"10\\\\\\",{\\\\\\"d\\\\\\":[5]}]}\\",\\"custom_test_custom\\":\\"10\\"}"`;
+
+exports[`@gondel/plugin-data @storage() with serializer 1`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-g-name="Button"
+  />,
+  "_namespace": "g",
+  "stop": [Function],
+}
+`;
+
+exports[`@gondel/plugin-data @storage() with serializer 2`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-g-name="Button"
+  />,
+  "_namespace": "g",
+  "stop": [Function],
+}
+`;
