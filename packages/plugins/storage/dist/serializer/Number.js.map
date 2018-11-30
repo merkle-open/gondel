@@ -1,0 +1,1 @@
+{"version":3,"file":"Number.js","sourceRoot":"","sources":["../../src/serializer/Number.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,IAAM,SAAS,GAAG,UAAC,KAAa,IAAa,OAAA,KAAG,KAAO,EAAV,CAAU,CAAC;AAC/D,MAAM,CAAC,IAAM,WAAW,GAAG,UAAC,KAAa,IAAa,OAAA,UAAU,CAAC,KAAK,CAAC,EAAjB,CAAiB,CAAC;AAExE,eAAe;IACb,SAAS,WAAA;IACT,WAAW,aAAA;CACZ,CAAC"}
