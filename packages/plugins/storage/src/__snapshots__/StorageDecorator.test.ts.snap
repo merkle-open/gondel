@@ -73,3 +73,25 @@ Button {
   "stop": [Function],
 }
 `;
+
+exports[`@gondel/plugin-data setDefaultStorageAdapter should set global defaults 1`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-g-name="Button"
+  />,
+  "_namespace": "g",
+  "stop": [Function],
+}
+`;
+
+exports[`@gondel/plugin-data setDefaultStorageAdapter should set global defaults 2`] = `
+Button {
+  "_componentName": "Button",
+  "_ctx": <div
+    data-g-name="Button"
+  />,
+  "_namespace": "g",
+  "stop": [Function],
+}
+`;

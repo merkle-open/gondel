@@ -4,9 +4,9 @@ var Adapter = /** @class */ (function () {
         this.name = name;
         this.store = store;
         this.config = {
-            prefix: '',
-            postfix: '',
-            delimitier: ''
+            prefix: "",
+            postfix: "",
+            delimitier: ""
         };
         if (!store) {
             throw new Error("Stroage not available in your environment");
@@ -26,8 +26,8 @@ var Adapter = /** @class */ (function () {
         return undefined;
     };
     Adapter.prototype.set = function (key, value, serializer) {
-        var savableValue = '';
-        if (serializer && typeof value !== 'string') {
+        var savableValue = "";
+        if (serializer && typeof value !== "string") {
             savableValue = serializer.serialize(value);
         }
         else {
@@ -45,15 +45,11 @@ var Adapter = /** @class */ (function () {
         return "Adapter { " + this.name + " }";
     };
     Adapter.prototype.generateAccessorKey = function (key) {
-        return [
-            this.config.prefix,
-            key,
-            this.config.postfix
-        ].join(this.config.delimitier);
+        return [this.config.prefix, key, this.config.postfix].join(this.config.delimitier);
     };
     return Adapter;
 }());
 export { Adapter };
-export var localStorageAdapter = new Adapter('local', window.localStorage);
-export var sessionStorageAdapter = new Adapter('session', window.sessionStorage);
+export var localStorageAdapter = new Adapter("local", window.localStorage);
+export var sessionStorageAdapter = new Adapter("session", window.sessionStorage);
 //# sourceMappingURL=Adapter.js.map

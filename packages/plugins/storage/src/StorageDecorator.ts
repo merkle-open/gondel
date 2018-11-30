@@ -2,7 +2,7 @@ import { GondelComponent } from "@gondel/core";
 import { Adapter, ISerializer, localStorageAdapter } from "./Adapter";
 
 type GondelComponentWithStorage = GondelComponent & {
-  __gondelStoragePlugin?: boolean;
+  // TODO: Optional props for third-party interaction (such as __gondelStorageBoundProps: [])?
 };
 
 type GondelComponentDecorator<T> = (target: T, propertyKey: string) => void;
@@ -15,11 +15,15 @@ type CreateStoreBindingsArgs<T> = {
   serializer?: ISerializer;
 };
 
+// the default storage to use, better for switching whole projects
+// to another storage type e.g. from local- to sessionstorage.
+let internalDefaultStorageAdapter: Adapter = localStorageAdapter;
+
 function createStorageBindings<T extends GondelComponentWithStorage>({
   target,
   propertyKey,
   storeKey = propertyKey,
-  storageAdapter = localStorageAdapter,
+  storageAdapter = internalDefaultStorageAdapter,
   serializer
 }: CreateStoreBindingsArgs<T>): void {
   // TODO: should we use the component class name as prefix or sth?
@@ -33,6 +37,9 @@ function createStorageBindings<T extends GondelComponentWithStorage>({
     }
   });
 }
+
+export const setDefaultStorageAdapter = (adapter: Adapter) =>
+  (internalDefaultStorageAdapter = adapter);
 
 export function storage<T extends GondelComponentWithStorage>(target: T, propertyKey: string): void;
 export function storage<T extends GondelComponentWithStorage>(
@@ -51,7 +58,6 @@ export function storage<T extends GondelComponentWithStorage>(
     const serializer = propertyKeyOrSerializer;
 
     return function<T extends GondelComponentWithStorage>(target: T, propertyKey: string): void {
-      target.__gondelStoragePlugin = true;
       createStorageBindings({
         target,
         storageAdapter,
@@ -69,8 +75,6 @@ export function storage<T extends GondelComponentWithStorage>(
 
   const target = targetOrStoreKey;
   const propertyKey = propertyKeyOrSerializer;
-
-  target.__gondelStoragePlugin = true;
 
   // create simple bindings for @storage
   createStorageBindings({

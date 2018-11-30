@@ -1,4 +1,4 @@
-export interface INativeStorage {
+export interface IStorage {
     readonly length: number;
     clear(): void;
     getItem(key: string): string | null;
@@ -20,7 +20,7 @@ export declare class Adapter {
     private name;
     private store;
     private config;
-    constructor(name: string, store: INativeStorage);
+    constructor(name: string, store: IStorage);
     configure(config: AdditionalAdapterConfiguration): void;
     get<T, S extends ISerializer<T>>(key: string, serializer?: S): T | void;
     set<T extends any = string>(key: string, value: T, serializer?: ISerializer<T>): void;

@@ -1,4 +1,4 @@
-export interface INativeStorage {
+export interface IStorage {
   readonly length: number;
   clear(): void;
   getItem(key: string): string | null;
@@ -26,7 +26,7 @@ export class Adapter {
     delimitier: ""
   };
 
-  constructor(private name: string, private store: INativeStorage) {
+  constructor(private name: string, private store: IStorage) {
     if (!store) {
       throw new Error(`Stroage not available in your environment`);
     }
@@ -82,8 +82,5 @@ export class Adapter {
   }
 }
 
-export const localStorageAdapter = new Adapter("local", window.localStorage as INativeStorage);
-export const sessionStorageAdapter = new Adapter(
-  "session",
-  window.sessionStorage as INativeStorage
-);
+export const localStorageAdapter = new Adapter("local", window.localStorage as IStorage);
+export const sessionStorageAdapter = new Adapter("session", window.sessionStorage as IStorage);

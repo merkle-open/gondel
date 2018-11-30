@@ -2,12 +2,11 @@ import {
   startComponents,
   getComponentByDomNode,
   Component,
-  GondelBaseComponent,
-  GondelComponent
+  GondelBaseComponent
 } from "@gondel/core";
-import { storage } from "./StorageDecorator";
+import { storage, setDefaultStorageAdapter } from "./StorageDecorator";
 import JSONSerializer from "./serializer/JSON";
-import { Adapter } from "./Adapter";
+import { Adapter, sessionStorageAdapter, localStorageAdapter } from "./Adapter";
 
 function createMockElement(component: string, namespace: string = "g") {
   const buttonElement = document.createElement("div");
@@ -25,6 +24,32 @@ beforeAll(() => {
 const snapshotify = (val: any) => JSON.stringify(val);
 
 describe("@gondel/plugin-data", () => {
+  describe("setDefaultStorageAdapter", () => {
+    it("should set global defaults", () => {
+      setDefaultStorageAdapter(sessionStorageAdapter);
+
+      @Component("Button")
+      class Button extends GondelBaseComponent {
+        @storage
+        testProp: string;
+
+        setTestProp() {
+          this.testProp = "hellow there!";
+        }
+      }
+
+      const button = createMockElement("Button") as Button;
+      expect(button).toMatchSnapshot();
+      expect(button.testProp).toBeUndefined();
+      button.setTestProp();
+      expect(button.testProp).toEqual("hellow there!");
+      expect(button).toMatchSnapshot();
+      expect(sessionStorageAdapter.get("testProp")).toEqual("hellow there!");
+      setDefaultStorageAdapter(localStorageAdapter);
+      expect(localStorage.length).toEqual(0);
+    });
+  });
+
   describe("@storage", () => {
     it("should bind to the localstorage", () => {
       @Component("Button")
