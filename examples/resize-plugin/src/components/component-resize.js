@@ -1,11 +1,11 @@
 import {Component, EventListener, GondelBaseComponent} from '@gondel/core';
-import { WINDOW_RESIZED } from '@gondel/plugin-resize';
+import { ResizeEvents } from '@gondel/plugin-resize';
 
 @Component('Resize')
-export class Resize extends GondelBaseComponent {
+export class ComponentResize extends GondelBaseComponent {
 
-  @EventListener(WINDOW_RESIZED)
-  _handleWindowResizeEvent(e, dimension) {
+  @EventListener(ResizeEvents.Component)
+  _handleComponentResizeEvent(e, dimension) {
     this._ctx.style.height = `${dimension.width}px`;
     this._ctx.innerHTML = `height resized to ${dimension.width}px`;
   }

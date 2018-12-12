@@ -4,6 +4,14 @@
 import { addGondelPluginEventListener, getComponentByDomNode, GondelComponent } from "@gondel/core";
 import { INamespacedEventHandlerRegistry } from "@gondel/core/dist/GondelEventRegistry";
 
+export enum ResizeEvents {
+  // The Component resize event will be fired when the window resizes and the component dimensions change
+  Component = "@gondel/plugin-resize--window-resized",
+
+  // The Window resize event will be fired when the window resizes
+  Window = "@gondel/plugin-resize--component-resized"
+}
+
 /**
  * This function returns all components for the given eventRegistry which can be found in the dom.
  */
@@ -34,7 +42,11 @@ function getComponentsInEventRegistry(
  * This will allow components to listen for throttled window resize events
  * The resize event will only be fired for a component if the width or the height of the component changed
  */
-const resize = (eventRegistry: INamespacedEventHandlerRegistry, namespace: string) => {
+const initializeResizeEvent = (
+  eventRegistry: INamespacedEventHandlerRegistry,
+  namespace: string,
+  eventName: ResizeEvents
+) => {
   let isRunning = false;
   let frameIsRequested = false;
   let resizeDoneTimer: any;
@@ -47,9 +59,11 @@ const resize = (eventRegistry: INamespacedEventHandlerRegistry, namespace: strin
         height: number;
       }>
     | undefined;
+  const fireResizeEvent =
+    eventName === ResizeEvents.Window ? fireWindowResizeEvent : fireComponentResizeEvent;
   /**
    * This handler is called if a new resize event happens.
-   * A resize event is new if no resize occured for 250ms
+   * A resize event is new if no resize occurred for 250ms
    */
   function startResizeWatching(event: UIEvent) {
     const components = getComponentsInEventRegistry(eventRegistry, namespace);
@@ -92,9 +106,9 @@ const resize = (eventRegistry: INamespacedEventHandlerRegistry, namespace: strin
     componentInformation = undefined;
   }
   /**
-   * Check which modules changed in size an call their event handler
+   * Check which modules changed in size, are still running and call their event handler
    */
-  function fireResizeEvent(event: UIEvent) {
+  function fireComponentResizeEvent(event: UIEvent) {
     frameIsRequested = false;
     if (!componentInformation) {
       return;
@@ -132,6 +146,34 @@ const resize = (eventRegistry: INamespacedEventHandlerRegistry, namespace: strin
       }
     });
   }
+
+  /**
+   * Check if the components are still running and call their event handler
+   */
+  function fireWindowResizeEvent(event: UIEvent) {
+    frameIsRequested = false;
+    if (!componentInformation) {
+      return;
+    }
+    const handlerResults: Array<() => void | undefined> = [];
+    componentInformation.forEach((componentInformation, i) => {
+      // Skip if the component is not running anymore
+      if (componentInformation.component._stopped) {
+        return;
+      }
+      componentInformation.selectors.forEach(selector =>
+        selector.forEach(handler =>
+          handlerResults.push(handler.call(componentInformation.component, event))
+        )
+      );
+    });
+    handlerResults.forEach(handlerResult => {
+      if (typeof handlerResult === "function") {
+        handlerResult();
+      }
+    });
+  }
+
   window.addEventListener("resize", (event: UIEvent) => {
     if (!isRunning) {
       startResizeWatching(event);
@@ -143,11 +185,6 @@ const resize = (eventRegistry: INamespacedEventHandlerRegistry, namespace: strin
     resizeDoneTimer = setTimeout(stopResizeWatching, 250);
   });
 };
-
-/**
- * The VIEWPORT_ENTERED will be fired if a new viewport is entered
- */
-export const WINDOW_RESIZED = "@gondel/plugin-resize--window-resized";
 /**
  * This function creates a custom gondel event
  */
@@ -157,13 +194,13 @@ export function initResizePlugin() {
     { eventName, namespace, eventRegistry },
     resolve
   ) {
-    // Ignore all events but the resize event
-    if (eventName !== WINDOW_RESIZED) {
+    // Ignore all events but the resize events
+    if (eventName !== ResizeEvents.Window && eventName !== ResizeEvents.Component) {
       resolve(isNativeEvent);
       return;
     }
 
-    resize(eventRegistry, namespace);
+    initializeResizeEvent(eventRegistry, namespace, eventName);
 
     // Tell the event system that it should not listen for the event:
     resolve(false);
