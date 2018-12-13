@@ -50,32 +50,35 @@ export class GondelReactComponent<State> extends GondelBaseComponent
       });
 
       // Render the app
-      const renderAppPromise = originalStartPromise.then(() => ReactDOMPromise).then(ReactDOM => {
-        // Render only if the app was not stopped
-        this._stopped ||
-          ReactDOM.render(
-            createRenderAbleAppWrapper({
-              children: this.render.bind(this),
-              onHasState: setInternalState => {
-                this._setInternalState = setInternalState;
-              },
-              componentWillUnmount: () => {
-                delete this._setInternalState;
-                this.componentWillUnmount && this.componentWillUnmount();
-              },
-              componentDidMount: this.componentDidMount && this.componentDidMount.bind(this),
-              componentWillReceiveProps:
-                this.componentWillReceiveProps && this.componentWillReceiveProps.bind(this),
-              shouldComponentUpdate:
-                this.shouldComponentUpdate && this.shouldComponentUpdate.bind(this),
-              componentWillUpdate: this.componentWillUpdate && this.componentWillUpdate.bind(this),
-              componentDidUpdate: this.componentDidUpdate && this.componentDidUpdate.bind(this),
-              componentDidCatch: this.componentDidCatch && this.componentDidCatch.bind(this),
-              config: this.state
-            }),
-            this._ctx
-          );
-      });
+      const renderAppPromise = originalStartPromise
+        .then(() => ReactDOMPromise)
+        .then(ReactDOM => {
+          // Render only if the app was not stopped
+          this._stopped ||
+            ReactDOM.render(
+              createRenderAbleAppWrapper({
+                children: this.render.bind(this),
+                onHasState: setInternalState => {
+                  this._setInternalState = setInternalState;
+                },
+                componentWillUnmount: () => {
+                  delete this._setInternalState;
+                  this.componentWillUnmount && this.componentWillUnmount();
+                },
+                componentDidMount: this.componentDidMount && this.componentDidMount.bind(this),
+                componentWillReceiveProps:
+                  this.componentWillReceiveProps && this.componentWillReceiveProps.bind(this),
+                shouldComponentUpdate:
+                  this.shouldComponentUpdate && this.shouldComponentUpdate.bind(this),
+                componentWillUpdate:
+                  this.componentWillUpdate && this.componentWillUpdate.bind(this),
+                componentDidUpdate: this.componentDidUpdate && this.componentDidUpdate.bind(this),
+                componentDidCatch: this.componentDidCatch && this.componentDidCatch.bind(this),
+                config: this.state
+              }),
+              this._ctx
+            );
+        });
       return renderAppPromise;
     };
   }

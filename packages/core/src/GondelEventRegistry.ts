@@ -132,9 +132,8 @@ export function getHandlers(
     return [];
   }
   // Sort the queue so events which are further up the dom are fired first
-  handlerQueue.sort(
-    (handlerA, handlerB) =>
-      handlerA.index > handlerB.index ? 1 : handlerA.index === handlerB.index ? 0 : -1
+  handlerQueue.sort((handlerA, handlerB) =>
+    handlerA.index > handlerB.index ? 1 : handlerA.index === handlerB.index ? 0 : -1
   );
   return handlerQueue;
 }

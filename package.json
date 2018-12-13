@@ -50,13 +50,13 @@
     }
   ],
   "devDependencies": {
-    "commitizen": "3.0.4",
+    "commitizen": "3.0.5",
     "conventional-changelog-lint": "2.1.1",
     "cz-conventional-changelog": "2.1.0",
-    "husky": "1.1.2",
-    "lerna": "3.4.3",
-    "lint-staged": "8.0.4",
-    "prettier": "1.14.3",
+    "husky": "1.2.0",
+    "lerna": "3.6.0",
+    "lint-staged": "8.1.0",
+    "prettier": "1.15.3",
     "rimraf": "2.6.2",
     "standard-version": "4.4.0"
   }
