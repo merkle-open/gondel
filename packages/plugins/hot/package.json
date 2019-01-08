@@ -20,9 +20,7 @@
     "dist/"
   ],
   "peerDependencies": {
-    "@gondel/core": "*",
-    "react": "*",
-    "react-dom": "*"
+    "@gondel/core": "*"
   },
   "devDependencies": {
     "@gondel/core": "^0.0.8",
