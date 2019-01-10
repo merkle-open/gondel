@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || (function () {
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -46,7 +46,9 @@ var GondelReactComponent = /** @class */ (function (_super) {
                 return isPromise(result) ? result.then(resolve, reject) : resolve(result);
             });
             // Render the app
-            var renderAppPromise = originalStartPromise.then(function () { return ReactDOMPromise; }).then(function (ReactDOM) {
+            var renderAppPromise = originalStartPromise
+                .then(function () { return ReactDOMPromise; })
+                .then(function (ReactDOM) {
                 // Render only if the app was not stopped
                 _this._stopped ||
                     ReactDOM.render(createRenderAbleAppWrapper({

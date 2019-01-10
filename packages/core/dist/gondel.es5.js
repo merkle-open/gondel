@@ -2,8 +2,8 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
     typeof define === 'function' && define.amd ? define(['exports'], factory) :
-    (factory((global.gondel = {})));
-}(this, (function (exports) { 'use strict';
+    (global = global || self, factory(global.gondel = {}));
+}(this, function (exports) { 'use strict';
 
     var basePluginListener = function (result, data, next) { return next(result); };
     // Global plugin events registry
@@ -724,5 +724,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=gondel.es5.js.map
