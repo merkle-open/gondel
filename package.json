@@ -18,7 +18,8 @@
     "posttest": "prettier --list-different **/src/*.{ts,tsx}",
     "test": "lerna run test",
     "test:watch": "lerna run --parallel test:watch",
-    "release": "lerna publish --conventional-commits --no-commit-hooks"
+    "release": "lerna publish --conventional-commits --no-commit-hooks",
+    "update-dependencies": "lerna exec -- npx npm-check-updates -u"
   },
   "license": "MIT",
   "husky": {
