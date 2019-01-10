@@ -16,10 +16,10 @@
   "devDependencies": {
     "html-webpack-plugin": "3.2.0",
     "react-scripts-ts": "3.1.0",
-    "ts-loader": "5.3.0",
-    "typescript": "3.0.3",
-    "webpack": "4.23.1",
-    "webpack-cli": "3.1.2",
-    "webpack-serve": "2.0.2"
+    "ts-loader": "5.3.3",
+    "typescript": "3.2.2",
+    "webpack": "4.28.1",
+    "webpack-cli": "3.2.1",
+    "webpack-serve": "2.0.3"
   }
 }
