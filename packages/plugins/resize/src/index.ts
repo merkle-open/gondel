@@ -4,13 +4,14 @@
 import { addGondelPluginEventListener, getComponentByDomNode, GondelComponent } from "@gondel/core";
 import { INamespacedEventHandlerRegistry } from "@gondel/core/dist/GondelEventRegistry";
 
-export enum ResizeEvents {
-  // The Component resize event will be fired when the window resizes and the component dimensions change
-  Component = "@gondel/plugin-resize--window-resized",
-
-  // The Window resize event will be fired when the window resizes
-  Window = "@gondel/plugin-resize--component-resized"
-}
+/**
+ * The COMPONENT_RESIZED_EVENT event will be fired if a component size was changed because of a browser window resize
+ */
+export const COMPONENT_RESIZED_EVENT = "@gondel/plugin-resize--component-resized";
+/**
+ * The WINDOW_RESIZED_EVENT event will be fired if the browser window was resized
+ */
+export const WINDOW_RESIZED_EVENT = "@gondel/plugin-resize--window-resized";
 
 /**
  * This function returns all components for the given eventRegistry which can be found in the dom.
@@ -45,7 +46,7 @@ function getComponentsInEventRegistry(
 const initializeResizeEvent = (
   eventRegistry: INamespacedEventHandlerRegistry,
   namespace: string,
-  eventName: ResizeEvents
+  eventName: string
 ) => {
   let isRunning = false;
   let frameIsRequested = false;
@@ -60,7 +61,7 @@ const initializeResizeEvent = (
       }>
     | undefined;
   const fireResizeEvent =
-    eventName === ResizeEvents.Window ? fireWindowResizeEvent : fireComponentResizeEvent;
+    eventName === WINDOW_RESIZED_EVENT ? fireWindowResizeEvent : fireComponentResizeEvent;
   /**
    * This handler is called if a new resize event happens.
    * A resize event is new if no resize occurred for 250ms
@@ -195,7 +196,7 @@ export function initResizePlugin() {
     resolve
   ) {
     // Ignore all events but the resize events
-    if (eventName !== ResizeEvents.Window && eventName !== ResizeEvents.Component) {
+    if (eventName !== WINDOW_RESIZED_EVENT && eventName !== COMPONENT_RESIZED_EVENT) {
       resolve(isNativeEvent);
       return;
     }
