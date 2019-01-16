@@ -81,3 +81,11 @@ Please note:
 * The fifth argument can be an optional boolean if the event should bubble
 * The component `Bar` needs to be a parent of `Foo` within the markup to be able to receive the public event
 
+## Live examples
+
+You can also find this code example live on StackBlitz:
+
+* https://stackblitz.com/edit/gondel-communication-get-component-by-dom-node
+* https://stackblitz.com/edit/gondel-communication-find-components
+* https://stackblitz.com/edit/gondel-communication-find-components-promise
+* https://stackblitz.com/edit/gondel-communication-trigger-public-event
