@@ -32,6 +32,13 @@ describe("GondelDecorators", () => {
       const button = createMockElement("t");
       expect(button.constructor).toBe(Button);
     });
+
+    it("should add the component for wihtout a namespace invoking the class name", () => {
+      @Component()
+      class Button extends GondelBaseComponent {}
+      const button = createMockElement("g");
+      expect(button.constructor).toBe(Button);
+    });
   });
 
   describe("#event - e2e", () => {

@@ -6,9 +6,9 @@ import { addRootEventListener, removeRootEventListernerForComponent } from "./Go
 import { addGondelPluginEventListener } from "./GondelPluginUtils";
 import { registerComponent } from "./index";
 
-export function Component(componentName: string, namespace?: string) {
+export function Component(componentName?: string, namespace?: string) {
   return function(constructor: IGondelComponent) {
-    registerComponent(componentName, namespace, constructor);
+    registerComponent(componentName || constructor.name, namespace, constructor);
   };
 }
 
