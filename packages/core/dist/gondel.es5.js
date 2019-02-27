@@ -622,7 +622,7 @@
         }
     }
 
-    function Component$$1(componentName, namespace) {
+    function Component(componentName, namespace) {
         return function (constructor) {
             registerComponent(componentName, namespace, constructor);
         };
@@ -680,7 +680,7 @@
     /**
      * The @EventListener decorator will add all event names to a static variable
      */
-    function EventListener$$1(eventName, selector) {
+    function EventListener(eventName, selector) {
         return function (target, handler) {
             if (!areEventsHookedIntoCore) {
                 hookEventDecoratorInCore();
@@ -717,8 +717,8 @@
     exports.findComponents = findComponents;
     exports.registerComponent = registerComponent;
     exports.disableAutoStart = disableAutoStart;
-    exports.Component = Component$$1;
-    exports.EventListener = EventListener$$1;
+    exports.Component = Component;
+    exports.EventListener = EventListener;
     exports.triggerPublicEvent = triggerPublicEvent;
     exports.GondelBaseComponent = GondelBaseComponent;
 

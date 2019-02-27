@@ -1,3 +1,4 @@
+/// <reference types="jquery" />
 /**
  * This plugin provides utils for Gondel jQuery integrations
  */
