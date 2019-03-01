@@ -8,6 +8,14 @@ import {
 import { disableAutoStart } from "../../../core/src/GondelAutoStart";
 import { initResizePlugin, WINDOW_RESIZED_EVENT, COMPONENT_RESIZED_EVENT } from "./index";
 
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+
+const dom = new JSDOM("<!DOCTYPE html><html><head></head><body></body></html>");
+
+window = dom.window;
+document = dom.window.document;
+
 function resize(width: number, height: number) {
   // Simulate window resize event
   const resizeEvent = document.createEvent("Event");
@@ -23,11 +31,14 @@ function createMockElement(namespace: string) {
   divElement.innerHTML = `<p>This is a container being resized</p>`;
   divElement.setAttribute("data-" + namespace + "-name", "ResizeComponent");
 
-  document.documentElement.appendChild(divElement);
+  window.document.body.appendChild(divElement);
 
+  return divElement;
+}
+
+function getGondelComponent(namespace: string, divElement: HTMLElement): ResizeComponent {
   startComponents(divElement, namespace);
-
-  return getComponentByDomNode(divElement, namespace)!;
+  return getComponentByDomNode(divElement, namespace);
 }
 
 disableAutoStart();
@@ -71,8 +82,9 @@ class ResizeComponent extends GondelBaseComponent {
 
 describe("GondelResizePlugin", () => {
   it("should receive an window resized event upon resize", () => {
-    resize(1400, 800);
-    const component = createMockElement("g") as ResizeComponent;
+    const divElement = createMockElement("g");
+    const component = getGondelComponent("g", divElement);
+
     resize(1200, 600);
 
     expect(component.getWindowResizeEventReceived()).toBe(true);
