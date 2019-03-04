@@ -89,8 +89,16 @@ describe("GondelResizePlugin", () => {
   });
 
   afterEach(() => {
-    stopComponents(document.body);
+    stopComponents();
     document.body.innerHTML = "";
+  });
+
+  it("should have registered a gondel resize window event", () => {
+    expect((window as any)["__🚡DomEvents"].g).toHaveProperty(WINDOW_RESIZED_EVENT);
+  });
+
+  it("should have registered a gondel resize component event", () => {
+    expect((window as any)["__🚡DomEvents"].g).toHaveProperty(COMPONENT_RESIZED_EVENT);
   });
 
   it("should receive no window resized event without resize", () => {
