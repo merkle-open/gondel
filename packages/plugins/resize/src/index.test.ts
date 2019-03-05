@@ -43,21 +43,12 @@ class ResizeComponent extends GondelBaseComponent {
   _windowResizedEventReceived = 0;
   _componentResizedEventReceived = 0;
 
-  public start() {}
-
-  public sync() {}
-
   public getWindowResizeEventReceived(): number {
     return this._windowResizedEventReceived;
   }
 
   public getComponentResizeEventReceived(): number {
     return this._componentResizedEventReceived;
-  }
-
-  public setDimensions(width: number, height: number) {
-    (this._ctx as any)._jsdomMockClientWidth = width;
-    (this._ctx as any)._jsdomMockClientHeight = height;
   }
 
   @EventListener(WINDOW_RESIZED_EVENT)
@@ -122,7 +113,7 @@ describe("GondelResizePlugin", () => {
   });
 
   it("should receive a component resized event when component dimensions did change", async () => {
-    gondelInstance.setDimensions(1400, 600);
+    setMockClientWidthAndHeight(gondelDivElement, 1400, 600);
     resize(1400, 600);
     await new Promise(resolve => setTimeout(resolve, 300));
     expect(gondelInstance.getComponentResizeEventReceived()).toBe(1);
@@ -130,12 +121,12 @@ describe("GondelResizePlugin", () => {
 
   it("should receive two component resize events when firing resize two times", async () => {
     // we need to set the initial dimensions as they are 0 when the resize plugin get's initialized
-    gondelInstance.setDimensions(1400, 600);
+    setMockClientWidthAndHeight(gondelDivElement, 1400, 600);
 
     // first resize event get's executed right away
     resize(1400, 600);
 
-    gondelInstance.setDimensions(1300, 500);
+    setMockClientWidthAndHeight(gondelDivElement, 1300, 500);
 
     resize(1300, 500);
 
@@ -146,23 +137,23 @@ describe("GondelResizePlugin", () => {
 
   it("should should throttle more than 2 resize events being fired", async () => {
     // we need to set the initial dimensions as they are 0 when the resize plugin get's initialized
-    gondelInstance.setDimensions(1400, 600);
+    setMockClientWidthAndHeight(gondelDivElement, 1400, 600);
 
     // first resize event get's executed right away
     resize(1400, 600);
 
-    gondelInstance.setDimensions(1300, 500);
+    setMockClientWidthAndHeight(gondelDivElement, 1300, 500);
     // second resize get's stored for requestAnimationFrame
     resize(1300, 500);
 
     // further resize events get neglected
-    gondelInstance.setDimensions(1200, 400);
+    setMockClientWidthAndHeight(gondelDivElement, 1200, 400);
     resize(1200, 400);
 
-    gondelInstance.setDimensions(1100, 300);
+    setMockClientWidthAndHeight(gondelDivElement, 1100, 300);
     resize(1100, 300);
 
-    gondelInstance.setDimensions(1000, 200);
+    setMockClientWidthAndHeight(gondelDivElement, 1000, 200);
     resize(1000, 200);
 
     await new Promise(resolve => setTimeout(resolve, 300));
@@ -172,27 +163,27 @@ describe("GondelResizePlugin", () => {
 
   it("should should reset throttling after requestAnimationFrame time duration", async () => {
     // we need to set the initial dimensions as they are 0 when the resize plugin get's initialized
-    gondelInstance.setDimensions(1400, 600);
+    setMockClientWidthAndHeight(gondelDivElement, 1400, 600);
 
     // first resize event get's executed right away
     resize(1400, 600);
 
-    gondelInstance.setDimensions(1300, 500);
+    setMockClientWidthAndHeight(gondelDivElement, 1300, 500);
     resize(1300, 500);
 
     await new Promise(resolve => setTimeout(resolve, 20));
 
-    gondelInstance.setDimensions(1200, 400);
+    setMockClientWidthAndHeight(gondelDivElement, 1200, 400);
     resize(1200, 400);
 
     await new Promise(resolve => setTimeout(resolve, 20));
 
-    gondelInstance.setDimensions(1100, 300);
+    setMockClientWidthAndHeight(gondelDivElement, 1100, 300);
     resize(1100, 300);
 
     await new Promise(resolve => setTimeout(resolve, 20));
 
-    gondelInstance.setDimensions(1000, 200);
+    setMockClientWidthAndHeight(gondelDivElement, 1000, 200);
     resize(1000, 200);
 
     await new Promise(resolve => setTimeout(resolve, 300));
@@ -202,18 +193,19 @@ describe("GondelResizePlugin", () => {
 
   it("should should reset component information after 250ms time duration", async () => {
     // we need to set the initial dimensions as they are 0 when the resize plugin get's initialized
-    gondelInstance.setDimensions(1400, 600);
+    setMockClientWidthAndHeight(gondelDivElement, 1400, 600);
 
     // first resize event get's executed right away
     resize(1400, 600);
 
-    gondelInstance.setDimensions(1300, 500);
+    setMockClientWidthAndHeight(gondelDivElement, 1300, 500);
     resize(1300, 500);
 
     // after 250ms, the resize event is being considered completed and component information get reset
     await new Promise(resolve => setTimeout(resolve, 500));
 
-    // resetting __resizeSize forces to set width / height to 0 and therefore being different than previous dimensions
+    // resetting __resizeSize forces to set width / height to 0 during startResizeWatching and
+    // therefore being different than previous dimensions
     (gondelInstance as any).__resizeSize = undefined;
 
     // next resize event get's treated as fresh resize and therefor also triggers component resize event
