@@ -5,12 +5,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [0.1.0](https://github.com/namics/gondel/compare/v0.0.8...v0.1.0) (2019-04-08)
 
-**Note:** Version bump only for package gondel-data-plugin
 
+### Features
 
-
-
-
-## [0.0.8](https://github.com/namics/gondel/compare/v0.0.7...v0.0.8) (2018-11-19)
-
-**Note:** Version bump only for package gondel-data-plugin
+* **resize plugin:** add resize plugin ([#39](https://github.com/namics/gondel/issues/39)) ([26df627](https://github.com/namics/gondel/commit/26df627))

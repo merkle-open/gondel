@@ -1,7 +1,7 @@
 {
   "name": "@gondel/plugin-resize",
   "private": true,
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "Provide a custom resize event",
   "bugs": "https://github.com/namics/gondel/issues",
   "homepage": "https://github.com/namics/gondel",

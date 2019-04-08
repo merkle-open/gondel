@@ -1,7 +1,7 @@
 {
   "name": "gondel-resize-example",
   "private": true,
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "@gondel/core": "^0.0.7",
-    "@gondel/plugin-resize": "*",
+    "@gondel/plugin-resize": "^0.1.0",
     "@types/react": "16.4.18",
     "@types/react-dom": "16.0.9",
     "react": "16.6.0",
