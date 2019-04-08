@@ -4,7 +4,8 @@ title: Communication
 sidebar_label: Communication
 ---
 
-When building more complex patterns, your patterns might need to communicate with each others.
+When building more complex patterns, your patterns might need to communicate between them. The following examples give you
+some deeper examples after looking at the [API reference](api.md).
 
 ## getComponentByDomNode
 
@@ -18,12 +19,12 @@ import { Bar } from '../../path/to/pattern/bar/js/bar';
 @Component('Foo')
 export class Foo extends GondelBaseComponent {
   start() {
-    if (document.getElementsByClassName('bar') === null || document.getElementsByClassName('bar').length === 0) {
-      return console.warn(`Component bar has not been found`);
-    } else {
-      const bar = getComponentByDomNode<Bar>(document.getElementsByClassName('bar'));
-      
-      bar.helloWorld();
+    const component = document.querySelector('.bar');
+    
+    if (hasMountedGondelComponent(component)) {
+      const bar = getComponentByDomNode<Bar>(component);
+            
+       bar.helloWorld();
     }
   }
 }
@@ -83,7 +84,7 @@ Please note:
 
 ## Live examples
 
-You can also find this code example live on StackBlitz:
+You can also find this code example live on StackBlitz and play around with it:
 
 * https://stackblitz.com/edit/gondel-communication-get-component-by-dom-node
 * https://stackblitz.com/edit/gondel-communication-find-components
