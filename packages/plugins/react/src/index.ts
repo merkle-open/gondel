@@ -31,9 +31,9 @@ export class GondelReactComponent<State> extends GondelBaseComponent
     super(ctx, componentName);
     // Overwrite the current start method
     const originalStart = (this as any).start;
-    const ReactDOMPromise = import(/* webpackPrefetch: true, webpackChunkName: 'ReactDom' */ "react-dom").then(
-      ReactDOM => ReactDOM.default
-    );
+    const ReactDOMPromise = import(
+      /* webpackPrefetch: true, webpackChunkName: 'ReactDom' */ "react-dom"
+    ).then(ReactDOM => ReactDOM.default);
     const configScript = ctx.querySelector("script[type='text/json']");
     this.state = configScript ? JSON.parse(configScript.innerHTML) : {};
     (this as any).start = function(this: GondelReactComponent<State>) {
