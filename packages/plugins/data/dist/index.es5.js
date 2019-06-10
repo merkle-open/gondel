@@ -120,8 +120,8 @@
 
     // the main @data decorator
 
-    exports.JSONSerializer = _JSON;
     exports.BooleanSerializer = _Boolean;
+    exports.JSONSerializer = _JSON;
     exports.NumberSerializer = _Number;
     exports.data = data;
 

@@ -29,7 +29,8 @@ var GondelReactComponent = /** @class */ (function (_super) {
         var _this = _super.call(this, ctx, componentName) || this;
         // Overwrite the current start method
         var originalStart = _this.start;
-        var ReactDOMPromise = import(/* webpackPrefetch: true, webpackChunkName: 'ReactDom' */ "react-dom").then(function (ReactDOM) { return ReactDOM.default; });
+        var ReactDOMPromise = import(
+        /* webpackPrefetch: true, webpackChunkName: 'ReactDom' */ "react-dom").then(function (ReactDOM) { return ReactDOM.default; });
         var configScript = ctx.querySelector("script[type='text/json']");
         _this.state = configScript ? JSON.parse(configScript.innerHTML) : {};
         _this.start = function () {

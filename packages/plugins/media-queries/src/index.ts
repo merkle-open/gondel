@@ -74,7 +74,7 @@ export function getCurrentViewport() {
  * Converts the given pixel breakpoint object into a em breakpoint object
  */
 function convertBreakpointsToEm<T extends { [key: string]: number }>(breakpointsInPx: T): T {
-  const breakpointsInEm: Partial<T> = {};
+  const breakpointsInEm: { [key: string]: number } = {};
   const breakpointNames = Object.keys(breakpointsInPx);
   breakpointNames.forEach(breakpointName => {
     breakpointsInEm[breakpointName] = px2em(breakpointsInPx[breakpointName]);

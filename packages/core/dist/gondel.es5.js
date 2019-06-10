@@ -707,20 +707,20 @@
 
     // Export helpers to hook into the gondel frameworks (should only be used by plugins)
 
-    exports.addGondelPluginEventListener = addGondelPluginEventListener;
-    exports.getFirstDomNode = getFirstDomNode;
-    exports.startComponents = startComponents;
-    exports.stopComponents = stopComponents;
-    exports.hasMountedGondelComponent = hasMountedGondelComponent;
-    exports.getComponentByDomNode = getComponentByDomNode;
-    exports.getComponentByDomNodeAsync = getComponentByDomNodeAsync;
-    exports.findComponents = findComponents;
-    exports.registerComponent = registerComponent;
-    exports.disableAutoStart = disableAutoStart;
     exports.Component = Component;
     exports.EventListener = EventListener;
-    exports.triggerPublicEvent = triggerPublicEvent;
     exports.GondelBaseComponent = GondelBaseComponent;
+    exports.addGondelPluginEventListener = addGondelPluginEventListener;
+    exports.disableAutoStart = disableAutoStart;
+    exports.findComponents = findComponents;
+    exports.getComponentByDomNode = getComponentByDomNode;
+    exports.getComponentByDomNodeAsync = getComponentByDomNodeAsync;
+    exports.getFirstDomNode = getFirstDomNode;
+    exports.hasMountedGondelComponent = hasMountedGondelComponent;
+    exports.registerComponent = registerComponent;
+    exports.startComponents = startComponents;
+    exports.stopComponents = stopComponents;
+    exports.triggerPublicEvent = triggerPublicEvent;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
