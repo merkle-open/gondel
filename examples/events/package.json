@@ -16,17 +16,17 @@
     "@gondel/plugin-media-queries": "^0.1.0"
   },
   "devDependencies": {
-    "@babel/core": "7.4.4",
+    "@babel/core": "7.4.5",
     "@babel/plugin-proposal-class-properties": "7.4.4",
     "@babel/plugin-proposal-decorators": "7.4.4",
-    "@babel/preset-env": "7.4.4",
+    "@babel/preset-env": "7.4.5",
     "@babel/preset-react": "7.0.0",
-    "babel-loader": "8.0.5",
+    "babel-loader": "8.0.6",
     "html-webpack-plugin": "3.2.0",
-    "ts-loader": "6.0.0",
-    "typescript": "3.4.5",
-    "webpack": "4.31.0",
-    "webpack-cli": "3.3.2",
+    "ts-loader": "6.0.2",
+    "typescript": "3.5.1",
+    "webpack": "4.33.0",
+    "webpack-cli": "3.3.3",
     "webpack-serve": "3.1.0"
   }
 }
