@@ -12,17 +12,23 @@ export function Component(componentName: string, namespace?: string) {
   };
 }
 
+declare global {
+  interface Window {
+    areEventsHookedIntoCore: boolean;
+  }
+}
+
 type EventOption = [
   // EventName:
   string,
   // Handler
   string,
-  // optional Selector or advanced event informations
+  // optional Selector or advanced event information
   string | object | undefined
 ];
-let areEventsHookedIntoCore = false;
+window.areEventsHookedIntoCore = false;
 function hookEventDecoratorInCore() {
-  areEventsHookedIntoCore = true;
+  window.areEventsHookedIntoCore = true;
   addGondelPluginEventListener("register", function(
     component,
     { componentName, namespace, gondelComponentRegistry },
@@ -104,7 +110,7 @@ export function EventListener(eventName: string, selector?: string | object) {
     target: T,
     handler: string
   ) {
-    if (!areEventsHookedIntoCore) {
+    if (!window.areEventsHookedIntoCore) {
       hookEventDecoratorInCore();
     }
     if (handler.substr(0, 1) !== "_") {
