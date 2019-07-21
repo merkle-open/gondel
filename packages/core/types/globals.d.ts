@@ -1,6 +1,6 @@
 import { IGondelPluginEventsGlobal } from "../src/GondelPluginUtils";
 import { GondelComponentRegistry } from "../src/GondelComponentRegistry";
-import { IEventHandlerRegistry } from "../dist/GondelEventRegistry";
+import { IEventHandlerRegistry } from "../src/GondelEventRegistry";
 
 declare global {
   interface Window {
