@@ -3,19 +3,13 @@ import { GondelComponentRegistry } from "./GondelComponentRegistry";
 import { addRootEventListener, removeRootEventListernerForComponent } from "./GondelEventRegistry";
 // Because of how decorators work @EventListeners is executed before the class is registred
 // so we need to provide a hrm compatible approch initialize and reinitialize the events
-import { addGondelPluginEventListener } from "./GondelPluginUtils";
+import { addGondelPluginEventListener, GONDEL_PLUGIN_EVENTS_NAMESPACE } from "./GondelPluginUtils";
 import { registerComponent } from "./index";
 
 export function Component(componentName: string, namespace?: string) {
   return function(constructor: IGondelComponent) {
     registerComponent(componentName, namespace, constructor);
   };
-}
-
-declare global {
-  interface Window {
-    areEventsHookedIntoCore: boolean;
-  }
 }
 
 type EventOption = [
@@ -26,9 +20,8 @@ type EventOption = [
   // optional Selector or advanced event information
   string | object | undefined
 ];
-window.areEventsHookedIntoCore = false;
 function hookEventDecoratorInCore() {
-  window.areEventsHookedIntoCore = true;
+  window[GONDEL_PLUGIN_EVENTS_NAMESPACE].areEventsHookedIntoCore = true;
   addGondelPluginEventListener("register", function(
     component,
     { componentName, namespace, gondelComponentRegistry },
@@ -110,7 +103,7 @@ export function EventListener(eventName: string, selector?: string | object) {
     target: T,
     handler: string
   ) {
-    if (!window.areEventsHookedIntoCore) {
+    if (!window[GONDEL_PLUGIN_EVENTS_NAMESPACE].areEventsHookedIntoCore) {
       hookEventDecoratorInCore();
     }
     if (handler.substr(0, 1) !== "_") {

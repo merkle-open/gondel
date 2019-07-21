@@ -1,3 +1,10 @@
+export interface IGondelPluginEventsGlobal {
+  areEventsHookedIntoCore: boolean;
+  registry: {
+    [key: string]: gondelPluginFunction;
+  };
+}
+
 export type IGondelPluginEventName =
   | "register" // Fired when a component is added to a registry
   | "unregister" // Fired when a component is removed from
@@ -17,12 +24,17 @@ export type gondelPluginFunction = (
   data: any | undefined,
   next: (result: any, data: any, next: gondelPluginFunction) => any
 ) => any;
-const basePluginListener: gondelPluginListener = (result, data, next) => next(result);
+
+const basePluginListener: gondelPluginListener = (result, _data, next) => next(result);
+
+export const GONDEL_PLUGIN_EVENTS_NAMESPACE = "__\ud83d\udea1PluginEvents";
 
 // Global plugin events registry
-export const pluginEvents: { [key: string]: gondelPluginFunction } =
-  (window as any).__gondelPluginEvents || {};
-(window as any).__gondelPluginEvents = pluginEvents;
+export const pluginEvents: IGondelPluginEventsGlobal = window[GONDEL_PLUGIN_EVENTS_NAMESPACE] || {
+  areEventsHookedIntoCore: false,
+  registry: {}
+};
+window[GONDEL_PLUGIN_EVENTS_NAMESPACE] = pluginEvents;
 
 /**
  * Fire an event which allows gondel plugins to add features to gondel
@@ -48,10 +60,14 @@ export function fireGondelPluginEvent<T, U>(
   let callbackResult;
   // Execute all bound events for the given name
   // if they exist
-  (pluginEvents[eventName] || basePluginListener)(initialValue, data, (processedResult: T) => {
-    isSyncron = true;
-    callbackResult = callback ? callback(processedResult) : processedResult;
-  });
+  (pluginEvents.registry[eventName] || basePluginListener)(
+    initialValue,
+    data,
+    (processedResult: T) => {
+      isSyncron = true;
+      callbackResult = callback ? callback(processedResult) : processedResult;
+    }
+  );
   // Add a guard to prevent asyncron plugin listeners
   // to simplify the usage of fireGondelPluginEvent
   if (!isSyncron) {
@@ -69,7 +85,7 @@ export function fireAsyncGondelPluginEvent<T>(
   data: any
 ): Promise<T> {
   return new Promise(resolve => {
-    (pluginEvents[eventName] || basePluginListener)(initialValue, data, result => {
+    (pluginEvents.registry[eventName] || basePluginListener)(initialValue, data, result => {
       resolve(result);
     });
   });
@@ -82,11 +98,11 @@ export function addGondelPluginEventListener(
   eventName: IGondelPluginEventName,
   eventListenerCallback: gondelPluginListener
 ) {
-  if (!pluginEvents[eventName]) {
-    pluginEvents[eventName] = basePluginListener as any;
+  if (!pluginEvents.registry[eventName]) {
+    pluginEvents.registry[eventName] = basePluginListener as gondelPluginFunction;
   }
-  const previousEventHandler = pluginEvents[eventName];
-  pluginEvents[eventName] = function wrapCallback(result, data, next) {
+  const previousEventHandler = pluginEvents.registry[eventName];
+  pluginEvents.registry[eventName] = function wrapCallback(result, data, next) {
     previousEventHandler(result, data, function callNextPlugin(modifiedResult, _, firstNext) {
       eventListenerCallback(modifiedResult, data, function bindData(result) {
         next(result, data, firstNext);
