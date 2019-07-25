@@ -7,8 +7,12 @@
 
     var basePluginListener = function (result, data, next) { return next(result); };
     // Global plugin events registry
-    var pluginEvents = window.__gondelPluginEvents || {};
-    window.__gondelPluginEvents = pluginEvents;
+    var pluginEventRegistry = window.__gondelPluginEvents || { pluginMapping: {}, pluginEvents: {} };
+    window.__gondelPluginEvents = pluginEventRegistry;
+    /** Global Plugin Event Handler Registry */
+    var pluginEvents = pluginEventRegistry.pluginEvents;
+    // Mapping to track if plugin was already registered to prevent double registrations
+    var pluginMapping = pluginEventRegistry.pluginMapping;
     function fireGondelPluginEvent(eventName, initialValue, data, callback) {
         var isSyncron = false;
         var callbackResult;
@@ -28,7 +32,16 @@
     /**
      * Allow plugins to hook into the gondel event system
      */
-    function addGondelPluginEventListener(eventName, eventListenerCallback) {
+    function addGondelPluginEventListener(pluginName, eventName, eventListenerCallback) {
+        // Prevent any event registration if this pluginHandlerName
+        // has already been used
+        var pluginHandlerNamePerEvent = eventName + "#" + pluginName;
+        if (pluginMapping[pluginHandlerNamePerEvent]) {
+            return;
+        }
+        // Flag plugin as registered
+        pluginMapping[pluginHandlerNamePerEvent] = true;
+        // Ensure that an entry for the given event name exists
         if (!pluginEvents[eventName]) {
             pluginEvents[eventName] = basePluginListener;
         }
@@ -627,10 +640,8 @@
             registerComponent(componentName, namespace, constructor);
         };
     }
-    var areEventsHookedIntoCore = false;
     function hookEventDecoratorInCore() {
-        areEventsHookedIntoCore = true;
-        addGondelPluginEventListener("register", function (component, _a, next) {
+        addGondelPluginEventListener("GondelDecorators", "register", function (component, _a, next) {
             var componentName = _a.componentName, namespace = _a.namespace, gondelComponentRegistry = _a.gondelComponentRegistry;
             // Only apply in case the component is already active in the DOM
             // this will only happen during hot module replacement
@@ -651,12 +662,12 @@
             }
             next(component);
         });
-        addGondelPluginEventListener("unregister", function (component, _a, next) {
+        addGondelPluginEventListener("GondelDecorators", "unregister", function (component, _a, next) {
             var componentName = _a.componentName, namespace = _a.namespace;
             removeRootEventListernerForComponent(namespace, componentName);
             next(component);
         });
-        addGondelPluginEventListener("start", function (gondelComponents, _a, next) {
+        addGondelPluginEventListener("GondelDecorators", "start", function (gondelComponents, _a, next) {
             var newComponentNames = _a.newComponentNames, gondelComponentRegistry = _a.gondelComponentRegistry, namespace = _a.namespace;
             newComponentNames.forEach(function (componentName) {
                 var gondelComponent = gondelComponentRegistry.getComponent(componentName);
@@ -682,9 +693,7 @@
      */
     function EventListener(eventName, selector) {
         return function (target, handler) {
-            if (!areEventsHookedIntoCore) {
-                hookEventDecoratorInCore();
-            }
+            hookEventDecoratorInCore();
             if (handler.substr(0, 1) !== "_") {
                 throw new Error("Invalid handler name '" + handler + "' use '_" + handler + "' instead.");
             }

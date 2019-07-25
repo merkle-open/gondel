@@ -7,12 +7,25 @@
 
     var basePluginListener = function (result, data, next) { return next(result); };
     // Global plugin events registry
-    var pluginEvents = window.__gondelPluginEvents || {};
-    window.__gondelPluginEvents = pluginEvents;
+    var pluginEventRegistry = window.__gondelPluginEvents || { pluginMapping: {}, pluginEvents: {} };
+    window.__gondelPluginEvents = pluginEventRegistry;
+    /** Global Plugin Event Handler Registry */
+    var pluginEvents = pluginEventRegistry.pluginEvents;
+    // Mapping to track if plugin was already registered to prevent double registrations
+    var pluginMapping = pluginEventRegistry.pluginMapping;
     /**
      * Allow plugins to hook into the gondel event system
      */
-    function addGondelPluginEventListener(eventName, eventListenerCallback) {
+    function addGondelPluginEventListener(pluginName, eventName, eventListenerCallback) {
+        // Prevent any event registration if this pluginHandlerName
+        // has already been used
+        var pluginHandlerNamePerEvent = eventName + "#" + pluginName;
+        if (pluginMapping[pluginHandlerNamePerEvent]) {
+            return;
+        }
+        // Flag plugin as registered
+        pluginMapping[pluginHandlerNamePerEvent] = true;
+        // Ensure that an entry for the given event name exists
         if (!pluginEvents[eventName]) {
             pluginEvents[eventName] = basePluginListener;
         }
@@ -240,7 +253,7 @@
         // Setup the viewport helper independently so it will
         // also be avialiable if no component is listening to events:
         setupCurrentViewportHelper(mediaQueries);
-        addGondelPluginEventListener("registerEvent", function addViewportChangeEvent(isNativeEvent, _a, resolve) {
+        addGondelPluginEventListener("MediaQueries", "registerEvent", function addViewportChangeEvent(isNativeEvent, _a, resolve) {
             var eventName = _a.eventName, namespace = _a.namespace, eventRegistry = _a.eventRegistry;
             // Ignore all events but the viewportChange event
             if (eventName !== VIEWPORT_ENTERED) {

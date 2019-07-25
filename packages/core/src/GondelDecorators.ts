@@ -20,10 +20,9 @@ type EventOption = [
   // optional Selector or advanced event informations
   string | object | undefined
 ];
-let areEventsHookedIntoCore = false;
+
 function hookEventDecoratorInCore() {
-  areEventsHookedIntoCore = true;
-  addGondelPluginEventListener("register", function(
+  addGondelPluginEventListener("GondelDecorators", "register", function(
     component,
     { componentName, namespace, gondelComponentRegistry },
     next
@@ -51,7 +50,7 @@ function hookEventDecoratorInCore() {
     }
     next(component);
   });
-  addGondelPluginEventListener("unregister", function(
+  addGondelPluginEventListener("GondelDecorators", "unregister", function(
     component,
     { componentName, namespace },
     next
@@ -59,7 +58,7 @@ function hookEventDecoratorInCore() {
     removeRootEventListernerForComponent(namespace, componentName);
     next(component);
   });
-  addGondelPluginEventListener("start", function(
+  addGondelPluginEventListener("GondelDecorators", "start", function(
     gondelComponents,
     {
       newComponentNames,
@@ -104,9 +103,8 @@ export function EventListener(eventName: string, selector?: string | object) {
     target: T,
     handler: string
   ) {
-    if (!areEventsHookedIntoCore) {
-      hookEventDecoratorInCore();
-    }
+    hookEventDecoratorInCore();
+
     if (handler.substr(0, 1) !== "_") {
       throw new Error(`Invalid handler name '${handler}' use '_${handler}' instead.`);
     }

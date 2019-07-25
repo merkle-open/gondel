@@ -278,7 +278,7 @@ const customEvents: {
 };
 
 export function initEventPlugin() {
-  addGondelPluginEventListener("registerEvent", function addResizeEvent(
+  addGondelPluginEventListener("Events", "registerEvent", function addResizeEvent(
     isNativeEvent,
     { eventName, namespace, eventRegistry },
     resolve
@@ -292,7 +292,7 @@ export function initEventPlugin() {
     }
   });
 
-  addGondelPluginEventListener("sync", function addResizeEvent(
+  addGondelPluginEventListener("Events", "sync", function addResizeEvent(
     components: Array<GondelComponent>,
     data,
     resolve

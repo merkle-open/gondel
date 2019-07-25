@@ -8,10 +8,8 @@ export function Component(componentName, namespace) {
         registerComponent(componentName, namespace, constructor);
     };
 }
-var areEventsHookedIntoCore = false;
 function hookEventDecoratorInCore() {
-    areEventsHookedIntoCore = true;
-    addGondelPluginEventListener("register", function (component, _a, next) {
+    addGondelPluginEventListener("GondelDecorators", "register", function (component, _a, next) {
         var componentName = _a.componentName, namespace = _a.namespace, gondelComponentRegistry = _a.gondelComponentRegistry;
         // Only apply in case the component is already active in the DOM
         // this will only happen during hot module replacement
@@ -32,12 +30,12 @@ function hookEventDecoratorInCore() {
         }
         next(component);
     });
-    addGondelPluginEventListener("unregister", function (component, _a, next) {
+    addGondelPluginEventListener("GondelDecorators", "unregister", function (component, _a, next) {
         var componentName = _a.componentName, namespace = _a.namespace;
         removeRootEventListernerForComponent(namespace, componentName);
         next(component);
     });
-    addGondelPluginEventListener("start", function (gondelComponents, _a, next) {
+    addGondelPluginEventListener("GondelDecorators", "start", function (gondelComponents, _a, next) {
         var newComponentNames = _a.newComponentNames, gondelComponentRegistry = _a.gondelComponentRegistry, namespace = _a.namespace;
         newComponentNames.forEach(function (componentName) {
             var gondelComponent = gondelComponentRegistry.getComponent(componentName);
@@ -63,9 +61,7 @@ function hookEventDecoratorInCore() {
  */
 export function EventListener(eventName, selector) {
     return function (target, handler) {
-        if (!areEventsHookedIntoCore) {
-            hookEventDecoratorInCore();
-        }
+        hookEventDecoratorInCore();
         if (handler.substr(0, 1) !== "_") {
             throw new Error("Invalid handler name '" + handler + "' use '_" + handler + "' instead.");
         }

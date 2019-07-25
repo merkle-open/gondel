@@ -164,7 +164,7 @@ export function initMediaQueriesPlugin(options) {
     // Setup the viewport helper independently so it will
     // also be avialiable if no component is listening to events:
     setupCurrentViewportHelper(mediaQueries);
-    addGondelPluginEventListener("registerEvent", function addViewportChangeEvent(isNativeEvent, _a, resolve) {
+    addGondelPluginEventListener("MediaQueries", "registerEvent", function addViewportChangeEvent(isNativeEvent, _a, resolve) {
         var eventName = _a.eventName, namespace = _a.namespace, eventRegistry = _a.eventRegistry;
         // Ignore all events but the viewportChange event
         if (eventName !== VIEWPORT_ENTERED) {

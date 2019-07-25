@@ -18,7 +18,7 @@ export function hot(module: __WebpackModuleApi.Module) {
       return;
     }
     hotModeActivated = true;
-    addGondelPluginEventListener("register", function(
+    addGondelPluginEventListener("Hot", "register", function(
       registerComponent,
       { componentName, namespace },
       next

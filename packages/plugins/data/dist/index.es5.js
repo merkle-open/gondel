@@ -8,7 +8,7 @@
     var areDataBindingsHookedIntoCore = false;
     function hookDataDecoratorIntoCore() {
         areDataBindingsHookedIntoCore = true;
-        core.addGondelPluginEventListener("start", function (gondelComponents, _, next) {
+        core.addGondelPluginEventListener("Data", "start", function (gondelComponents, _, next) {
             gondelComponents.forEach(function (gondelComponent) {
                 var componentDataBindings = (gondelComponent.prototype && gondelComponent.prototype.__dataBindings) ||
                     gondelComponent.__dataBindings;

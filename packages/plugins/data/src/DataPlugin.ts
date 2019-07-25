@@ -15,7 +15,7 @@ export let areDataBindingsHookedIntoCore = false;
 export function hookDataDecoratorIntoCore() {
   areDataBindingsHookedIntoCore = true;
 
-  addGondelPluginEventListener("start", function(
+  addGondelPluginEventListener("Data", "start", function(
     gondelComponents: GondelComponent<HTMLElement>[],
     _: any | undefined,
     next: (result: any) => any

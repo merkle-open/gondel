@@ -1,7 +1,11 @@
 var basePluginListener = function (result, data, next) { return next(result); };
 // Global plugin events registry
-export var pluginEvents = window.__gondelPluginEvents || {};
-window.__gondelPluginEvents = pluginEvents;
+var pluginEventRegistry = window.__gondelPluginEvents || { pluginMapping: {}, pluginEvents: {} };
+window.__gondelPluginEvents = pluginEventRegistry;
+/** Global Plugin Event Handler Registry */
+export var pluginEvents = pluginEventRegistry.pluginEvents;
+// Mapping to track if plugin was already registered to prevent double registrations
+var pluginMapping = pluginEventRegistry.pluginMapping;
 export function fireGondelPluginEvent(eventName, initialValue, data, callback) {
     var isSyncron = false;
     var callbackResult;
@@ -31,7 +35,16 @@ export function fireAsyncGondelPluginEvent(eventName, initialValue, data) {
 /**
  * Allow plugins to hook into the gondel event system
  */
-export function addGondelPluginEventListener(eventName, eventListenerCallback) {
+export function addGondelPluginEventListener(pluginName, eventName, eventListenerCallback) {
+    // Prevent any event registration if this pluginHandlerName
+    // has already been used
+    var pluginHandlerNamePerEvent = eventName + "#" + pluginName;
+    if (pluginMapping[pluginHandlerNamePerEvent]) {
+        return;
+    }
+    // Flag plugin as registered
+    pluginMapping[pluginHandlerNamePerEvent] = true;
+    // Ensure that an entry for the given event name exists
     if (!pluginEvents[eventName]) {
         pluginEvents[eventName] = basePluginListener;
     }
