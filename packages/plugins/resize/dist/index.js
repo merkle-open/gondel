@@ -168,7 +168,7 @@ var initializeResizeEvent = function (eventRegistry, namespace, eventName) {
  * This function creates a custom gondel event
  */
 export function initResizePlugin() {
-    addGondelPluginEventListener("registerEvent", function addResizeEvent(isNativeEvent, _a, resolve) {
+    addGondelPluginEventListener("Resize", "registerEvent", function addResizeEvent(isNativeEvent, _a, resolve) {
         var eventName = _a.eventName, namespace = _a.namespace, eventRegistry = _a.eventRegistry;
         // Ignore all events but the resize events
         if (eventName !== WINDOW_RESIZED_EVENT && eventName !== COMPONENT_RESIZED_EVENT) {
@@ -179,7 +179,7 @@ export function initResizePlugin() {
         // Tell the event system that it should not listen for the event:
         resolve(false);
     });
-    addGondelPluginEventListener("sync", function addResizeEvent(components, data, resolve) {
+    addGondelPluginEventListener("Resize", "sync", function addResizeEvent(components, data, resolve) {
         setTimeout(function () {
             components.forEach(function (component) {
                 component.__resizeSize = {

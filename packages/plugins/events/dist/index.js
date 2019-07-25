@@ -249,7 +249,7 @@ var customEvents = {
     }
 };
 export function initEventPlugin() {
-    addGondelPluginEventListener("registerEvent", function addResizeEvent(isNativeEvent, _a, resolve) {
+    addGondelPluginEventListener("Events", "registerEvent", function addResizeEvent(isNativeEvent, _a, resolve) {
         var eventName = _a.eventName, namespace = _a.namespace, eventRegistry = _a.eventRegistry;
         if (customEvents[eventName]) {
             customEvents[eventName](eventRegistry, namespace);
@@ -260,7 +260,7 @@ export function initEventPlugin() {
             resolve(isNativeEvent);
         }
     });
-    addGondelPluginEventListener("sync", function addResizeEvent(components, data, resolve) {
+    addGondelPluginEventListener("Events", "sync", function addResizeEvent(components, data, resolve) {
         setTimeout(function () {
             components.forEach(function (component) {
                 component.__resizeSize = {

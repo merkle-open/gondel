@@ -210,7 +210,7 @@ export function initMediaQueriesPlugin(options: MediaQueryPluginOptions) {
   // also be avialiable if no component is listening to events:
   setupCurrentViewportHelper(mediaQueries);
 
-  addGondelPluginEventListener("registerEvent", function addViewportChangeEvent(
+  addGondelPluginEventListener("MediaQueries", "registerEvent", function addViewportChangeEvent(
     isNativeEvent,
     { eventName, namespace, eventRegistry },
     resolve

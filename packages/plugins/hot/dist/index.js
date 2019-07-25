@@ -10,7 +10,7 @@ export function hot(module) {
             return;
         }
         hotModeActivated = true;
-        addGondelPluginEventListener("register", function (registerComponent, _a, next) {
+        addGondelPluginEventListener("Hot", "register", function (registerComponent, _a, next) {
             var componentName = _a.componentName, namespace = _a.namespace;
             findComponents(document.documentElement, undefined, namespace)
                 .filter(function (oldComponent) { return oldComponent._componentName === componentName; })

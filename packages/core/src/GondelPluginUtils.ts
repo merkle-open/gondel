@@ -20,9 +20,17 @@ export type gondelPluginFunction = (
 const basePluginListener: gondelPluginListener = (result, data, next) => next(result);
 
 // Global plugin events registry
-export const pluginEvents: { [key: string]: gondelPluginFunction } =
-  (window as any).__gondelPluginEvents || {};
-(window as any).__gondelPluginEvents = pluginEvents;
+const pluginEventRegistry: {
+  pluginMapping: { [pluginName: string]: boolean };
+  pluginEvents: { [key: string]: gondelPluginFunction };
+} = (window as any).__gondelPluginEvents || { pluginMapping: {}, pluginEvents: {} };
+(window as any).__gondelPluginEvents = pluginEventRegistry;
+
+/** Global Plugin Event Handler Registry */
+export const pluginEvents = pluginEventRegistry.pluginEvents;
+
+// Mapping to track if plugin was already registered to prevent double registrations
+const pluginMapping = pluginEventRegistry.pluginMapping;
 
 /**
  * Fire an event which allows gondel plugins to add features to gondel
@@ -79,9 +87,19 @@ export function fireAsyncGondelPluginEvent<T>(
  * Allow plugins to hook into the gondel event system
  */
 export function addGondelPluginEventListener(
+  pluginName: string,
   eventName: IGondelPluginEventName,
   eventListenerCallback: gondelPluginListener
 ) {
+  // Prevent any event registration if this pluginHandlerName
+  // has already been used
+  const pluginHandlerNamePerEvent = `${eventName}#${pluginName}`;
+  if (pluginMapping[pluginHandlerNamePerEvent]) {
+    return;
+  }
+  // Flag plugin as registered
+  pluginMapping[pluginHandlerNamePerEvent] = true;
+  // Ensure that an entry for the given event name exists
   if (!pluginEvents[eventName]) {
     pluginEvents[eventName] = basePluginListener as any;
   }

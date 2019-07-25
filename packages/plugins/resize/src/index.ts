@@ -190,7 +190,7 @@ const initializeResizeEvent = (
  * This function creates a custom gondel event
  */
 export function initResizePlugin() {
-  addGondelPluginEventListener("registerEvent", function addResizeEvent(
+  addGondelPluginEventListener("Resize", "registerEvent", function addResizeEvent(
     isNativeEvent,
     { eventName, namespace, eventRegistry },
     resolve
@@ -207,7 +207,7 @@ export function initResizePlugin() {
     resolve(false);
   });
 
-  addGondelPluginEventListener("sync", function addResizeEvent(
+  addGondelPluginEventListener("Resize", "sync", function addResizeEvent(
     components: Array<GondelComponent>,
     data,
     resolve
