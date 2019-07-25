@@ -12,6 +12,13 @@ export const COMPONENT_RESIZED_EVENT = "@gondel/plugin-resize--component-resized
  * The WINDOW_RESIZED_EVENT event will be fired if the browser window was resized
  */
 export const WINDOW_RESIZED_EVENT = "@gondel/plugin-resize--window-resized";
+/**
+ * The second parameter of the COMPONENT_RESIZED_EVENT event listener
+ */
+export interface IComponentDimension {
+  width: number;
+  height: number;
+}
 
 /**
  * This function returns all components for the given eventRegistry which can be found in the dom.
@@ -120,7 +127,7 @@ const initializeResizeEvent = (
     }));
     const handlerResults: Array<() => void | undefined> = [];
     componentInformation.forEach((componentInformation, i) => {
-      const newSize = newSizes[i];
+      const newSize: IComponentDimension = newSizes[i];
       // Skip if the size did not change
       if (
         newSize.width === componentInformation.width &&
