@@ -44,6 +44,8 @@ export class Button extends GondelBaseComponent {
 }
 ```
 
+[Hello World Example](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/hello-world)
+
 ## Module format 
 
 Gondel follows the [rollup recommendations](https://github.com/rollup/rollup/wiki/pkg.module) which includes on the one hand ESM for bundle size optimisations and on the other hand a UMD version to be compatible with every former javascript bundling/concatenation strategy.
@@ -52,8 +54,7 @@ Gondel is fully typed and exports optional typescript declaration files for type
 
 ## Plugins
 
-- [Media Queries Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/media-queries) - Provide a custom gondel event which will fire once a given media query is met - [Demo](https://stackblitz.com/edit/gondel-media-query?file=components%2Fbutton.js)
-- [Data Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/data) - Easy dual binding for data attributes - [Demo](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/data-plugin)
+- [Media Queries Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/media-queries) - Provide a custom gondel event which will fire once a given media query is met - [Demo](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/media-query-plugin)
 
 ## Playground
 
@@ -61,9 +62,12 @@ https://stackblitz.com/fork/gondel
 
 ## Examples
 
-+ Gondel 5 Star - [https://stackblitz.com/edit/gondel-5-star](https://stackblitz.com/edit/gondel-5-star?file=components%2Frating.js)
-+ Chunk Splitting - [https://stackblitz.com/edit/gondel-lazy-load](https://stackblitz.com/edit/gondel-lazy-load?file=components%2Fbutton.js)
-+ Media Queries - [CodeSandbox](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/media-query-plugin)
++ [Intro](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/intro)
++ [Chunk Splitting](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/lazy-load)
++ [Star Rating](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/five-star)
++ [Media Queries](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/media-query-plugin)
++ [Using Gondel with React](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/react)
++ [Typescript - Form Validation](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/typescript)
 
 ## Contributing to Gondel
 
@@ -89,10 +93,9 @@ Thanks to all who have contributed ([emoji key](https://github.com/kentcdodds/al
 | :---: | :---: | :---: | :---: | :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-
 ### License
 
-[MIT license](http://opensource.org/licenses/MIT)
+[MIT license](./LICENSE)
 
 [npm-image]: https://badge.fury.io/js/%40gondel%2Fcore.svg
 [npm-url]: https://npmjs.org/package/@gondel/core

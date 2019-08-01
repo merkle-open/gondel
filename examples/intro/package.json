@@ -1,16 +1,11 @@
 {
-  "name": "gondel-five-star-example",
+  "name": "gondel-intro-example",
   "private": true,
-  "version": "0.1.0",
-  "description": "Gondel Star Rating Example",
-  "main": "index.js",
+  "version": "0.0.1",
   "scripts": {
     "start": "webpack-serve --open --config ./webpack.config.js"
   },
-  "author": "Jan Nicklas",
-  "license": "MIT",
   "dependencies": {
-    "@babel/plugin-proposal-decorators": "7.4.4",
     "@gondel/core": "^0.1.0"
   },
   "devDependencies": {

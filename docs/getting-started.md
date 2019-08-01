@@ -42,8 +42,7 @@ Create a `example.js` file in your project, and paste the following content:
 import {
   Component,
   EventListener,
-  GondelBaseComponent,
-  startComponents
+  GondelBaseComponent
 } from '@gondel/core';
 
 @Component('Example')
@@ -52,10 +51,7 @@ export class Example extends GondelBaseComponent {
     this._ctx.innerHTML = 'Hello from Gondel!';
   }
 };
-
-startComponents();
 ```
-
 
 Presto! Our `<div>` now changes it's inner content to `Hello from Gondel!`. But how did it do that? Let me explain line by line:
 
@@ -78,6 +74,7 @@ The line
 `@Component('Example')` invokes the `Component` decorator, with the `Example` parameter. What that means is that the DOM element with the attribute `data-g-name="Example"` will be assigned to the `this._ctx` property of the following class.
 
 ## The class definition
+
 Ok, but what about the rest of the class definition? What is this `extend` thing?
 
 `export class Example extends GondelBaseComponent`
@@ -85,20 +82,17 @@ Ok, but what about the rest of the class definition? What is this `extend` thing
 Well, the `extend` keyword means that our Example class will inherit some methods from the `GondelBaseComponent` class. What are those methods? Well you can find all of them here: `//TODO`
 
 ## The start method
+
 One of them is the `start()` method. This is the method that will be invoked when gondel initializes.
 
 Within our `start()` method, we are changing the `innerHTML` of our `<div data-g-name="Example">` element, to:
 
 `Hello from Gondel!`
 
-
 ## Gondel bootstraping
-Finally, there is the following line:
 
-`startComponents();`
-
-This will initialize Gondel, scan the page for elements containing the `data-g-name` attribute, and execute the start method of the corresponding modules.
+Gondel will be initialized automatically, and will scan the page for elements containing the `data-g-name` attribute, and execute the start method of the corresponding modules.
 
 ## Live example
-You can also find this code example live on StackBlitz:
-https://stackblitz.com/edit/gondel-intro-example
+
+You can also find this code example live on [CodeSandbox](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/intro)

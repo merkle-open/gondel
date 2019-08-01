@@ -2,6 +2,6 @@
 
 Gondel is fully typed and ready to use with typescript.
 
-Try it your self:
+In this example, the submit button is not enabled until both input fields are filled in.
 
-https://codesandbox.io/s/github/namics/gondel/tree/master/examples/typescript
+[Try it your self](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/typescript)
