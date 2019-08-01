@@ -6,7 +6,8 @@
     "start": "webpack-serve --open --config ./webpack.config.js"
   },
   "dependencies": {
-    "@gondel/core": "^0.1.0"
+    "@gondel/core": "^0.1.0",
+    "@babel/plugin-proposal-decorators": "7.4.4"
   },
   "devDependencies": {
     "common-config-webpack-plugin": "1.4.0",
