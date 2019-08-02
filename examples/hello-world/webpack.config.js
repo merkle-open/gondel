@@ -1,4 +1,3 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CommonConfigWebpackPlugin = require('common-config-webpack-plugin');
 
 module.exports = {
@@ -6,10 +5,5 @@ module.exports = {
   devtool: 'inline-source-map',
   context: __dirname,
   entry: './src/index.js',
-  plugins: [
-    new CommonConfigWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      template: 'src/index.html'
-    })
-  ],
+  plugins: [new CommonConfigWebpackPlugin()],
 };
