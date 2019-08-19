@@ -7,6 +7,13 @@ export declare const COMPONENT_RESIZED_EVENT = "@gondel/plugin-resize--component
  */
 export declare const WINDOW_RESIZED_EVENT = "@gondel/plugin-resize--window-resized";
 /**
+ * The second parameter of the COMPONENT_RESIZED_EVENT event listener
+ */
+export interface IComponentDimension {
+    width: number;
+    height: number;
+}
+/**
  * This function creates a custom gondel event
  */
 export declare function initResizePlugin(): void;

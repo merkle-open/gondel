@@ -12,14 +12,27 @@ initResizePlugin();
 The resize event is fired if the element changed after a `window.resize` event.
 The event is throttled using requestAnimationFrame
 
-```js
-import { WINDOW_RESIZED } from '@gondel/plugin-resize';
+```typescript
+import { Component, EventListener, GondelBaseComponent } from '@gondel/core';
+import { WINDOW_RESIZED_EVENT } from '@gondel/plugin-resize';
 
-@Component('Resize')
-export class Resize extends GondelBaseComponent {
-  @EventListener(WINDOW_RESIZED)
-  _handleWindowResizeEvent(event, dimensions) {
-    // add your code
+@Component('WindowResize')
+export class WindowResize extends GondelBaseComponent {
+  @EventListener(WINDOW_RESIZED_EVENT)
+  _handleWindowResizeEvent(event: UIEvent) {
+    console.log(event);
+  }
+}
+
+import { COMPONENT_RESIZED_EVENT, IComponentDimension } from '@gondel/plugin-resize';
+
+@Component('ComponentResize')
+export class ComponentResize extends GondelBaseComponent {
+  @EventListener(COMPONENT_RESIZED_EVENT)
+  _handleComponentResizeEvent(event: UIEvent, dimensions: IComponentDimension) {
+    // event is only getting fired if the component dimensions did change
+    console.log(event);
+    console.log(dimensions);
   }
 }
 ```
