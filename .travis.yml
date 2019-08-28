@@ -9,4 +9,4 @@ install:
 script:
   - travis_retry npm run build
   - travis_retry npm test
-  - travis_retry npx size-limit
+  - travis_retry npm run size
