@@ -118,8 +118,6 @@
         deserialize: deserialize$2
     };
 
-    // the main @data decorator
-
     exports.BooleanSerializer = _Boolean;
     exports.JSONSerializer = _JSON;
     exports.NumberSerializer = _Number;

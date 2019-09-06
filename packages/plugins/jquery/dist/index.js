@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __extends } from "tslib";
 /**
  * This plugin provides utils for Gondel jQuery integrations
  */
@@ -17,7 +17,7 @@ class MyComponent extends gondelJQueryMixin(GondelBaseComponent) {
  */
 export function gondelJQueryMixin(BaseClass) {
     var WithJquery = /** @class */ (function (_super) {
-        tslib_1.__extends(WithJquery, _super);
+        __extends(WithJquery, _super);
         function WithJquery(ctx, componentName) {
             var _this = _super.call(this, ctx, componentName) || this;
             _this.$ctx = $(ctx);
@@ -39,7 +39,7 @@ class MyComponent extends GondelJqueryComponent {
    ```
  */
 var GondelJqueryComponent = /** @class */ (function (_super) {
-    tslib_1.__extends(GondelJqueryComponent, _super);
+    __extends(GondelJqueryComponent, _super);
     function GondelJqueryComponent(ctx, componentName) {
         var _this = _super.call(this, ctx, componentName) || this;
         _this.$ctx = $(ctx);

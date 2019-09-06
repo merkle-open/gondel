@@ -87,13 +87,6 @@
     }
 
     /**
-     * The event registry provides a way to bind events ahead of time
-     * with a very small foot print during launch to improve the time to interaction
-     */
-
-    // Export helpers to hook into the gondel frameworks (should only be used by plugins)
-
-    /**
      * This is a plugin to initialize enquire.js and fire a viewportChange event when triggering a breakpoint
      */
     /**

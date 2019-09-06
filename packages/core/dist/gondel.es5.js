@@ -714,8 +714,6 @@
         return GondelBaseComponent;
     }());
 
-    // Export helpers to hook into the gondel frameworks (should only be used by plugins)
-
     exports.Component = Component;
     exports.EventListener = EventListener;
     exports.GondelBaseComponent = GondelBaseComponent;

@@ -1,5 +1,4 @@
-var _this = this;
-import * as tslib_1 from "tslib";
+import { __awaiter, __decorate, __extends, __generator, __metadata } from "tslib";
 import { GondelBaseComponent, startComponents, stopComponents, getComponentByDomNode, Component, EventListener, disableAutoStart } from "@gondel/core";
 import { initResizePlugin, WINDOW_RESIZED_EVENT, COMPONENT_RESIZED_EVENT } from "./index";
 // mock clientWidth and clientHeight, see https://github.com/jsdom/jsdom/issues/2342
@@ -26,7 +25,7 @@ function resize(width, height) {
     window.dispatchEvent(resizeEvent);
 }
 var ResizeComponent = /** @class */ (function (_super) {
-    tslib_1.__extends(ResizeComponent, _super);
+    __extends(ResizeComponent, _super);
     function ResizeComponent() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this._windowResizedEventReceived = 0;
@@ -45,19 +44,19 @@ var ResizeComponent = /** @class */ (function (_super) {
     ResizeComponent.prototype._handleComponentResizeEvent = function () {
         this._componentResizedEventReceived++;
     };
-    tslib_1.__decorate([
+    __decorate([
         EventListener(WINDOW_RESIZED_EVENT),
-        tslib_1.__metadata("design:type", Function),
-        tslib_1.__metadata("design:paramtypes", []),
-        tslib_1.__metadata("design:returntype", void 0)
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
     ], ResizeComponent.prototype, "_handleWindowResizeEvent", null);
-    tslib_1.__decorate([
+    __decorate([
         EventListener(COMPONENT_RESIZED_EVENT),
-        tslib_1.__metadata("design:type", Function),
-        tslib_1.__metadata("design:paramtypes", []),
-        tslib_1.__metadata("design:returntype", void 0)
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
     ], ResizeComponent.prototype, "_handleComponentResizeEvent", null);
-    ResizeComponent = tslib_1.__decorate([
+    ResizeComponent = __decorate([
         Component("ResizeComponent")
     ], ResizeComponent);
     return ResizeComponent;
@@ -91,8 +90,8 @@ describe("GondelResizePlugin", function () {
     it("should receive no component resized event without resize", function () {
         expect(gondelInstance.getComponentResizeEventReceived()).toBe(0);
     });
-    it("should receive an window resized event upon resize", function () { return tslib_1.__awaiter(_this, void 0, void 0, function () {
-        return tslib_1.__generator(this, function (_a) {
+    it("should receive an window resized event upon resize", function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     resize(1200, 600);
@@ -104,8 +103,8 @@ describe("GondelResizePlugin", function () {
             }
         });
     }); });
-    it("should receive no component resized event when component dimensions did not change", function () { return tslib_1.__awaiter(_this, void 0, void 0, function () {
-        return tslib_1.__generator(this, function (_a) {
+    it("should receive no component resized event when component dimensions did not change", function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     resize(1200, 400);
@@ -117,8 +116,8 @@ describe("GondelResizePlugin", function () {
             }
         });
     }); });
-    it("should receive a component resized event when component dimensions did change", function () { return tslib_1.__awaiter(_this, void 0, void 0, function () {
-        return tslib_1.__generator(this, function (_a) {
+    it("should receive a component resized event when component dimensions did change", function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     setMockClientWidthAndHeight(gondelDivElement, 1400, 600);
@@ -131,8 +130,8 @@ describe("GondelResizePlugin", function () {
             }
         });
     }); });
-    it("should receive two component resize events when firing resize two times", function () { return tslib_1.__awaiter(_this, void 0, void 0, function () {
-        return tslib_1.__generator(this, function (_a) {
+    it("should receive two component resize events when firing resize two times", function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     // we need to set the initial dimensions as they are 0 when the resize plugin get's initialized
@@ -149,8 +148,8 @@ describe("GondelResizePlugin", function () {
             }
         });
     }); });
-    it("should should throttle more than 2 resize events being fired", function () { return tslib_1.__awaiter(_this, void 0, void 0, function () {
-        return tslib_1.__generator(this, function (_a) {
+    it("should should throttle more than 2 resize events being fired", function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     // we need to set the initial dimensions as they are 0 when the resize plugin get's initialized
@@ -175,8 +174,8 @@ describe("GondelResizePlugin", function () {
             }
         });
     }); });
-    it("should should reset throttling after requestAnimationFrame time duration", function () { return tslib_1.__awaiter(_this, void 0, void 0, function () {
-        return tslib_1.__generator(this, function (_a) {
+    it("should should reset throttling after requestAnimationFrame time duration", function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     // we need to set the initial dimensions as they are 0 when the resize plugin get's initialized
@@ -208,8 +207,8 @@ describe("GondelResizePlugin", function () {
             }
         });
     }); });
-    it("should should reset component information after 250ms time duration", function () { return tslib_1.__awaiter(_this, void 0, void 0, function () {
-        return tslib_1.__generator(this, function (_a) {
+    it("should should reset component information after 250ms time duration", function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     // we need to set the initial dimensions as they are 0 when the resize plugin get's initialized
