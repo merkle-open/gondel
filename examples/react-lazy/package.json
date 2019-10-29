@@ -1,14 +1,10 @@
 {
   "name": "gondel-react-lazy-example",
   "private": true,
-  "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.0.1",
   "scripts": {
-    "start": "webpack-serve --open --config ./webpack.config.js"
+    "start": "webpack-dev-server"
   },
-  "author": "Jan Nicklas",
-  "license": "MIT",
   "dependencies": {
     "@gondel/core": "^0.1.0",
     "@gondel/plugin-hot": "^0.1.0",
@@ -16,13 +12,12 @@
     "react-awesome-button": "6.1.2"
   },
   "devDependencies": {
-    "css-loader": "3.2.0",
+    "@babel/preset-env": "7.6.3",
+    "@babel/preset-react": "7.6.3",
+    "common-config-webpack-plugin": "1.4.0",
     "html-webpack-plugin": "3.2.0",
-    "style-loader": "1.0.0",
-    "ts-loader": "6.0.4",
     "typescript": "3.6.2",
     "webpack": "4.39.3",
-    "webpack-cli": "3.3.8",
-    "webpack-serve": "3.1.1"
+    "webpack-dev-server": "3.8.0"
   }
 }

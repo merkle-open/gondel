@@ -1,4 +1,5 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CommonConfigWebpackPlugin = require('common-config-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -21,8 +22,9 @@ module.exports = {
       extensions: [ '.ts', '.tsx', '.js' ]
   },
   plugins: [
+    new CommonConfigWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: 'public/index.html'
+      template: './public/index.html'
     })
   ],
 };

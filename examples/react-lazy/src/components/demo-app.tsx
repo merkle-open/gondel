@@ -4,7 +4,7 @@ import React from "react";
 import { App } from "./DemoApp";
 
 @Component("DemoApp")
-export class DemoApp extends GondelReactComponent<{ title: string }> {
+class DemoApp extends GondelReactComponent<{ title: string }> {
   render() {
     return <App {...this.state} />;
   }
@@ -13,3 +13,5 @@ export class DemoApp extends GondelReactComponent<{ title: string }> {
     this.setState({ title: newTitle });
   }
 }
+
+export default DemoApp;

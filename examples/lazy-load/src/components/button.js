@@ -1,9 +1,9 @@
 import {Component, EventListener, GondelBaseComponent} from '@gondel/core';
 
 @Component('Button')
-export class Button extends GondelBaseComponent {
+class Button extends GondelBaseComponent {
 
-  @EventListener('click') 
+  @EventListener('click')
   async _handleMouseClick(event) {
     // Lazy load npm library
     const {Funnies} = await import('funnies');
@@ -11,5 +11,6 @@ export class Button extends GondelBaseComponent {
     let funnies = new Funnies();
     alert (funnies.message());
   }
+}
 
-};
+export default Button;

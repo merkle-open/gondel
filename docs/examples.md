@@ -4,10 +4,6 @@ title: Examples
 sidebar_label: Examples
 ---
 
-## Intro
-
-https://codesandbox.io/s/github/namics/gondel/tree/master/examples/intro
-
 ## Star Rating
 
 https://codesandbox.io/s/github/namics/gondel/tree/master/examples/five-star
