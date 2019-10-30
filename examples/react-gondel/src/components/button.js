@@ -13,6 +13,6 @@ class Button extends GondelBaseComponent {
     this._ctx.style.border = '';
   }
 
-};
+}
 
 export default Button;

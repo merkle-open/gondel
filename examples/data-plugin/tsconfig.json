@@ -1,11 +1,12 @@
 {
   "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
+    "skipLibCheck": true
+  },
   "paths": {
     "@gondel/core/*": ["../../packages/core/src/*"],
     "@gondel/plugin-*/*": ["../../packages/plugins/*/*"]
-  },
-  "compilerOptions": {
-    "noImplicitAny": false,
-    "noImplicitReturns": false
   }
 }

@@ -66,7 +66,7 @@ https://stackblitz.com/fork/gondel
 + [Chunk Splitting](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/lazy-load)
 + [Star Rating](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/five-star)
 + [Media Queries](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/media-query-plugin)
-+ [Using Gondel with React](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/react)
++ [Using Gondel with React](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/react-gondel)
 + [Typescript - Form Validation](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/typescript)
 
 ## Contributing to Gondel

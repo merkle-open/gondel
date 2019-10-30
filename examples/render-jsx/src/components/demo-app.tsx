@@ -1,7 +1,7 @@
 import { Component } from "@gondel/core";
 import { GondelReactComponent } from "@gondel/plugin-react";
 import React from "react";
-import { App } from "./DemoApp";
+import { App } from "./App";
 
 @Component("DemoApp")
 class DemoApp extends GondelReactComponent<{ title: string }> {
@@ -14,4 +14,4 @@ class DemoApp extends GondelReactComponent<{ title: string }> {
   }
 }
 
-export default DemoApp;
+export { DemoApp };
