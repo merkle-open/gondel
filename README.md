@@ -58,11 +58,11 @@ Gondel is fully typed and exports optional typescript declaration files for type
 
 ## Playground
 
-https://stackblitz.com/fork/gondel
+https://codesandbox.io/s/github/namics/gondel/tree/master/examples/hello-world
 
 ## Examples
 
-+ [Intro](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/intro)
++ [Hello World](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/hello-world)
 + [Chunk Splitting](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/lazy-load)
 + [Star Rating](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/five-star)
 + [Media Queries](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/media-query-plugin)
