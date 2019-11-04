@@ -2,8 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "noImplicitAny": false,
-    "skipLibCheck": true,
-    "experimentalDecorators": true
+    "skipLibCheck": true
   },
   "paths": {
     "@gondel/core/*": ["../../packages/core/src/*"],
