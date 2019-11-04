@@ -1,14 +1,15 @@
+const CommonConfigWebpackPlugin = require('common-config-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
-  presets: [
-    [require.resolve('@babel/preset-env'), {
-      "modules": false,
-      "targets": {
-        "ie": 9
-      }
-    }]
-  ],
+  mode: 'development',
+  devtool: 'inline-source-map',
+  context: __dirname,
+  entry: './src/index.ts',
   plugins: [
-    [require.resolve('@babel/plugin-proposal-decorators'), {legacy: true}],
-    'transform-class-properties',
+    new CommonConfigWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: './index.html'
+    })
   ],
 };

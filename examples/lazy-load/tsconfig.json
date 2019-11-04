@@ -1,7 +1,6 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "noImplicitAny": false,
-    "skipLibCheck": true,
-    "experimentalDecorators": true
+    "skipLibCheck": true
   }
 }

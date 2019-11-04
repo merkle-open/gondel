@@ -9,7 +9,7 @@ module.exports = {
   plugins: [
     new CommonConfigWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: './public/index.html'
+      template: './index.html'
     })
   ],
 };

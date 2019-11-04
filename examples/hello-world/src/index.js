@@ -4,7 +4,7 @@ import {Component, EventListener, GondelBaseComponent} from '@gondel/core';
 @Component('Button')
 class Button extends GondelBaseComponent {
   start() {
-    this._ctx.innerHTML = 'Hello from Gondel!';
+    console.log('The button has been initialized');
   }
   @EventListener('click')
   _handleChange(event) {
