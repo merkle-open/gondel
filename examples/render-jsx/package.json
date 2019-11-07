@@ -9,7 +9,9 @@
     "@gondel/core": "^0.1.0",
     "@gondel/plugin-hot": "^0.1.0",
     "@gondel/plugin-react": "^0.1.0",
-    "react-awesome-button": "6.1.2"
+    "react-awesome-button": "6.1.2",
+    "react": "16.11.0",
+    "react-dom": "16.11.0"
   },
   "devDependencies": {
     "@babel/preset-env": "7.6.3",
