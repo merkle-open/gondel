@@ -1,7 +1,7 @@
 /**
  * This is a plugin which allows a simplified usage of gondel together with react
  */
-import { GondelBaseComponent } from "@gondel/core";
+import { GondelBaseComponent, GondelComponent } from "@gondel/core";
 import React, { ComponentLifecycle, StatelessComponent, ComponentClass } from "react";
 export declare class GondelReactComponent<State> extends GondelBaseComponent implements ComponentLifecycle<null, State> {
     _setInternalState: (config: State) => void | undefined;
@@ -59,3 +59,5 @@ export declare class GondelReactComponent<State> extends GondelBaseComponent imp
     componentDidCatch?(error: Error, errorInfo: React.ErrorInfo): void;
     render(): any;
 }
+/** React hook to use Gondel components inside React */
+export declare function useGondelComponent<TComponentType extends GondelComponent>(): readonly [(element: HTMLElement | null) => void, TComponentType | null];

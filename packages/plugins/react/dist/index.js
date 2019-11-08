@@ -14,8 +14,8 @@ var __extends = (this && this.__extends) || (function () {
 /**
  * This is a plugin which allows a simplified usage of gondel together with react
  */
-import { GondelBaseComponent } from "@gondel/core";
-import React from "react";
+import { GondelBaseComponent, startComponents, stopComponents, getComponentByDomNode, hasMountedGondelComponent } from "@gondel/core";
+import React, { useCallback, useRef, useState, useEffect } from "react";
 import { createRenderAbleAppWrapper } from "./AppWrapper";
 /**
  * Returns true if the given object is promise like
@@ -91,4 +91,28 @@ var GondelReactComponent = /** @class */ (function (_super) {
     return GondelReactComponent;
 }(GondelBaseComponent));
 export { GondelReactComponent };
+/** React hook to use Gondel components inside React */
+export function useGondelComponent() {
+    var _a = useState(null), gondelInstance = _a[0], setGondelInstance = _a[1];
+    var ref = useRef();
+    var refFunction = useCallback(function (element) {
+        if (element) {
+            ref.current = element;
+            startComponents(element).then(function () {
+                setGondelInstance(hasMountedGondelComponent(element) ? getComponentByDomNode(element) : null);
+            });
+        }
+    }, []);
+    useEffect(function () {
+        // Cleanup on unmount
+        return function () {
+            var element = ref.current;
+            if (element) {
+                stopComponents(element);
+                ref.current = undefined;
+            }
+        };
+    }, []);
+    return [refFunction, gondelInstance];
+}
 //# sourceMappingURL=index.js.map
