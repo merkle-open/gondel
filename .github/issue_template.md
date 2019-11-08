@@ -38,5 +38,5 @@ The issue refers to:
 <!-- 
 If possible, provide a simple demo.
 Your issue will be processed faster if we can run your code and it doesn't have dependencies other than gondel. 
-Paste the link to your example below. This Stackblitz (https://stackblitz.com/fork/gondel) could be a good starting point. 
+Paste the link to your example below. This Codesandbox (https://codesandbox.io/s/github/namics/gondel/tree/master/examples/hello-world) could be a good starting point. 
 -->
