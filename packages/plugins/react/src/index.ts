@@ -1,8 +1,23 @@
 /**
  * This is a plugin which allows a simplified usage of gondel together with react
  */
-import { GondelBaseComponent } from "@gondel/core";
-import React, { ComponentLifecycle, StatelessComponent, ComponentClass } from "react";
+import {
+  GondelBaseComponent,
+  GondelComponent,
+  startComponents,
+  stopComponents,
+  getComponentByDomNode,
+  hasMountedGondelComponent
+} from "@gondel/core";
+import React, {
+  ComponentLifecycle,
+  StatelessComponent,
+  ComponentClass,
+  useCallback,
+  useRef,
+  useState,
+  useEffect
+} from "react";
 import { createRenderAbleAppWrapper } from "./AppWrapper";
 
 /**
@@ -150,4 +165,31 @@ export class GondelReactComponent<State> extends GondelBaseComponent
     }
     throw new Error(`${this._componentName} is missing a render method`);
   }
+}
+
+/** React hook to use Gondel components inside React */
+export function useGondelComponent<TComponentType extends GondelComponent>() {
+  const [gondelInstance, setGondelInstance] = useState<TComponentType | null>(null);
+  const ref = useRef<HTMLElement | undefined>();
+  const refFunction = useCallback((element: HTMLElement | null) => {
+    if (element) {
+      ref.current = element;
+      startComponents(element).then(() => {
+        setGondelInstance(
+          hasMountedGondelComponent(element) ? getComponentByDomNode<TComponentType>(element) : null
+        );
+      });
+    }
+  }, []);
+  useEffect(() => {
+    // Cleanup on unmount
+    return () => {
+      const element = ref.current;
+      if (element) {
+        stopComponents(element);
+        ref.current = undefined;
+      }
+    };
+  }, []);
+  return [refFunction, gondelInstance] as const;
 }

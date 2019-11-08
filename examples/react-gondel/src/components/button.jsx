@@ -1,22 +1,14 @@
-import { startComponents, stopComponents } from '@gondel/core';
+import { useGondelComponent } from '@gondel/plugin-react';
 import React from 'react';
 import './button-ui';
 
-export default class Button extends React.Component {
+const ButtonReact = (props) => {
+  const [ref] = useGondelComponent();
+  return (
+    <button onClick={props.onClick} ref={ref} data-g-name="ButtonUi">
+      <span>{props.children}</span>
+    </button>
+  );
+};
 
-  componentDidMount() {
-    startComponents(this.gondelComponent);
-  }
-
-  componentWillUnmount() {
-    stopComponents(this.gondelComponent);
-  }
-
-  render() {
-    return (
-      <button onClick={this.props.onClick} ref={(element) => { this.gondelComponent = element; }} data-g-name="ButtonUi">
-        <span>{this.props.children}</span>
-      </button>
-    );
-  }
-}
+export default ButtonReact;

@@ -1,4 +1,4 @@
-# React Lazy Plugin
+# React Plugin
 
 This tiny plugin bootstraps React widgets and apps using Gondel.  
 
@@ -158,4 +158,54 @@ get component by using [`getComponentByDomNode`](https://gondel.js.org/docs/api.
 
 ```js
 getComponentByDomNode(domElement).setCounter(10)
+```
+
+## Using Gondel components from react
+ 
+The `useGondelComponent` hook allows to use a Gondel UI component like an accordion or button inside a react app. 
+
+```js
+import { useGondelComponent } from '@gondel/plugin-react';
+
+const Button = (props) => {
+  const [ref] = useGondelComponent();
+  return (
+    <button ref={ref} data-g-name="Button"></button>
+  );
+};
+```
+
+In addition to the `ref` object an instance of the gondel component is returned.  
+This allows controlling the Gondel component from react.
+
+```js
+// react component
+import { useGondelComponent } from '@gondel/plugin-react';
+
+const Button = (props) => {
+  const [ref, gondelButtonInstance] = useGondelComponent();
+  return (
+    <button onClick={() => {
+        // Ensure that the gondelInstance is already initialized
+        if (gondelButtonInstance) {
+            // Execute a class method from the Gondel component
+            gondelButtonInstance.setIsEnabled(false);
+        }       
+    }} ref={ref} data-g-name="Button"></button>
+  );
+};
+
+// gondel component
+import { Component, GondelBaseComponent } from '@gondel/core';
+
+@Component('Button')
+export class Button extends GondelBaseComponent {
+  setIsEnabled(newState) {
+    if(newState) {
+        this._ctx.removeAttribute('disabled');
+    } else {
+        this._ctx.setAttribute('disabled');
+    }
+  }
+}
 ```
