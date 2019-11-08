@@ -1,0 +1,23 @@
+{
+  "name": "gondel-communication-trigger-public-event-example",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "start": "webpack-dev-server"
+  },
+  "dependencies": {
+    "@gondel/core": "^0.1.0",
+    "@gondel/plugin-hot": "^0.1.0",
+    "@types/react": "16.9.2",
+    "@types/react-dom": "16.9.0",
+    "react": "16.9.0",
+    "react-dom": "16.9.0"
+  },
+  "devDependencies": {
+    "common-config-webpack-plugin": "1.4.0",
+    "html-webpack-plugin": "3.2.0",
+    "webpack": "4.39.3",
+    "webpack-cli": "3.3.8",
+    "webpack-dev-server": "3.8.0"
+  }
+}

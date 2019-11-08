@@ -65,9 +65,15 @@ https://codesandbox.io/s/github/namics/gondel/tree/master/examples/hello-world
 + [Hello World](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/hello-world)
 + [Chunk Splitting](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/lazy-load)
 + [Star Rating](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/five-star)
-+ [Media Queries](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/media-query-plugin)
-+ [Using Gondel with React](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/react-gondel)
-+ [Typescript - Form Validation](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/typescript)
++ [Gondel with Typescript](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/typescript)
++ [Using Gondel from React](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/react-gondel)
++ [Using React from Gondel](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/render-jsx)
++ [Communication getComponentByDomNode](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/get-component-by-dom-node)
++ [Communication findComponents](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/find-components)
++ [Communication triggerPublicEvent](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/trigger-public-event)
++ [Plugin Data](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/plugin-data)
++ [Plugin Media Queries](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/plugin-media-query)
++ [Plugin Resize](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/plugin-resize)
 
 ## Contributing to Gondel
 
