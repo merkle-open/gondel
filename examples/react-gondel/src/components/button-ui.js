@@ -1,7 +1,7 @@
 import {Component, EventListener, GondelBaseComponent} from '@gondel/core';
 
-@Component('Button')
-class Button extends GondelBaseComponent {
+@Component('ButtonUi')
+class ButtonUi extends GondelBaseComponent {
 
   @EventListener('mouseover')
   _handleMouseOver(event) {
@@ -15,4 +15,4 @@ class Button extends GondelBaseComponent {
 
 }
 
-export default Button;
+export default ButtonUi;
