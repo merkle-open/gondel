@@ -3,29 +3,12 @@ import {Component, GondelBaseComponent, findComponents} from '@gondel/core';
 @Component('List')
 class List extends GondelBaseComponent {
 
-  start() {
-    this.list = document.createElement("ul");
-    this.list.classList.add('js-list');
-    this._ctx.appendChild(this.list);
-
-    const buttonComponents = findComponents(this._ctx, 'Button');
-
-    if (buttonComponents.length > 0) {
-      this.button = buttonComponents[0];
-      this.button.registerCallback(this.buttonClickCallback);
-    }
-  }
-
-  stop() {
-    this.button.removeCallback(this.buttonClickCallback);
-  }
-
-  buttonClickCallback = () => {
+  addItem = (text) => {
     const paragraph = document.createElement("li");
-    const content = document.createTextNode("New element appended");
+    const content = document.createTextNode(text);
     paragraph.appendChild(content);
 
-    this.list.appendChild(paragraph);
+    this._ctx.appendChild(paragraph);
   }
 }
 

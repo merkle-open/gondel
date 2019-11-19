@@ -56,7 +56,7 @@ Gondel is fully typed and exports optional typescript declaration files for type
 
 - [Data Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/data) - Provide auto binding of data attributes - [Demo](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/plugin-data)
 - [Hot Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/hot) - Adds support for hot-module-reloading (hmr) for Gondel components. - [Demo](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/typescript)
-- [jQuery Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/hot) - Adds support for easy access to the current ctx as jQuery collection.
+- [jQuery Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/jquery) - Adds support for easy access to the current ctx as jQuery collection.
 - [Media Queries Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/media-queries) - Provide a custom gondel event which will fire once a given media query is met - [Demo](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/plugin-media-query)
 - [React Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/resize) - Adds support to bootstrap React widgets and apps using Gondel and vice versa - [Demo](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/gondel-react)
 - [Resize Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/resize) - Provide an event when the window or the component resized - [Demo](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/plugin-resize)

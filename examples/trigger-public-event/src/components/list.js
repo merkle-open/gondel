@@ -9,7 +9,7 @@ class List extends GondelBaseComponent {
 
   @EventListener('gButtonClick')
   _buttonClickCallback(event) {
-    this.setBackground(event.data.eventData.backgroundColor);
+    this.setBackground(event.data.eventData.color);
   }
 }
 

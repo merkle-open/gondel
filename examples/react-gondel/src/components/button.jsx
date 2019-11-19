@@ -2,7 +2,7 @@ import { startComponents, stopComponents } from '@gondel/core';
 import React from 'react';
 import './button-ui';
 
-export default class ButtonReact extends React.Component {
+export default class Button extends React.Component {
 
   componentDidMount() {
     startComponents(this.gondelComponent);

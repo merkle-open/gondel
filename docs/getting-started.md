@@ -46,7 +46,7 @@ import {
 } from '@gondel/core';
 
 @Component('Button')
-export class Example extends GondelBaseComponent {
+export class Button extends GondelBaseComponent {
   start() {
     console.log('The button has been initialized');
   }
@@ -66,7 +66,7 @@ Let's analyze the following code:
 
 ```javascript
 @Component('Button')
-export class Example extends GondelBaseComponent {
+export class Button extends GondelBaseComponent {
   start() {
     console.log('The button has been initialized');
   }

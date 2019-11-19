@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Component} from 'react';
-import ButtonReact from './components/button-react';
+import Button from './components/button';
 export default class App extends Component {
 
   constructor(props) {
@@ -14,8 +14,8 @@ export default class App extends Component {
 
   render() {
     return <div>
-      <ButtonReact onClick={this.handleClick}>Button 1</ButtonReact>
-      {this.state.counter % 2 ? <ButtonReact>Button 2</ButtonReact> : null}
+      <Button onClick={this.handleClick}>Button 1</Button>
+      {this.state.counter % 2 ? <Button>Button 2</Button> : null}
     </div>
   }
 }

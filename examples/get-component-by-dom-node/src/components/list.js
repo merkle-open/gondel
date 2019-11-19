@@ -4,8 +4,7 @@ import {Component, EventListener, GondelBaseComponent, findComponents} from '@go
 class List extends GondelBaseComponent {
 
   sync() {
-    this.list = document.createElement("ul");
-    this._ctx.appendChild(this.list);
+    this.list = document.querySelector('.js-list');
   }
 
   appendContent() {

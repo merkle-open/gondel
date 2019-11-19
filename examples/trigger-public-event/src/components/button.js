@@ -1,13 +1,15 @@
 import {Component, EventListener, GondelBaseComponent, triggerPublicEvent} from '@gondel/core';
 
-@Component('Button')
-class Button extends GondelBaseComponent {
+@Component('ColorPicker')
+class ColorPicker extends GondelBaseComponent {
 
-  @EventListener('click')
-  _handleButtonClick(ev) {
-    const eventData = { backgroundColor: 'lightblue' };
+  @EventListener('click', '.js-button')
+  _handleButtonClick() {
+    const inputField = document.querySelector('.js-input');
+    const eventData = { color: inputField.value };
+
     triggerPublicEvent('gButtonClick', this, document.getElementsByClassName('js-list'), eventData);
   }
 }
 
-export default Button;
+export default ColorPicker;
