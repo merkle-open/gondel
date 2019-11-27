@@ -11,10 +11,8 @@ class ComponentResize extends GondelBaseComponent {
 
   @EventListener(COMPONENT_RESIZED_EVENT)
   _handleComponentResizeEvent(e, dimension) {
-    if (dimension.width < this.componentWidth) {
-      this._ctx.style.height = `${dimension.width}px`;
-      this._ctx.innerHTML = `height resized to component width of ${dimension.width}px`;
-    }
+    this._ctx.style.height = `${dimension.width}px`;
+    this._ctx.innerHTML = `height resized to component width of ${dimension.width}px`;
   }
 }
 
