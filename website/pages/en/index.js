@@ -88,6 +88,8 @@ class HomeSplash extends React.Component {
           <PromoSection>
             <Button href="#try">Try It Out</Button>
             <Button href={docUrl('intro.html', language)}>Introduction</Button>
+            <Button href={docUrl('examples.html', language)}>Examples</Button>
+            <Button href={docUrl('api.html', language)}>API Reference</Button>
           </PromoSection>
         </div>
       </SplashContainer>
@@ -200,10 +202,8 @@ const TryOut = props => (
   <Container
     padding={['bottom', 'top']}
     id='try'>
-      <h2>CodeSandbox - Five Star</h2>
-      <CodeSanbox example="examples/five-star" sourceFile="/src/index.js" />
-      <h2>CodeSandbox - Form Validation</h2>
-      <CodeSanbox example="examples/typescript" sourceFile="/src/components/button.ts" />
+      <h2>CodeSandbox - Hello World</h2>
+      <CodeSanbox example="examples/hello-world" sourceFile="/src/index.js" />
   </Container>
 );
 

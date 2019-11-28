@@ -1,7 +1,7 @@
 import { Component, EventListener, GondelBaseComponent, triggerPublicEvent } from "@gondel/core";
 
 @Component("Input")
-export class Input extends GondelBaseComponent<HTMLInputElement> {
+class Input extends GondelBaseComponent<HTMLInputElement> {
   @EventListener("input")
   _handleInput() {
     triggerPublicEvent("gInput", this);
@@ -15,3 +15,5 @@ export class Input extends GondelBaseComponent<HTMLInputElement> {
     return this._ctx.value;
   }
 }
+
+export default Input;

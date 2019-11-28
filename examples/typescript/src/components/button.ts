@@ -1,7 +1,7 @@
 import { Component, GondelBaseComponent } from "@gondel/core";
 
 @Component("Button")
-export class Button extends GondelBaseComponent {
+class Button extends GondelBaseComponent {
   start() {
     console.log("started");
   }
@@ -10,7 +10,7 @@ export class Button extends GondelBaseComponent {
     console.log("stopped");
   }
 
-  setIsEnabled(isEnabled) {
+  setIsEnabled(isEnabled: boolean) {
     if (isEnabled) {
       this._ctx.removeAttribute("disabled");
     } else {
@@ -18,3 +18,4 @@ export class Button extends GondelBaseComponent {
     }
   }
 }
+export default Button;

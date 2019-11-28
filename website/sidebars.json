@@ -1,8 +1,5 @@
 {
   "docs": {
-    "General": ["intro", "getting-started", "examples", "communication"]
-  },
-  "docs-other": {
-    "First Category": ["doc4", "doc5"]
+    "General": ["intro", "getting-started", "examples", "communication", "plugins"]
   }
 }

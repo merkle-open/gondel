@@ -16,6 +16,6 @@ Many libraries and frameworks today assume that you want everything. Gondel does
 
 ## Do you do plugins?
 
-Yes! Currently a few plugins exist, and some are in development. However, since Gondel is pretty close to vanilla JavaScript, you can pretty much just write a class decorator, and your good to go!
+Yes! Currently [this plugins](plugins.md) exist, and some more are in development. However, since Gondel is pretty close to vanilla JavaScript, you can pretty much just write a class decorator, and your good to go!
 
 If you have a good idea for a plugin, please feel free to make a Pull Request!

@@ -4,6 +4,6 @@ declare const module: any;
 hot(module);
 
 // Load components
-import "./components/button";
 import "./components/form";
+import "./components/button";
 import "./components/input";

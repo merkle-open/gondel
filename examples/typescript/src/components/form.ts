@@ -1,11 +1,11 @@
 import { Component, EventListener, GondelBaseComponent, findComponents } from "@gondel/core";
-import { Button } from "./button";
-import { Input } from "./input";
+import Button from "./button";
+import Input from "./input";
 
 @Component("Form")
-export class Form extends GondelBaseComponent {
+class Form extends GondelBaseComponent {
   @EventListener("submit")
-  _handleSubmit(event) {
+  _handleSubmit(event: UIEvent) {
     alert("Submitted");
     event.preventDefault();
   }
@@ -17,10 +17,12 @@ export class Form extends GondelBaseComponent {
   }
 
   _getInputs(): Array<Input> {
-    return findComponents(this._ctx, "Input") as Array<Input>;
+    return findComponents<Input>(this._ctx, "Input");
   }
 
   _getSubmitButton(): Button {
-    return findComponents(this._ctx, "Button")[0] as Button;
+    return findComponents<Button>(this._ctx, "Button")[0];
   }
 }
+
+export default Form;

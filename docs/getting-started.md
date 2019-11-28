@@ -20,24 +20,24 @@ Ok, now you installed Gondel, but how do you use it?
 Well, first you need to modify your HTML code a bit. Let's say you have the following markup:
 
 ```html
-<div>
-    I am the example markup, hear me roar.
-</div>
+<button>
+    I am a Button
+</button>
 ```
 
-To initialize gondel on the `<div>` element, you need to decorate your markup by adding a `data-g-name` attribute to the corresponding element, like so:
+To initialize gondel on the `<button>` element, you need to decorate your markup by adding a `data-g-name` attribute to the corresponding element, like so:
 
 ```html
-<div data-g-name="Example">
-    I am the example markup, hear me roar.
+<div data-g-name="Button">
+   I am a Button
 </div>
 ```
 
-Now, when Gondel runs, it will know to take control of this `<div>`, because of the `data-g-name` attribute.
+Now, when Gondel runs, it will know to take control of this `<button>`, because of the `data-g-name` attribute.
 
-But for now, our code does nothing. So let's add some behaviour to demonstarte it:
+But for now, our code does nothing. So let's add some behaviour to demonstrate it:
 
-Create a `example.js` file in your project, and paste the following content:
+Create a `button.js` file in your project, and paste the following content:
 ```javascript
 import {
   Component,
@@ -45,49 +45,57 @@ import {
   GondelBaseComponent
 } from '@gondel/core';
 
-@Component('Example')
-export class Example extends GondelBaseComponent {
+@Component('Button')
+export class Button extends GondelBaseComponent {
   start() {
-    this._ctx.innerHTML = 'Hello from Gondel!';
+    console.log('The button has been initialized');
   }
+
+  @EventListener('click')
+  _handleChange(event) {
+     alert('Hello World');
+   }
 };
 ```
 
-Presto! Our `<div>` now changes it's inner content to `Hello from Gondel!`. But how did it do that? Let me explain line by line:
+Presto! Our `<button>` now shows an alert box on click. But how did it do that? Let me explain line by line:
 
 ## The decorator
 
 Let's analyze the following code:
 
 ```javascript
-@Component('Example')
-export class Example extends GondelBaseComponent {
+@Component('Button')
+export class Button extends GondelBaseComponent {
   start() {
-    this._ctx.innerHTML = 'Hello from Gondel!';
+    console.log('The button has been initialized');
   }
+
+  @EventListener('click')
+  _handleChange(event) {
+     alert('Hello World');
+   }
 };
 ```
 
-The first line of our code is a *class decorator*. They are a new ES6 feature, which is still in stage-2 at the moment. However, they are an integral part of *Typescript*, in which Gondel was written. So if you can, it is highly recomended to use Typescript to write your Gondel components.
+The first line of our code is a *class decorator*. They are a new ES6 feature, which is still in stage-2 at the moment. However, they are an integral part of *Typescript*, in which Gondel was written. So if you can, it is highly recommended to use Typescript to write your Gondel components.
 
 The line 
-`@Component('Example')` invokes the `Component` decorator, with the `Example` parameter. What that means is that the DOM element with the attribute `data-g-name="Example"` will be assigned to the `this._ctx` property of the following class.
+`@Component('Button')` invokes the `Component` decorator, with the `Button` parameter. What that means is that the DOM element with the attribute `data-g-name="Button"` will be assigned to the `this._ctx` property of the following class.
 
 ## The class definition
 
 Ok, but what about the rest of the class definition? What is this `extend` thing?
 
-`export class Example extends GondelBaseComponent`
+`export class Button extends GondelBaseComponent`
 
-Well, the `extend` keyword means that our Example class will inherit some methods from the `GondelBaseComponent` class. What are those methods? Well you can find all of them here: `//TODO`
+Well, the `extend` keyword means that our Example class will inherit some methods from the `GondelBaseComponent` class. What are those methods? Well you can find all of them [here](../packages/core/src/GondelComponent.ts).
 
 ## The start method
 
 One of them is the `start()` method. This is the method that will be invoked when gondel initializes.
 
-Within our `start()` method, we are changing the `innerHTML` of our `<div data-g-name="Example">` element, to:
-
-`Hello from Gondel!`
+Within our `start()` method, we are logging to the console that our button component has started.
 
 ## Gondel bootstraping
 
@@ -95,4 +103,4 @@ Gondel will be initialized automatically, and will scan the page for elements co
 
 ## Live example
 
-You can also find this code example live on [CodeSandbox](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/intro)
+You can also find this code example live on [CodeSandbox](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/hello-world)

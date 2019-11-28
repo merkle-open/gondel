@@ -5,7 +5,7 @@ sidebar_label: Communication
 ---
 
 When building more complex patterns, your patterns might need to communicate between them. The following examples give you
-some deeper examples after looking at the [API reference](api.md).
+a deeper dive after looking at the [API reference](api.md).
 
 ## getComponentByDomNode
 
@@ -22,13 +22,20 @@ export class Foo extends GondelBaseComponent {
     const component = document.querySelector('.bar');
     
     if (hasMountedGondelComponent(component)) {
-      const bar = getComponentByDomNode<Bar>(component);
+      const bar = getComponentByDomNode(component);
             
        bar.helloWorld();
     }
   }
 }
 ```
+
+Please note: If you need access to a component which is not a parent or a child of your current component, it recommends 
+to create a shared parent to prevent searching for your node over the whole document.
+
+### Live Example
+
+https://codesandbox.io/s/github/namics/gondel/tree/master/examples/get-component-by-dom-node
 
 ## findComponents
 
@@ -42,7 +49,7 @@ import { Bar } from '../../path/to/pattern/bar/js/bar';
 @Component('Foo')
 export class Foo extends GondelBaseComponent {
   start() {
-    const barComponents = findComponents<Bar>(this._ctx, 'Bar');
+    const barComponents = findComponents(this._ctx, 'Bar');
     
     if (barComponents.length > 0) {
       const bar = barComponents[0];
@@ -51,6 +58,10 @@ export class Foo extends GondelBaseComponent {
   }
 }
 ```
+
+### Live Example
+
+https://codesandbox.io/s/github/namics/gondel/tree/master/examples/find-components
 
 ## triggerPublicEvent
 
@@ -78,15 +89,12 @@ export class Bar extends GondelBaseComponent {
 ```
 
 Please note: 
+* `triggerPublicEvent` is especially useful in cases where you don't want to get a hold on your target component, e.g. 
+disabling scroll on your page controller component
 * The third argument can be an optional target to limit who is allowed to listen for the Event
 * The fifth argument can be an optional boolean if the event should bubble
 * The component `Bar` needs to be a parent of `Foo` within the markup to be able to receive the public event
 
-## Live examples
+### Live Example
 
-You can also find this code example live on StackBlitz and play around with it:
-
-* https://stackblitz.com/edit/gondel-communication-get-component-by-dom-node
-* https://stackblitz.com/edit/gondel-communication-find-components
-* https://stackblitz.com/edit/gondel-communication-find-components-promise
-* https://stackblitz.com/edit/gondel-communication-trigger-public-event
+https://codesandbox.io/s/github/namics/gondel/tree/master/examples/trigger-public-event

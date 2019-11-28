@@ -44,6 +44,8 @@ export class Button extends GondelBaseComponent {
 }
 ```
 
+[Hello World Example](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/hello-world)
+
 ## Module format 
 
 Gondel follows the [rollup recommendations](https://github.com/rollup/rollup/wiki/pkg.module) which includes on the one hand ESM for bundle size optimisations and on the other hand a UMD version to be compatible with every former javascript bundling/concatenation strategy.
@@ -52,12 +54,33 @@ Gondel is fully typed and exports optional typescript declaration files for type
 
 ## Plugins
 
-- [Media Queries Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/media-queries) - Provide a custom gondel event which will fire once a given media query is met - [Demo](https://stackblitz.com/edit/gondel-media-query?file=components%2Fbutton.js)
+- [Data Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/data) - Provide auto binding of data attributes - [Demo](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/plugin-data)
+- [Hot Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/hot) - Adds support for hot-module-reloading (hmr) for Gondel components. - [Demo](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/typescript)
+- [jQuery Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/jquery) - Adds support for easy access to the current ctx as jQuery collection.
+- [Media Queries Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/media-queries) - Provide a custom gondel event which will fire once a given media query is met - [Demo](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/plugin-media-query)
+- [React Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/resize) - Adds support to bootstrap React widgets and apps using Gondel and vice versa - [Demo](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/gondel-react)
+- [Resize Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/resize) - Provides an event when the window or the component resized - [Demo](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/plugin-resize)
+
+## Playground
+
+https://codesandbox.io/s/github/namics/gondel/tree/master/examples/hello-world
+
+## Examples
+
++ [Hello World](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/hello-world)
++ [Chunk Splitting](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/lazy-load)
++ [Star Rating](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/five-star)
++ [Gondel with Typescript](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/typescript)
++ [Using Gondel from React](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/react-gondel)
++ [Using React from Gondel](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/gondel-react)
++ [Communication getComponentByDomNode](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/get-component-by-dom-node)
++ [Communication findComponents](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/find-components)
++ [Communication triggerPublicEvent](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/trigger-public-event)
 
 ## Contributing to Gondel
 
-Feel free to contribute to gondel.  
-The following commands will get you started:
+All contributions are welcome: use-cases, documentation, code, patches, bug reports, feature requests, etc.  
+The following commands will get you started to work locally:
 
 ```
 npm install
@@ -70,19 +93,17 @@ Running tests:
 npm run test:watch
 ```
 
-## Playground
+Thanks to all who have contributed ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)) so far:
 
-https://stackblitz.com/fork/gondel
-
-## Examples
-
-+ Gondel 5 Star - [https://stackblitz.com/edit/gondel-5-star](https://stackblitz.com/edit/gondel-5-star?file=components%2Frating.js)
-+ Chunk Splitting - [https://stackblitz.com/edit/gondel-lazy-load](https://stackblitz.com/edit/gondel-lazy-load?file=components%2Fbutton.js)
-+ Media Queries - [CodeSandbox](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/media-query-plugin)
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+| [<img src="https://avatars2.githubusercontent.com/u/4113649?v=4" width="100px;"/><br /><sub><b>Jan Nicklas</b></sub>](https://twitter.com/jantimon)<br />[💻](https://github.com/namics/gondel/commits?author=jantimon "Code") [📖](https://github.com/namics/gondel/commits?author=jantimon "Documentation") [🐛](https://github.com/namics/gondel/issues?q=author%3Ajantimon "Bug reports") [💡](#example-jantimon "Examples") [🚇](#infra-jantimon "Infrastructure (Hosting, Build-Tools, etc)") [🔌](#plugin-jantimon "Plugin/utility libraries") [⚠️](https://github.com/namics/gondel/commits?author=jantimon "Tests") [👀](#review-jantimon "Reviewed Pull Requests") | [<img src="https://avatars1.githubusercontent.com/u/149406?v=4" width="100px;"/><br /><sub><b>Ernst Ammann</b></sub>](https://github.com/ernscht)<br />[💻](https://github.com/namics/gondel/commits?author=ernscht "Code") [📖](https://github.com/namics/gondel/commits?author=ernscht "Documentation") [🚇](#infra-ernscht "Infrastructure (Hosting, Build-Tools, etc)") [📦](#platform-ernscht "Packaging/porting to new platform") [👀](#review-ernscht "Reviewed Pull Requests") | [<img src="https://avatars1.githubusercontent.com/u/9339019?v=4" width="100px;"/><br /><sub><b>Dušan Perković</b></sub>](https://github.com/noblica)<br />[💻](https://github.com/namics/gondel/commits?author=noblica "Code") [📖](https://github.com/namics/gondel/commits?author=noblica "Documentation") [🔌](#plugin-noblica "Plugin/utility libraries") [🤔](#ideas-noblica "Ideas, Planning, & Feedback") [⚠️](https://github.com/namics/gondel/commits?author=noblica "Tests") | [<img src="https://avatars1.githubusercontent.com/u/4563751?v=4" width="100px;"/><br /><sub><b>Jan R. Biasi</b></sub>](https://aviormusic.com)<br />[💻](https://github.com/namics/gondel/commits?author=janbiasi "Code") [📖](https://github.com/namics/gondel/commits?author=janbiasi "Documentation") [🤔](#ideas-janbiasi "Ideas, Planning, & Feedback") [⚠️](https://github.com/namics/gondel/commits?author=janbiasi "Tests") [👀](#review-janbiasi "Reviewed Pull Requests") | [<img src="https://avatars1.githubusercontent.com/u/3381820?v=4" width="100px;"/><br /><sub><b>Jan Widmer</b></sub>](https://github.com/janwidmer)<br />[💻](https://github.com/namics/gondel/commits?author=janwidmer "Code") [📖](https://github.com/namics/gondel/commits?author=janwidmer "Documentation") [💡](#example-janwidmer "Examples") [🤔](#ideas-janwidmer "Ideas, Planning, & Feedback") [🔌](#plugin-janwidmer "Plugin/utility libraries") | [<img src="https://avatars1.githubusercontent.com/u/3457712?v=4" width="100px;"/><br /><sub><b>Claudio Bianucci</b></sub>](https://github.com/chezdev)<br />[💻](https://github.com/namics/gondel/commits?author=chezdev "Code") [🤔](#ideas-chezdev "Ideas, Planning, & Feedback") |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ### License
 
-[MIT license](http://opensource.org/licenses/MIT)
+[MIT license](../../LICENSE)
 
 [npm-image]: https://badge.fury.io/js/%40gondel%2Fcore.svg
 [npm-url]: https://npmjs.org/package/@gondel/core
