@@ -10,12 +10,8 @@
 <url> <loc>https://gondel.js.org/blog/2016/03/11/blog-post.html</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://gondel.js.org/docs/api.html</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://gondel.js.org/docs/api.html" /> </url>
 <url> <loc>https://gondel.js.org/docs/communication.html</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://gondel.js.org/docs/communication.html" /> </url>
-<url> <loc>https://gondel.js.org/docs/doc1.html</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://gondel.js.org/docs/doc1.html" /> </url>
-<url> <loc>https://gondel.js.org/docs/doc2.html</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://gondel.js.org/docs/doc2.html" /> </url>
-<url> <loc>https://gondel.js.org/docs/doc3.html</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://gondel.js.org/docs/doc3.html" /> </url>
-<url> <loc>https://gondel.js.org/docs/doc4.html</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://gondel.js.org/docs/doc4.html" /> </url>
-<url> <loc>https://gondel.js.org/docs/doc5.html</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://gondel.js.org/docs/doc5.html" /> </url>
 <url> <loc>https://gondel.js.org/docs/examples.html</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://gondel.js.org/docs/examples.html" /> </url>
 <url> <loc>https://gondel.js.org/docs/getting-started.html</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://gondel.js.org/docs/getting-started.html" /> </url>
 <url> <loc>https://gondel.js.org/docs/intro.html</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://gondel.js.org/docs/intro.html" /> </url>
+<url> <loc>https://gondel.js.org/docs/plugins.html</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://gondel.js.org/docs/plugins.html" /> </url>
 </urlset>
