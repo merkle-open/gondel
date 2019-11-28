@@ -1,14 +1,14 @@
 {
   "name": "gondel-plugin-media-query-example",
   "private": true,
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "start": "webpack-dev-server"
   },
   "dependencies": {
-    "@gondel/core": "^0.1.0",
-    "@gondel/plugin-media-queries": "^0.1.0",
-    "@babel/plugin-proposal-decorators": "7.4.4"
+    "@babel/plugin-proposal-decorators": "7.4.4",
+    "@gondel/core": "^1.0.0",
+    "@gondel/plugin-media-queries": "^1.0.0"
   },
   "devDependencies": {
     "common-config-webpack-plugin": "1.4.0",
