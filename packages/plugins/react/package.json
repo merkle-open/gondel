@@ -30,6 +30,6 @@
     "react": "16.11.0",
     "react-dom": "16.11.0",
     "rimraf": "3.0.0",
-    "typescript": "3.6.2"
+    "typescript": "3.7.3"
   }
 }

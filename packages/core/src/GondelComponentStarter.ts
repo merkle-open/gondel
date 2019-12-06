@@ -150,7 +150,7 @@ export function startConstructedComponent(component: GondelComponent): Promise<a
   // Start the component and expect a promise or a syncronous return value
   // if the function expects no arguments
   if (expectsNoArguments) {
-    return (component.start as (() => Promise<any> | void))();
+    return (component.start as () => Promise<any> | void)();
   }
   // Otherwise start the component by passing a resolve function
   type AsyncStartMethod = (resolve: () => void, reject: () => void) => void;
