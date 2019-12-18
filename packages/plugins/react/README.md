@@ -63,7 +63,7 @@ export class DemoWidget extends GondelReactComponent {
 
 ## Lazy loading
 
-To load the javascript of your react widget only if the matching HTML Element is present you can use
+To download the javascript of your react widget only if the matching HTML Element is present you can use
 the following pattern:
 
 html
@@ -85,9 +85,8 @@ import React from 'react';
 @Component('DemoWidget')
 export class DemoWidget extends GondelReactComponent {
   async start() {
-      this.App = await import('./App').App;
+      this.App = await (import('./App')).App;
   }
-
   render(config) {
     const App = this.App;
     return 
