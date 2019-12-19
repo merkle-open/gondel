@@ -60,11 +60,13 @@ export class DemoWidget extends GondelReactComponent {
 }
 ```
 
+## Component linking
 
-## Lazy loading
+It's also possible to link a gondel component to a react component without using a render method.
 
-To download the javascript of your react widget only if the matching HTML Element is present you can use
-the following pattern:
+### Sync linking example
+
+In this example the react app will be bundled into the same bundle (no splitting).
 
 html
 
@@ -80,34 +82,7 @@ js
 ```js
 import {GondelReactComponent} from '@gondel/plugin-react';
 import {Component} from '@gondel/core';
-import React from 'react';
-
-@Component('DemoWidget')
-export class DemoWidget extends GondelReactComponent {
-  async start() {
-      this.App = await (import('./App')).App;
-  }
-  render(config) {
-    const App = this.App;
-    return 
-      <App config={config} />
-    ));
-  }
-}
-```
-
-
-## Component linking
-
-It's also possible to link a gondel component to a react component without using a render method.
-
-### Sync linking example
-
-```js
-import {GondelReactComponent} from '@gondel/plugin-react';
-import {Component} from '@gondel/core';
 import {App} from './App';
-import React from 'react';
 
 @Component('DemoWidget')
 export class DemoWidget extends GondelReactComponent {
@@ -115,17 +90,56 @@ export class DemoWidget extends GondelReactComponent {
 }
 ```
 
-### Async linking example
+### Lazy linking example (code splitting)
+
+To only lazy load the javascript of your react widget if the matching
+HTML Element is present, you can use the following pattern:
+
+html
+
+```html
+  <div data-g-name="DemoWidget">
+    <script type="text/json">{ "foo":"bar" }</script>
+    Loading..
+  </div>
+```
+
+js
 
 ```js
 import {GondelReactComponent} from '@gondel/plugin-react';
 import {Component} from '@gondel/core';
-import React from 'react';
+
+@Component('DemoWidget')
+export class DemoWidget extends GondelReactComponent {
+  App = import('./App').then(({App}) => App);
+}
+```
+
+### Async blocking linking example (code splitting)
+
+You can use a async start method to lazy load a component and tell Gondel to wait until the javascript of the component has been loaded.  
+This will guarantee that the sync method of all Gondel components will be delayed until the react component was completely loaded.
+
+html
+
+```html
+  <div data-g-name="DemoWidget">
+    <script type="text/json">{ "foo":"bar" }</script>
+    Loading..
+  </div>
+```
+
+js
+
+```js
+import {GondelReactComponent} from '@gondel/plugin-react';
+import {Component} from '@gondel/core';
 
 @Component('DemoWidget')
 export class DemoWidget extends GondelReactComponent {
   async start() {
-      this.App = await import('./App').App;
+      this.App = (await import('./App')).App;
   }
 }
 ```
@@ -133,30 +147,46 @@ export class DemoWidget extends GondelReactComponent {
 
 ## Manipulating state
 
-It is possible to manipulate the state inside a public method.
+Initially the state is load from the html.
+In the following example it would be `{theme: 'light'}`:
+
+```html
+  <div data-g-name="DemoWidget">
+    <script type="text/json">{ "theme":"light" }</script>
+    Loading..
+  </div>
+```
+
+This initial state can be accesed inside the `GondelReactComponent` using `this.state`.  
+It is even possible to update the state by calling `this.setState`:
 
 ```js
 import {GondelReactComponent} from '@gondel/plugin-react';
 import {Component} from '@gondel/core';
-import {App} from './App';
 import React from 'react';
 
-@Component('DemoWidget')
-export class DemoWidget extends GondelReactComponent<{counter: number}> {
-  App = App;
+const DemoApp = ({theme}) => (
+    <h1 className={theme === 'dark' ? 'dark' : 'light'}>
+        Hello World
+    </h1>
+)
 
-  setCounter(counter: number) {
-      this.setState({counter})
+@Component('DemoWidget')
+export class DemoWidget extends GondelReactComponent<{theme: 'light' | 'dark'}> {
+  App = DemoApp;
+
+  setTheme(theme: 'light' | 'dark') {
+      this.setState({theme})
   }
 }
 ```
 
-With this public method it is now possible to set the counter using
-get component by using [`getComponentByDomNode`](https://gondel.js.org/docs/api.html#getcomponentbydomnode-domnode-namespace-gondelbasecomponent):
+In the example above we created a public `setTheme` method which is now a public api for your react widget.  
+In combination with [`getComponentByDomNode`](https://gondel.js.org/docs/api.html#getcomponentbydomnode-domnode-namespace-gondelbasecomponent) it allows changing the state during runtime:
 
 
 ```js
-getComponentByDomNode(domElement).setCounter(10)
+getComponentByDomNode(domElement).setTheme('dark')
 ```
 
 ## Using Gondel components from react

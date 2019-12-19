@@ -57,7 +57,7 @@ var AppWrapper = /** @class */ (function (_super) {
     return AppWrapper;
 }(Component));
 export { AppWrapper };
-export function createRenderAbleAppWrapper(props) {
+export function createRenderableAppWrapper(props) {
     return React.createElement(AppWrapper, __assign({}, props));
 }
 //# sourceMappingURL=AppWrapper.js.map

@@ -2,35 +2,46 @@
  * This is a plugin which allows a simplified usage of gondel together with react
  */
 import {
+  getComponentByDomNode,
   GondelBaseComponent,
   GondelComponent,
+  hasMountedGondelComponent,
   startComponents,
-  stopComponents,
-  getComponentByDomNode,
-  hasMountedGondelComponent
+  stopComponents
 } from "@gondel/core";
 import React, {
+  ComponentClass,
   ComponentLifecycle,
   StatelessComponent,
-  ComponentClass,
   useCallback,
+  useEffect,
   useRef,
-  useState,
-  useEffect
+  useState
 } from "react";
-import { createRenderAbleAppWrapper } from "./AppWrapper";
+import { createRenderableAppWrapper } from "./AppWrapper";
 
 /**
  * Returns true if the given object is promise like
  */
-function isPromise<T>(obj: {} | Promise<T> | undefined | string | number): obj is Promise<T> {
-  return obj !== undefined && (<Promise<T>>obj).then !== undefined;
+function isPromise<T>(
+  obj: {} | Promise<T> | undefined | string | number | null
+): obj is Promise<T> {
+  return !!obj && typeof (obj as Promise<T>).then === "function";
 }
+
+type RenderableReactComponent<State> =
+  | StatelessComponent<Readonly<State>>
+  | ComponentClass<Readonly<State>, any>;
 
 export class GondelReactComponent<State> extends GondelBaseComponent
   implements ComponentLifecycle<null, State> {
+  static readonly AppPromiseMap = new WeakMap<
+    Promise<RenderableReactComponent<any>>,
+    RenderableReactComponent<any>
+  >();
+
   _setInternalState: (config: State) => void | undefined;
-  App?: StatelessComponent<Readonly<State>> | ComponentClass<Readonly<State>, any>;
+  App?: RenderableReactComponent<State> | Promise<RenderableReactComponent<State>>;
 
   state: Readonly<State>;
   setState(state: Partial<State>) {
@@ -66,12 +77,16 @@ export class GondelReactComponent<State> extends GondelBaseComponent
 
       // Render the app
       const renderAppPromise = originalStartPromise
-        .then(() => ReactDOMPromise)
-        .then(ReactDOM => {
+        .then(() => Promise.all([ReactDOMPromise, this.App]))
+        .then(([ReactDOM, App]) => {
+          // Store unwrapped promise for this.App
+          if (App && isPromise(this.App)) {
+            GondelReactComponent.AppPromiseMap.set(this.App, App);
+          }
           // Render only if the app was not stopped
           this._stopped ||
             ReactDOM.render(
-              createRenderAbleAppWrapper({
+              createRenderableAppWrapper({
                 children: this.render.bind(this),
                 onHasState: setInternalState => {
                   this._setInternalState = setInternalState;
@@ -160,10 +175,18 @@ export class GondelReactComponent<State> extends GondelBaseComponent
   componentDidCatch?(error: Error, errorInfo: React.ErrorInfo): void;
 
   render(): any {
-    if (this.App) {
-      return React.createElement(this.App, this.state);
+    // If this App is a promise use the AppPromiseMap to extract the resolved promise value
+    const App = isPromise(this.App) ? GondelReactComponent.AppPromiseMap.get(this.App) : this.App;
+    if (!App) {
+      throw new Error(
+        `${this._componentName} could not render ${
+          this.App
+            ? "ensure that you are returning a React component"
+            : "please add a render method"
+        }`
+      );
     }
-    throw new Error(`${this._componentName} is missing a render method`);
+    return React.createElement(App, this.state);
   }
 }
 

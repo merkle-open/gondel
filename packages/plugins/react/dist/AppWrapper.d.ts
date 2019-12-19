@@ -8,4 +8,4 @@ export declare class AppWrapper<TConfig> extends Component<Props<TConfig>, TConf
     constructor(props: Props<TConfig>);
     render(): JSX.Element | (((props: TConfig) => JSX.Element) & string) | (((props: TConfig) => JSX.Element) & number) | (((props: TConfig) => JSX.Element) & false) | (((props: TConfig) => JSX.Element) & true) | (((props: TConfig) => JSX.Element) & React.ReactNodeArray) | undefined;
 }
-export declare function createRenderAbleAppWrapper<TConfig>(props: Props<TConfig>): JSX.Element;
+export declare function createRenderableAppWrapper<TConfig>(props: Props<TConfig>): JSX.Element;

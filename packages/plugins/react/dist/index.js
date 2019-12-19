@@ -14,14 +14,14 @@ var __extends = (this && this.__extends) || (function () {
 /**
  * This is a plugin which allows a simplified usage of gondel together with react
  */
-import { GondelBaseComponent, startComponents, stopComponents, getComponentByDomNode, hasMountedGondelComponent } from "@gondel/core";
-import React, { useCallback, useRef, useState, useEffect } from "react";
-import { createRenderAbleAppWrapper } from "./AppWrapper";
+import { getComponentByDomNode, GondelBaseComponent, hasMountedGondelComponent, startComponents, stopComponents } from "@gondel/core";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { createRenderableAppWrapper } from "./AppWrapper";
 /**
  * Returns true if the given object is promise like
  */
 function isPromise(obj) {
-    return obj !== undefined && obj.then !== undefined;
+    return !!obj && typeof obj.then === "function";
 }
 var GondelReactComponent = /** @class */ (function (_super) {
     __extends(GondelReactComponent, _super);
@@ -48,11 +48,16 @@ var GondelReactComponent = /** @class */ (function (_super) {
             });
             // Render the app
             var renderAppPromise = originalStartPromise
-                .then(function () { return ReactDOMPromise; })
-                .then(function (ReactDOM) {
+                .then(function () { return Promise.all([ReactDOMPromise, _this.App]); })
+                .then(function (_a) {
+                var ReactDOM = _a[0], App = _a[1];
+                // Store unwrapped promise for this.App
+                if (App && isPromise(_this.App)) {
+                    GondelReactComponent.AppPromiseMap.set(_this.App, App);
+                }
                 // Render only if the app was not stopped
                 _this._stopped ||
-                    ReactDOM.render(createRenderAbleAppWrapper({
+                    ReactDOM.render(createRenderableAppWrapper({
                         children: _this.render.bind(_this),
                         onHasState: function (setInternalState) {
                             _this._setInternalState = setInternalState;
@@ -83,11 +88,16 @@ var GondelReactComponent = /** @class */ (function (_super) {
         }
     };
     GondelReactComponent.prototype.render = function () {
-        if (this.App) {
-            return React.createElement(this.App, this.state);
+        // If this App is a promise use the AppPromiseMap to extract the resolved promise value
+        var App = isPromise(this.App) ? GondelReactComponent.AppPromiseMap.get(this.App) : this.App;
+        if (!App) {
+            throw new Error(this._componentName + " could not render " + (this.App
+                ? "ensure that you are returning a React component"
+                : "please add a render method"));
         }
-        throw new Error(this._componentName + " is missing a render method");
+        return React.createElement(App, this.state);
     };
+    GondelReactComponent.AppPromiseMap = new WeakMap();
     return GondelReactComponent;
 }(GondelBaseComponent));
 export { GondelReactComponent };

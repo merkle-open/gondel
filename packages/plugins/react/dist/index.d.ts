@@ -2,10 +2,12 @@
  * This is a plugin which allows a simplified usage of gondel together with react
  */
 import { GondelBaseComponent, GondelComponent } from "@gondel/core";
-import React, { ComponentLifecycle, StatelessComponent, ComponentClass } from "react";
+import React, { ComponentClass, ComponentLifecycle, StatelessComponent } from "react";
+declare type RenderableReactComponent<State> = StatelessComponent<Readonly<State>> | ComponentClass<Readonly<State>, any>;
 export declare class GondelReactComponent<State> extends GondelBaseComponent implements ComponentLifecycle<null, State> {
+    static readonly AppPromiseMap: WeakMap<Promise<RenderableReactComponent<any>>, RenderableReactComponent<any>>;
     _setInternalState: (config: State) => void | undefined;
-    App?: StatelessComponent<Readonly<State>> | ComponentClass<Readonly<State>, any>;
+    App?: RenderableReactComponent<State> | Promise<RenderableReactComponent<State>>;
     state: Readonly<State>;
     setState(state: Partial<State>): void;
     constructor(ctx: HTMLElement, componentName: string);
@@ -61,3 +63,4 @@ export declare class GondelReactComponent<State> extends GondelBaseComponent imp
 }
 /** React hook to use Gondel components inside React */
 export declare function useGondelComponent<TComponentType extends GondelComponent>(): readonly [(element: HTMLElement | null) => void, TComponentType | null];
+export {};
