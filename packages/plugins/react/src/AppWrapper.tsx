@@ -37,6 +37,6 @@ export class AppWrapper<TConfig> extends Component<Props<TConfig>, TConfig> {
   }
 }
 
-export function createRenderAbleAppWrapper<TConfig>(props: Props<TConfig>) {
+export function createRenderableAppWrapper<TConfig>(props: Props<TConfig>) {
   return <AppWrapper {...props} />;
 }
