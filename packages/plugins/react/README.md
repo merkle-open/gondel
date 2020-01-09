@@ -4,13 +4,13 @@ This tiny plugin bootstraps React widgets and apps using Gondel.
 
 ## Usage
 
-HTML
+**HTML**
 
 ```html
   <div data-g-name="DemoWidget">Loading..</div>
 ```
 
-JavaScript
+**JavaScript**
 
 ```js
 import { GondelReactComponent } from '@gondel/plugin-react';
@@ -34,7 +34,7 @@ Most apps need some specific configuration e.g. API enpoints or other settings.
 The following pattern allows you to pass a basic configuration from the DOM to your application.
 This guarantees us that we have the full flexibility to pass a configuration, so that it can get rendered by anyone (e.g. CMS).
 
-HTML
+**HTML**
 
 ```html
   <div data-g-name="DemoWidget">
@@ -43,7 +43,7 @@ HTML
   </div>
 ```
 
-JavaScript
+**JavaScript**
 
 ```js
 import { GondelReactComponent } from '@gondel/plugin-react';
@@ -212,8 +212,9 @@ const Button = (props) => {
 In addition to the `ref` object, an instance of the Gondel component gets returned.
 This allows to fully control the Gondel component from the React code.
 
+**React component**
+
 ```tsx
-// React component
 import { useGondelComponent } from '@gondel/plugin-react';
 
 const Button = (props) => {
@@ -235,8 +236,9 @@ const Button = (props) => {
 };
 ```
 
+**Gondel component**
+
 ```ts
-// Gondel component
 import { Component, GondelBaseComponent } from '@gondel/core';
 
 @Component('Button')
