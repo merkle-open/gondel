@@ -11,6 +11,7 @@
   "author": "Jan Nicklas",
   "license": "MIT",
   "scripts": {
+    "test": "jest",
     "build:clean": "rimraf dist",
     "build:esm": "tsc --project ./tsconfig.json --declaration --esModuleInterop --declarationDir dist/ --sourceMap --outDir dist/",
     "build": "npm-run-all build:clean build:esm"
@@ -27,9 +28,33 @@
   "devDependencies": {
     "@gondel/core": "^1.0.0",
     "npm-run-all": "4.1.5",
+    "jest": "24.9.0",
     "react": "16.11.0",
     "react-dom": "16.11.0",
     "rimraf": "3.0.0",
     "typescript": "3.7.4"
+  },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "diagnostics": true
+      }
+    },
+    "transform": {
+      "^.+\\.tsx?": "ts-jest"
+    },
+    "testRegex": "\\.test\\.tsx?",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx,js,jsx}"
+    ],
+    "coverageDirectory": "coverage",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json",
+      "node"
+    ]
   }
 }
