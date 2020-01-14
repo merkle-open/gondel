@@ -1,6 +1,10 @@
 {
     "extends": "../../../tsconfig.json",
     "compilerOptions": {
-        "importHelpers": false
-    }
+      "importHelpers": false
+    },
+    "exclude": [
+      "src/**/*.test.ts",
+      "fixtures"
+  ]
 }
