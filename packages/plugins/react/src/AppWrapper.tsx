@@ -10,6 +10,7 @@ export class AppWrapper<TConfig> extends Component<Props<TConfig>, TConfig> {
   constructor(props: Props<TConfig>) {
     super(props);
     this.state = props.config;
+
     // Forward react life cycle hooks
     [
       "componentWillMount",
@@ -24,13 +25,16 @@ export class AppWrapper<TConfig> extends Component<Props<TConfig>, TConfig> {
       if (!(this.props as any)[reactHook]) {
         return;
       }
+
       (this as any)[reactHook] = function() {
         this.props[reactHook].apply(this, arguments);
       };
     });
+
     // Notify the Gondel component that the state can be set
     props.onHasState && props.onHasState(this.setState.bind(this));
   }
+
   render() {
     const children = this.props.children;
     return typeof children === "function" ? children(this.state) : children;
