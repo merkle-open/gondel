@@ -1,6 +1,6 @@
 {
   "name": "@gondel/core",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "The base core of the gondel library",
   "bugs": "https://github.com/namics/gondel/issues",
   "homepage": "https://github.com/namics/gondel",
