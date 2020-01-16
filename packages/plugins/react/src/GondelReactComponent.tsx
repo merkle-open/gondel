@@ -3,11 +3,10 @@ import { GondelBaseComponent } from "@gondel/core";
 import { createRenderableAppWrapper } from "./AppWrapper";
 import { isPromise } from "./utils";
 
-type RenderableReactComponent<State> =
-  | StatelessComponent<Readonly<State>>
-  | ComponentClass<Readonly<State>, any>;
+type RenderableReactComponent<State> = StatelessComponent<State> | ComponentClass<State, any>;
 
-export class GondelReactComponent<State extends {}> extends GondelBaseComponent
+export class GondelReactComponent<State = {}, TElement extends HTMLElement = HTMLDivElement>
+  extends GondelBaseComponent<TElement>
   implements ComponentLifecycle<null, State> {
   static readonly AppPromiseMap = new WeakMap<
     Promise<RenderableReactComponent<any>>,
@@ -18,7 +17,7 @@ export class GondelReactComponent<State extends {}> extends GondelBaseComponent
   App?: RenderableReactComponent<State> | Promise<RenderableReactComponent<State>>;
   state: Readonly<State>;
 
-  constructor(ctx: HTMLElement, componentName: string) {
+  constructor(ctx: TElement, componentName: string) {
     super(ctx, componentName);
 
     // Overwrite the current start method

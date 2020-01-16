@@ -1,12 +1,12 @@
 import React, { StatelessComponent, ComponentClass, ComponentLifecycle } from "react";
 import { GondelBaseComponent } from "@gondel/core";
-declare type RenderableReactComponent<State> = StatelessComponent<Readonly<State>> | ComponentClass<Readonly<State>, any>;
-export declare class GondelReactComponent<State extends {}> extends GondelBaseComponent implements ComponentLifecycle<null, State> {
-    static readonly AppPromiseMap: WeakMap<Promise<RenderableReactComponent<any>>, RenderableReactComponent<any>>;
+declare type RenderableReactComponent<State> = StatelessComponent<State> | ComponentClass<State, any>;
+export declare class GondelReactComponent<State = {}, TElement extends HTMLElement = HTMLDivElement> extends GondelBaseComponent<TElement> implements ComponentLifecycle<null, State> {
+    static readonly AppPromiseMap: WeakMap<Promise<React.ComponentType<any>>, React.ComponentType<any>>;
     _setInternalState: (config: State) => void | undefined;
     App?: RenderableReactComponent<State> | Promise<RenderableReactComponent<State>>;
     state: Readonly<State>;
-    constructor(ctx: HTMLElement, componentName: string);
+    constructor(ctx: TElement, componentName: string);
     setState(state: Partial<State>): void;
     /**
      * Called immediately before mounting occurs, and before `Component#render`.

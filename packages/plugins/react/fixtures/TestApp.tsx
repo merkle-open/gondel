@@ -1,3 +1,3 @@
-import React, { StatelessComponent } from 'react';
+import React from 'react';
 
-export const TestApp: StatelessComponent<Readonly<{ text: string }>> = ({ text }) => <p>Hello, {text}!</p>;
+export const TestApp = ({ text }: { text: string }) => <p>Hello, {text}!</p>;

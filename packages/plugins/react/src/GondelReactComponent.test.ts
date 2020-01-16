@@ -1,24 +1,7 @@
-import { GondelReactComponent } from "./GondelReactComponent";
+import { Component } from "@gondel/core";
 import { TestApp } from "../fixtures/TestApp";
-import {
-  Component,
-  GondelComponent,
-  GondelBaseComponent,
-  IGondelComponent,
-  StartMethod
-} from "@gondel/core";
+import { GondelReactComponent } from "./GondelReactComponent";
 import { isPromise } from "./utils";
-
-class StubComponent<T> extends GondelReactComponent<T> {
-  _componentName = "StubComponent";
-}
-
-const createStubComponent = <TState>() => {
-  const root = document.createElement("div");
-  const component = new StubComponent<TState>(root, "stub");
-
-  return { component, root };
-};
 
 const createComponentStateHTML = (initialState: object = {}) => {
   const tree = document.createElement("div");
@@ -26,7 +9,6 @@ const createComponentStateHTML = (initialState: object = {}) => {
   initialScript.type = "text/json";
   initialScript.innerHTML = JSON.stringify(initialState);
   tree.appendChild(initialScript);
-
   return tree;
 };
 
@@ -41,14 +23,14 @@ describe("@gondel/plugin-react", () => {
 
       it("should expose gondel lifecycle methods", () => {
         const root = document.createElement("div");
-        const c = new GondelReactComponent<{}>(root, "example");
+        const c = new GondelReactComponent(root, "example");
 
         expect((c as any).start).toBeDefined();
         expect((c as any).stop).toBeDefined();
       });
 
       it("should not expose certain react lifecycle methods", () => {
-        class TestComponent extends GondelReactComponent<{}> {
+        class TestComponent extends GondelReactComponent {
           _componentName = "TestComponent";
         }
 
@@ -79,15 +61,19 @@ describe("@gondel/plugin-react", () => {
           unload = () => this.setState({ loaded: false });
         }
 
-        const c = new TestComponent(root, "test");
-        expect(c.state.theme).toEqual("light");
-        expect(c.state.loaded).toBe(true);
+        const component = new TestComponent(root, "test");
+        expect(component.state.theme).toEqual("light");
+        expect(component.state.loaded).toBe(true);
       });
     });
 
     describe("state", () => {
       it("should expose an initial default state", () => {
-        const { component } = createStubComponent<{ a: number; b: string }>();
+        const root = document.createElement("div");
+        class TestComponent extends GondelReactComponent {
+          _componentName = "TestComponent";
+        }
+        const component = new TestComponent(root, "stub");
 
         // check if state & setter are defined
         expect(component.state).toBeDefined();
@@ -153,14 +139,14 @@ describe("@gondel/plugin-react", () => {
       // TODO: This test fails, strange behaviour, we need to investigate a bit here
       it.skip("should be able to render React apps", async () => {
         @Component("test")
-        class TestComponent extends GondelReactComponent<{ text: string }> {
+        class TestComponent extends GondelReactComponent {
           App = TestApp;
         }
-
         const root = document.createElement("div");
-        const c = new TestComponent(root, "test");
-        expect(typeof (c as any).start).toBeTruthy();
-        const startPromise = (c as any).start() as Promise<any>;
+        const component = new TestComponent(root, "test");
+        component.setState({ a: 1 });
+        expect(typeof (component as any).start).toBeTruthy();
+        const startPromise = (component as any).start() as Promise<any>;
         expect(isPromise(startPromise)).toBeTruthy();
         const startResponse = await startPromise;
         // const out = await (c as any).start();
