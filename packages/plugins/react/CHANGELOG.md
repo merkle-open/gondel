@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/namics/gondel/compare/v1.1.1...v1.1.2) (2020-01-16)
+
+
+### Bug Fixes
+
+* **react plugin:** allow to set the wrapper html element ([56e8f16](https://github.com/namics/gondel/commit/56e8f16))
+
+
+
+
+
 ## [1.1.1](https://github.com/namics/gondel/compare/v1.1.0...v1.1.1) (2020-01-16)
 
 
