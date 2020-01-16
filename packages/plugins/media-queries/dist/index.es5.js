@@ -3,7 +3,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
     typeof define === 'function' && define.amd ? define(['exports'], factory) :
     (global = global || self, factory(global.gondelPluginMediaQueries = {}));
-}(this, (function (exports) { 'use strict';
+}(this, function (exports) { 'use strict';
 
     var basePluginListener = function (result, data, next) { return next(result); };
     // Global plugin events registry
@@ -265,5 +265,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=index.es5.js.map

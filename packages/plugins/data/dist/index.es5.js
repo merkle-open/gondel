@@ -3,7 +3,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@gondel/core')) :
     typeof define === 'function' && define.amd ? define(['exports', '@gondel/core'], factory) :
     (global = global || self, factory(global.gondelPluginData = {}, global.gondel));
-}(this, (function (exports, core) { 'use strict';
+}(this, function (exports, core) { 'use strict';
 
     var areDataBindingsHookedIntoCore = false;
     function hookDataDecoratorIntoCore() {
@@ -125,5 +125,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=index.es5.js.map
