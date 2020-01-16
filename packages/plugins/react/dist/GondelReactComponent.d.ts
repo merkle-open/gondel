@@ -1,7 +1,7 @@
 import React, { StatelessComponent, ComponentClass, ComponentLifecycle } from "react";
 import { GondelBaseComponent } from "@gondel/core";
 declare type RenderableReactComponent<State> = StatelessComponent<Readonly<State>> | ComponentClass<Readonly<State>, any>;
-export declare class GondelReactComponent<State> extends GondelBaseComponent implements ComponentLifecycle<null, State> {
+export declare class GondelReactComponent<State extends {}> extends GondelBaseComponent implements ComponentLifecycle<null, State> {
     static readonly AppPromiseMap: WeakMap<Promise<RenderableReactComponent<any>>, RenderableReactComponent<any>>;
     _setInternalState: (config: State) => void | undefined;
     App?: RenderableReactComponent<State> | Promise<RenderableReactComponent<State>>;

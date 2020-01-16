@@ -7,7 +7,7 @@ type RenderableReactComponent<State> =
   | StatelessComponent<Readonly<State>>
   | ComponentClass<Readonly<State>, any>;
 
-export class GondelReactComponent<State> extends GondelBaseComponent
+export class GondelReactComponent<State extends {}> extends GondelBaseComponent
   implements ComponentLifecycle<null, State> {
   static readonly AppPromiseMap = new WeakMap<
     Promise<RenderableReactComponent<any>>,
