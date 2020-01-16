@@ -1,6 +1,6 @@
 {
   "name": "@gondel/plugin-react",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Gondel Plugin to boot react widgets and apps",
   "bugs": "https://github.com/namics/gondel/issues",
   "homepage": "https://github.com/namics/gondel",
