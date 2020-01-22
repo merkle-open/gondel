@@ -1,3 +1,5 @@
 import React from 'react';
 
-export const TestApp = ({ text }: { text: string }) => <p>Hello, {text}!</p>;
+export interface ITestAppProps { text: string }
+
+export const TestApp = ({ text }: ITestAppProps) => <p>Hello, {text}!</p>;

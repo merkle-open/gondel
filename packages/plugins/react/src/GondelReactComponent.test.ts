@@ -1,7 +1,6 @@
-import { Component } from "@gondel/core";
-import { TestApp } from "../fixtures/TestApp";
-import { GondelReactComponent } from "./GondelReactComponent";
-import { isPromise } from "./utils";
+import { Component, getComponentByDomNode, startComponents } from "@gondel/core";
+import { createElement } from "react";
+import { createGondelReactLoader, GondelReactComponent } from "./GondelReactComponent";
 
 const createComponentStateHTML = (initialState: object = {}) => {
   const tree = document.createElement("div");
@@ -27,24 +26,6 @@ describe("@gondel/plugin-react", () => {
 
         expect((c as any).start).toBeDefined();
         expect((c as any).stop).toBeDefined();
-      });
-
-      it("should not expose certain react lifecycle methods", () => {
-        class TestComponent extends GondelReactComponent {
-          _componentName = "TestComponent";
-        }
-
-        const root = document.createElement("div");
-        const c = new TestComponent(root, "stub");
-
-        expect(c.componentWillMount).toBeUndefined();
-        expect(c.componentDidMount).toBeUndefined();
-        expect(c.componentWillReceiveProps).toBeUndefined();
-        expect(c.shouldComponentUpdate).toBeUndefined();
-        expect(c.componentWillUpdate).toBeUndefined();
-        expect(c.componentDidUpdate).toBeUndefined();
-        expect(c.componentWillUnmount).toBeUndefined();
-        expect(c.componentDidCatch).toBeUndefined();
       });
 
       it("should read child script config", () => {
@@ -136,22 +117,198 @@ describe("@gondel/plugin-react", () => {
     });
 
     describe("render", () => {
-      // TODO: This test fails, strange behaviour, we need to investigate a bit here
-      it.skip("should be able to render React apps", async () => {
-        @Component("test")
-        class TestComponent extends GondelReactComponent {
-          App = TestApp;
-        }
+      it("should be able to render React apps syncronously", async () => {
         const root = document.createElement("div");
-        const component = new TestComponent(root, "test");
-        component.setState({ a: 1 });
-        expect(typeof (component as any).start).toBeTruthy();
-        const startPromise = (component as any).start() as Promise<any>;
-        expect(isPromise(startPromise)).toBeTruthy();
-        const startResponse = await startPromise;
-        // const out = await (c as any).start();
-        // expect(typeof (c as any).start === 'function').toBeTruthy()
-        // expect(c.render()).toEqual('')
+        root.innerHTML = `<div data-g-name="Greeter"><script type="text/json">{ "title": "Hello World"}</script></div>`;
+
+        await new Promise(resolve => {
+          function TestTitleSpan(props: { title: string }) {
+            return createElement("span", null, props.title);
+          }
+          const loader = () => TestTitleSpan;
+          const GondelReactLoaderComponent = createGondelReactLoader(loader);
+          @Component("Greeter")
+          class Greeter extends GondelReactLoaderComponent {
+            start() {}
+            componentDidMount() {
+              resolve();
+            }
+          }
+
+          startComponents(root);
+        });
+
+        expect(root.innerHTML).toBe('<div data-g-name="Greeter"><span>Hello World</span></div>');
+      });
+
+      it("should be able to render React apps asyncronously", async () => {
+        const root = document.createElement("div");
+        root.innerHTML = `<div data-g-name="Greeter"><script type="text/json">{ "title": "Hello World"}</script></div>`;
+
+        await new Promise(resolve => {
+          function TestTitleSpan(props: { title: string }) {
+            return createElement("span", null, props.title);
+          }
+          const loader = async () => TestTitleSpan;
+          const GondelReactLoaderComponent = createGondelReactLoader(loader);
+          @Component("Greeter")
+          class Greeter extends GondelReactLoaderComponent {
+            componentDidMount() {
+              resolve();
+            }
+          }
+
+          startComponents(root);
+        });
+
+        expect(root.innerHTML).toBe('<div data-g-name="Greeter"><span>Hello World</span></div>');
+      });
+
+      it("should be able to render React apps named asyncronously", async () => {
+        const root = document.createElement("div");
+        root.innerHTML = `<div data-g-name="Greeter"><script type="text/json">{ "title": "Hello World"}</script></div>`;
+
+        await new Promise(resolve => {
+          function TestTitleSpan(props: { title: string }) {
+            return createElement("span", null, props.title);
+          }
+          const loader = async () => ({ TestTitleSpan } as const);
+          const GondelReactLoaderComponent = createGondelReactLoader(loader, "TestTitleSpan");
+          @Component("Greeter")
+          class Greeter extends GondelReactLoaderComponent {
+            componentDidMount() {
+              resolve();
+            }
+          }
+
+          startComponents(root);
+        });
+
+        expect(root.innerHTML).toBe('<div data-g-name="Greeter"><span>Hello World</span></div>');
+      });
+
+      it("should execute hooks during rendering", async () => {
+        const root = document.createElement("div");
+        root.innerHTML = `<div data-g-name="Greeter"></div>`;
+        const hooks: string[] = [];
+
+        await new Promise(resolve => {
+          const loader = () => () => createElement("span", null, "Hello World");
+          const GondelReactLoaderComponent = createGondelReactLoader(loader);
+          @Component("Greeter")
+          class Greeter extends GondelReactLoaderComponent {
+            componentDidMount() {
+              hooks.push("componentDidMount");
+              setTimeout(() => {
+                this.stop();
+              });
+            }
+            componentWillUnmount() {
+              hooks.push("componentWillUnmount");
+              resolve();
+            }
+          }
+          startComponents(root);
+        });
+
+        expect(hooks).toEqual(["componentDidMount", "componentWillUnmount"]);
+      });
+
+      it("should render after the start method is done", async () => {
+        const root = document.createElement("div");
+        root.innerHTML = `<div data-g-name="Greeter"></div>`;
+
+        await new Promise(resolve => {
+          function TestTitleSpan(props: { title: string }) {
+            return createElement("span", null, props.title);
+          }
+          const loader = () => TestTitleSpan;
+          const GondelReactLoaderComponent = createGondelReactLoader(loader);
+          @Component("Greeter")
+          class Greeter extends GondelReactLoaderComponent {
+            start() {
+              return new Promise(resolve => {
+                setTimeout(() => {
+                  this.setState({
+                    title: "Lazy loaded data"
+                  });
+                  resolve();
+                });
+              });
+            }
+            componentDidMount() {
+              resolve();
+            }
+          }
+
+          startComponents(root);
+        });
+
+        expect(root.innerHTML).toBe(
+          '<div data-g-name="Greeter"><span>Lazy loaded data</span></div>'
+        );
+      });
+
+      it("should render after the start method is done using a callback", async () => {
+        const root = document.createElement("div");
+        root.innerHTML = `<div data-g-name="Greeter"></div>`;
+
+        await new Promise(resolve => {
+          function TestTitleSpan(props: { title: string }) {
+            return createElement("span", null, props.title);
+          }
+          const loader = () => TestTitleSpan;
+          const GondelReactLoaderComponent = createGondelReactLoader(loader);
+          @Component("Greeter")
+          class Greeter extends GondelReactLoaderComponent {
+            start(resolve: () => void) {
+              setTimeout(() => {
+                this.setState({
+                  title: "Lazy loaded data"
+                });
+                resolve();
+              });
+            }
+            componentDidMount() {
+              resolve();
+            }
+          }
+
+          startComponents(root);
+        });
+
+        expect(root.innerHTML).toBe(
+          '<div data-g-name="Greeter"><span>Lazy loaded data</span></div>'
+        );
+      });
+
+      it("should rerender once setState is called", async () => {
+        const root = document.createElement("div");
+        root.innerHTML = `<div data-g-name="Greeter"></div>`;
+        await new Promise(resolve => {
+          function TestTitleSpan(props: { title: string }) {
+            return createElement("span", null, props.title || "");
+          }
+          const GondelReactLoaderComponent = createGondelReactLoader(() => TestTitleSpan);
+          @Component("Greeter")
+          class Greeter extends GondelReactLoaderComponent {
+            componentDidMount() {
+              resolve();
+            }
+            componentDidUpdate() {}
+            shouldComponentUpdate() {
+              return true;
+            }
+          }
+          startComponents(root);
+        });
+
+        const component = getComponentByDomNode<any>(root.firstElementChild!);
+        component.setState({ title: "update using getComponentByDomNode" });
+
+        expect(root.innerHTML).toBe(
+          '<div data-g-name="Greeter"><span>update using getComponentByDomNode</span></div>'
+        );
       });
 
       it("base class should throw an error if no app provided", () => {

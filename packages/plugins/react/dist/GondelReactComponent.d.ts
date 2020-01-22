@@ -1,8 +1,51 @@
 import React, { StatelessComponent, ComponentClass, ComponentLifecycle } from "react";
 import { GondelBaseComponent } from "@gondel/core";
+import { KeysMatching, UnwrapPromise } from "./utils";
 declare type RenderableReactComponent<State> = StatelessComponent<State> | ComponentClass<State, any>;
-export declare class GondelReactComponent<State = {}, TElement extends HTMLElement = HTMLDivElement> extends GondelBaseComponent<TElement> implements ComponentLifecycle<null, State> {
-    static readonly AppPromiseMap: WeakMap<Promise<React.ComponentType<any>>, React.ComponentType<any>>;
+declare type StateOfComponent<T> = T extends RenderableReactComponent<infer V> ? V : never;
+interface ConstructableGondelReactComponent<State> {
+    new (...args: any[]): GondelReactComponent<State>;
+}
+/**
+ * Create a GondelReactComponent class which is directly linked with a loader
+ * for default exports
+ *
+ *  @example
+ *  const loader = () => import('./App');
+ *  class MyComponent extends GondelReactComponent.create(loader) {
+ *  }
+ *
+ */
+export declare function createGondelReactLoader<State extends {}>(loader: () => Promise<RenderableReactComponent<State>>): ConstructableGondelReactComponent<State>;
+/**
+ * Create a GondelReactComponent class which is directly linked with a loader
+ *
+ *  @example
+ *  const loader = () => <span>Hello world</span>;
+ *  class MyComponent extends GondelReactComponent.create(loader) {
+ *  }
+ *
+ */
+export declare function createGondelReactLoader<State extends {}>(loader: () => RenderableReactComponent<State>): ConstructableGondelReactComponent<State>;
+/**
+ * Create a GondelReactComponent class which is directly linked with a loader
+ * for named exports like `export const App = () => <span>Hello world</span>`
+ *
+ *  @example
+ *  const loader = () => import('./App');
+ *  class MyComponent extends GondelReactComponent.create(loader, "App") {
+ *  }
+ *
+ */
+export declare function createGondelReactLoader<State extends StateOfComponent<UnwrapPromise<Module>[ExportName]>, Module extends Promise<{
+    [key: string]: unknown;
+}>, ExportName extends KeysMatching<UnwrapPromise<Module>, RenderableReactComponent<any>>>(loader: () => Module, exportName: ExportName): ConstructableGondelReactComponent<State>;
+export declare class GondelReactComponent<State extends {} = {}, TElement extends HTMLElement = HTMLDivElement> extends GondelBaseComponent<TElement> implements ComponentLifecycle<null, State> {
+    static readonly AppPromiseMap: WeakMap<Promise<RenderableReactComponent<any>>, RenderableReactComponent<any>>;
+    /**
+     * Create a GondelReactComponent class which is directly linked with a loader
+     */
+    static create: typeof createGondelReactLoader;
     _setInternalState: (config: State) => void | undefined;
     App?: RenderableReactComponent<State> | Promise<RenderableReactComponent<State>>;
     state: Readonly<State>;
