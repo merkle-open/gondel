@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 export interface Props<S> extends React.ComponentLifecycle<null, S> {
     children?: (props: S) => JSX.Element;
     onHasState?: (setState: (state: Partial<S>) => void) => void;
@@ -6,6 +6,6 @@ export interface Props<S> extends React.ComponentLifecycle<null, S> {
 }
 export declare class AppWrapper<TConfig> extends Component<Props<TConfig>, TConfig> {
     constructor(props: Props<TConfig>);
-    render(): JSX.Element | (((props: TConfig) => JSX.Element) & string) | (((props: TConfig) => JSX.Element) & number) | (((props: TConfig) => JSX.Element) & false) | (((props: TConfig) => JSX.Element) & true) | (((props: TConfig) => JSX.Element) & React.ReactNodeArray) | undefined;
+    render(): JSX.Element | (((props: TConfig) => JSX.Element) & string) | (((props: TConfig) => JSX.Element) & number) | (((props: TConfig) => JSX.Element) & false) | (((props: TConfig) => JSX.Element) & true) | (((props: TConfig) => JSX.Element) & import("react").ReactNodeArray) | undefined;
 }
-export declare function createRenderableAppWrapper<TConfig>(props: Props<TConfig>): JSX.Element;
+export declare function createRenderableAppWrapper<TConfig>(props: Props<TConfig>): import("react").CElement<Props<unknown>, AppWrapper<unknown>>;

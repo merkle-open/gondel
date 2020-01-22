@@ -111,40 +111,27 @@ HTML Element is present, you can use the following pattern below which is called
 import { GondelReactComponent } from '@gondel/plugin-react';
 import { Component } from '@gondel/core';
 
+const loader = () => import('./App');
+
 @Component('DemoWidget')
-export class DemoWidget extends GondelReactComponent {
-  App = import('./App').then(({ App }) => App);
+export class DemoWidget extends GondelReactComponent.create(loader, "App") {
+
 }
 ```
 
-### Async blocking linking example (code splitting)
-
-You can use a async start method to lazy load a component and tell Gondel to wait until the JavaScript of the component has been loaded.  
-This will guarantee that the sync method of all Gondel components will be delayed until the React component was completely loaded.
-
-**HTML**
-
-```html
-  <div data-g-name="DemoWidget">
-    <script type="text/json">{ "foo":"bar" }</script>
-    Loading..
-  </div>
-```
-
-**JavaScript**
+To use a react App with a default export the second parameter of `create` can be skipped.
 
 ```js
 import { GondelReactComponent } from '@gondel/plugin-react';
 import { Component } from '@gondel/core';
 
+const loader = () => import('./App');
+
 @Component('DemoWidget')
-export class DemoWidget extends GondelReactComponent {
-  async start() {
-      this.App = (await import('./App')).App;
-  }
+export class DemoWidget extends GondelReactComponent.create(loader) {
+
 }
 ```
-
 
 ## Manipulating state
 
@@ -166,16 +153,14 @@ import React from 'react';
 import { GondelReactComponent } from '@gondel/plugin-react';
 import { Component } from '@gondel/core';
 
-const DemoApp = ({ theme }) => (
+const DemoApp = ({ theme }: {theme: 'light' | 'dark'}) => (
     <h1 className={theme === 'dark' ? 'dark' : 'light'}>
         Hello World
     </h1>
 );
 
 @Component('DemoWidget')
-export class DemoWidget extends GondelReactComponent<{theme: 'light' | 'dark'}> {
-  App = DemoApp;
-
+export class DemoWidget extends GondelReactComponent.create(() => DemoApp) {
   setTheme(theme: 'light' | 'dark') {
       this.setState({ theme });
   }

@@ -11,10 +11,40 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import React from "react";
+import { createElement } from "react";
 import { GondelBaseComponent } from "@gondel/core";
 import { createRenderableAppWrapper } from "./AppWrapper";
 import { isPromise } from "./utils";
+export function createGondelReactLoader(loader, exportName) {
+    var unifiedLoader = function () {
+        var loaderResult = loader();
+        if (!isPromise(loaderResult)) {
+            return loaderResult;
+        }
+        return loaderResult.then(function (lazyLoadModule) {
+            if (exportName) {
+                var mod = lazyLoadModule;
+                /* istanbul ignore else */
+                if (mod[exportName]) {
+                    return mod[exportName];
+                }
+                else {
+                    throw new Error("export " + exportName + " not found");
+                }
+            }
+            return lazyLoadModule;
+        });
+    };
+    return /** @class */ (function (_super) {
+        __extends(GondelReactWrapperComponent, _super);
+        function GondelReactWrapperComponent() {
+            var _this = _super !== null && _super.apply(this, arguments) || this;
+            _this.App = unifiedLoader();
+            return _this;
+        }
+        return GondelReactWrapperComponent;
+    }(GondelReactComponent));
+}
 var GondelReactComponent = /** @class */ (function (_super) {
     __extends(GondelReactComponent, _super);
     function GondelReactComponent(ctx, componentName) {
@@ -22,9 +52,10 @@ var GondelReactComponent = /** @class */ (function (_super) {
         // Overwrite the current start method
         var originalStart = _this.start;
         var ReactDOMPromise = import(
-        /* webpackPrefetch: true, webpackChunkName: 'ReactDom' */ "react-dom").then(function (ReactDOM) { return ReactDOM.default; });
+        /* webpackPrefetch: true, webpackChunkName: 'ReactDom' */ "react-dom").then(function (ReactDOM) { return ReactDOM.default || ReactDOM; });
         var configScript = ctx.querySelector("script[type='text/json']");
         _this.state = configScript ? JSON.parse(configScript.innerHTML) : {};
+        var unmountComponentAtNode;
         _this.start = function () {
             var _this = this;
             // Wait for the original start promise to allow lazy loading
@@ -43,6 +74,8 @@ var GondelReactComponent = /** @class */ (function (_super) {
                 .then(function () { return Promise.all([ReactDOMPromise, _this.App]); })
                 .then(function (_a) {
                 var ReactDOM = _a[0], App = _a[1];
+                // Store unmountComponentAtNode for stopping the app
+                unmountComponentAtNode = ReactDOM.unmountComponentAtNode;
                 // Store unwrapped promise for this.App
                 if (App && isPromise(_this.App)) {
                     GondelReactComponent.AppPromiseMap.set(_this.App, App);
@@ -55,8 +88,12 @@ var GondelReactComponent = /** @class */ (function (_super) {
                             _this._setInternalState = setInternalState;
                         },
                         componentWillUnmount: function () {
+                            var args = [];
+                            for (var _i = 0; _i < arguments.length; _i++) {
+                                args[_i] = arguments[_i];
+                            }
                             delete _this._setInternalState;
-                            _this.componentWillUnmount && _this.componentWillUnmount();
+                            _this.componentWillUnmount && _this.componentWillUnmount.apply(_this, args);
                         },
                         componentDidMount: _this.componentDidMount && _this.componentDidMount.bind(_this),
                         componentWillReceiveProps: _this.componentWillReceiveProps && _this.componentWillReceiveProps.bind(_this),
@@ -68,6 +105,17 @@ var GondelReactComponent = /** @class */ (function (_super) {
                     }), _this._ctx);
             });
             return renderAppPromise;
+        };
+        // Make sure that the stop method will tear down the react app
+        var originalStop = _this.stop;
+        _this.stop = function () {
+            var returnValue = originalStop && originalStop.apply(this, arguments);
+            // check if during this components start method unmountComponentAtNode
+            // was set - if not we don't need to unmound the app
+            if (unmountComponentAtNode) {
+                unmountComponentAtNode(this._ctx);
+            }
+            return returnValue;
         };
         return _this;
     }
@@ -87,9 +135,13 @@ var GondelReactComponent = /** @class */ (function (_super) {
                 ? "ensure that you are returning a React component"
                 : "please add a render method"));
         }
-        return React.createElement(App, this.state);
+        return createElement(App, this.state);
     };
     GondelReactComponent.AppPromiseMap = new WeakMap();
+    /**
+     * Create a GondelReactComponent class which is directly linked with a loader
+     */
+    GondelReactComponent.create = createGondelReactLoader;
     return GondelReactComponent;
 }(GondelBaseComponent));
 export { GondelReactComponent };

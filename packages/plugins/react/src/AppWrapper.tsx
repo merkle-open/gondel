@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component, createElement } from "react";
 
 export interface Props<S> extends React.ComponentLifecycle<null, S> {
   children?: (props: S) => JSX.Element;
@@ -12,7 +12,7 @@ export class AppWrapper<TConfig> extends Component<Props<TConfig>, TConfig> {
     this.state = props.config;
 
     // Forward react life cycle hooks
-    [
+    ([
       "componentWillMount",
       "componentDidMount",
       "componentWillReceiveProps",
@@ -21,13 +21,13 @@ export class AppWrapper<TConfig> extends Component<Props<TConfig>, TConfig> {
       "componentDidUpdate",
       "componentWillUnmount",
       "componentDidCatch"
-    ].forEach(reactHook => {
+    ] as const).forEach(reactHook => {
       if (!(this.props as any)[reactHook]) {
         return;
       }
 
       (this as any)[reactHook] = function() {
-        this.props[reactHook].apply(this, arguments);
+        return this.props[reactHook].apply(this, arguments);
       };
     });
 
@@ -42,5 +42,5 @@ export class AppWrapper<TConfig> extends Component<Props<TConfig>, TConfig> {
 }
 
 export function createRenderableAppWrapper<TConfig>(props: Props<TConfig>) {
-  return <AppWrapper {...props} />;
+  return createElement(AppWrapper, props);
 }
