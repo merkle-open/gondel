@@ -139,12 +139,12 @@ describe("@gondel/plugin-react", () => {
       // TODO: This test fails, strange behaviour, we need to investigate a bit here
       it.skip("should be able to render React apps", async () => {
         @Component("test")
-        class TestComponent extends GondelReactComponent {
+        class TestComponent extends GondelReactComponent<{ text: string }> {
           App = TestApp;
         }
         const root = document.createElement("div");
         const component = new TestComponent(root, "test");
-        component.setState({ a: 1 });
+        component.setState({ text: "test" });
         expect(typeof (component as any).start).toBeTruthy();
         const startPromise = (component as any).start() as Promise<any>;
         expect(isPromise(startPromise)).toBeTruthy();

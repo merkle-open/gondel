@@ -1,0 +1,12 @@
+{
+    "extends": "../../../tsconfig.json",
+    "compilerOptions": {
+      "importHelpers": false,
+      "emitDecoratorMetadata": true
+    },
+    "exclude": [
+      "src/**/*.test.ts",
+      "fixtures",
+      "coverage"
+  ]
+}
