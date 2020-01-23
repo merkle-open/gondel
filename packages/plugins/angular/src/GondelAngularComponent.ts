@@ -24,19 +24,25 @@ export class GondelAngularComponent<
   NGModule extends GondelAngularModule = any,
   TElement extends HTMLElement = HTMLDivElement
 > extends GondelBaseComponent<TElement> {
+  /**
+   * Map which saves a direct reference from the start promise
+   * to the resolved application module.
+   * @internal
+   */
   static readonly AppPromiseMap = new WeakMap<Promise<GondelAngularModule>, GondelAngularModule>();
   /**
    * Saving all NgModule references here, important
-   * for updating or destroying apps
+   * for updating or destroying apps.
+   * @internal
    */
   static readonly ModuleRefMap = new WeakMap<
     Promise<GondelAngularModule> | GondelAngularModule,
     NgModuleRef<any>
   >();
-
   /**
    * The module ref zones, will be set after
    * each successful bootstrap process.
+   * @internal
    */
   static readonly ZoneMap = new Map<string, NgZone>();
   /**
@@ -95,6 +101,7 @@ export class GondelAngularComponent<
         GondelAngularComponent.ModuleRefMap.delete(appModule);
         this.setZoneActiveProperty(false); // global zone
         this.setZoneActiveProperty(false, this.zone); // bootstrapped zone
+        delete this.zone;
       }
 
       if (this.stop) {
@@ -162,16 +169,15 @@ export class GondelAngularComponent<
             .bootstrapModule((AppModule as unknown) as Type<unknown>)
             .then((ref: NgModuleRef<unknown>) => {
               // extract corelated zone instance from root injector
-              const bootstrappedNgZone = ref.injector.get(NgZone);
-              this.zone = bootstrappedNgZone;
+              this.zone = ref.injector.get(NgZone);
 
               // set reference property in bootstrapped zone
-              (bootstrappedNgZone as any)._inner._properties[zoneIdentifier] = true;
+              this.setZoneActiveProperty(true, this.zone);
               // activate reference property in global zone
               this.setZoneActiveProperty(true);
 
               // save references of zone and module in class
-              GondelAngularComponent.ZoneMap.set(zoneIdentifier, bootstrappedNgZone);
+              GondelAngularComponent.ZoneMap.set(zoneIdentifier, this.zone);
               GondelAngularComponent.ModuleRefMap.set(AppModule, ref);
             })
             .catch((err: Error) => {
@@ -214,7 +220,7 @@ export class GondelAngularComponent<
       return;
     }
 
-    return (zone as any)._properties[this.zoneIdentifier] === active;
+    (zone as any)._properties[this.zoneIdentifier] = active;
   }
 
   /**
