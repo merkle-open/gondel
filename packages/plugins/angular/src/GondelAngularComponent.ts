@@ -14,6 +14,11 @@ import { loadAngularInternals } from "./angularInternalsLoader";
 
 type GondelAngularModule = any;
 
+/**
+ * Base class implementation of the Gondel Angular component.
+ * Enables you to lazy-load Angular applications, set states,
+ * communicate with the rest of your components and more.
+ */
 export class GondelAngularComponent<
   State = {},
   NGModule extends GondelAngularModule = any,
@@ -58,7 +63,6 @@ export class GondelAngularComponent<
    * Public zone reference
    */
   public zone: NgZone;
-
   /**
    * Unique identifier per component which defines
    * the reference to the forked Zone property
@@ -91,6 +95,10 @@ export class GondelAngularComponent<
         GondelAngularComponent.ModuleRefMap.delete(appModule);
         this.setZoneActiveProperty(false); // global zone
         this.setZoneActiveProperty(false, this.zone); // bootstrapped zone
+      }
+
+      if (this.stop) {
+        this.stop();
       }
     };
 
@@ -130,9 +138,6 @@ export class GondelAngularComponent<
 
           /**
            * This is a hack, since NgZone doesn't allow you to configure the property that identifies your zone.
-           * @see https://github.com/PlaceMe-SAS/single-spa-angular-cli/issues/33
-           * @see https://github.com/CanopyTax/single-spa-angular/issues/47
-           * @see https://github.com/CanopyTax/single-spa-angular/issues/47
            * @see https://github.com/angular/angular/blob/a14dc2d7a4821a19f20a9547053a5734798f541e/packages/core/src/zone/ng_zone.ts#L144
            * @see https://github.com/angular/angular/blob/a14dc2d7a4821a19f20a9547053a5734798f541e/packages/core/src/zone/ng_zone.ts#L257
            */
@@ -179,6 +184,10 @@ export class GondelAngularComponent<
     };
   }
 
+  /**
+   * Get the original start method as promise to ensure
+   * correct async flow throught the overwritten start.
+   */
   private getSafeStartPromise(originalStart?: StartMethod) {
     return new Promise((resolve, reject) => {
       if (!originalStart) {
@@ -194,6 +203,12 @@ export class GondelAngularComponent<
     });
   }
 
+  /**
+   * DO NOT MODIFY UNLESS YOU ARE 100% SURE
+   * This is a hack to enable multizone module bootstrapping.
+   * @see https://github.com/angular/angular/blob/a14dc2d7a4821a19f20a9547053a5734798f541e/packages/core/src/zone/ng_zone.ts#L144
+   * @see https://github.com/angular/angular/blob/a14dc2d7a4821a19f20a9547053a5734798f541e/packages/core/src/zone/ng_zone.ts#L257
+   */
   private setZoneActiveProperty(active: boolean, zone: NgZone = (window as any).Zone.current) {
     if (!this.zoneIdentifier) {
       return;
@@ -202,6 +217,10 @@ export class GondelAngularComponent<
     return (zone as any)._properties[this.zoneIdentifier] === active;
   }
 
+  /**
+   * Returns a static provider which will connect the current
+   * component instance with the GondelComponentProvider token.
+   */
   private getInternalComponentRefProvider(): ValueProvider {
     return {
       provide: this.GondelComponentProvider,
@@ -209,6 +228,10 @@ export class GondelAngularComponent<
     };
   }
 
+  /**
+   * Returns a static provider which will connect the
+   * current state with the StateProvider token.
+   */
   private getInternalStateProvider(): ValueProvider {
     if (!this.StateProvider) {
       // default state will be empty object
@@ -221,6 +244,12 @@ export class GondelAngularComponent<
     };
   }
 
+  /**
+   * Ensures that there is a valid root entry point for
+   * the Angular module as it requires a <ng-component /> tag
+   * for ambiguous modules.
+   * @see https://angular.io/guide/bootstrapping
+   */
   private ensureComponentTagInContext() {
     if (!this._ctx) {
       return false;
