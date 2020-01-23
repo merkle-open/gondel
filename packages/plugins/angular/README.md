@@ -59,15 +59,11 @@ export class DemoWidgetModule {}
 ```ts
 import { Component } from "@gondel/core";
 import { GondelAngularComponent } from "@gondel/plugin-angular";
-import { DemoWidgetStateProvider } from "./demo-widget.const";
 
 @Component("Tool")
 export class Tool extends GondelAngularComponent {
     // import your angular module here
     AppModule = import("./demo-widget.module").then(mod => mod.DemoWidgetModule);
-
-    // injectable state reference
-    StateProvider = DemoWidgetStateProvider;
 }
 ```
 
