@@ -1,9 +1,7 @@
 import { GondelBaseComponent, GondelComponent } from "@gondel/core";
-import { NgModuleRef, Type, RootRenderer, NgZone, getPlatform } from "@angular/core";
+import { NgModuleRef, Type, NgZone, getPlatform, InjectionToken } from "@angular/core";
 import { isPromise } from "./utils";
-import { GondelZone } from "./GondelZone";
-import { loadAngularInternals } from "./GondelAngularComponent.ng-loader";
-import { GondelStateProvider } from "./GondelConfigurationProvider";
+import { loadAngularInternals } from "./angularInternalsLoader";
 
 type GondelAngularModule = any;
 
@@ -27,7 +25,11 @@ export class GondelAngularComponent<
    * each successful bootstrap process.
    */
   static readonly ZoneMap = new Map<string, NgZone>();
-
+  /**
+   * Injection token instance which defines the state
+   * injectable, required for static provider typings
+   */
+  public StateProvider: InjectionToken<State>;
   /**
    * Dynamic import of the root NgModule class
    */
@@ -134,14 +136,18 @@ export class GondelAngularComponent<
           // the AppModule can be bootstrapped correctly
           this.ensureComponentTagInContext();
 
-          DynamicBoot.platformBrowserDynamic([
-            {
-              provide: GondelStateProvider,
-              useValue: {
-                state: this.state
-              }
-            }
-          ])
+          const staticModuleProviders = this.StateProvider
+            ? [
+                {
+                  provide: this.StateProvider,
+                  useValue: this.state
+                }
+              ]
+            : [];
+
+          console.log("providing state", this.state);
+
+          DynamicBoot.platformBrowserDynamic(staticModuleProviders)
             .bootstrapModule((AppModule as unknown) as Type<unknown>)
             .then(ref => {
               console.log("Platform after boot", getPlatform());

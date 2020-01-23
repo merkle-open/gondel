@@ -12,10 +12,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.html$/,
-        loader: 'html-loader'
-      },
-      {
         test: /\.ts$/,
         loaders: [
             'babel-loader',
@@ -25,10 +21,28 @@ module.exports = {
                     configFileName: 'tsconfig.json'
                 }
             },
-            'angular2-template-loader'
+            'angular2-template-loader?keepUrl=true'
         ],
         exclude: [/node_modules/]
-    }
+      },
+      {
+        test: /\.(html|css)$/,
+        loader: 'raw-loader',
+        exclude: /\.async\.(html|css)$/
+      },
+      {
+        test: /\.async\.(html|css)$/,
+        loaders: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[hash].[ext]',
+            },
+          },
+          'extract-loader'
+        ],
+        exclude: [/index.html/]
+      }
     ]
   },
   devServer: {

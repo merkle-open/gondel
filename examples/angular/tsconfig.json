@@ -3,6 +3,7 @@
   "compilerOptions": {
     "skipLibCheck": true,
     "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true,
     "lib": ["es6", "dom"]
   }
 }

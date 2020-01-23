@@ -1,11 +1,13 @@
-import { Component } from "@angular/core";
-import { GondelStateProvider } from "@gondel/plugin-angular/dist/GondelConfigurationProvider";
+import { Component, Inject } from "@angular/core";
+import { ToolState, ToolStateProvider } from "./tool.const";
 
 @Component({
-  template: "<p>calculator rendered by angular</p>"
+  template: require("./calculator.component.html").default
 })
 export class Calculator {
-  constructor(private state: GondelStateProvider<any>) {
-    console.log("state", state);
+  public title: string = "";
+
+  constructor(@Inject(ToolStateProvider) state: ToolState) {
+    this.title = state.title;
   }
 }
