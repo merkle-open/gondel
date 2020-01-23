@@ -22,7 +22,7 @@ The plugin currently supports Angular version >= 8.0.0 < 9.0.0
 
 ## Basic usage
 
-This section handles bootstrapping a basic module without any state nor connection to the outter world of angular itself. If you're already up and running you may take a look at the [advanced usage](#advanced-usage) below.
+This section handles bootstrapping a basic module without any state nor connection to the outter world of angular itself. If you're already up and running you may take a look at the [using an initial state](#using-an-initial-state) or [interacting with the Gondel component](#interacting-with-the-gondel-component) sections below or take a look at the [recipes](#recipes) section for any frequently asked questions.
 
 ### HTML
 
@@ -67,7 +67,7 @@ export class Tool extends GondelAngularComponent {
 }
 ```
 
-## Advanced usage
+## Using an initial state
 
 ### HTML
 
@@ -82,45 +82,39 @@ export class Tool extends GondelAngularComponent {
 
 ##### demo-widget.ts <small>(Gondel Component)</small>
 
+As you may know, Angular is based on the dependency injection pattern. Thus to pass data
+from outside of any Angular application you need to define an injectable. In this case 
+we need to create a new injection token which is then used by the plugin to provide the
+internal data.
+
 ```ts
 import { Component } from "@gondel/core";
-import { GondelAngularComponent } from "@gondel/plugin-angular";
-import { DemoWidgetStateProvider } from "./demo-widget.const";
+import { GondelAngularComponent, createStateProvider } from "@gondel/plugin-angular";
 
-@Component("Tool")
-export class Tool extends GondelAngularComponent {
+export interface DemoWidgetState {
+  message: string;
+}
+
+export const DemoWidgetStateProvider =
+    createStateProvider<DemoWidgetState>("demoWidgetState");
+
+@Component("DemoWidget")
+export class DemoWidget extends GondelAngularComponent {
     // import your angular module here
-    AppModule = import("./demo-widget.module").then(mod => mod.DemoWidgetModule);
+    AppModule = import("./demo-widget.module")
+        .then(mod => mod.DemoWidgetModule);
 
     // injectable state reference, see example in next snippet
     StateProvider = DemoWidgetStateProvider;
 }
 ```
 
-##### demo-widget.const.ts <small>(DI)</small>
-
-As you may know, Angular is based on the dependency injection pattern. Thus to pass data
-from outside of any Angular application you need to define an injectable. In this case 
-we need to create a new injection token which is then used by the plugin to provide the
-internal data.
-
-You should **always put the token** and state definition **in a separate file** as it will be used by the lazy loaded Angular application and Gondel.
-
-```ts
-import { createStateToken } from "@gondel/plugin-angular";
-
-export interface DemoWidgetState {
-  message: string;
-}
-
-export const DemoWidgetStateProvider = createStateToken<DemoWidgetState>("demoWidgetState");
-```
 
 ##### demo-widget.component.ts <small>(Angular Component)</small>
 
 ```ts
 import { Component, Inject } from "@angular/core";
-import { DemoWidgetStateProvider, DemoWidgetState } from "./demo-widget.const";
+import { DemoWidgetStateProvider, DemoWidgetState } from "./demo-widget";
 
 @Component({
   template: `<h1>{{message}}</h1>`
@@ -128,13 +122,77 @@ import { DemoWidgetStateProvider, DemoWidgetState } from "./demo-widget.const";
 export class DemoWidget {
   public message: string = "";
 
-  constructor(@Inject(DemoWidgetStateProvider) state: DemoWidgetState) {
-    this.title = state.message;
-  }
+    constructor(
+      @Inject(DemoWidgetStateProvider) state: DemoWidgetState
+    ) {
+        this.title = state.message;
+    }
 }
 ```
 
-## Recipes
+
+
+## Interacting with the Gondel component
+
+##### demo-widget.ts <small>(Gondel Component)</small>
+
+As you may know, Angular is based on the dependency injection pattern. Thus to pass data
+from outside of any Angular application you need to define an injectable. In this case 
+we need to create a new injection token which is then used by the plugin to provide the
+internal data.
+
+```ts
+import { Component } from "@gondel/core";
+import {
+    GondelAngularComponent,
+    createGondelComponentProvider
+} from "@gondel/plugin-angular";
+
+export const DemoWidgetComponentRef =
+    createGondelComponentProvider<DemoWidgetState>("demoWidgetState");
+
+@Component("DemoWidget")
+export class DemoWidget extends GondelAngularComponent {
+    // import your angular module here
+    AppModule = import("./demo-widget.module")
+        .then(mod => mod.DemoWidgetModule);
+
+    // injectable gondel component reference, see example in next snippet
+    GondelComponentProvider = DemoWidgetComponentRef;
+
+    // will be triggered inside an Angular component
+    public sendMessage(message: string) {
+        alert(message);
+    }
+}
+```
+
+
+##### demo-widget.component.ts <small>(Angular Component)</small>
+
+```ts
+import { Component, Inject } from "@angular/core";
+import { DemoWidgetStateProvider, DemoWidgetComponentRef } from "./demo-widget";
+
+@Component({
+  template: `<button (click)="sayHi()">{{message}}</button>`
+})
+export class DemoWidget {
+    constructor(@Inject(DemoWidgetComponentRef) private component: DemoWidgetState) {}
+
+    sayHi() {
+        this.component.sendMessage('Hello from Angular!');
+    }
+}
+```
+
+
+## Interacting with Angular
+
+*tbd.*
+
+
+## Other Recipes
 
 ### Using the `templateUrl` for Angular components
 

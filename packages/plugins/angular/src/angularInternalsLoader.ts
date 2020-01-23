@@ -29,5 +29,5 @@ export const loadAngularInternals = () => {
     PlatformBrowser,
     PlatformBrowserDynamic,
     Zone
-  };
+  } as const;
 };

@@ -2,7 +2,8 @@
     "extends": "../../../tsconfig.json",
     "compilerOptions": {
       "importHelpers": false,
-      "emitDecoratorMetadata": true
+      "emitDecoratorMetadata": true,
+      "allowSyntheticDefaultImports": true
     },
     "exclude": [
       "src/**/*.test.ts",
