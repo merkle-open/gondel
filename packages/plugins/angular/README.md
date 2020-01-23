@@ -136,11 +136,6 @@ export class DemoWidget {
 
 ##### demo-widget.ts <small>(Gondel Component)</small>
 
-As you may know, Angular is based on the dependency injection pattern. Thus to pass data
-from outside of any Angular application you need to define an injectable. In this case 
-we need to create a new injection token which is then used by the plugin to provide the
-internal data.
-
 ```ts
 import { Component } from "@gondel/core";
 import {
@@ -148,8 +143,7 @@ import {
     createGondelComponentProvider
 } from "@gondel/plugin-angular";
 
-export const DemoWidgetComponentRef =
-    createGondelComponentProvider<DemoWidgetState>("demoWidgetState");
+export const DemoWidgetComponentRef = createGondelComponentProvider<DemoWidget>();
 
 @Component("DemoWidget")
 export class DemoWidget extends GondelAngularComponent {
