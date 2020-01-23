@@ -166,13 +166,14 @@ export class DemoWidget extends GondelAngularComponent {
 
 ```ts
 import { Component, Inject } from "@angular/core";
-import { DemoWidgetStateProvider, DemoWidgetComponentRef } from "./demo-widget";
+import { DemoWidget, DemoWidgetComponentRef } from "./demo-widget";
 
 @Component({
   template: `<button (click)="sayHi()">{{message}}</button>`
 })
 export class DemoWidget {
-    constructor(@Inject(DemoWidgetComponentRef) private component: DemoWidgetState) {}
+
+    constructor(@Inject(DemoWidgetComponentRef) private component: DemoWidget) {}
 
     sayHi() {
         this.component.sendMessage('Hello from Angular!');
@@ -183,7 +184,7 @@ export class DemoWidget {
 
 ## Interacting with Angular
 
-*tbd.*
+*not supported yet, tbd.*
 
 
 ## Other Recipes
