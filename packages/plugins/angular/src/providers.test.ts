@@ -46,7 +46,9 @@ describe("@gondel/plugin-angular", () => {
       const componentRef = createGondelComponentProvider<Fixture>();
       expect(componentRef).toBeDefined();
       expect(componentRef instanceof InjectionToken).toBeTruthy();
-      expect(componentRef.toString()).toEqual("InjectionToken");
+      expect(componentRef.toString()).toEqual(
+        "InjectionToken provides the root gondel component of the current module"
+      );
     });
 
     it("should be injectable", () => {
@@ -57,7 +59,7 @@ describe("@gondel/plugin-angular", () => {
       );
 
       const value = injector.get(componentRef);
-      expect(value._ctx).toBeDefined();
+      expect(value).toBeDefined();
     });
 
     it("should be overridable via child injector", () => {
@@ -72,7 +74,7 @@ describe("@gondel/plugin-angular", () => {
       );
 
       const value = integrationInjector.get(componentRef);
-      expect(value._ctx).toBeDefined();
+      expect(value).toBeDefined();
     });
   });
 });
