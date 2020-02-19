@@ -1,5 +1,5 @@
 [![NPM version][npm-image]][npm-url] 
-[![Build Status][travis-image]][travis-url]
+[![CI](https://github.com/namics/gondel/workflows/CI/badge.svg)](https://github.com/namics/gondel/actions?query=workflow%3ACI)
 [![Size][size-image]][size-url]
 [![License][license-image]][license-url] 
 [![Commitizen friendly][commitizen-image]][commitizen-url] 
