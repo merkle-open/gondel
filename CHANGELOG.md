@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/namics/gondel/compare/v1.1.2...v1.2.0) (2020-02-19)
+
+
+### Features
+
+* **react plugin:** provide a factory function to connect Gondel and React ([c6ac867](https://github.com/namics/gondel/commit/c6ac867ad9841f09d90dda18a9fbb77fb83f6dce))
+
+
+
+
+
 ## [1.1.2](https://github.com/namics/gondel/compare/v1.1.1...v1.1.2) (2020-01-16)
 
 
