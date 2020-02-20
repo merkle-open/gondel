@@ -1,0 +1,21 @@
+{
+  "name": "gondel-plugin-selector-example",
+  "private": true,
+  "version": "1.2.0",
+  "scripts": {
+    "start": "webpack-dev-server"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-decorators": "7.7.4",
+    "@gondel/core": "^1.2.0",
+    "@gondel/plugin-selector": "^1.2.0",
+    "@gondel/plugin-hot": "^1.2.0"
+  },
+  "devDependencies": {
+    "common-config-webpack-plugin": "1.4.0",
+    "html-webpack-plugin": "3.2.0",
+    "webpack": "4.41.4",
+    "webpack-cli": "3.3.10",
+    "webpack-dev-server": "3.10.1"
+  }
+}
