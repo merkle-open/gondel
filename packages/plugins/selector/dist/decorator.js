@@ -1,4 +1,4 @@
-import { areSelectorsHookedIntoCore, injectSelectorPluginIntoCore } from './injector';
+import { areSelectorsHookedIntoCore, injectSelectorPluginIntoCore } from "./injector";
 /**
  * The @selector decorator will lookup the nodes on access including caching (enabled by default)
  */

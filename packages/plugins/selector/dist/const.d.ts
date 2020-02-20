@@ -1,4 +1,4 @@
-import { GondelComponent } from '@gondel/core';
+import { GondelComponent } from "@gondel/core";
 export interface ISelectorBindingOptions {
     cache?: boolean;
 }

@@ -1,4 +1,4 @@
-import { IGondelComponentWithSelectors, ISelectorBindingOptions } from './const';
+import { IGondelComponentWithSelectors, ISelectorBindingOptions } from "./const";
 declare type GondelComponentDecorator<T> = (target: T, propertyKey: string) => void;
 /**
  * The @selector decorator will lookup the nodes on access including caching (enabled by default)

@@ -1,5 +1,5 @@
-import { GondelComponent } from '@gondel/core';
-import { Selector } from './Selector';
+import { GondelComponent } from "@gondel/core";
+import { Selector } from "./Selector";
 /**
  * TODO: describe
  */
