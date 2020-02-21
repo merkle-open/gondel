@@ -21,7 +21,7 @@ describe("GondelDecorators", () => {
   describe("#component - e2e", () => {
     it("should add the component for the default 'g' namespace", () => {
       @Component("Button")
-      class Button extends GondelBaseComponent {}
+      class Button extends GondelBaseComponent<HTMLButtonElement> {}
       const button = createMockElement("g");
       expect(button.constructor).toBe(Button);
     });

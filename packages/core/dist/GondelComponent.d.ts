@@ -1,6 +1,6 @@
-export declare type IGondelComponent = new (context: HTMLElement, componentName: string) => GondelComponent;
+export declare type IGondelComponent<TElement extends HTMLElement = HTMLElement> = new (context: TElement, componentName: string) => GondelComponent<TElement>;
 export declare type StartMethod = ((resolve: Function, reject?: Function) => void) | (() => Promise<any>) | (() => void);
-export interface GondelComponent<TElement = HTMLElement> {
+export interface GondelComponent<TElement extends HTMLElement = HTMLElement> {
     _ctx: TElement;
     _namespace: string;
     _componentName: string;
@@ -9,7 +9,7 @@ export interface GondelComponent<TElement = HTMLElement> {
     stop?(): void;
     sync?(): void;
 }
-export declare class GondelBaseComponent<TElement = HTMLElement> implements GondelComponent<TElement> {
+export declare class GondelBaseComponent<TElement extends HTMLElement = HTMLElement> implements GondelComponent<TElement> {
     constructor(domNode: TElement, componentName: string);
     /**
      * The component context
