@@ -7,8 +7,6 @@ type Props = {
   title: string;
 };
 
-export class ReactApp extends React.Component<Props, {}> {
-  render() {
-    return <AwesomeButton type="primary">{this.props.title}</AwesomeButton>;
-  }
-}
+export const ReactApp = (props: Props) => {
+  return <AwesomeButton type="primary">{props.title}</AwesomeButton>;
+};
