@@ -1,11 +1,8 @@
-import { startComponents } from "@gondel/core";
 import { hot } from "@gondel/plugin-hot";
 
 import "./components/gondel";
 import "./components/gondel-react";
 import "./components/App";
 
-declare const module: any;
+// Hot module replacement is optional
 hot(module);
-
-startComponents();

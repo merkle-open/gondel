@@ -1,5 +1,4 @@
 import { Component, EventListener, GondelBaseComponent, findComponents } from "@gondel/core";
-import React from "react";
 import { GondelReact } from "./gondel-react";
 
 @Component("Gondel")
