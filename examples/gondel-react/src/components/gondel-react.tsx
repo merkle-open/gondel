@@ -1,14 +1,11 @@
 import { Component } from "@gondel/core";
 import { GondelReactComponent } from "@gondel/plugin-react";
 import React from "react";
-import { ReactComponent } from "./App";
+
+const loader = async () => import("./App");
 
 @Component("GondelReact")
-class GondelReact extends GondelReactComponent<{ title: string }> {
-  render() {
-    return <ReactComponent {...this.state} />;
-  }
-
+class GondelReact extends GondelReactComponent.create(loader, "ReactApp") {
   setTitle(newTitle: string) {
     this.setState({ title: newTitle });
   }
