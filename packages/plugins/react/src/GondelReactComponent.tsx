@@ -8,12 +8,10 @@ import { GondelBaseComponent } from "@gondel/core";
 import { createRenderableAppWrapper } from "./AppWrapper";
 import { isPromise, KeysMatching, UnwrapPromise } from "./utils";
 
-export type RenderableReactComponent<State> =
-  | StatelessComponent<State>
-  | ComponentClass<State, any>;
+type RenderableReactComponent<State> = StatelessComponent<State> | ComponentClass<State, any>;
 type StateOfComponent<T> = T extends RenderableReactComponent<infer V> ? V : never;
 
-interface ConstructableGondelReactComponent<State> {
+export interface ConstructableGondelReactComponent<State> {
   new (...args: any[]): GondelReactComponent<State>;
 }
 
