@@ -1,15 +1,21 @@
 import { Component, EventListener, GondelBaseComponent, findComponents } from "@gondel/core";
-import { GondelReact } from "./gondel-react";
+import { GondelReactWidget } from "./gondel-react";
 
 @Component("Gondel")
 class Gondel extends GondelBaseComponent {
+
   @EventListener("click", ".js-button")
   _handleInput() {
-    const inputField = document.getElementsByClassName("js-input")[0] as HTMLInputElement;
+    const gondelReactComponent = findComponents<GondelReactWidget>(
+      this._ctx,
+      "GondelReactWidget"
+    )[0];
+    gondelReactComponent.setTitle(this.getInputValue());
+  }
 
-    const gondelReactComponent = findComponents<GondelReact>(this._ctx)[0];
-
-    gondelReactComponent.setTitle(inputField.value);
+  getInputValue() {
+    const input = this._ctx.querySelector<HTMLInputElement>(".js-input")!;
+    return input.value;
   }
 }
 
