@@ -1,7 +1,7 @@
 {
   "name": "gondel-plugin-data-example",
   "private": true,
-  "version": "1.2.0",
+  "version": "1.2.3",
   "scripts": {
     "start": "webpack-dev-server"
   },
@@ -9,7 +9,7 @@
     "@babel/plugin-proposal-decorators": "7.7.4",
     "@gondel/core": "^1.2.0",
     "@gondel/plugin-data": "^1.2.0",
-    "@gondel/plugin-hot": "^1.2.0"
+    "@gondel/plugin-hot": "^1.2.3"
   },
   "devDependencies": {
     "common-config-webpack-plugin": "1.4.0",

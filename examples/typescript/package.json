@@ -1,13 +1,13 @@
 {
   "name": "gondel-typescript-example",
   "private": true,
-  "version": "1.2.0",
+  "version": "1.2.3",
   "scripts": {
     "start": "webpack-dev-server"
   },
   "dependencies": {
     "@gondel/core": "^1.2.0",
-    "@gondel/plugin-hot": "^1.2.0"
+    "@gondel/plugin-hot": "^1.2.3"
   },
   "devDependencies": {
     "common-config-webpack-plugin": "1.4.0",

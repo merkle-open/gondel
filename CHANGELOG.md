@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.3](https://github.com/namics/gondel/compare/v1.2.2...v1.2.3) (2020-03-09)
+
+
+### Bug Fixes
+
+* **react plugin:** export typescript interface for better ide support ([fa87524](https://github.com/namics/gondel/commit/fa875240eb64d76bdcbb3427d27b10f4323ffc31))
+
+
+
+
+
 ## [1.2.2](https://github.com/namics/gondel/compare/v1.2.1...v1.2.2) (2020-03-09)
 
 
