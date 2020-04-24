@@ -1,5 +1,5 @@
 export { addGondelPluginEventListener } from "./GondelPluginUtils";
-export { getFirstDomNode, startComponents, stopComponents, hasMountedGondelComponent, getComponentByDomNode, getComponentByDomNodeAsync, findComponents } from "./GondelDomUtils";
+export { getFirstDomNode, startComponents, stopComponents, hasMountedGondelComponent, getComponentByDomNode, getComponentByDomNodeAsync, findComponents, } from "./GondelDomUtils";
 export * from "./GondelDecorators";
 export * from "./GondelEventEmitter";
 export * from "./GondelComponent";

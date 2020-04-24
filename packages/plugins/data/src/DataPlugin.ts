@@ -15,7 +15,7 @@ export let areDataBindingsHookedIntoCore = false;
 export function hookDataDecoratorIntoCore() {
   areDataBindingsHookedIntoCore = true;
 
-  addGondelPluginEventListener("Data", "start", function(
+  addGondelPluginEventListener("Data", "start", function (
     gondelComponents: GondelComponent<HTMLElement>[],
     _: any | undefined,
     next: (result: any) => any
@@ -54,7 +54,7 @@ export function hookDataDecoratorIntoCore() {
               }
 
               gondelComponent._ctx.setAttribute(attributeKey, value);
-            }
+            },
           });
           if (initialValue) {
             (gondelComponent as any)[propertyKey] =

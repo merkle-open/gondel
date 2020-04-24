@@ -26,7 +26,7 @@ var AppWrapper = /** @class */ (function (_super) {
             "componentWillUpdate",
             "componentDidUpdate",
             "componentWillUnmount",
-            "componentDidCatch"
+            "componentDidCatch",
         ].forEach(function (reactHook) {
             if (!_this.props[reactHook]) {
                 return;

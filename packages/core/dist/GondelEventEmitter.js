@@ -21,7 +21,7 @@ export function triggerPublicEvent(eventName, gondelComponent, target, eventData
         component: gondelComponent,
         name: gondelComponent._componentName,
         namespace: gondelComponent._namespace,
-        eventData: eventData
+        eventData: eventData,
     };
     return eventTarget.dispatchEvent(event);
 }

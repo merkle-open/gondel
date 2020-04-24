@@ -19,7 +19,7 @@ function getComponentsInEventRegistry(
   namespace: string
 ): GondelComponent[] {
   const selector = Object.keys(eventRegistry)
-    .map(componentName => `[data-${namespace}-name="${componentName}"]`)
+    .map((componentName) => `[data-${namespace}-name="${componentName}"]`)
     .join(",");
   if (!selector) {
     return [];
@@ -45,10 +45,10 @@ function fireViewportChangeEvent(
 ) {
   const components = getComponentsInEventRegistry(eventRegistry, namespace);
   const handlerResults: Array<() => void | undefined> = [];
-  components.forEach(component => {
-    Object.keys(eventRegistry[component._componentName]).forEach(selector => {
+  components.forEach((component) => {
+    Object.keys(eventRegistry[component._componentName]).forEach((selector) => {
       if (selector === "" || viewport === selector) {
-        eventRegistry[component._componentName][selector].forEach(handlerOption => {
+        eventRegistry[component._componentName][selector].forEach((handlerOption) => {
           handlerResults.push(
             (component as any)[handlerOption.handlerName].call(component, { viewport })
           );
@@ -56,7 +56,7 @@ function fireViewportChangeEvent(
       }
     });
   });
-  handlerResults.forEach(handlerResults => () => {
+  handlerResults.forEach((handlerResults) => () => {
     if (typeof handlerResults === "function") {
       handlerResults();
     }
@@ -76,7 +76,7 @@ export function getCurrentViewport() {
 function convertBreakpointsToEm<T extends { [key: string]: number }>(breakpointsInPx: T): T {
   const breakpointsInEm: { [key: string]: number } = {};
   const breakpointNames = Object.keys(breakpointsInPx);
-  breakpointNames.forEach(breakpointName => {
+  breakpointNames.forEach((breakpointName) => {
     breakpointsInEm[breakpointName] = px2em(breakpointsInPx[breakpointName]);
   });
   return breakpointsInEm as T;
@@ -139,7 +139,7 @@ function setupViewportChangeEvent(
   namespace: string
 ) {
   for (const viewport of mediaQueries) {
-    matchMedia(viewport.query).addListener(mediaQueryList => {
+    matchMedia(viewport.query).addListener((mediaQueryList) => {
       if (mediaQueryList.matches) {
         fireViewportChangeEvent(viewport.name, eventRegistry, namespace);
       }
@@ -159,7 +159,7 @@ function setupCurrentViewportHelper(mediaQueries: Array<{ name: string; query: s
       currentViewport = viewport.name;
     }
     // Watch for media query changes
-    viewportMediaQueryList.addListener(mediaQueryList => {
+    viewportMediaQueryList.addListener((mediaQueryList) => {
       if (mediaQueryList.matches) {
         currentViewport = viewport.name;
       }

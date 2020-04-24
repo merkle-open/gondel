@@ -142,7 +142,7 @@
             componentInformation = components.map(function (component) {
                 var size = component.__resizeSize || {
                     width: 0,
-                    height: 0
+                    height: 0,
                 };
                 var gondelComponentHandlers = eventRegistry[component._componentName];
                 return {
@@ -152,7 +152,7 @@
                         return gondelComponentHandlers[selector].map(function (handlerOption) { return component[handlerOption.handlerName]; });
                     }),
                     width: size.width,
-                    height: size.height
+                    height: size.height,
                 };
             });
             fireResizeEvent(event);
@@ -183,7 +183,7 @@
                 var node = _a.node;
                 return ({
                     width: node.clientWidth,
-                    height: node.clientHeight
+                    height: node.clientHeight,
                 });
             });
             var handlerResults = [];
@@ -271,7 +271,7 @@
                 components.forEach(function (component) {
                     component.__resizeSize = {
                         width: component._ctx.clientWidth,
-                        height: component._ctx.clientHeight
+                        height: component._ctx.clientHeight,
                     };
                 });
             });

@@ -10,8 +10,8 @@ import { internalGondelAsyncRefAttribute, internalGondelRefAttribute } from "./G
 import { triggerPublicEvent } from "./GondelEventEmitter";
 import { fireGondelPluginEvent } from "./GondelPluginUtils";
 const noop = () => {};
-const Deferred = (function() {
-  this.promise = new Promise(resolve => {
+const Deferred = (function () {
+  this.promise = new Promise((resolve) => {
     this.resolve = resolve;
   });
 } as any) as { new (): { promise: Promise<any>; resolve: () => void } };
@@ -33,12 +33,12 @@ export function startComponentsFromRegistry(
     gondelDomNodeList.push(domContext);
   }
   // Remove already booted nodes
-  const pristineGondelDomNodes: Array<HTMLElement> = gondelDomNodeList.filter(gondelDomNode =>
+  const pristineGondelDomNodes: Array<HTMLElement> = gondelDomNodeList.filter((gondelDomNode) =>
     isPristineGondelDomNode(gondelDomNode, namespace)
   );
   const bootingDeferred = new Deferred();
   // Mark all nodes as booting
-  pristineGondelDomNodes.forEach(gondelDomNode => {
+  pristineGondelDomNodes.forEach((gondelDomNode) => {
     attachGondelBootingFlag(gondelDomNode, bootingDeferred.promise, namespace);
   });
 
@@ -47,15 +47,15 @@ export function startComponentsFromRegistry(
     "boot",
     pristineGondelDomNodes,
     { namespace },
-    pristineGondelDomNodes => {
-      return pristineGondelDomNodes.map(gondelDomNode =>
+    (pristineGondelDomNodes) => {
+      return pristineGondelDomNodes.map((gondelDomNode) =>
         constructComponent(gondelDomNode, gondelComponentRegistry, namespace)
       );
     }
   );
   // Get all component names
   const newComponentNames = getNewComponents(gondelComponents, gondelComponentRegistry);
-  newComponentNames.forEach(componentName =>
+  newComponentNames.forEach((componentName) =>
     gondelComponentRegistry.setActiveState(componentName, true)
   );
   // Start all components
@@ -63,14 +63,14 @@ export function startComponentsFromRegistry(
     "start",
     gondelComponents,
     { newComponentNames, namespace, gondelComponentRegistry },
-    gondelComponents => {
+    (gondelComponents) => {
       // Wait for async started components
       return Promise.all(gondelComponents.map(startConstructedComponent));
     }
   )
     // Let all plugins know that the components are now all ready to use
     .then(() => {
-      gondelComponents.forEach(gondelComponent => {
+      gondelComponents.forEach((gondelComponent) => {
         if (gondelComponent.sync) {
           gondelComponent.sync();
         }
@@ -178,7 +178,7 @@ export function stopStartedComponent(
  */
 function getNewComponents(components: Array<GondelComponent>, registry: GondelComponentRegistry) {
   const componentNameHelper: { [key: string]: boolean } = {};
-  components.forEach(component => (componentNameHelper[component._componentName] = true));
+  components.forEach((component) => (componentNameHelper[component._componentName] = true));
   const componentNames = Object.keys(componentNameHelper);
-  return componentNames.filter(componentName => !registry._activeComponents[componentName]);
+  return componentNames.filter((componentName) => !registry._activeComponents[componentName]);
 }

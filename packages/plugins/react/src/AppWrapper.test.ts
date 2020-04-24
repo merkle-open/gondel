@@ -19,14 +19,14 @@ describe("@gondel/plugin-react", () => {
     it("should render with empty configuration", () => {
       expect(() => {
         new AppWrapper<undefined>({
-          config: undefined
+          config: undefined,
         });
       }).not.toThrow();
     });
 
     it("should set the initial state from config", () => {
       const wrapper = new AppWrapper<{ test: number }>({
-        config: { test: 10 }
+        config: { test: 10 },
       });
 
       expect(wrapper.state.test).toEqual(10);
@@ -41,13 +41,13 @@ describe("@gondel/plugin-react", () => {
         "componentWillUpdate" as const,
         "componentDidUpdate" as const,
         "componentWillUnmount" as const,
-        "componentDidCatch" as const
+        "componentDidCatch" as const,
       ];
 
       const mockLifecycle = lifecycles.reduce(
         (prev, curr) => ({
           ...prev,
-          [curr]: jest.fn()
+          [curr]: jest.fn(),
         }),
         {} as Record<ArrayElement<typeof lifecycles>, () => any>
       );
@@ -55,10 +55,10 @@ describe("@gondel/plugin-react", () => {
       const Wrapper = new AppWrapper<HelloProps>({
         ...mockLifecycle, // add react lifecycle hooks
         config: { text: "World" },
-        children: props => createElement(HelloFixture, props, null)
+        children: (props) => createElement(HelloFixture, props, null),
       });
 
-      lifecycles.forEach(lifecycle => {
+      lifecycles.forEach((lifecycle) => {
         expect(Wrapper[lifecycle]).toBeDefined();
       });
     });
@@ -67,7 +67,7 @@ describe("@gondel/plugin-react", () => {
       const root = document.createElement("div");
       const Wrapper = new AppWrapper<HelloProps>({
         config: { text: "World" },
-        children: props => createElement(HelloFixture, props, null)
+        children: (props) => createElement(HelloFixture, props, null),
       });
 
       expect(Wrapper.render()).toBeDefined();
@@ -77,9 +77,9 @@ describe("@gondel/plugin-react", () => {
         key: null,
         props: {
           children: null,
-          text: "World"
+          text: "World",
         },
-        ref: null
+        ref: null,
       });
 
       class App extends Component<HelloProps> {
@@ -89,8 +89,8 @@ describe("@gondel/plugin-react", () => {
             {
               children: (props: HelloProps) => createElement(HelloFixture, props, null),
               config: {
-                text: "World"
-              }
+                text: "World",
+              },
             },
             null
           );
@@ -108,7 +108,7 @@ describe("@gondel/plugin-react", () => {
         AppWrapper,
         {
           config: { text: "initial" },
-          children: (props: HelloProps) => createElement(HelloFixture, props, null)
+          children: (props: HelloProps) => createElement(HelloFixture, props, null),
         },
         null
       );
@@ -124,18 +124,18 @@ describe("@gondel/plugin-react", () => {
 
     it("enables onHasState bindings", () => {
       const onHasState = jest.fn<AppWrapperProps<HelloProps>["onHasState"], any>(
-        stateFn => stateFn
+        (stateFn) => stateFn
       );
 
       new AppWrapper<HelloProps>({
         onHasState,
-        config: { text: "config" }
+        config: { text: "config" },
       });
 
       expect(onHasState.mockReturnValue).toBeDefined();
       expect(typeof onHasState.mockReturnValue).toEqual("function");
       expect(() => {
-        onHasState.mockReturnValue(setState => {
+        onHasState.mockReturnValue((setState) => {
           setState({ text: "mock" });
         });
       }).not.toThrow();

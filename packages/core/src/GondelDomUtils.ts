@@ -51,7 +51,7 @@ export function stopComponents(domContext?: ArrayLikeHtmlElement, namespace: str
   if (domContext && hasMountedGondelComponent(domContext)) {
     components.unshift(getComponentByDomNode(domContext));
   }
-  components.forEach(component => component.stop!());
+  components.forEach((component) => component.stop!());
 }
 
 /**

@@ -3,5 +3,5 @@ export const deserialize = (value: string): number => parseFloat(value);
 
 export default {
   serialize,
-  deserialize
+  deserialize,
 };

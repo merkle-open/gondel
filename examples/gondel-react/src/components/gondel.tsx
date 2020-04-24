@@ -3,7 +3,6 @@ import { GondelReactWidget } from "./gondel-react";
 
 @Component("Gondel")
 class Gondel extends GondelBaseComponent {
-
   @EventListener("click", ".js-button")
   _handleInput() {
     const gondelReactComponent = findComponents<GondelReactWidget>(

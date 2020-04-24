@@ -13,7 +13,7 @@ function getComponentsInEventRegistry(
   namespace: string
 ): Array<GondelComponent> {
   const selector = Object.keys(eventRegistry)
-    .map(componentName => `[data-${namespace}-name="${componentName}"]`)
+    .map((componentName) => `[data-${namespace}-name="${componentName}"]`)
     .join(",");
   if (!selector) {
     return [];
@@ -61,22 +61,22 @@ const customEvents: {
       // The resize listener is fired very often
       // for performance optimisations we search and store
       // all components during the initial start event
-      componentInformation = components.map(component => {
+      componentInformation = components.map((component) => {
         const size = (component as any).__resizeSize || {
           width: 0,
-          height: 0
+          height: 0,
         };
         const gondelComponentHandlers = eventRegistry[component._componentName];
         return {
           component: component,
           node: component._ctx,
-          selectors: Object.keys(gondelComponentHandlers).map(selector =>
+          selectors: Object.keys(gondelComponentHandlers).map((selector) =>
             gondelComponentHandlers[selector].map(
-              handlerOption => (component as any)[handlerOption.handlerName]
+              (handlerOption) => (component as any)[handlerOption.handlerName]
             )
           ),
           width: size.width,
-          height: size.height
+          height: size.height,
         };
       });
       fireResizeEvent(event);
@@ -105,7 +105,7 @@ const customEvents: {
       }
       const newSizes = componentInformation.map(({ node }) => ({
         width: node.clientWidth,
-        height: node.clientHeight
+        height: node.clientHeight,
       }));
       const handlerResults: Array<() => void | undefined> = [];
       componentInformation.forEach((componentInformation, i) => {
@@ -124,13 +124,13 @@ const customEvents: {
         (componentInformation.component as any).__resizeSize = newSize;
         componentInformation.width = newSize.width;
         componentInformation.height = newSize.height;
-        componentInformation.selectors.forEach(selector =>
-          selector.forEach(handler =>
+        componentInformation.selectors.forEach((selector) =>
+          selector.forEach((handler) =>
             handlerResults.push(handler.call(componentInformation.component, event, newSize))
           )
         );
       });
-      handlerResults.forEach(handlerResult => {
+      handlerResults.forEach((handlerResult) => {
         if (typeof handlerResult === "function") {
           handlerResult();
         }
@@ -155,16 +155,16 @@ const customEvents: {
    * For a full list of possible keys see:
    * https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values
    */
-  key: function(eventRegistry: INamespacedEventHandlerRegistry, namespace: string) {
-    window.addEventListener("keydown", function(event) {
+  key: function (eventRegistry: INamespacedEventHandlerRegistry, namespace: string) {
+    window.addEventListener("keydown", function (event) {
       const components = getComponentsInEventRegistry(eventRegistry, namespace);
       const handlerResults: Array<() => void | undefined> = [];
-      components.forEach(component => {
+      components.forEach((component) => {
         const gondelComponentHandlers = Object.keys(
           eventRegistry[component._componentName]
-        ).forEach(selector => {
+        ).forEach((selector) => {
           if (selector === "" || event.key === selector) {
-            eventRegistry[component._componentName][selector].forEach(handlerOption => {
+            eventRegistry[component._componentName][selector].forEach((handlerOption) => {
               handlerResults.push(
                 (component as any)[handlerOption.handlerName].call(component, event)
               );
@@ -172,7 +172,7 @@ const customEvents: {
           }
         });
       });
-      handlerResults.forEach(handlerResult => {
+      handlerResults.forEach((handlerResult) => {
         if (typeof handlerResult === "function") {
           handlerResult();
         }
@@ -184,8 +184,8 @@ const customEvents: {
    *
    * This will allow components to listen for mouse swipe events
    */
-  "swipe-left": function(eventRegistry: INamespacedEventHandlerRegistry, namespace: string) {
-    document.documentElement.addEventListener("mousedown", function(mouseDownEvent) {
+  "swipe-left": function (eventRegistry: INamespacedEventHandlerRegistry, namespace: string) {
+    document.documentElement.addEventListener("mousedown", function (mouseDownEvent) {
       const handlers = getHandlers(
         `data-${namespace}-name`,
         eventRegistry,
@@ -232,8 +232,8 @@ const customEvents: {
    *
    * This will allow components to listen for mouse swipe events
    */
-  "swipe-right": function(eventRegistry: INamespacedEventHandlerRegistry, namespace: string) {
-    document.documentElement.addEventListener("mousedown", function(mouseDownEvent) {
+  "swipe-right": function (eventRegistry: INamespacedEventHandlerRegistry, namespace: string) {
+    document.documentElement.addEventListener("mousedown", function (mouseDownEvent) {
       const handlers = getHandlers(
         `data-${namespace}-name`,
         eventRegistry,
@@ -274,7 +274,7 @@ const customEvents: {
       document.documentElement.addEventListener("mousemove", handleMouseMove);
       document.documentElement.addEventListener("mouseup", handleMouseUp);
     });
-  }
+  },
 };
 
 export function initEventPlugin() {
@@ -298,10 +298,10 @@ export function initEventPlugin() {
     resolve
   ) {
     setTimeout(() => {
-      components.forEach(component => {
+      components.forEach((component) => {
         (component as any).__resizeSize = {
           width: component._ctx.clientWidth,
-          height: component._ctx.clientHeight
+          height: component._ctx.clientHeight,
         };
       });
     });

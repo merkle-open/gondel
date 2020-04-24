@@ -10,7 +10,7 @@ import { fireGondelPluginEvent } from "./GondelPluginUtils";
  */
 var eventNameMapping = {
     focus: "focusin",
-    blur: "focusout"
+    blur: "focusout",
 };
 // Polyfill for element.prototype.matches
 var matchesCssSelector = function (element, selector) {
@@ -63,7 +63,7 @@ export function getHandlers(attributeName, eventHandlerRegistry, target) {
                     index: index,
                     ctx: parents[index],
                     target: parents[index],
-                    handlerOptions: handlers[selectorName]
+                    handlerOptions: handlers[selectorName],
                 });
             }
             // Iterate backwards over the children of the component to find an element
@@ -74,7 +74,7 @@ export function getHandlers(attributeName, eventHandlerRegistry, target) {
                         index: i,
                         ctx: parents[index],
                         target: parents[i],
-                        handlerOptions: handlers[selectorName]
+                        handlerOptions: handlers[selectorName],
                     });
                 }
             }
@@ -131,7 +131,7 @@ export function executeHandlers(handlers, event, namespace) {
             // See https://stackoverflow.com/questions/52057726/what-is-the-best-way-to-alter-a-native-browser-event
             Object.defineProperty(event, "currentTarget", {
                 get: function () { return handlerObject.target; },
-                configurable: true
+                configurable: true,
             });
             eventObjectRequiresCleanup = true;
             for (var j = 0; j < handlerOptions.length && !event.cancelBubble; j++) {
@@ -175,7 +175,7 @@ export function addRootEventListener(namespace, domEventName, gondelComponentNam
         fireGondelPluginEvent("registerEvent", true, {
             eventName: domEventName,
             namespace: namespace,
-            eventRegistry: namespacedDomEventRegistry[domEventName]
+            eventRegistry: namespacedDomEventRegistry[domEventName],
         }, function (isNativeEvent) {
             // If no plugin registered the event
             // register a native browser event

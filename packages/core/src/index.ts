@@ -10,7 +10,7 @@ export {
   hasMountedGondelComponent,
   getComponentByDomNode,
   getComponentByDomNodeAsync,
-  findComponents
+  findComponents,
 } from "./GondelDomUtils";
 
 // Export https://github.com/tc39/proposal-decorators decorators e.g. @EventListener or @Component

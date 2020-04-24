@@ -4,7 +4,7 @@ import {
   startComponents,
   hasMountedGondelComponent,
   getComponentByDomNode,
-  stopComponents
+  stopComponents,
 } from "@gondel/core";
 
 /**

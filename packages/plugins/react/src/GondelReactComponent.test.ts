@@ -67,7 +67,7 @@ describe("@gondel/plugin-react", () => {
         component.setState({ a: 10, b: "test" });
         expect(component.state).toEqual({
           a: 10,
-          b: "test"
+          b: "test",
         });
       });
 
@@ -121,7 +121,7 @@ describe("@gondel/plugin-react", () => {
         const root = document.createElement("div");
         root.innerHTML = `<div data-g-name="Greeter"><script type="text/json">{ "title": "Hello World"}</script></div>`;
 
-        await new Promise(resolve => {
+        await new Promise((resolve) => {
           function TestTitleSpan(props: { title: string }) {
             return createElement("span", null, props.title);
           }
@@ -145,7 +145,7 @@ describe("@gondel/plugin-react", () => {
         const root = document.createElement("div");
         root.innerHTML = `<div data-g-name="Greeter"><script type="text/json">{ "title": "Hello World"}</script></div>`;
 
-        await new Promise(resolve => {
+        await new Promise((resolve) => {
           function TestTitleSpan(props: { title: string }) {
             return createElement("span", null, props.title);
           }
@@ -168,7 +168,7 @@ describe("@gondel/plugin-react", () => {
         const root = document.createElement("div");
         root.innerHTML = `<div data-g-name="Greeter"><script type="text/json">{ "title": "Hello World"}</script></div>`;
 
-        await new Promise(resolve => {
+        await new Promise((resolve) => {
           function TestTitleSpan(props: { title: string }) {
             return createElement("span", null, props.title);
           }
@@ -192,7 +192,7 @@ describe("@gondel/plugin-react", () => {
         root.innerHTML = `<div data-g-name="Greeter"></div>`;
         const hooks: string[] = [];
 
-        await new Promise(resolve => {
+        await new Promise((resolve) => {
           const loader = () => () => createElement("span", null, "Hello World");
           const GondelReactLoaderComponent = createGondelReactLoader(loader);
           @Component("Greeter")
@@ -218,7 +218,7 @@ describe("@gondel/plugin-react", () => {
         const root = document.createElement("div");
         root.innerHTML = `<div data-g-name="Greeter"></div>`;
 
-        await new Promise(resolve => {
+        await new Promise((resolve) => {
           function TestTitleSpan(props: { title: string }) {
             return createElement("span", null, props.title);
           }
@@ -227,10 +227,10 @@ describe("@gondel/plugin-react", () => {
           @Component("Greeter")
           class Greeter extends GondelReactLoaderComponent {
             start() {
-              return new Promise(resolve => {
+              return new Promise((resolve) => {
                 setTimeout(() => {
                   this.setState({
-                    title: "Lazy loaded data"
+                    title: "Lazy loaded data",
                   });
                   resolve();
                 });
@@ -253,7 +253,7 @@ describe("@gondel/plugin-react", () => {
         const root = document.createElement("div");
         root.innerHTML = `<div data-g-name="Greeter"></div>`;
 
-        await new Promise(resolve => {
+        await new Promise((resolve) => {
           function TestTitleSpan(props: { title: string }) {
             return createElement("span", null, props.title);
           }
@@ -264,7 +264,7 @@ describe("@gondel/plugin-react", () => {
             start(resolve: () => void) {
               setTimeout(() => {
                 this.setState({
-                  title: "Lazy loaded data"
+                  title: "Lazy loaded data",
                 });
                 resolve();
               });
@@ -285,7 +285,7 @@ describe("@gondel/plugin-react", () => {
       it("should rerender once setState is called", async () => {
         const root = document.createElement("div");
         root.innerHTML = `<div data-g-name="Greeter"></div>`;
-        await new Promise(resolve => {
+        await new Promise((resolve) => {
           function TestTitleSpan(props: { title: string }) {
             return createElement("span", null, props.title || "");
           }

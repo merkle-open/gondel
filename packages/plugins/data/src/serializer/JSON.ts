@@ -3,5 +3,5 @@ export const deserialize = <T extends any = any>(value: string): T => JSON.parse
 
 export default {
   serialize,
-  deserialize
+  deserialize,
 };

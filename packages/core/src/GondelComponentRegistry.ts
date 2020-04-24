@@ -20,7 +20,7 @@ export const enum RegistryBootMode {
   /**
    * The registry will start once the dom was load
    */
-  onDomReady
+  onDomReady,
 }
 
 export class GondelComponentRegistry {
@@ -100,9 +100,9 @@ export function registerComponent() {
     {
       componentName,
       namespace,
-      gondelComponentRegistry
+      gondelComponentRegistry,
     },
-    function(component) {
+    function (component) {
       gondelComponentRegistry.registerComponent(componentName, component);
     }
   );

@@ -2,7 +2,7 @@ import {
   startComponents,
   getComponentByDomNode,
   getComponentByDomNodeAsync,
-  Component
+  Component,
 } from "./index";
 
 import { GondelBaseComponent, IGondelComponent } from "./GondelComponent";
@@ -94,7 +94,7 @@ describe("GondelComponentStarter", () => {
       class Button extends GondelBaseComponent {
         _wasStarted: boolean;
         start() {
-          return new Promise(resolve => {
+          return new Promise((resolve) => {
             setTimeout(() => {
               this._wasStarted = true;
               resolve();
@@ -203,7 +203,7 @@ describe("GondelComponentStarter", () => {
       delete (document as any).readyState;
     });
 
-    it("should start the components once the page was load", done => {
+    it("should start the components once the page was load", (done) => {
       @Component("Button", "autostart-1")
       class Button extends GondelBaseComponent {}
       const buttonElement = createMockElement("autostart-1");
@@ -221,7 +221,7 @@ describe("GondelComponentStarter", () => {
       });
     });
 
-    it("should not start the components if the auto start is disabled", done => {
+    it("should not start the components if the auto start is disabled", (done) => {
       disableAutoStart("autostart-2");
       @Component("Button", "autostart-2")
       class Button extends GondelBaseComponent {}

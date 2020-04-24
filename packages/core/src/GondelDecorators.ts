@@ -7,7 +7,7 @@ import { addGondelPluginEventListener } from "./GondelPluginUtils";
 import { registerComponent } from "./index";
 
 export function Component(componentName: string, namespace?: string) {
-  return function(constructor: IGondelComponent) {
+  return function (constructor: IGondelComponent) {
     registerComponent(componentName, namespace, constructor);
   };
 }
@@ -22,7 +22,7 @@ type EventOption = [
 ];
 
 function hookEventDecoratorInCore() {
-  addGondelPluginEventListener("GondelDecorators", "register", function(
+  addGondelPluginEventListener("GondelDecorators", "register", function (
     component,
     { componentName, namespace, gondelComponentRegistry },
     next
@@ -38,7 +38,7 @@ function hookEventDecoratorInCore() {
     const componentEventOptions: Array<EventOption> =
       (component.prototype && component.prototype.__events) || component.__events;
     if (componentEventOptions) {
-      componentEventOptions.forEach(eventOptions => {
+      componentEventOptions.forEach((eventOptions) => {
         addRootEventListener(
           namespace,
           /* event name: */ eventOptions[0],
@@ -50,7 +50,7 @@ function hookEventDecoratorInCore() {
     }
     next(component);
   });
-  addGondelPluginEventListener("GondelDecorators", "unregister", function(
+  addGondelPluginEventListener("GondelDecorators", "unregister", function (
     component,
     { componentName, namespace },
     next
@@ -58,12 +58,12 @@ function hookEventDecoratorInCore() {
     removeRootEventListernerForComponent(namespace, componentName);
     next(component);
   });
-  addGondelPluginEventListener("GondelDecorators", "start", function(
+  addGondelPluginEventListener("GondelDecorators", "start", function (
     gondelComponents,
     {
       newComponentNames,
       gondelComponentRegistry,
-      namespace
+      namespace,
     }: {
       newComponentNames: Array<string>;
       gondelComponentRegistry: GondelComponentRegistry;
@@ -71,7 +71,7 @@ function hookEventDecoratorInCore() {
     },
     next
   ) {
-    newComponentNames.forEach(componentName => {
+    newComponentNames.forEach((componentName) => {
       const gondelComponent = gondelComponentRegistry.getComponent(componentName);
       // The decorator will store the event information in two different places.
       // For ES6 classes it is using __events
@@ -99,7 +99,7 @@ function hookEventDecoratorInCore() {
  * The @EventListener decorator will add all event names to a static variable
  */
 export function EventListener(eventName: string, selector?: string | object) {
-  return function<T extends { __events?: Array<EventOption> } & GondelComponent>(
+  return function <T extends { __events?: Array<EventOption> } & GondelComponent>(
     target: T,
     handler: string
   ) {

@@ -36,7 +36,7 @@
                                 value = serializer.serialize(value);
                             }
                             gondelComponent._ctx.setAttribute(attributeKey, value);
-                        }
+                        },
                     });
                     if (initialValue) {
                         gondelComponent[propertyKey] =
@@ -101,21 +101,21 @@
     var deserialize = function (value) { return JSON.parse(value); };
     var _JSON = {
         serialize: serialize,
-        deserialize: deserialize
+        deserialize: deserialize,
     };
 
     var serialize$1 = function (value) { return "" + value; };
     var deserialize$1 = function (value) { return value === "true"; };
     var _Boolean = {
         serialize: serialize$1,
-        deserialize: deserialize$1
+        deserialize: deserialize$1,
     };
 
     var serialize$2 = function (value) { return "" + value; };
     var deserialize$2 = function (value) { return parseFloat(value); };
     var _Number = {
         serialize: serialize$2,
-        deserialize: deserialize$2
+        deserialize: deserialize$2,
     };
 
     exports.BooleanSerializer = _Boolean;

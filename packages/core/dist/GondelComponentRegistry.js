@@ -58,7 +58,7 @@ export function registerComponent() {
     fireGondelPluginEvent("register", component, {
         componentName: componentName,
         namespace: namespace,
-        gondelComponentRegistry: gondelComponentRegistry
+        gondelComponentRegistry: gondelComponentRegistry,
     }, function (component) {
         gondelComponentRegistry.registerComponent(componentName, component);
     });

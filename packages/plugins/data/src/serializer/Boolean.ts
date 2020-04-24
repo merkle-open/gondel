@@ -3,5 +3,5 @@ export const deserialize = (value: string): boolean => value === "true";
 
 export default {
   serialize,
-  deserialize
+  deserialize,
 };

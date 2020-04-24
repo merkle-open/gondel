@@ -1,16 +1,16 @@
 import { __awaiter, __decorate, __extends, __generator, __metadata } from "tslib";
-import { GondelBaseComponent, startComponents, stopComponents, getComponentByDomNode, Component, EventListener, disableAutoStart } from "@gondel/core";
+import { GondelBaseComponent, startComponents, stopComponents, getComponentByDomNode, Component, EventListener, disableAutoStart, } from "@gondel/core";
 import { initResizePlugin, WINDOW_RESIZED_EVENT, COMPONENT_RESIZED_EVENT } from "./index";
 // mock clientWidth and clientHeight, see https://github.com/jsdom/jsdom/issues/2342
 Object.defineProperty(window.HTMLElement.prototype, "clientWidth", {
     get: function () {
         return this._jsdomMockClientWidth || 0;
-    }
+    },
 });
 Object.defineProperty(window.HTMLElement.prototype, "clientHeight", {
     get: function () {
         return this._jsdomMockClientHeight || 0;
-    }
+    },
 });
 function setMockClientWidthAndHeight(component, width, height) {
     component._jsdomMockClientWidth = width;

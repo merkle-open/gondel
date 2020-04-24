@@ -12,7 +12,7 @@ import { fireGondelPluginEvent } from "./GondelPluginUtils";
  */
 const eventNameMapping = {
   focus: "focusin",
-  blur: "focusout"
+  blur: "focusout",
 };
 
 export type IEventHandlerRegistry = {
@@ -108,7 +108,7 @@ export function getHandlers(
           index,
           ctx: parents[index],
           target: parents[index],
-          handlerOptions: handlers[selectorName]
+          handlerOptions: handlers[selectorName],
         });
       }
       // Iterate backwards over the children of the component to find an element
@@ -119,7 +119,7 @@ export function getHandlers(
             index: i,
             ctx: parents[index],
             target: parents[i],
-            handlerOptions: handlers[selectorName]
+            handlerOptions: handlers[selectorName],
           });
         }
       }
@@ -191,7 +191,7 @@ export function executeHandlers(
       // See https://stackoverflow.com/questions/52057726/what-is-the-best-way-to-alter-a-native-browser-event
       Object.defineProperty(event, "currentTarget", {
         get: () => handlerObject.target,
-        configurable: true
+        configurable: true,
       });
       eventObjectRequiresCleanup = true;
       for (let j = 0; j < handlerOptions.length && !event.cancelBubble; j++) {
@@ -206,7 +206,7 @@ export function executeHandlers(
     }
   }
   // Execute all callbacks to allow grouping write events
-  results.forEach(result => {
+  results.forEach((result) => {
     result();
   });
   // Cleanup the event object
@@ -254,9 +254,9 @@ export function addRootEventListener(
       {
         eventName: domEventName,
         namespace,
-        eventRegistry: namespacedDomEventRegistry[domEventName]
+        eventRegistry: namespacedDomEventRegistry[domEventName],
       },
-      function(isNativeEvent) {
+      function (isNativeEvent) {
         // If no plugin registered the event
         // register a native browser event
         if (isNativeEvent) {
@@ -299,7 +299,7 @@ export function removeRootEventListener(
     namespacedDomEventRegistry[domEventName][gondelComponentName][
       selectorKey
     ] = namespacedDomEventRegistry[domEventName][gondelComponentName][selectorKey].filter(
-      handlerOption => {
+      (handlerOption) => {
         return handlerOption.handlerName !== handlerName || handlerName === undefined;
       }
     );

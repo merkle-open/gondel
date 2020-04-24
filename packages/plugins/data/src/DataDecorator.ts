@@ -2,7 +2,7 @@ import { GondelComponent } from "@gondel/core";
 import {
   areDataBindingsHookedIntoCore,
   hookDataDecoratorIntoCore,
-  DataBindingConfig
+  DataBindingConfig,
 } from "./DataPlugin";
 
 export interface ISerializer<T extends any = any> {
@@ -37,7 +37,7 @@ export function data<T extends GondelComponentWithData>(
     const customAttributeKey = targetOrAttributeKey;
     const serializer = propertyKeyOrSerializer;
 
-    return function<T extends GondelComponentWithData>(target: T, propertyKey: string): void {
+    return function <T extends GondelComponentWithData>(target: T, propertyKey: string): void {
       if (!areDataBindingsHookedIntoCore) {
         // prevent multiple hook listeners
         hookDataDecoratorIntoCore();

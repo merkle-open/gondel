@@ -2,7 +2,7 @@ import {
   startComponents,
   getComponentByDomNode,
   Component,
-  GondelBaseComponent
+  GondelBaseComponent,
 } from "@gondel/core";
 import { data, ISerializer } from "./DataDecorator";
 import JSONSerializer from "./serializer/JSON";
@@ -136,7 +136,7 @@ describe("@gondel/plugin-data", () => {
         setNewId(id: number) {
           this.config = {
             hello: this.config.hello,
-            id
+            id,
           };
         }
 
@@ -168,7 +168,7 @@ describe("@gondel/plugin-data", () => {
           let dec = decipher.update(value, "hex", "utf8");
           dec += decipher.final("utf8");
           return dec;
-        }
+        },
       };
 
       @Component("Button", "g")

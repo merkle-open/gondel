@@ -11,7 +11,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { createElement } from "react";
+import { createElement, } from "react";
 import { GondelBaseComponent } from "@gondel/core";
 import { createRenderableAppWrapper } from "./AppWrapper";
 import { isPromise } from "./utils";
@@ -101,7 +101,7 @@ var GondelReactComponent = /** @class */ (function (_super) {
                         componentWillUpdate: _this.componentWillUpdate && _this.componentWillUpdate.bind(_this),
                         componentDidUpdate: _this.componentDidUpdate && _this.componentDidUpdate.bind(_this),
                         componentDidCatch: _this.componentDidCatch && _this.componentDidCatch.bind(_this),
-                        config: _this.state
+                        config: _this.state,
                     }), _this._ctx);
             });
             return renderAppPromise;

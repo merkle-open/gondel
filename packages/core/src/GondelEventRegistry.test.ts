@@ -3,14 +3,14 @@ import {
   addRootEventListener,
   getEventRegistry,
   removeRootEventListener,
-  removeRootEventListernerForComponent
+  removeRootEventListernerForComponent,
 } from "./GondelEventRegistry";
 import {
   getComponentByDomNode,
   registerComponent,
   startComponents,
   stopComponents,
-  triggerPublicEvent
+  triggerPublicEvent,
 } from "./index";
 
 describe("GondelEventRegistry", () => {
@@ -280,7 +280,7 @@ describe("GondelEventRegistry", () => {
       expect(buttonComponent.eventHistory).toEqual([
         "_handleAnotherEvent",
         "_handleEvent",
-        "_handleAnotherEventPostHandler"
+        "_handleAnotherEventPostHandler",
       ]);
     });
   });

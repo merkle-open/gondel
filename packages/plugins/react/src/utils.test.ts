@@ -4,7 +4,7 @@ describe("@gondel/plugin-react utils", () => {
   describe("isPromise", () => {
     it("should recognize promises", () => {
       const asyncFunc = async () => true;
-      const promiseFunc = () => new Promise(r => r());
+      const promiseFunc = () => new Promise((r) => r());
       const resolveFunc = () => Promise.resolve();
 
       expect(isPromise(asyncFunc())).toBeTruthy();

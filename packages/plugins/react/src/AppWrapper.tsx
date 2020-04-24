@@ -20,13 +20,13 @@ export class AppWrapper<TConfig> extends Component<Props<TConfig>, TConfig> {
       "componentWillUpdate",
       "componentDidUpdate",
       "componentWillUnmount",
-      "componentDidCatch"
-    ] as const).forEach(reactHook => {
+      "componentDidCatch",
+    ] as const).forEach((reactHook) => {
       if (!(this.props as any)[reactHook]) {
         return;
       }
 
-      (this as any)[reactHook] = function() {
+      (this as any)[reactHook] = function () {
         return this.props[reactHook].apply(this, arguments);
       };
     });

@@ -30,7 +30,7 @@ export function hookDataDecoratorIntoCore() {
                             value = serializer.serialize(value);
                         }
                         gondelComponent._ctx.setAttribute(attributeKey, value);
-                    }
+                    },
                 });
                 if (initialValue) {
                     gondelComponent[propertyKey] =

@@ -5,22 +5,22 @@ import {
   getComponentByDomNode,
   Component,
   EventListener,
-  disableAutoStart
+  disableAutoStart,
 } from "@gondel/core";
 
 import { initResizePlugin, WINDOW_RESIZED_EVENT, COMPONENT_RESIZED_EVENT } from "./index";
 
 // mock clientWidth and clientHeight, see https://github.com/jsdom/jsdom/issues/2342
 Object.defineProperty((window as any).HTMLElement.prototype, "clientWidth", {
-  get: function() {
+  get: function () {
     return this._jsdomMockClientWidth || 0;
-  }
+  },
 });
 
 Object.defineProperty((window as any).HTMLElement.prototype, "clientHeight", {
-  get: function() {
+  get: function () {
     return this._jsdomMockClientHeight || 0;
-  }
+  },
 });
 
 function setMockClientWidthAndHeight(component: HTMLElement, width: number, height: number) {
@@ -102,20 +102,20 @@ describe("GondelResizePlugin", () => {
 
   it("should receive an window resized event upon resize", async () => {
     resize(1200, 600);
-    await new Promise(resolve => setTimeout(resolve, 300));
+    await new Promise((resolve) => setTimeout(resolve, 300));
     expect(gondelInstance.getWindowResizeEventReceived()).toBe(1);
   });
 
   it("should receive no component resized event when component dimensions did not change", async () => {
     resize(1200, 400);
-    await new Promise(resolve => setTimeout(resolve, 300));
+    await new Promise((resolve) => setTimeout(resolve, 300));
     expect(gondelInstance.getComponentResizeEventReceived()).toBe(0);
   });
 
   it("should receive a component resized event when component dimensions did change", async () => {
     setMockClientWidthAndHeight(gondelDivElement, 1400, 600);
     resize(1400, 600);
-    await new Promise(resolve => setTimeout(resolve, 300));
+    await new Promise((resolve) => setTimeout(resolve, 300));
     expect(gondelInstance.getComponentResizeEventReceived()).toBe(1);
   });
 
@@ -130,7 +130,7 @@ describe("GondelResizePlugin", () => {
 
     resize(1300, 500);
 
-    await new Promise(resolve => setTimeout(resolve, 300));
+    await new Promise((resolve) => setTimeout(resolve, 300));
 
     expect(gondelInstance.getComponentResizeEventReceived()).toBe(2);
   });
@@ -156,7 +156,7 @@ describe("GondelResizePlugin", () => {
     setMockClientWidthAndHeight(gondelDivElement, 1000, 200);
     resize(1000, 200);
 
-    await new Promise(resolve => setTimeout(resolve, 300));
+    await new Promise((resolve) => setTimeout(resolve, 300));
 
     expect(gondelInstance.getComponentResizeEventReceived()).toBe(2);
   });
@@ -171,22 +171,22 @@ describe("GondelResizePlugin", () => {
     setMockClientWidthAndHeight(gondelDivElement, 1300, 500);
     resize(1300, 500);
 
-    await new Promise(resolve => setTimeout(resolve, 20));
+    await new Promise((resolve) => setTimeout(resolve, 20));
 
     setMockClientWidthAndHeight(gondelDivElement, 1200, 400);
     resize(1200, 400);
 
-    await new Promise(resolve => setTimeout(resolve, 20));
+    await new Promise((resolve) => setTimeout(resolve, 20));
 
     setMockClientWidthAndHeight(gondelDivElement, 1100, 300);
     resize(1100, 300);
 
-    await new Promise(resolve => setTimeout(resolve, 20));
+    await new Promise((resolve) => setTimeout(resolve, 20));
 
     setMockClientWidthAndHeight(gondelDivElement, 1000, 200);
     resize(1000, 200);
 
-    await new Promise(resolve => setTimeout(resolve, 300));
+    await new Promise((resolve) => setTimeout(resolve, 300));
 
     expect(gondelInstance.getComponentResizeEventReceived()).toBe(5);
   });
@@ -202,7 +202,7 @@ describe("GondelResizePlugin", () => {
     resize(1300, 500);
 
     // after 250ms, the resize event is being considered completed and component information get reset
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     // resetting __resizeSize forces to set width / height to 0 during startResizeWatching and
     // therefore being different than previous dimensions
@@ -211,7 +211,7 @@ describe("GondelResizePlugin", () => {
     // next resize event get's treated as fresh resize and therefor also triggers component resize event
     resize(1200, 400);
 
-    await new Promise(resolve => setTimeout(resolve, 300));
+    await new Promise((resolve) => setTimeout(resolve, 300));
 
     expect(gondelInstance.getComponentResizeEventReceived()).toBe(3);
   });

@@ -2,7 +2,7 @@ import React, {
   createElement,
   StatelessComponent,
   ComponentClass,
-  ComponentLifecycle
+  ComponentLifecycle,
 } from "react";
 import { GondelBaseComponent } from "@gondel/core";
 import { createRenderableAppWrapper } from "./AppWrapper";
@@ -71,7 +71,7 @@ export function createGondelReactLoader<
       return loaderResult;
     }
 
-    return loaderResult.then(lazyLoadModule => {
+    return loaderResult.then((lazyLoadModule) => {
       if (exportName) {
         const mod = lazyLoadModule as {
           [key in typeof exportName]: RenderableReactComponent<State>;
@@ -119,14 +119,14 @@ export class GondelReactComponent<
     const originalStart = (this as any).start;
     const ReactDOMPromise = import(
       /* webpackPrefetch: true, webpackChunkName: 'ReactDom' */ "react-dom"
-    ).then(ReactDOM => ReactDOM.default || ReactDOM);
+    ).then((ReactDOM) => ReactDOM.default || ReactDOM);
 
     const configScript = ctx.querySelector("script[type='text/json']");
     this.state = configScript ? JSON.parse(configScript.innerHTML) : {};
 
     let unmountComponentAtNode: typeof import("react-dom")["unmountComponentAtNode"] | undefined;
 
-    (this as any).start = function(this: GondelReactComponent<State>) {
+    (this as any).start = function (this: GondelReactComponent<State>) {
       // Wait for the original start promise to allow lazy loading
       const originalStartPromise = new Promise((resolve, reject) => {
         if (!originalStart) {
@@ -157,7 +157,7 @@ export class GondelReactComponent<
             ReactDOM.render(
               createRenderableAppWrapper({
                 children: this.render.bind(this),
-                onHasState: setInternalState => {
+                onHasState: (setInternalState) => {
                   this._setInternalState = setInternalState;
                 },
                 componentWillUnmount: (...args) => {
@@ -173,7 +173,7 @@ export class GondelReactComponent<
                   this.componentWillUpdate && this.componentWillUpdate.bind(this),
                 componentDidUpdate: this.componentDidUpdate && this.componentDidUpdate.bind(this),
                 componentDidCatch: this.componentDidCatch && this.componentDidCatch.bind(this),
-                config: this.state
+                config: this.state,
               }),
               this._ctx
             );
@@ -184,7 +184,7 @@ export class GondelReactComponent<
 
     // Make sure that the stop method will tear down the react app
     const originalStop = (this as any).stop as undefined | (() => {});
-    (this as any).stop = function(this: GondelReactComponent<State>) {
+    (this as any).stop = function (this: GondelReactComponent<State>) {
       const returnValue = originalStop && originalStop.apply(this, arguments);
       // check if during this components start method unmountComponentAtNode
       // was set - if not we don't need to unmound the app

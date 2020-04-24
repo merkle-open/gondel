@@ -48,7 +48,7 @@ var customEvents = {
             componentInformation = components.map(function (component) {
                 var size = component.__resizeSize || {
                     width: 0,
-                    height: 0
+                    height: 0,
                 };
                 var gondelComponentHandlers = eventRegistry[component._componentName];
                 return {
@@ -58,7 +58,7 @@ var customEvents = {
                         return gondelComponentHandlers[selector].map(function (handlerOption) { return component[handlerOption.handlerName]; });
                     }),
                     width: size.width,
-                    height: size.height
+                    height: size.height,
                 };
             });
             fireResizeEvent(event);
@@ -89,7 +89,7 @@ var customEvents = {
                 var node = _a.node;
                 return ({
                     width: node.clientWidth,
-                    height: node.clientHeight
+                    height: node.clientHeight,
                 });
             });
             var handlerResults = [];
@@ -246,7 +246,7 @@ var customEvents = {
             document.documentElement.addEventListener("mousemove", handleMouseMove);
             document.documentElement.addEventListener("mouseup", handleMouseUp);
         });
-    }
+    },
 };
 export function initEventPlugin() {
     addGondelPluginEventListener("Events", "registerEvent", function addResizeEvent(isNativeEvent, _a, resolve) {
@@ -265,7 +265,7 @@ export function initEventPlugin() {
             components.forEach(function (component) {
                 component.__resizeSize = {
                     width: component._ctx.clientWidth,
-                    height: component._ctx.clientHeight
+                    height: component._ctx.clientHeight,
                 };
             });
         });

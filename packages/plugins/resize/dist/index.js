@@ -55,7 +55,7 @@ var initializeResizeEvent = function (eventRegistry, namespace, eventName) {
         componentInformation = components.map(function (component) {
             var size = component.__resizeSize || {
                 width: 0,
-                height: 0
+                height: 0,
             };
             var gondelComponentHandlers = eventRegistry[component._componentName];
             return {
@@ -65,7 +65,7 @@ var initializeResizeEvent = function (eventRegistry, namespace, eventName) {
                     return gondelComponentHandlers[selector].map(function (handlerOption) { return component[handlerOption.handlerName]; });
                 }),
                 width: size.width,
-                height: size.height
+                height: size.height,
             };
         });
         fireResizeEvent(event);
@@ -96,7 +96,7 @@ var initializeResizeEvent = function (eventRegistry, namespace, eventName) {
             var node = _a.node;
             return ({
                 width: node.clientWidth,
-                height: node.clientHeight
+                height: node.clientHeight,
             });
         });
         var handlerResults = [];
@@ -184,7 +184,7 @@ export function initResizePlugin() {
             components.forEach(function (component) {
                 component.__resizeSize = {
                     width: component._ctx.clientWidth,
-                    height: component._ctx.clientHeight
+                    height: component._ctx.clientHeight,
                 };
             });
         });

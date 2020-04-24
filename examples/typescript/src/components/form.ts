@@ -12,7 +12,7 @@ class Form extends GondelBaseComponent {
 
   @EventListener("gInput")
   _handleChange() {
-    const hasEmptyElements = this._getInputs().some(input => !input.getValue());
+    const hasEmptyElements = this._getInputs().some((input) => !input.getValue());
     this._getSubmitButton().setIsEnabled(!hasEmptyElements);
   }
 

@@ -76,8 +76,8 @@ export function fireAsyncGondelPluginEvent<T>(
   initialValue: T,
   data: any
 ): Promise<T> {
-  return new Promise(resolve => {
-    (pluginEvents[eventName] || basePluginListener)(initialValue, data, result => {
+  return new Promise((resolve) => {
+    (pluginEvents[eventName] || basePluginListener)(initialValue, data, (result) => {
       resolve(result);
     });
   });

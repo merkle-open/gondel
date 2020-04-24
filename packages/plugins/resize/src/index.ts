@@ -28,7 +28,7 @@ function getComponentsInEventRegistry(
   namespace: string
 ): Array<GondelComponent> {
   const selector = Object.keys(eventRegistry)
-    .map(componentName => `[data-${namespace}-name="${componentName}"]`)
+    .map((componentName) => `[data-${namespace}-name="${componentName}"]`)
     .join(",");
   if (!selector) {
     return [];
@@ -79,22 +79,22 @@ const initializeResizeEvent = (
     // The resize listener is fired very often
     // for performance optimisations we search and store
     // all components during the initial start event
-    componentInformation = components.map(component => {
+    componentInformation = components.map((component) => {
       const size = (component as any).__resizeSize || {
         width: 0,
-        height: 0
+        height: 0,
       };
       const gondelComponentHandlers = eventRegistry[component._componentName];
       return {
         component: component,
         node: component._ctx,
-        selectors: Object.keys(gondelComponentHandlers).map(selector =>
+        selectors: Object.keys(gondelComponentHandlers).map((selector) =>
           gondelComponentHandlers[selector].map(
-            handlerOption => (component as any)[handlerOption.handlerName]
+            (handlerOption) => (component as any)[handlerOption.handlerName]
           )
         ),
         width: size.width,
-        height: size.height
+        height: size.height,
       };
     });
     fireResizeEvent(event);
@@ -123,7 +123,7 @@ const initializeResizeEvent = (
     }
     const newSizes = componentInformation.map(({ node }) => ({
       width: node.clientWidth,
-      height: node.clientHeight
+      height: node.clientHeight,
     }));
     const handlerResults: Array<() => void | undefined> = [];
     componentInformation.forEach((componentInformation, i) => {
@@ -142,13 +142,13 @@ const initializeResizeEvent = (
       (componentInformation.component as any).__resizeSize = newSize;
       componentInformation.width = newSize.width;
       componentInformation.height = newSize.height;
-      componentInformation.selectors.forEach(selector =>
-        selector.forEach(handler =>
+      componentInformation.selectors.forEach((selector) =>
+        selector.forEach((handler) =>
           handlerResults.push(handler.call(componentInformation.component, event, newSize))
         )
       );
     });
-    handlerResults.forEach(handlerResult => {
+    handlerResults.forEach((handlerResult) => {
       if (typeof handlerResult === "function") {
         handlerResult();
       }
@@ -169,13 +169,13 @@ const initializeResizeEvent = (
       if (componentInformation.component._stopped) {
         return;
       }
-      componentInformation.selectors.forEach(selector =>
-        selector.forEach(handler =>
+      componentInformation.selectors.forEach((selector) =>
+        selector.forEach((handler) =>
           handlerResults.push(handler.call(componentInformation.component, event))
         )
       );
     });
-    handlerResults.forEach(handlerResult => {
+    handlerResults.forEach((handlerResult) => {
       if (typeof handlerResult === "function") {
         handlerResult();
       }
@@ -220,10 +220,10 @@ export function initResizePlugin() {
     resolve
   ) {
     setTimeout(() => {
-      components.forEach(component => {
+      components.forEach((component) => {
         (component as any).__resizeSize = {
           width: component._ctx.clientWidth,
-          height: component._ctx.clientHeight
+          height: component._ctx.clientHeight,
         };
       });
     });

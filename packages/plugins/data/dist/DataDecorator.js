@@ -1,4 +1,4 @@
-import { areDataBindingsHookedIntoCore, hookDataDecoratorIntoCore } from "./DataPlugin";
+import { areDataBindingsHookedIntoCore, hookDataDecoratorIntoCore, } from "./DataPlugin";
 export function data(targetOrAttributeKey, propertyKeyOrSerializer) {
     // First case will be used if we have a custom attribute and a valid serializer (which is typeof ISerializer)
     if (typeof targetOrAttributeKey === "string" && typeof propertyKeyOrSerializer !== "string") {

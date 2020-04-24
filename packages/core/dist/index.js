@@ -2,7 +2,7 @@
 export { addGondelPluginEventListener } from "./GondelPluginUtils";
 // Export helpers to interact with DOM e.g. start a gondel component for a given DOM node
 // or get a running gondel component instance for a given DOM node
-export { getFirstDomNode, startComponents, stopComponents, hasMountedGondelComponent, getComponentByDomNode, getComponentByDomNodeAsync, findComponents } from "./GondelDomUtils";
+export { getFirstDomNode, startComponents, stopComponents, hasMountedGondelComponent, getComponentByDomNode, getComponentByDomNodeAsync, findComponents, } from "./GondelDomUtils";
 // Export https://github.com/tc39/proposal-decorators decorators e.g. @EventListener or @Component
 export * from "./GondelDecorators";
 // Export event helpers to send custom events to React/Angular or foreign gondel components
