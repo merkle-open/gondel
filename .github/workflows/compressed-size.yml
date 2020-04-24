@@ -1,15 +1,17 @@
-name: Compressed Size
+# https://github.com/andresz1/size-limit-action
 
-on: [pull_request]
+name: Size Limit
+
+on:
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-      with:
-          fetch-depth: 1
-    - uses: preactjs/compressed-size-action@v1
-      with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+      - uses: actions/checkout@v1
+      - uses: andresz1/size-limit-action@v1.2.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
