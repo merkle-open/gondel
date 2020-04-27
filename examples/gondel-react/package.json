@@ -14,9 +14,8 @@
     "react-dom": "16.13.1"
   },
   "devDependencies": {
-    "@babel/preset-env": "7.9.5",
-    "@babel/preset-react": "7.9.4",
-    "common-config-webpack-plugin": "2.0.0",
+    "ts-config-webpack-plugin": "2.0.0",
+    "scss-config-webpack-plugin": "2.0.0",
     "html-webpack-plugin": "4.2.0",
     "typescript": "3.8.3",
     "webpack": "4.43.0",

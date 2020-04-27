@@ -10,7 +10,7 @@
     "@gondel/plugin-hot": "^1.2.3"
   },
   "devDependencies": {
-    "common-config-webpack-plugin": "2.0.0",
+    "ts-config-webpack-plugin": "2.0.0",
     "html-webpack-plugin": "4.2.0",
     "typescript": "3.8.3",
     "webpack": "4.43.0",
