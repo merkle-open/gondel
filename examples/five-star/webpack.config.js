@@ -1,4 +1,5 @@
-const CommonConfigWebpackPlugin = require('common-config-webpack-plugin');
+const JsConfigWebpackPlugin = require('js-config-webpack-plugin');
+const ScssConfigWebpackPlugin = require('scss-config-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -7,7 +8,8 @@ module.exports = {
   context: __dirname,
   entry: './src/index.js',
   plugins: [
-    new CommonConfigWebpackPlugin(),
+    new JsConfigWebpackPlugin(),
+    new ScssConfigWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './index.html'
     })

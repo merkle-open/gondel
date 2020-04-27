@@ -3,4 +3,3 @@ import './components/window-resize';
 import './components/component-resize';
 
 initResizePlugin();
-
