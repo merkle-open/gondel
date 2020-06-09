@@ -15,7 +15,7 @@ class MyComponent extends gondelJQueryMixin(GondelBaseComponent) {
    ```
  */
 export declare function gondelJQueryMixin<T extends GondelBaseComponent, U extends new (context: HTMLElement, componentName: string) => T>(BaseClass: U): new (context: HTMLElement, componentName: string) => T & {
-    $ctx: JQuery<HTMLElement>;
+    $ctx: JQuery;
 };
 /**
  * BaseComponent with JqueryMixin
