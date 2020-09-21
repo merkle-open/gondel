@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.4](https://github.com/namics/gondel/compare/v1.2.3...v1.2.4) (2020-09-21)
+
+
+### Bug Fixes
+
+* **examples:** examples work on codesandbox again ([097c325](https://github.com/namics/gondel/commit/097c32566bd5e982237aa4f1d4a5c1e76fca5ed8))
+* add experimentalDecorators config to examples ([7ad1bcf](https://github.com/namics/gondel/commit/7ad1bcfca0563629262cc712a935b1cdc194cfd0))
+
+
+
+
+
 # [1.2.0](https://github.com/namics/gondel/compare/v1.1.2...v1.2.0) (2020-02-19)
 
 **Note:** Version bump only for package gondel-lazy-load-example

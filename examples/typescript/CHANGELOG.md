@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.4](https://github.com/namics/gondel/compare/v1.2.3...v1.2.4) (2020-09-21)
+
+
+### Bug Fixes
+
+* **examples:** examples work on codesandbox again ([097c325](https://github.com/namics/gondel/commit/097c32566bd5e982237aa4f1d4a5c1e76fca5ed8))
+
+
+
+
+
 ## [1.2.3](https://github.com/namics/gondel/compare/v1.2.2...v1.2.3) (2020-03-09)
 
 **Note:** Version bump only for package gondel-typescript-example

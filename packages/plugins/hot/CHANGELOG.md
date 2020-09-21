@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.4](https://github.com/namics/gondel/compare/v1.2.3...v1.2.4) (2020-09-21)
+
+
+### Bug Fixes
+
+* **hot plugin:** allow passing a node module ([7be34f6](https://github.com/namics/gondel/commit/7be34f699fb4ae5dc88b530171714c3630aea8ee))
+
+
+
+
+
 ## [1.2.3](https://github.com/namics/gondel/compare/v1.2.2...v1.2.3) (2020-03-09)
 
 **Note:** Version bump only for package @gondel/plugin-hot
