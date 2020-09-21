@@ -1,8 +1,11 @@
 /**
  * Add hot module replacement
  */
-import { findComponents, addGondelPluginEventListener, } from "@gondel/core";
+import { findComponents, addGondelPluginEventListener } from "@gondel/core";
 var hotModeActivated = false;
+/**
+ * Make Gondel Components inside this module and all its children hot replaceable
+ */
 export function hot(module) {
     if (module.hot) {
         module.hot.accept();

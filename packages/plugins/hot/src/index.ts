@@ -2,16 +2,14 @@
  * Add hot module replacement
  */
 
-import {
-  GondelComponent,
-  IGondelComponent,
-  findComponents,
-  addGondelPluginEventListener,
-} from "@gondel/core";
+import { findComponents, addGondelPluginEventListener } from "@gondel/core";
 
 let hotModeActivated = false;
 
-export function hot(module: __WebpackModuleApi.Module) {
+/**
+ * Make Gondel Components inside this module and all its children hot replaceable
+ */
+export function hot(module: __WebpackModuleApi.Module | NodeModule) {
   if (module.hot) {
     module.hot.accept();
     if (hotModeActivated) {
