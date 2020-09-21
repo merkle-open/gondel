@@ -2,4 +2,7 @@
  * Add hot module replacement
  */
 /// <reference types="webpack-env" />
-export declare function hot(module: __WebpackModuleApi.Module): void;
+/**
+ * Make Gondel Components inside this module and all its children hot replaceable
+ */
+export declare function hot(module: __WebpackModuleApi.Module | NodeModule): void;
