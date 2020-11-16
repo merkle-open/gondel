@@ -7,11 +7,12 @@ export function triggerPublicEvent(eventName, gondelComponent, target, eventData
     if (canBubble === void 0) { canBubble = true; }
     var event = document.createEvent("Event");
     var eventTarget = target ? getFirstDomNode(target) : gondelComponent._ctx;
-    if (eventName[0] !== gondelComponent._namespace) {
+    var namespace = gondelComponent._namespace;
+    if (eventName.substr(0, namespace.length) !== namespace) {
         throw new Error("Invalid event name '" +
             eventName +
             "' - use '" +
-            gondelComponent._namespace +
+            namespace +
             eventName.charAt(0).toUpperCase() +
             eventName.slice(1) +
             "'");
