@@ -23,12 +23,13 @@ export function triggerPublicEvent(
 ): boolean {
   const event = <UxEvent>document.createEvent("Event");
   const eventTarget = target ? getFirstDomNode(target) : gondelComponent._ctx;
-  if (eventName[0] !== gondelComponent._namespace) {
+  const namespace = gondelComponent._namespace;
+  if (eventName.substr(0, namespace.length) !== namespace) {
     throw new Error(
       "Invalid event name '" +
         eventName +
         "' - use '" +
-        gondelComponent._namespace +
+        namespace +
         eventName.charAt(0).toUpperCase() +
         eventName.slice(1) +
         "'"

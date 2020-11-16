@@ -1,4 +1,10 @@
-import { startComponents, getComponentByDomNode, Component, EventListener } from "./index";
+import {
+  startComponents,
+  getComponentByDomNode,
+  Component,
+  EventListener,
+  stopComponents,
+} from "./index";
 
 import { GondelBaseComponent } from "./GondelComponent";
 
@@ -23,6 +29,7 @@ describe("GondelDecorators", () => {
       @Component("Button")
       class Button extends GondelBaseComponent {}
       const button = createMockElement("g");
+      stopComponents(button._ctx, "g");
       expect(button.constructor).toBe(Button);
     });
 
@@ -30,6 +37,15 @@ describe("GondelDecorators", () => {
       @Component("Button", "t")
       class Button extends GondelBaseComponent {}
       const button = createMockElement("t");
+      stopComponents(button._ctx, "t");
+      expect(button.constructor).toBe(Button);
+    });
+
+    it("should add the component for a custom 'utils' namespace", () => {
+      @Component("Button", "util")
+      class Button extends GondelBaseComponent {}
+      const button = createMockElement("util");
+      stopComponents(button._ctx, "util");
       expect(button.constructor).toBe(Button);
     });
   });
