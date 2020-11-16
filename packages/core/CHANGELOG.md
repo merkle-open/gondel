@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.5](https://github.com/namics/gondel/compare/v1.2.4...v1.2.5) (2020-11-16)
+
+
+### Bug Fixes
+
+* allow to stop components in namespaces with long names ([20af9c0](https://github.com/namics/gondel/commit/20af9c09efc4992d48cbc7c300babcffc1db3382))
+
+
+
+
+
 ## [1.2.4](https://github.com/namics/gondel/compare/v1.2.3...v1.2.4) (2020-09-21)
 
 **Note:** Version bump only for package @gondel/core

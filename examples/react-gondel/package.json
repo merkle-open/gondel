@@ -1,14 +1,14 @@
 {
   "name": "gondel-react-gondel-example",
   "private": true,
-  "version": "1.2.4",
+  "version": "1.2.5",
   "scripts": {
     "start": "webpack-dev-server --disable-host-check"
   },
   "dependencies": {
-    "@gondel/core": "^1.2.4",
-    "@gondel/plugin-hot": "^1.2.4",
-    "@gondel/plugin-react": "^1.2.4",
+    "@gondel/core": "^1.2.5",
+    "@gondel/plugin-hot": "^1.2.5",
+    "@gondel/plugin-react": "^1.2.5",
     "@types/react": "16.9.35",
     "@types/react-dom": "16.9.8",
     "react": "16.13.1",

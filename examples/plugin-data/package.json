@@ -1,14 +1,14 @@
 {
   "name": "gondel-plugin-data-example",
   "private": true,
-  "version": "1.2.4",
+  "version": "1.2.5",
   "scripts": {
     "start": "webpack-dev-server --disable-host-check"
   },
   "dependencies": {
-    "@gondel/core": "^1.2.4",
-    "@gondel/plugin-data": "^1.2.4",
-    "@gondel/plugin-hot": "^1.2.4"
+    "@gondel/core": "^1.2.5",
+    "@gondel/plugin-data": "^1.2.5",
+    "@gondel/plugin-hot": "^1.2.5"
   },
   "devDependencies": {
     "html-webpack-plugin": "4.3.0",
