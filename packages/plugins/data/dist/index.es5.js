@@ -2,7 +2,7 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@gondel/core')) :
     typeof define === 'function' && define.amd ? define(['exports', '@gondel/core'], factory) :
-    (global = global || self, factory(global.gondelPluginData = {}, global.gondel));
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.gondelPluginData = {}, global.gondel));
 }(this, (function (exports, core) { 'use strict';
 
     var areDataBindingsHookedIntoCore = false;
@@ -10,7 +10,8 @@
         areDataBindingsHookedIntoCore = true;
         core.addGondelPluginEventListener("Data", "start", function (gondelComponents, _, next) {
             gondelComponents.forEach(function (gondelComponent) {
-                var componentDataBindings = (gondelComponent.prototype && gondelComponent.prototype.__dataBindings) ||
+                var componentDataBindings = (gondelComponent.prototype &&
+                    gondelComponent.prototype.__dataBindings) ||
                     gondelComponent.__dataBindings;
                 if (!componentDataBindings || componentDataBindings.length === 0) {
                     return next(gondelComponents);

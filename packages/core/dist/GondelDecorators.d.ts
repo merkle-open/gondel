@@ -1,6 +1,10 @@
 import { GondelComponent, IGondelComponent } from "./GondelComponent";
 export declare function Component(componentName: string, namespace?: string): (constructor: IGondelComponent) => void;
-declare type EventOption = [string, string, string | object | undefined];
+declare type EventOption = [
+    string,
+    string,
+    string | object | undefined
+];
 /**
  * The @EventListener decorator will add all event names to a static variable
  */
