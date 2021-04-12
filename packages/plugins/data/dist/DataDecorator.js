@@ -1,7 +1,7 @@
-import { areDataBindingsHookedIntoCore, hookDataDecoratorIntoCore, } from "./DataPlugin";
+import { areDataBindingsHookedIntoCore, hookDataDecoratorIntoCore } from './DataPlugin';
 export function data(targetOrAttributeKey, propertyKeyOrSerializer) {
     // First case will be used if we have a custom attribute and a valid serializer (which is typeof ISerializer)
-    if (typeof targetOrAttributeKey === "string" && typeof propertyKeyOrSerializer !== "string") {
+    if (typeof targetOrAttributeKey === 'string' && typeof propertyKeyOrSerializer !== 'string') {
         var customAttributeKey_1 = targetOrAttributeKey;
         var serializer_1 = propertyKeyOrSerializer;
         return function (target, propertyKey) {
@@ -16,9 +16,9 @@ export function data(targetOrAttributeKey, propertyKeyOrSerializer) {
             target.__dataBindings.push([propertyKey, attributeKey, serializer_1]);
         };
     }
-    if (typeof targetOrAttributeKey === "string" || typeof propertyKeyOrSerializer !== "string") {
+    if (typeof targetOrAttributeKey === 'string' || typeof propertyKeyOrSerializer !== 'string') {
         // this case should not occur, the only case could be a respec of the decorators
-        throw new Error("Unexpected usage of @data");
+        throw new Error('Unexpected usage of @data');
     }
     // We only have a simple decorator which will need to autobind values via prop-key
     var target = targetOrAttributeKey;
@@ -38,12 +38,12 @@ export function data(targetOrAttributeKey, propertyKeyOrSerializer) {
  * @param {string} propertyKey    the prop to convert
  */
 function convertPropertyKeyToDataAttributeKey(propertyKey) {
-    if (propertyKey.substr(0, 1) === "_") {
+    if (propertyKey.substr(0, 1) === '_') {
         propertyKey = propertyKey.substr(1);
     }
-    if (propertyKey.substr(0, 4) !== "data") {
+    if (propertyKey.substr(0, 4) !== 'data') {
         throw new Error(propertyKey + "\" has an invalid format please use @data dataSomeProp (data-some-prop) for valid bindings.");
     }
-    return propertyKey.replace(/([a-zA-Z])(?=[A-Z])/g, "$1-").toLowerCase();
+    return propertyKey.replace(/([a-zA-Z])(?=[A-Z])/g, '$1-').toLowerCase();
 }
 //# sourceMappingURL=DataDecorator.js.map

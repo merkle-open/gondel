@@ -1,6 +1,6 @@
-import { fireGondelPluginEvent } from "./GondelPluginUtils";
-import { addRegistryToBootloader } from "./GondelAutoStart";
-var GLOBAL_GONDEL_REGISTRY_NAMESPACE = "__\ud83d\udea1Registries";
+import { fireGondelPluginEvent } from './GondelPluginUtils';
+import { addRegistryToBootloader } from './GondelAutoStart';
+var GLOBAL_GONDEL_REGISTRY_NAMESPACE = '__\ud83d\udea1Registries';
 var GondelComponentRegistry = /** @class */ (function () {
     function GondelComponentRegistry() {
         this._components = {};
@@ -45,17 +45,17 @@ export function registerComponent() {
     // The componentName is always the first argument
     var componentName = args[0];
     // Use namespace from the second argument or fallback to the default "g" if it is missing
-    var namespace = typeof args[1] === "string" ? args[1] : "g";
+    var namespace = typeof args[1] === 'string' ? args[1] : 'g';
     // The last argument is always the component class
     var component = args[args.length - 1];
     var gondelComponentRegistry = getComponentRegistry(namespace);
     // If this component was already registered we remove the previous one
     // and notify all plugins - this is especially usefull for hot component replacement
     if (gondelComponentRegistry.getComponent(componentName)) {
-        fireGondelPluginEvent("unregister", component, { componentName: componentName, namespace: namespace });
+        fireGondelPluginEvent('unregister', component, { componentName: componentName, namespace: namespace });
     }
     // Let plugins know about the new component
-    fireGondelPluginEvent("register", component, {
+    fireGondelPluginEvent('register', component, {
         componentName: componentName,
         namespace: namespace,
         gondelComponentRegistry: gondelComponentRegistry,

@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component } from 'react';
 export interface Props<S> extends React.ComponentLifecycle<null, S> {
     children?: (props: S) => JSX.Element;
     onHasState?: (setState: (state: Partial<S>) => void) => void;

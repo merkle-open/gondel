@@ -27,7 +27,7 @@ export declare type MediaQueryPluginOptions = {
     /**
      * The unit which is used - default: 'px'
      */
-    unit?: "px" | "em";
+    unit?: 'px' | 'em';
     /**
      * Activates a conversion from px - default: false
      */

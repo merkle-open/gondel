@@ -2,15 +2,15 @@
  * The event registry provides a way to bind events ahead of time
  * with a very small foot print during launch to improve the time to interaction
  */
-import { extractComponent } from "./GondelDomUtils";
-import { fireGondelPluginEvent } from "./GondelPluginUtils";
+import { extractComponent } from './GondelDomUtils';
+import { fireGondelPluginEvent } from './GondelPluginUtils';
 /**
  * Only real browser events are supported.
  * Unfortunately focus and blur do not bubble so a special mapping is needed.
  */
 var eventNameMapping = {
-    focus: "focusin",
-    blur: "focusout",
+    focus: 'focusin',
+    blur: 'focusout',
 };
 // Polyfill for element.prototype.matches
 var matchesCssSelector = function (element, selector) {
@@ -105,8 +105,8 @@ var _domEventRegistry;
  */
 export function getEventRegistry(namespace) {
     if (!_domEventRegistry) {
-        _domEventRegistry = window["__\ud83d\udea1DomEvents"] || {};
-        window["__\ud83d\udea1DomEvents"] = _domEventRegistry;
+        _domEventRegistry = window['__\ud83d\udea1DomEvents'] || {};
+        window['__\ud83d\udea1DomEvents'] = _domEventRegistry;
     }
     if (!_domEventRegistry[namespace]) {
         _domEventRegistry[namespace] = {};
@@ -129,14 +129,14 @@ export function executeHandlers(handlers, event, namespace) {
         // Skip if the component wasn't started or if it was stopped
         if (gondelComponent) {
             // See https://stackoverflow.com/questions/52057726/what-is-the-best-way-to-alter-a-native-browser-event
-            Object.defineProperty(event, "currentTarget", {
+            Object.defineProperty(event, 'currentTarget', {
                 get: function () { return handlerObject.target; },
                 configurable: true,
             });
             eventObjectRequiresCleanup = true;
             for (var j = 0; j < handlerOptions.length && !event.cancelBubble; j++) {
                 var handlerResult = gondelComponent[handlerOptions[j].handlerName].call(gondelComponent, event);
-                if (typeof handlerResult === "function") {
+                if (typeof handlerResult === 'function') {
                     results.push(handlerResult);
                 }
             }
@@ -172,7 +172,7 @@ export function addRootEventListener(namespace, domEventName, gondelComponentNam
     // This notification is only triggered if a event name e.g. 'click' is used for the first time
     if (!namespacedDomEventRegistry[domEventName]) {
         namespacedDomEventRegistry[domEventName] = {};
-        fireGondelPluginEvent("registerEvent", true, {
+        fireGondelPluginEvent('registerEvent', true, {
             eventName: domEventName,
             namespace: namespace,
             eventRegistry: namespacedDomEventRegistry[domEventName],
@@ -187,8 +187,8 @@ export function addRootEventListener(namespace, domEventName, gondelComponentNam
     if (!namespacedDomEventRegistry[domEventName][gondelComponentName]) {
         namespacedDomEventRegistry[domEventName][gondelComponentName] = {};
     }
-    var handlerOptionObject = typeof handlerOption === "object" ? handlerOption : { selector: handlerOption };
-    var selectorKey = handlerOptionObject.selector || "";
+    var handlerOptionObject = typeof handlerOption === 'object' ? handlerOption : { selector: handlerOption };
+    var selectorKey = handlerOptionObject.selector || '';
     if (!namespacedDomEventRegistry[domEventName][gondelComponentName][selectorKey]) {
         namespacedDomEventRegistry[domEventName][gondelComponentName][selectorKey] = [];
     }
@@ -198,7 +198,7 @@ export function addRootEventListener(namespace, domEventName, gondelComponentNam
  * Remove an event from the Gondel EventRegistry
  */
 export function removeRootEventListener(namespace, domEventName, gondelComponentName, handlerName, selector) {
-    var selectorKey = selector || "";
+    var selectorKey = selector || '';
     var namespacedDomEventRegistry = getEventRegistry(namespace);
     if (namespacedDomEventRegistry[domEventName] &&
         namespacedDomEventRegistry[domEventName][gondelComponentName] &&

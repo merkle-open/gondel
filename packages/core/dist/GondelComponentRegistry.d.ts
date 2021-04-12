@@ -2,7 +2,7 @@
  * The component registry allows to store
  * gondel components by an unique name
  */
-import { IGondelComponent } from "./GondelComponent";
+import { IGondelComponent } from './GondelComponent';
 export declare const enum RegistryBootMode {
     /**
      * The Registry was already booted

@@ -2,16 +2,18 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { Component, createElement } from "react";
+import { Component, createElement } from 'react';
 var AppWrapper = /** @class */ (function (_super) {
     __extends(AppWrapper, _super);
     function AppWrapper(props) {
@@ -19,14 +21,14 @@ var AppWrapper = /** @class */ (function (_super) {
         _this.state = props.config;
         // Forward react life cycle hooks
         [
-            "componentWillMount",
-            "componentDidMount",
-            "componentWillReceiveProps",
-            "shouldComponentUpdate",
-            "componentWillUpdate",
-            "componentDidUpdate",
-            "componentWillUnmount",
-            "componentDidCatch",
+            'componentWillMount',
+            'componentDidMount',
+            'componentWillReceiveProps',
+            'shouldComponentUpdate',
+            'componentWillUpdate',
+            'componentDidUpdate',
+            'componentWillUnmount',
+            'componentDidCatch',
         ].forEach(function (reactHook) {
             if (!_this.props[reactHook]) {
                 return;
@@ -41,7 +43,7 @@ var AppWrapper = /** @class */ (function (_super) {
     }
     AppWrapper.prototype.render = function () {
         var children = this.props.children;
-        return typeof children === "function" ? children(this.state) : children;
+        return typeof children === 'function' ? children(this.state) : children;
     };
     return AppWrapper;
 }(Component));

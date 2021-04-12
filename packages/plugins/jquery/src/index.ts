@@ -1,8 +1,8 @@
 /**
  * This plugin provides utils for Gondel jQuery integrations
  */
-import { GondelBaseComponent, IGondelComponent } from "@gondel/core";
-import $ from "jquery";
+import { GondelBaseComponent, IGondelComponent } from '@gondel/core';
+import $ from 'jquery';
 
 /**
  * Class mixin https://basarat.gitbooks.io/typescript/docs/types/mixins.html
@@ -16,17 +16,17 @@ class MyComponent extends gondelJQueryMixin(GondelBaseComponent) {
    ```
  */
 export function gondelJQueryMixin<
-  T extends GondelBaseComponent,
-  U extends new (context: HTMLElement, componentName: string) => T
+	T extends GondelBaseComponent,
+	U extends new (context: HTMLElement, componentName: string) => T
 >(BaseClass: U) {
-  class WithJquery extends (BaseClass as IGondelComponent) {
-    $ctx: JQuery<HTMLElement>;
-    constructor(ctx: HTMLElement, componentName: string) {
-      super(ctx, componentName);
-      this.$ctx = $(ctx);
-    }
-  }
-  return WithJquery as new (context: HTMLElement, componentName: string) => T & { $ctx: JQuery };
+	class WithJquery extends (BaseClass as IGondelComponent) {
+		$ctx: JQuery<HTMLElement>;
+		constructor(ctx: HTMLElement, componentName: string) {
+			super(ctx, componentName);
+			this.$ctx = $(ctx);
+		}
+	}
+	return WithJquery as new (context: HTMLElement, componentName: string) => T & { $ctx: JQuery };
 }
 
 /**
@@ -41,9 +41,9 @@ class MyComponent extends GondelJqueryComponent {
    ```
  */
 export class GondelJqueryComponent<TElement = HTMLElement> extends GondelBaseComponent<TElement> {
-  $ctx: JQuery<TElement>;
-  constructor(ctx: TElement, componentName: string) {
-    super(ctx, componentName);
-    this.$ctx = $(ctx);
-  }
+	$ctx: JQuery<TElement>;
+	constructor(ctx: TElement, componentName: string) {
+		super(ctx, componentName);
+		this.$ctx = $(ctx);
+	}
 }

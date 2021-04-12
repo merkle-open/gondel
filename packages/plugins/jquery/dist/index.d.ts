@@ -2,7 +2,7 @@
 /**
  * This plugin provides utils for Gondel jQuery integrations
  */
-import { GondelBaseComponent } from "@gondel/core";
+import { GondelBaseComponent } from '@gondel/core';
 /**
  * Class mixin https://basarat.gitbooks.io/typescript/docs/types/mixins.html
  * Usage:

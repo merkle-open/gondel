@@ -8,10 +8,9 @@
     var areDataBindingsHookedIntoCore = false;
     function hookDataDecoratorIntoCore() {
         areDataBindingsHookedIntoCore = true;
-        core.addGondelPluginEventListener("Data", "start", function (gondelComponents, _, next) {
+        core.addGondelPluginEventListener('Data', 'start', function (gondelComponents, _, next) {
             gondelComponents.forEach(function (gondelComponent) {
-                var componentDataBindings = (gondelComponent.prototype &&
-                    gondelComponent.prototype.__dataBindings) ||
+                var componentDataBindings = (gondelComponent.prototype && gondelComponent.prototype.__dataBindings) ||
                     gondelComponent.__dataBindings;
                 if (!componentDataBindings || componentDataBindings.length === 0) {
                     return next(gondelComponents);
@@ -40,8 +39,7 @@
                         },
                     });
                     if (initialValue) {
-                        gondelComponent[propertyKey] =
-                            gondelComponent[propertyKey] || initialValue;
+                        gondelComponent[propertyKey] = gondelComponent[propertyKey] || initialValue;
                         initialValue = undefined;
                     }
                 });
@@ -52,7 +50,7 @@
 
     function data(targetOrAttributeKey, propertyKeyOrSerializer) {
         // First case will be used if we have a custom attribute and a valid serializer (which is typeof ISerializer)
-        if (typeof targetOrAttributeKey === "string" && typeof propertyKeyOrSerializer !== "string") {
+        if (typeof targetOrAttributeKey === 'string' && typeof propertyKeyOrSerializer !== 'string') {
             var customAttributeKey_1 = targetOrAttributeKey;
             var serializer_1 = propertyKeyOrSerializer;
             return function (target, propertyKey) {
@@ -67,9 +65,9 @@
                 target.__dataBindings.push([propertyKey, attributeKey, serializer_1]);
             };
         }
-        if (typeof targetOrAttributeKey === "string" || typeof propertyKeyOrSerializer !== "string") {
+        if (typeof targetOrAttributeKey === 'string' || typeof propertyKeyOrSerializer !== 'string') {
             // this case should not occur, the only case could be a respec of the decorators
-            throw new Error("Unexpected usage of @data");
+            throw new Error('Unexpected usage of @data');
         }
         // We only have a simple decorator which will need to autobind values via prop-key
         var target = targetOrAttributeKey;
@@ -89,34 +87,34 @@
      * @param {string} propertyKey    the prop to convert
      */
     function convertPropertyKeyToDataAttributeKey(propertyKey) {
-        if (propertyKey.substr(0, 1) === "_") {
+        if (propertyKey.substr(0, 1) === '_') {
             propertyKey = propertyKey.substr(1);
         }
-        if (propertyKey.substr(0, 4) !== "data") {
+        if (propertyKey.substr(0, 4) !== 'data') {
             throw new Error(propertyKey + "\" has an invalid format please use @data dataSomeProp (data-some-prop) for valid bindings.");
         }
-        return propertyKey.replace(/([a-zA-Z])(?=[A-Z])/g, "$1-").toLowerCase();
+        return propertyKey.replace(/([a-zA-Z])(?=[A-Z])/g, '$1-').toLowerCase();
     }
 
-    var serialize = function (value) { return JSON.stringify(value); };
-    var deserialize = function (value) { return JSON.parse(value); };
+    var serialize$2 = function (value) { return JSON.stringify(value); };
+    var deserialize$2 = function (value) { return JSON.parse(value); };
     var _JSON = {
-        serialize: serialize,
-        deserialize: deserialize,
+        serialize: serialize$2,
+        deserialize: deserialize$2,
     };
 
     var serialize$1 = function (value) { return "" + value; };
-    var deserialize$1 = function (value) { return value === "true"; };
+    var deserialize$1 = function (value) { return value === 'true'; };
     var _Boolean = {
         serialize: serialize$1,
         deserialize: deserialize$1,
     };
 
-    var serialize$2 = function (value) { return "" + value; };
-    var deserialize$2 = function (value) { return parseFloat(value); };
+    var serialize = function (value) { return "" + value; };
+    var deserialize = function (value) { return parseFloat(value); };
     var _Number = {
-        serialize: serialize$2,
-        deserialize: deserialize$2,
+        serialize: serialize,
+        deserialize: deserialize,
     };
 
     exports.BooleanSerializer = _Boolean;

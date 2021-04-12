@@ -39,7 +39,7 @@
         };
     }
 
-    var internalGondelRefAttribute = "_gondel_";
+    var internalGondelRefAttribute = '_gondel_';
     /**
      * Returns true if the given object is a single Element
      */
@@ -64,7 +64,7 @@
      * Returns the gondel instance for the given HtmlELement
      */
     function getComponentByDomNode(domNode, namespace) {
-        if (namespace === void 0) { namespace = "g"; }
+        if (namespace === void 0) { namespace = 'g'; }
         var gondelComponent = extractComponent(getFirstDomNode(domNode), namespace);
         if (!gondelComponent) {
             throw new Error("Could not find a started gondel component in namespace \"" + namespace + "\",\nplease check if your component is mounted via 'hasMountedGondelComponent'");
@@ -92,7 +92,7 @@
     /**
      * The VIEWPORT_ENTERED will be fired if a new viewport is entered
      */
-    var VIEWPORT_ENTERED = "@gondel/plugin-media-queries--viewport-entered";
+    var VIEWPORT_ENTERED = '@gondel/plugin-media-queries--viewport-entered';
     var currentViewport;
     /**
      * This function returns all components for the given eventRegistry which can be found in the dom.
@@ -100,7 +100,7 @@
     function getComponentsInEventRegistry(eventRegistry, namespace) {
         var selector = Object.keys(eventRegistry)
             .map(function (componentName) { return "[data-" + namespace + "-name=\"" + componentName + "\"]"; })
-            .join(",");
+            .join(',');
         if (!selector) {
             return [];
         }
@@ -122,7 +122,7 @@
         var handlerResults = [];
         components.forEach(function (component) {
             Object.keys(eventRegistry[component._componentName]).forEach(function (selector) {
-                if (selector === "" || viewport === selector) {
+                if (selector === '' || viewport === selector) {
                     eventRegistry[component._componentName][selector].forEach(function (handlerOption) {
                         handlerResults.push(component[handlerOption.handlerName].call(component, { viewport: viewport }));
                     });
@@ -187,7 +187,7 @@
             else {
                 // This should only happen if the user did a miss configuration
                 // with only a single breakpoint which is set to infinity
-                throw new Error("The smallest provided viewport must not be set to Infinity");
+                throw new Error('The smallest provided viewport must not be set to Infinity');
             }
             return { name: breakpointName, query: queryString, min: min, max: max };
         });
@@ -237,16 +237,14 @@
      */
     function initMediaQueriesPlugin(options) {
         // Get the converted breakpoint values
-        var breakPoints = options.convertToEm
-            ? convertBreakpointsToEm(options.breakPoints)
-            : options.breakPoints;
+        var breakPoints = options.convertToEm ? convertBreakpointsToEm(options.breakPoints) : options.breakPoints;
         // Get the unit
-        var unit = options.unit || (options.convertToEm ? "em" : "px");
+        var unit = options.unit || (options.convertToEm ? 'em' : 'px');
         var mediaQueries = generateMediaQueries(breakPoints, unit);
         // Setup the viewport helper independently so it will
         // also be avialiable if no component is listening to events:
         setupCurrentViewportHelper(mediaQueries);
-        addGondelPluginEventListener("MediaQueries", "registerEvent", function addViewportChangeEvent(isNativeEvent, _a, resolve) {
+        addGondelPluginEventListener('MediaQueries', 'registerEvent', function addViewportChangeEvent(isNativeEvent, _a, resolve) {
             var eventName = _a.eventName, namespace = _a.namespace, eventRegistry = _a.eventRegistry;
             // Ignore all events but the viewportChange event
             if (eventName !== VIEWPORT_ENTERED) {

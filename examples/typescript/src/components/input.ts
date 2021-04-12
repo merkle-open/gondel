@@ -1,19 +1,19 @@
-import { Component, EventListener, GondelBaseComponent, triggerPublicEvent } from "@gondel/core";
+import { Component, EventListener, GondelBaseComponent, triggerPublicEvent } from '@gondel/core';
 
-@Component("Input")
+@Component('Input')
 class Input extends GondelBaseComponent<HTMLInputElement> {
-  @EventListener("input")
-  _handleInput() {
-    triggerPublicEvent("gInput", this);
-  }
+	@EventListener('input')
+	_handleInput() {
+		triggerPublicEvent('gInput', this);
+	}
 
-  setValue(newValue: string) {
-    this._ctx.value = newValue;
-  }
+	setValue(newValue: string) {
+		this._ctx.value = newValue;
+	}
 
-  getValue() {
-    return this._ctx.value;
-  }
+	getValue() {
+		return this._ctx.value;
+	}
 }
 
 export default Input;

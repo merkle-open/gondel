@@ -1,11 +1,11 @@
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback, useEffect } from 'react';
 import {
-  GondelComponent,
-  startComponents,
-  hasMountedGondelComponent,
-  getComponentByDomNode,
-  stopComponents,
-} from "@gondel/core";
+	GondelComponent,
+	startComponents,
+	hasMountedGondelComponent,
+	getComponentByDomNode,
+	stopComponents,
+} from '@gondel/core';
 
 /**
  * React hook to use a Gondel components inside React
@@ -32,30 +32,30 @@ import {
  * };
  */
 export function useGondelComponent<TComponentType extends GondelComponent>() {
-  const [gondelInstance, setGondelInstance] = useState<TComponentType | null>(null);
-  const ref = useRef<HTMLElement | undefined>();
-  const refFunction = useCallback((element: HTMLElement | null) => {
-    if (element) {
-      ref.current = element;
-      startComponents(element).then(() => {
-        setGondelInstance(
-          hasMountedGondelComponent(element) ? getComponentByDomNode<TComponentType>(element) : null
-        );
-      });
-    }
-  }, []);
+	const [gondelInstance, setGondelInstance] = useState<TComponentType | null>(null);
+	const ref = useRef<HTMLElement | undefined>();
+	const refFunction = useCallback((element: HTMLElement | null) => {
+		if (element) {
+			ref.current = element;
+			startComponents(element).then(() => {
+				setGondelInstance(
+					hasMountedGondelComponent(element) ? getComponentByDomNode<TComponentType>(element) : null
+				);
+			});
+		}
+	}, []);
 
-  useEffect(() => {
-    // Cleanup on unmount
-    return () => {
-      const element = ref.current;
+	useEffect(() => {
+		// Cleanup on unmount
+		return () => {
+			const element = ref.current;
 
-      if (element) {
-        stopComponents(element);
-        ref.current = undefined;
-      }
-    };
-  }, []);
+			if (element) {
+				stopComponents(element);
+				ref.current = undefined;
+			}
+		};
+	}, []);
 
-  return [refFunction, gondelInstance] as const;
+	return [refFunction, gondelInstance] as const;
 }

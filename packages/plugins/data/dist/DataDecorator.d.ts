@@ -1,5 +1,5 @@
-import { GondelComponent } from "@gondel/core";
-import { DataBindingConfig } from "./DataPlugin";
+import { GondelComponent } from '@gondel/core';
+import { DataBindingConfig } from './DataPlugin';
 export interface ISerializer<T extends any = any> {
     serialize: (value: T) => string;
     deserialize: (value: string) => T;
