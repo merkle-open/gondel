@@ -1,13 +1,13 @@
 import { __awaiter, __decorate, __extends, __generator, __metadata } from "tslib";
-import { GondelBaseComponent, startComponents, stopComponents, getComponentByDomNode, Component, EventListener, disableAutoStart, } from "@gondel/core";
-import { initResizePlugin, WINDOW_RESIZED_EVENT, COMPONENT_RESIZED_EVENT } from "./index";
+import { GondelBaseComponent, startComponents, stopComponents, getComponentByDomNode, Component, EventListener, disableAutoStart, } from '@gondel/core';
+import { initResizePlugin, WINDOW_RESIZED_EVENT, COMPONENT_RESIZED_EVENT } from './index';
 // mock clientWidth and clientHeight, see https://github.com/jsdom/jsdom/issues/2342
-Object.defineProperty(window.HTMLElement.prototype, "clientWidth", {
+Object.defineProperty(window.HTMLElement.prototype, 'clientWidth', {
     get: function () {
         return this._jsdomMockClientWidth || 0;
     },
 });
-Object.defineProperty(window.HTMLElement.prototype, "clientHeight", {
+Object.defineProperty(window.HTMLElement.prototype, 'clientHeight', {
     get: function () {
         return this._jsdomMockClientHeight || 0;
     },
@@ -18,8 +18,8 @@ function setMockClientWidthAndHeight(component, width, height) {
 }
 function resize(width, height) {
     // Simulate window resize event
-    var resizeEvent = document.createEvent("Event");
-    resizeEvent.initEvent("resize", true, true);
+    var resizeEvent = document.createEvent('Event');
+    resizeEvent.initEvent('resize', true, true);
     window.innerWidth = width || window.innerWidth;
     window.innerHeight = height || window.innerHeight;
     window.dispatchEvent(resizeEvent);
@@ -57,16 +57,16 @@ var ResizeComponent = /** @class */ (function (_super) {
         __metadata("design:returntype", void 0)
     ], ResizeComponent.prototype, "_handleComponentResizeEvent", null);
     ResizeComponent = __decorate([
-        Component("ResizeComponent")
+        Component('ResizeComponent')
     ], ResizeComponent);
     return ResizeComponent;
 }(GondelBaseComponent));
 var gondelDivElement;
 var gondelInstance;
-describe("GondelResizePlugin", function () {
+describe('GondelResizePlugin', function () {
     beforeEach(function () {
         disableAutoStart();
-        var mockElementWrapper = document.createElement("div");
+        var mockElementWrapper = document.createElement('div');
         mockElementWrapper.innerHTML = "<div data-g-name=\"ResizeComponent\"><p>This is a container being resized</p></div>";
         gondelDivElement = mockElementWrapper.firstElementChild;
         document.body.appendChild(gondelDivElement);
@@ -76,21 +76,21 @@ describe("GondelResizePlugin", function () {
     });
     afterEach(function () {
         stopComponents();
-        document.body.innerHTML = "";
+        document.body.innerHTML = '';
     });
-    it("should have registered a gondel resize window event", function () {
-        expect(window["__🚡DomEvents"].g).toHaveProperty(WINDOW_RESIZED_EVENT);
+    it('should have registered a gondel resize window event', function () {
+        expect(window['__🚡DomEvents'].g).toHaveProperty(WINDOW_RESIZED_EVENT);
     });
-    it("should have registered a gondel resize component event", function () {
-        expect(window["__🚡DomEvents"].g).toHaveProperty(COMPONENT_RESIZED_EVENT);
+    it('should have registered a gondel resize component event', function () {
+        expect(window['__🚡DomEvents'].g).toHaveProperty(COMPONENT_RESIZED_EVENT);
     });
-    it("should receive no window resized event without resize", function () {
+    it('should receive no window resized event without resize', function () {
         expect(gondelInstance.getWindowResizeEventReceived()).toBe(0);
     });
-    it("should receive no component resized event without resize", function () {
+    it('should receive no component resized event without resize', function () {
         expect(gondelInstance.getComponentResizeEventReceived()).toBe(0);
     });
-    it("should receive an window resized event upon resize", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it('should receive an window resized event upon resize', function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -103,7 +103,7 @@ describe("GondelResizePlugin", function () {
             }
         });
     }); });
-    it("should receive no component resized event when component dimensions did not change", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it('should receive no component resized event when component dimensions did not change', function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -116,7 +116,7 @@ describe("GondelResizePlugin", function () {
             }
         });
     }); });
-    it("should receive a component resized event when component dimensions did change", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it('should receive a component resized event when component dimensions did change', function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -130,7 +130,7 @@ describe("GondelResizePlugin", function () {
             }
         });
     }); });
-    it("should receive two component resize events when firing resize two times", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it('should receive two component resize events when firing resize two times', function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -148,7 +148,7 @@ describe("GondelResizePlugin", function () {
             }
         });
     }); });
-    it("should should throttle more than 2 resize events being fired", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it('should should throttle more than 2 resize events being fired', function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -174,7 +174,7 @@ describe("GondelResizePlugin", function () {
             }
         });
     }); });
-    it("should should reset throttling after requestAnimationFrame time duration", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it('should should reset throttling after requestAnimationFrame time duration', function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -207,7 +207,7 @@ describe("GondelResizePlugin", function () {
             }
         });
     }); });
-    it("should should reset component information after 250ms time duration", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it('should should reset component information after 250ms time duration', function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:

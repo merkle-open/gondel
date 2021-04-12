@@ -1,6 +1,6 @@
-import React, { StatelessComponent, ComponentClass, ComponentLifecycle } from "react";
-import { GondelBaseComponent } from "@gondel/core";
-import { KeysMatching, UnwrapPromise } from "./utils";
+import React, { StatelessComponent, ComponentClass, ComponentLifecycle } from 'react';
+import { GondelBaseComponent } from '@gondel/core';
+import { KeysMatching, UnwrapPromise } from './utils';
 declare type RenderableReactComponent<State> = StatelessComponent<State> | ComponentClass<State, any>;
 declare type StateOfComponent<T> = T extends RenderableReactComponent<infer V> ? V : never;
 export interface ConstructableGondelReactComponent<State> {
@@ -46,7 +46,7 @@ export declare class GondelReactComponent<State extends {} = {}, TElement extend
      * Create a GondelReactComponent class which is directly linked with a loader
      */
     static create: typeof createGondelReactLoader;
-    _setInternalState: (config: State) => void | undefined;
+    _setInternalState?: (config: State) => void | undefined;
     App?: RenderableReactComponent<State> | Promise<RenderableReactComponent<State>>;
     state: Readonly<State>;
     constructor(ctx: TElement, componentName: string);

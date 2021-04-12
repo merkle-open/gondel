@@ -1,21 +1,21 @@
-import { Component, GondelBaseComponent } from "@gondel/core";
+import { Component, GondelBaseComponent } from '@gondel/core';
 
-@Component("Button")
+@Component('Button')
 class Button extends GondelBaseComponent {
-  start() {
-    console.log("started");
-  }
+	start() {
+		console.log('started');
+	}
 
-  stop() {
-    console.log("stopped");
-  }
+	stop() {
+		console.log('stopped');
+	}
 
-  setIsEnabled(isEnabled: boolean) {
-    if (isEnabled) {
-      this._ctx.removeAttribute("disabled");
-    } else {
-      this._ctx.setAttribute("disabled", "");
-    }
-  }
+	setIsEnabled(isEnabled: boolean) {
+		if (isEnabled) {
+			this._ctx.removeAttribute('disabled');
+		} else {
+			this._ctx.setAttribute('disabled', '');
+		}
+	}
 }
 export default Button;

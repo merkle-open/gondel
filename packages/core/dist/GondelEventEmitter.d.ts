@@ -1,5 +1,5 @@
-import { GondelComponent } from "./GondelComponent";
-import { ArrayLikeHtmlElement } from "./GondelDomUtils";
+import { GondelComponent } from './GondelComponent';
+import { ArrayLikeHtmlElement } from './GondelDomUtils';
 export interface UxEvent extends Event {
     currentTarget: Element;
     data: {

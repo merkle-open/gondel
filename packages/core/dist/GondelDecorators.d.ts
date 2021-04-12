@@ -1,4 +1,4 @@
-import { GondelComponent, IGondelComponent } from "./GondelComponent";
+import { GondelComponent, IGondelComponent } from './GondelComponent';
 export declare function Component(componentName: string, namespace?: string): (constructor: IGondelComponent) => void;
 declare type EventOption = [
     string,

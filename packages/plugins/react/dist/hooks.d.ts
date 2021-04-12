@@ -1,4 +1,4 @@
-import { GondelComponent } from "@gondel/core";
+import { GondelComponent } from '@gondel/core';
 /**
  * React hook to use a Gondel components inside React
  * @description

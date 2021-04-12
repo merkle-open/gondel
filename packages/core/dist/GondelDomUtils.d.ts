@@ -1,4 +1,4 @@
-import { GondelComponent } from "./GondelComponent";
+import { GondelComponent } from './GondelComponent';
 export declare type ArrayLikeHtmlElement = Element | Element[] | NodeListOf<Element> | ArrayLike<Element>;
 export declare const internalGondelRefAttribute = "_gondel_";
 export declare const internalGondelAsyncRefAttribute = "_gondelA_";

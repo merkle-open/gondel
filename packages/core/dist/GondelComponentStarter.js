@@ -1,6 +1,6 @@
-import { internalGondelAsyncRefAttribute, internalGondelRefAttribute } from "./GondelDomUtils";
-import { triggerPublicEvent } from "./GondelEventEmitter";
-import { fireGondelPluginEvent } from "./GondelPluginUtils";
+import { internalGondelAsyncRefAttribute, internalGondelRefAttribute } from './GondelDomUtils';
+import { triggerPublicEvent } from './GondelEventEmitter';
+import { fireGondelPluginEvent } from './GondelPluginUtils';
 var noop = function () { };
 var Deferred = function () {
     var _this = this;
@@ -28,18 +28,16 @@ export function startComponentsFromRegistry(gondelComponentRegistry, domContext,
         attachGondelBootingFlag(gondelDomNode, bootingDeferred.promise, namespace);
     });
     // Create instances
-    var gondelComponents = fireGondelPluginEvent("boot", pristineGondelDomNodes, { namespace: namespace }, function (pristineGondelDomNodes) {
+    var gondelComponents = fireGondelPluginEvent('boot', pristineGondelDomNodes, { namespace: namespace }, function (pristineGondelDomNodes) {
         return pristineGondelDomNodes.map(function (gondelDomNode) {
             return constructComponent(gondelDomNode, gondelComponentRegistry, namespace);
         });
     });
     // Get all component names
     var newComponentNames = getNewComponents(gondelComponents, gondelComponentRegistry);
-    newComponentNames.forEach(function (componentName) {
-        return gondelComponentRegistry.setActiveState(componentName, true);
-    });
+    newComponentNames.forEach(function (componentName) { return gondelComponentRegistry.setActiveState(componentName, true); });
     // Start all components
-    var gondelComponentStartPromise = fireGondelPluginEvent("start", gondelComponents, { newComponentNames: newComponentNames, namespace: namespace, gondelComponentRegistry: gondelComponentRegistry }, function (gondelComponents) {
+    var gondelComponentStartPromise = fireGondelPluginEvent('start', gondelComponents, { newComponentNames: newComponentNames, namespace: namespace, gondelComponentRegistry: gondelComponentRegistry }, function (gondelComponents) {
         // Wait for async started components
         return Promise.all(gondelComponents.map(startConstructedComponent));
     })
@@ -50,7 +48,7 @@ export function startComponentsFromRegistry(gondelComponentRegistry, domContext,
                 gondelComponent.sync();
             }
         });
-        return fireGondelPluginEvent("sync", gondelComponents, { namespace: namespace });
+        return fireGondelPluginEvent('sync', gondelComponents, { namespace: namespace });
     });
     // Resolve the booting deferred
     gondelComponentStartPromise
@@ -92,7 +90,7 @@ export function constructComponent(domNode, gondelComponentRegistry, namespace) 
     // Add stop method
     componentInstance.stop = stopStartedComponent.bind(null, componentInstance, componentInstance.stop || noop, namespace);
     // Create a circular reference which will allow access to the componentInstance from ctx
-    domNode["_gondel_" + namespace] = componentInstance;
+    domNode['_gondel_' + namespace] = componentInstance;
     return componentInstance;
 }
 /**
@@ -120,7 +118,7 @@ export function stopStartedComponent(component, internalStopMethod, namespace) {
     delete component._ctx[internalGondelRefAttribute + namespace];
     delete component._ctx[internalGondelAsyncRefAttribute + namespace];
     component._stopped = true;
-    fireGondelPluginEvent("stop", component, { namespace: namespace }, internalStopMethod.bind(component));
+    fireGondelPluginEvent('stop', component, { namespace: namespace }, internalStopMethod.bind(component));
 }
 /**
  * Filters the given component list and returns the names of those components which have never been started before

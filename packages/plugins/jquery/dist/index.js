@@ -2,8 +2,8 @@ import { __extends } from "tslib";
 /**
  * This plugin provides utils for Gondel jQuery integrations
  */
-import { GondelBaseComponent } from "@gondel/core";
-import $ from "jquery";
+import { GondelBaseComponent } from '@gondel/core';
+import $ from 'jquery';
 /**
  * Class mixin https://basarat.gitbooks.io/typescript/docs/types/mixins.html
  * Usage:

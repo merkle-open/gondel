@@ -1,15 +1,15 @@
-import { addRootEventListener, removeRootEventListernerForComponent } from "./GondelEventRegistry";
+import { addRootEventListener, removeRootEventListernerForComponent } from './GondelEventRegistry';
 // Because of how decorators work @EventListeners is executed before the class is registred
 // so we need to provide a hrm compatible approch initialize and reinitialize the events
-import { addGondelPluginEventListener } from "./GondelPluginUtils";
-import { registerComponent } from "./index";
+import { addGondelPluginEventListener } from './GondelPluginUtils';
+import { registerComponent } from './index';
 export function Component(componentName, namespace) {
     return function (constructor) {
         registerComponent(componentName, namespace, constructor);
     };
 }
 function hookEventDecoratorInCore() {
-    addGondelPluginEventListener("GondelDecorators", "register", function (component, _a, next) {
+    addGondelPluginEventListener('GondelDecorators', 'register', function (component, _a, next) {
         var componentName = _a.componentName, namespace = _a.namespace, gondelComponentRegistry = _a.gondelComponentRegistry;
         // Only apply in case the component is already active in the DOM
         // this will only happen during hot module replacement
@@ -30,12 +30,12 @@ function hookEventDecoratorInCore() {
         }
         next(component);
     });
-    addGondelPluginEventListener("GondelDecorators", "unregister", function (component, _a, next) {
+    addGondelPluginEventListener('GondelDecorators', 'unregister', function (component, _a, next) {
         var componentName = _a.componentName, namespace = _a.namespace;
         removeRootEventListernerForComponent(namespace, componentName);
         next(component);
     });
-    addGondelPluginEventListener("GondelDecorators", "start", function (gondelComponents, _a, next) {
+    addGondelPluginEventListener('GondelDecorators', 'start', function (gondelComponents, _a, next) {
         var newComponentNames = _a.newComponentNames, gondelComponentRegistry = _a.gondelComponentRegistry, namespace = _a.namespace;
         newComponentNames.forEach(function (componentName) {
             var gondelComponent = gondelComponentRegistry.getComponent(componentName);
@@ -62,7 +62,7 @@ function hookEventDecoratorInCore() {
 export function EventListener(eventName, selector) {
     return function (target, handler) {
         hookEventDecoratorInCore();
-        if (handler.substr(0, 1) !== "_") {
+        if (handler.substr(0, 1) !== '_') {
             throw new Error("Invalid handler name '" + handler + "' use '_" + handler + "' instead.");
         }
         if (!target.__events) {

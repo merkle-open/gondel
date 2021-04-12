@@ -34,7 +34,7 @@
   },
   "lint-staged": {
     "**/src/**/*.(ts|tsx)": [
-      "prettier --list-different"
+      "prettier --write"
     ]
   },
   "commitlint": {
@@ -63,6 +63,7 @@
     "commitizen": "4.2.3",
     "@commitlint/cli": "12.1.1",
     "@namics/commitlint-conventional-changelog": "1.2.1",
+    "@namics/prettier-config": "2.0.0",
     "@size-limit/preset-small-lib": "4.10.2",
     "cz-conventional-changelog": "3.3.0",
     "husky": "4.3.8",

@@ -1,7 +1,7 @@
-import { getComponentRegistry } from "./GondelComponentRegistry";
-import { startComponentsFromRegistry } from "./GondelComponentStarter";
-export var internalGondelRefAttribute = "_gondel_";
-export var internalGondelAsyncRefAttribute = "_gondelA_";
+import { getComponentRegistry } from './GondelComponentRegistry';
+import { startComponentsFromRegistry } from './GondelComponentStarter';
+export var internalGondelRefAttribute = '_gondel_';
+export var internalGondelAsyncRefAttribute = '_gondelA_';
 /**
  * Returns true if the given object is a single Element
  */
@@ -26,7 +26,7 @@ export function getFirstDomNode(domNode) {
  * Start all nodes in the given context
  */
 export function startComponents(domContext, namespace) {
-    if (namespace === void 0) { namespace = "g"; }
+    if (namespace === void 0) { namespace = 'g'; }
     var registry = getComponentRegistry(namespace);
     return startComponentsFromRegistry(registry, domContext ? getFirstDomNode(domContext) : document.documentElement, namespace);
 }
@@ -34,7 +34,7 @@ export function startComponents(domContext, namespace) {
  * Stop all nodes in the given context
  */
 export function stopComponents(domContext, namespace) {
-    if (namespace === void 0) { namespace = "g"; }
+    if (namespace === void 0) { namespace = 'g'; }
     var components = findComponents(domContext, undefined, namespace);
     if (domContext && hasMountedGondelComponent(domContext)) {
         components.unshift(getComponentByDomNode(domContext));
@@ -45,7 +45,7 @@ export function stopComponents(domContext, namespace) {
  * Checks if a component is mounted on a certain DOM node
  */
 export function hasMountedGondelComponent(domNode, namespace) {
-    if (namespace === void 0) { namespace = "g"; }
+    if (namespace === void 0) { namespace = 'g'; }
     var firstNode = getFirstDomNode(domNode);
     var gondelComponent = firstNode[internalGondelRefAttribute + namespace];
     if (!gondelComponent || !gondelComponent._ctx) {
@@ -60,7 +60,7 @@ export function hasMountedGondelComponent(domNode, namespace) {
  * Returns the gondel instance for the given HtmlELement
  */
 export function getComponentByDomNode(domNode, namespace) {
-    if (namespace === void 0) { namespace = "g"; }
+    if (namespace === void 0) { namespace = 'g'; }
     var gondelComponent = extractComponent(getFirstDomNode(domNode), namespace);
     if (!gondelComponent) {
         throw new Error("Could not find a started gondel component in namespace \"" + namespace + "\",\nplease check if your component is mounted via 'hasMountedGondelComponent'");
@@ -85,7 +85,7 @@ export function extractComponent(element, namespace) {
  * Returns the gondel instance for the given HtmlELement once it is booted
  */
 export function getComponentByDomNodeAsync(domNode, namespace) {
-    if (namespace === void 0) { namespace = "g"; }
+    if (namespace === void 0) { namespace = 'g'; }
     var firstNode = getFirstDomNode(domNode);
     var gondelComponent = firstNode[internalGondelAsyncRefAttribute + namespace];
     // Stop if this dom node is not known to gondel
@@ -104,11 +104,11 @@ export function getComponentByDomNodeAsync(domNode, namespace) {
  */
 export function findComponents(domNode, componentName, namespace) {
     if (domNode === void 0) { domNode = document.documentElement; }
-    if (namespace === void 0) { namespace = "g"; }
+    if (namespace === void 0) { namespace = 'g'; }
     var firstNode = getFirstDomNode(domNode);
     var components = [];
     var attribute = "_gondel_" + namespace;
-    var nodes = firstNode.querySelectorAll("[data-" + namespace + "-name" + (componentName ? "=\"" + componentName + "\"" : "") + "]");
+    var nodes = firstNode.querySelectorAll("[data-" + namespace + "-name" + (componentName ? "=\"" + componentName + "\"" : '') + "]");
     for (var i = 0; i < nodes.length; i++) {
         var node = nodes[i];
         var gondelComponentInstance = node[attribute];

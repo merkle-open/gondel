@@ -18,7 +18,7 @@ export function fireGondelPluginEvent(eventName, initialValue, data, callback) {
     // Add a guard to prevent asyncron plugin listeners
     // to simplify the usage of fireGondelPluginEvent
     if (!isSyncron) {
-        throw new Error("Async plugin listener");
+        throw new Error('Async plugin listener');
     }
     return callbackResult;
 }

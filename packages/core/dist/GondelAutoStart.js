@@ -1,12 +1,12 @@
-import { getComponentRegistry } from "./GondelComponentRegistry";
-import { startComponentsFromRegistry } from "./GondelComponentStarter";
+import { getComponentRegistry } from './GondelComponentRegistry';
+import { startComponentsFromRegistry } from './GondelComponentStarter';
 /**
  * By default Gondel will run startComponents on DOMContentLoaded
  * To gain more controll over the boot behaviour tihs function can be called
  * to disable the auto start
  */
 export function disableAutoStart(namespace) {
-    if (namespace === void 0) { namespace = "g"; }
+    if (namespace === void 0) { namespace = 'g'; }
     getComponentRegistry(namespace).setBootMode(1 /* manual */);
 }
 /**
@@ -24,11 +24,11 @@ export function addRegistryToBootloader(namespace) {
         });
     };
     // Boot if document is complete or once it completes
-    if (document.readyState == "complete") {
+    if (document.readyState == 'complete') {
         boot();
     }
     else {
-        document.addEventListener("DOMContentLoaded", boot, false);
+        document.addEventListener('DOMContentLoaded', boot, false);
     }
 }
 //# sourceMappingURL=GondelAutoStart.js.map

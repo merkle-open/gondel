@@ -1,15 +1,15 @@
 /**
  * This is a demo plugin which adds custom events
  */
-import { addGondelPluginEventListener, getComponentByDomNode } from "@gondel/core";
-import { getHandlers, executeHandlers } from "@gondel/core/dist/GondelEventRegistry";
+import { addGondelPluginEventListener, getComponentByDomNode } from '@gondel/core';
+import { getHandlers, executeHandlers } from '@gondel/core/dist/GondelEventRegistry';
 /**
  * This function returns all components for the given eventRegistry which can be found in the dom.
  */
 function getComponentsInEventRegistry(eventRegistry, namespace) {
     var selector = Object.keys(eventRegistry)
         .map(function (componentName) { return "[data-" + namespace + "-name=\"" + componentName + "\"]"; })
-        .join(",");
+        .join(',');
     if (!selector) {
         return [];
     }
@@ -96,8 +96,7 @@ var customEvents = {
             componentInformation.forEach(function (componentInformation, i) {
                 var newSize = newSizes[i];
                 // Skip if the size did not change
-                if (newSize.width === componentInformation.width &&
-                    newSize.height === componentInformation.height) {
+                if (newSize.width === componentInformation.width && newSize.height === componentInformation.height) {
                     return;
                 }
                 // Skip if the component is not running anymore
@@ -114,12 +113,12 @@ var customEvents = {
                 });
             });
             handlerResults.forEach(function (handlerResult) {
-                if (typeof handlerResult === "function") {
+                if (typeof handlerResult === 'function') {
                     handlerResult();
                 }
             });
         }
-        window.addEventListener("resize", function (event) {
+        window.addEventListener('resize', function (event) {
             if (!isRunning) {
                 startResizeWatching(event);
             }
@@ -140,12 +139,12 @@ var customEvents = {
      * https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values
      */
     key: function (eventRegistry, namespace) {
-        window.addEventListener("keydown", function (event) {
+        window.addEventListener('keydown', function (event) {
             var components = getComponentsInEventRegistry(eventRegistry, namespace);
             var handlerResults = [];
             components.forEach(function (component) {
                 var gondelComponentHandlers = Object.keys(eventRegistry[component._componentName]).forEach(function (selector) {
-                    if (selector === "" || event.key === selector) {
+                    if (selector === '' || event.key === selector) {
                         eventRegistry[component._componentName][selector].forEach(function (handlerOption) {
                             handlerResults.push(component[handlerOption.handlerName].call(component, event));
                         });
@@ -153,7 +152,7 @@ var customEvents = {
                 });
             });
             handlerResults.forEach(function (handlerResult) {
-                if (typeof handlerResult === "function") {
+                if (typeof handlerResult === 'function') {
                     handlerResult();
                 }
             });
@@ -164,8 +163,8 @@ var customEvents = {
      *
      * This will allow components to listen for mouse swipe events
      */
-    "swipe-left": function (eventRegistry, namespace) {
-        document.documentElement.addEventListener("mousedown", function (mouseDownEvent) {
+    'swipe-left': function (eventRegistry, namespace) {
+        document.documentElement.addEventListener('mousedown', function (mouseDownEvent) {
             var handlers = getHandlers("data-" + namespace + "-name", eventRegistry, mouseDownEvent.target);
             var latestMouseMoveEvent;
             var frameListernerId;
@@ -189,8 +188,8 @@ var customEvents = {
                 }
             }
             function stopMouseMoveTracking() {
-                document.documentElement.removeEventListener("mousemove", handleMouseMove);
-                document.documentElement.removeEventListener("mouseup", handleMouseUp);
+                document.documentElement.removeEventListener('mousemove', handleMouseMove);
+                document.documentElement.removeEventListener('mouseup', handleMouseUp);
                 if (frameListernerId) {
                     cancelAnimationFrame(frameListernerId);
                 }
@@ -199,8 +198,8 @@ var customEvents = {
                 mouseMoveUpEvent.preventDefault();
                 stopMouseMoveTracking();
             }
-            document.documentElement.addEventListener("mousemove", handleMouseMove);
-            document.documentElement.addEventListener("mouseup", handleMouseUp);
+            document.documentElement.addEventListener('mousemove', handleMouseMove);
+            document.documentElement.addEventListener('mouseup', handleMouseUp);
         });
     },
     /**
@@ -208,8 +207,8 @@ var customEvents = {
      *
      * This will allow components to listen for mouse swipe events
      */
-    "swipe-right": function (eventRegistry, namespace) {
-        document.documentElement.addEventListener("mousedown", function (mouseDownEvent) {
+    'swipe-right': function (eventRegistry, namespace) {
+        document.documentElement.addEventListener('mousedown', function (mouseDownEvent) {
             var handlers = getHandlers("data-" + namespace + "-name", eventRegistry, mouseDownEvent.target);
             var latestMouseMoveEvent;
             var frameListernerId;
@@ -233,8 +232,8 @@ var customEvents = {
                 }
             }
             function stopMouseMoveTracking() {
-                document.documentElement.removeEventListener("mousemove", handleMouseMove);
-                document.documentElement.removeEventListener("mouseup", handleMouseUp);
+                document.documentElement.removeEventListener('mousemove', handleMouseMove);
+                document.documentElement.removeEventListener('mouseup', handleMouseUp);
                 if (frameListernerId) {
                     cancelAnimationFrame(frameListernerId);
                 }
@@ -243,13 +242,13 @@ var customEvents = {
                 mouseMoveUpEvent.preventDefault();
                 stopMouseMoveTracking();
             }
-            document.documentElement.addEventListener("mousemove", handleMouseMove);
-            document.documentElement.addEventListener("mouseup", handleMouseUp);
+            document.documentElement.addEventListener('mousemove', handleMouseMove);
+            document.documentElement.addEventListener('mouseup', handleMouseUp);
         });
     },
 };
 export function initEventPlugin() {
-    addGondelPluginEventListener("Events", "registerEvent", function addResizeEvent(isNativeEvent, _a, resolve) {
+    addGondelPluginEventListener('Events', 'registerEvent', function addResizeEvent(isNativeEvent, _a, resolve) {
         var eventName = _a.eventName, namespace = _a.namespace, eventRegistry = _a.eventRegistry;
         if (customEvents[eventName]) {
             customEvents[eventName](eventRegistry, namespace);
@@ -260,7 +259,7 @@ export function initEventPlugin() {
             resolve(isNativeEvent);
         }
     });
-    addGondelPluginEventListener("Events", "sync", function addResizeEvent(components, data, resolve) {
+    addGondelPluginEventListener('Events', 'sync', function addResizeEvent(components, data, resolve) {
         setTimeout(function () {
             components.forEach(function (component) {
                 component.__resizeSize = {

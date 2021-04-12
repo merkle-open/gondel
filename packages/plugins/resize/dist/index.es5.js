@@ -39,7 +39,7 @@
         };
     }
 
-    var internalGondelRefAttribute = "_gondel_";
+    var internalGondelRefAttribute = '_gondel_';
     /**
      * Returns true if the given object is a single Element
      */
@@ -64,7 +64,7 @@
      * Returns the gondel instance for the given HtmlELement
      */
     function getComponentByDomNode(domNode, namespace) {
-        if (namespace === void 0) { namespace = "g"; }
+        if (namespace === void 0) { namespace = 'g'; }
         var gondelComponent = extractComponent(getFirstDomNode(domNode), namespace);
         if (!gondelComponent) {
             throw new Error("Could not find a started gondel component in namespace \"" + namespace + "\",\nplease check if your component is mounted via 'hasMountedGondelComponent'");
@@ -92,18 +92,18 @@
     /**
      * The COMPONENT_RESIZED_EVENT event will be fired if a component size was changed because of a browser window resize
      */
-    var COMPONENT_RESIZED_EVENT = "@gondel/plugin-resize--component-resized";
+    var COMPONENT_RESIZED_EVENT = '@gondel/plugin-resize--component-resized';
     /**
      * The WINDOW_RESIZED_EVENT event will be fired if the browser window was resized
      */
-    var WINDOW_RESIZED_EVENT = "@gondel/plugin-resize--window-resized";
+    var WINDOW_RESIZED_EVENT = '@gondel/plugin-resize--window-resized';
     /**
      * This function returns all components for the given eventRegistry which can be found in the dom.
      */
     function getComponentsInEventRegistry(eventRegistry, namespace) {
         var selector = Object.keys(eventRegistry)
             .map(function (componentName) { return "[data-" + namespace + "-name=\"" + componentName + "\"]"; })
-            .join(",");
+            .join(',');
         if (!selector) {
             return [];
         }
@@ -190,8 +190,7 @@
             componentInformation.forEach(function (componentInformation, i) {
                 var newSize = newSizes[i];
                 // Skip if the size did not change
-                if (newSize.width === componentInformation.width &&
-                    newSize.height === componentInformation.height) {
+                if (newSize.width === componentInformation.width && newSize.height === componentInformation.height) {
                     return;
                 }
                 // Skip if the component is not running anymore
@@ -208,7 +207,7 @@
                 });
             });
             handlerResults.forEach(function (handlerResult) {
-                if (typeof handlerResult === "function") {
+                if (typeof handlerResult === 'function') {
                     handlerResult();
                 }
             });
@@ -228,18 +227,16 @@
                     return;
                 }
                 componentInformation.selectors.forEach(function (selector) {
-                    return selector.forEach(function (handler) {
-                        return handlerResults.push(handler.call(componentInformation.component, event));
-                    });
+                    return selector.forEach(function (handler) { return handlerResults.push(handler.call(componentInformation.component, event)); });
                 });
             });
             handlerResults.forEach(function (handlerResult) {
-                if (typeof handlerResult === "function") {
+                if (typeof handlerResult === 'function') {
                     handlerResult();
                 }
             });
         }
-        window.addEventListener("resize", function (event) {
+        window.addEventListener('resize', function (event) {
             if (!isRunning) {
                 startResizeWatching(event);
             }
@@ -255,7 +252,7 @@
      * This function creates a custom gondel event
      */
     function initResizePlugin() {
-        addGondelPluginEventListener("Resize", "registerEvent", function addResizeEvent(isNativeEvent, _a, resolve) {
+        addGondelPluginEventListener('Resize', 'registerEvent', function addResizeEvent(isNativeEvent, _a, resolve) {
             var eventName = _a.eventName, namespace = _a.namespace, eventRegistry = _a.eventRegistry;
             // Ignore all events but the resize events
             if (eventName !== WINDOW_RESIZED_EVENT && eventName !== COMPONENT_RESIZED_EVENT) {
@@ -266,7 +263,7 @@
             // Tell the event system that it should not listen for the event:
             resolve(false);
         });
-        addGondelPluginEventListener("Resize", "sync", function addResizeEvent(components, data, resolve) {
+        addGondelPluginEventListener('Resize', 'sync', function addResizeEvent(components, data, resolve) {
             setTimeout(function () {
                 components.forEach(function (component) {
                     component.__resizeSize = {

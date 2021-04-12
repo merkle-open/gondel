@@ -2,19 +2,21 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { createElement, } from "react";
-import { GondelBaseComponent } from "@gondel/core";
-import { createRenderableAppWrapper } from "./AppWrapper";
-import { isPromise } from "./utils";
+import { createElement } from 'react';
+import { GondelBaseComponent } from '@gondel/core';
+import { createRenderableAppWrapper } from './AppWrapper';
+import { isPromise } from './utils';
 export function createGondelReactLoader(loader, exportName) {
     var unifiedLoader = function () {
         var loaderResult = loader();
@@ -51,8 +53,7 @@ var GondelReactComponent = /** @class */ (function (_super) {
         var _this = _super.call(this, ctx, componentName) || this;
         // Overwrite the current start method
         var originalStart = _this.start;
-        var ReactDOMPromise = import(
-        /* webpackPrefetch: true, webpackChunkName: 'ReactDom' */ "react-dom").then(function (ReactDOM) { return ReactDOM.default || ReactDOM; });
+        var ReactDOMPromise = import(/* webpackPrefetch: true, webpackChunkName: 'ReactDom' */ 'react-dom').then(function (ReactDOM) { return ReactDOM.default || ReactDOM; });
         var configScript = ctx.querySelector("script[type='text/json']");
         _this.state = configScript ? JSON.parse(configScript.innerHTML) : {};
         var unmountComponentAtNode;
@@ -131,9 +132,7 @@ var GondelReactComponent = /** @class */ (function (_super) {
         // If this App is a promise use the AppPromiseMap to extract the resolved promise value
         var App = isPromise(this.App) ? GondelReactComponent.AppPromiseMap.get(this.App) : this.App;
         if (!App) {
-            throw new Error(this._componentName + " could not render " + ("App" in this
-                ? "ensure that you are returning a React component"
-                : "please add a render method"));
+            throw new Error(this._componentName + " could not render " + ('App' in this ? 'ensure that you are returning a React component' : 'please add a render method'));
         }
         return createElement(App, this.state);
     };

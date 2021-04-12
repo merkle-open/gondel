@@ -1,1 +1,1 @@
-{"version":3,"file":"GondelComponent.js","sourceRoot":"","sources":["../src/GondelComponent.ts"],"names":[],"mappings":"AA2BA;IACE,6BAAY,OAAiB,EAAE,aAAqB;IAAG,CAAC;IAiBxD;;OAEG;IACH,kCAAI,GAAJ,cAAQ,CAAC;IACX,0BAAC;AAAD,CAAC,AAtBD,IAsBC"}
+{"version":3,"file":"GondelComponent.js","sourceRoot":"","sources":["../src/GondelComponent.ts"],"names":[],"mappings":"AA2BA;IACC,6BAAY,OAAiB,EAAE,aAAqB;IAAG,CAAC;IAiBxD;;OAEG;IACH,kCAAI,GAAJ,cAAQ,CAAC;IACV,0BAAC;AAAD,CAAC,AAtBD,IAsBC"}
