@@ -23,7 +23,7 @@
     "release": "lerna publish --conventional-commits --no-commit-hooks",
     "update-dependencies": "npm-run-all --parallel update-dependencies:*",
     "update-dependencies:packages": "lerna exec -- npm-check-updates -u",
-    "update-dependencies:root": "npm-check-updates -u"
+    "update-dependencies:root": "npm-check-updates -u -x husky"
   },
   "license": "MIT",
   "husky": {
