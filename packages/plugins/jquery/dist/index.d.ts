@@ -28,7 +28,7 @@ class MyComponent extends GondelJqueryComponent {
 }
    ```
  */
-export declare class GondelJqueryComponent<TElement = HTMLElement> extends GondelBaseComponent<TElement> {
+export declare class GondelJqueryComponent<TElement extends HTMLElement = HTMLElement> extends GondelBaseComponent<TElement> {
     $ctx: JQuery<TElement>;
     constructor(ctx: TElement, componentName: string);
 }
