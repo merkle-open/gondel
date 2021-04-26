@@ -40,7 +40,7 @@ class MyComponent extends GondelJqueryComponent {
 }
    ```
  */
-export class GondelJqueryComponent<TElement = HTMLElement> extends GondelBaseComponent<TElement> {
+export class GondelJqueryComponent<TElement extends HTMLElement = HTMLElement> extends GondelBaseComponent<TElement> {
 	$ctx: JQuery<TElement>;
 	constructor(ctx: TElement, componentName: string) {
 		super(ctx, componentName);

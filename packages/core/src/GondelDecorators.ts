@@ -7,7 +7,7 @@ import { addGondelPluginEventListener } from './GondelPluginUtils';
 import { registerComponent } from './index';
 
 export function Component(componentName: string, namespace?: string) {
-	return function (constructor: IGondelComponent) {
+	return function <TGondelComponent extends IGondelComponent<any>>(constructor: TGondelComponent) {
 		registerComponent(componentName, namespace, constructor);
 	};
 }
