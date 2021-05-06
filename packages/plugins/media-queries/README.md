@@ -82,5 +82,5 @@ The `initMediaQueriesPlugin` has to be called before you call `startComponents`.
 [license-url]: http://opensource.org/licenses/MIT
 [commitizen-image]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
 [commitizen-url]: http://commitizen.github.io/cz-cli/
-[size-image]: http://img.badgesize.io/namics/gondel/master/packages/media-queries/dist/index.es5.min.js.svg?compression=gzip&label=gzip%20size
+[size-image]: http://img.badgesize.io/merkle-open/gondel/master/packages/media-queries/dist/index.es5.min.js.svg?compression=gzip&label=gzip%20size
 [size-url]: https://unpkg.com/@gondel/plugin-media-queries/dist/index.es5.min.js

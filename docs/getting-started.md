@@ -103,4 +103,4 @@ Gondel will be initialized automatically, and will scan the page for elements co
 
 ## Live example
 
-You can also find this code example live on [CodeSandbox](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/hello-world)
+You can also find this code example live on [CodeSandbox](https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/hello-world)

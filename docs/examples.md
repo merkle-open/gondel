@@ -6,24 +6,24 @@ sidebar_label: Examples
 
 ## Hello World
 
-https://codesandbox.io/s/github/namics/gondel/tree/master/examples/hello-world
+https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/hello-world
 
 ## Star Rating
 
-https://codesandbox.io/s/github/namics/gondel/tree/master/examples/five-star
+https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/five-star
 
 ## Chunk Splitting
 
-https://codesandbox.io/s/github/namics/gondel/tree/master/examples/lazy-load
+https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/lazy-load
 
 ## Gondel with Typescript
 
-https://codesandbox.io/s/github/namics/gondel/tree/master/examples/typescript
+https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/typescript
 
 ## Using Gondel from React
 
-https://codesandbox.io/s/github/namics/gondel/tree/master/examples/react-gondel
+https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/react-gondel
 
 ## Using React from Gondel
 
-https://codesandbox.io/s/github/namics/gondel/tree/master/examples/gondel-react
+https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/gondel-react

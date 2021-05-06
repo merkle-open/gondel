@@ -59,12 +59,12 @@ class Footer extends React.Component {
           </div>
           <div>
             <h5>More</h5>
-            <a href="https://github.com/namics/gondel">GitHub</a>
+            <a href="https://github.com/merkle-open/gondel">GitHub</a>
             <a
               className="github-button"
               href={this.props.config.repoUrl}
               data-icon="octicon-star"
-              data-count-href="https://github.com/namics/gondel/stargazers"
+              data-count-href="https://github.com/merkle-open/gondel/stargazers"
               data-show-count={true}
               data-count-aria-label="# stargazers on GitHub"
               aria-label="Star this project on GitHub">

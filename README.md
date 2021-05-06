@@ -1,5 +1,5 @@
 [![NPM version][npm-image]][npm-url] 
-[![CI](https://github.com/namics/gondel/workflows/CI/badge.svg)](https://github.com/namics/gondel/actions?query=workflow%3ACI)
+[![CI](https://github.com/merkle-open/gondel/workflows/CI/badge.svg)](https://github.com/merkle-open/gondel/actions?query=workflow%3ACI)
 [![Size][size-image]][size-url]
 [![License][license-image]][license-url] 
 [![Commitizen friendly][commitizen-image]][commitizen-url] 
@@ -44,7 +44,7 @@ export class Button extends GondelBaseComponent {
 }
 ```
 
-[Hello World Example](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/hello-world)
+[Hello World Example](https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/hello-world)
 
 ## Module format 
 
@@ -54,31 +54,31 @@ Gondel is fully typed and exports optional typescript declaration files for type
 
 ## Plugins
 
-- [Data Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/data) - Provide auto binding of data attributes - [Demo](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/plugin-data)
-- [Hot Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/hot) - Adds support for hot-module-reloading (hmr) for Gondel components. - [Demo](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/typescript)
-- [jQuery Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/jquery) - Adds support for easy access to the current ctx as jQuery collection.
-- [Media Queries Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/media-queries) - Provide a custom gondel event which will fire once a given media query is met - [Demo](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/plugin-media-query)
-- [React Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/resize) - Adds support to bootstrap React widgets and apps using Gondel and vice versa - [Demo](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/gondel-react)
-- [Resize Plugin](https://github.com/namics/gondel/tree/master/packages/plugins/resize) - Provide an event when the window or the component resized - [Demo](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/plugin-resize)
+- [Data Plugin](https://github.com/merkle-open/gondel/tree/master/packages/plugins/data) - Provide auto binding of data attributes - [Demo](https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/plugin-data)
+- [Hot Plugin](https://github.com/merkle-open/gondel/tree/master/packages/plugins/hot) - Adds support for hot-module-reloading (hmr) for Gondel components. - [Demo](https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/typescript)
+- [jQuery Plugin](https://github.com/merkle-open/gondel/tree/master/packages/plugins/jquery) - Adds support for easy access to the current ctx as jQuery collection.
+- [Media Queries Plugin](https://github.com/merkle-open/gondel/tree/master/packages/plugins/media-queries) - Provide a custom gondel event which will fire once a given media query is met - [Demo](https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/plugin-media-query)
+- [React Plugin](https://github.com/merkle-open/gondel/tree/master/packages/plugins/resize) - Adds support to bootstrap React widgets and apps using Gondel and vice versa - [Demo](https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/gondel-react)
+- [Resize Plugin](https://github.com/merkle-open/gondel/tree/master/packages/plugins/resize) - Provide an event when the window or the component resized - [Demo](https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/plugin-resize)
 
 ## Playground
 
-https://codesandbox.io/s/github/namics/gondel/tree/master/examples/hello-world
+https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/hello-world
 
 ## Examples
 
-+ [Hello World](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/hello-world)
-+ [Chunk Splitting](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/lazy-load)
-+ [Star Rating](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/five-star)
-+ [Gondel with Typescript](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/typescript)
-+ [Using Gondel from React](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/react-gondel)
-+ [Using React from Gondel](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/gondel-react)
-+ [Communication getComponentByDomNode](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/get-component-by-dom-node)
-+ [Communication findComponents](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/find-components)
-+ [Communication triggerPublicEvent](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/trigger-public-event)
-+ [Plugin Data](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/plugin-data)
-+ [Plugin Media Queries](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/plugin-media-query)
-+ [Plugin Resize](https://codesandbox.io/s/github/namics/gondel/tree/master/examples/plugin-resize)
++ [Hello World](https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/hello-world)
++ [Chunk Splitting](https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/lazy-load)
++ [Star Rating](https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/five-star)
++ [Gondel with Typescript](https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/typescript)
++ [Using Gondel from React](https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/react-gondel)
++ [Using React from Gondel](https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/gondel-react)
++ [Communication getComponentByDomNode](https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/get-component-by-dom-node)
++ [Communication findComponents](https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/find-components)
++ [Communication triggerPublicEvent](https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/trigger-public-event)
++ [Plugin Data](https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/plugin-data)
++ [Plugin Media Queries](https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/plugin-media-query)
++ [Plugin Resize](https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/plugin-resize)
 
 ## Contributing to Gondel
 
@@ -100,7 +100,7 @@ Thanks to all who have contributed ([emoji key](https://github.com/kentcdodds/al
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-| [<img src="https://avatars2.githubusercontent.com/u/4113649?v=4" width="100px;"/><br /><sub><b>Jan Nicklas</b></sub>](https://twitter.com/jantimon)<br />[💻](https://github.com/namics/gondel/commits?author=jantimon "Code") [📖](https://github.com/namics/gondel/commits?author=jantimon "Documentation") [🐛](https://github.com/namics/gondel/issues?q=author%3Ajantimon "Bug reports") [💡](#example-jantimon "Examples") [🚇](#infra-jantimon "Infrastructure (Hosting, Build-Tools, etc)") [🔌](#plugin-jantimon "Plugin/utility libraries") [⚠️](https://github.com/namics/gondel/commits?author=jantimon "Tests") [👀](#review-jantimon "Reviewed Pull Requests") | [<img src="https://avatars1.githubusercontent.com/u/149406?v=4" width="100px;"/><br /><sub><b>Ernst Ammann</b></sub>](https://github.com/ernscht)<br />[💻](https://github.com/namics/gondel/commits?author=ernscht "Code") [📖](https://github.com/namics/gondel/commits?author=ernscht "Documentation") [🚇](#infra-ernscht "Infrastructure (Hosting, Build-Tools, etc)") [📦](#platform-ernscht "Packaging/porting to new platform") [👀](#review-ernscht "Reviewed Pull Requests") | [<img src="https://avatars1.githubusercontent.com/u/9339019?v=4" width="100px;"/><br /><sub><b>Dušan Perković</b></sub>](https://github.com/noblica)<br />[💻](https://github.com/namics/gondel/commits?author=noblica "Code") [📖](https://github.com/namics/gondel/commits?author=noblica "Documentation") [🔌](#plugin-noblica "Plugin/utility libraries") [🤔](#ideas-noblica "Ideas, Planning, & Feedback") [⚠️](https://github.com/namics/gondel/commits?author=noblica "Tests") | [<img src="https://avatars1.githubusercontent.com/u/4563751?v=4" width="100px;"/><br /><sub><b>Jan R. Biasi</b></sub>](https://aviormusic.com)<br />[💻](https://github.com/namics/gondel/commits?author=janbiasi "Code") [📖](https://github.com/namics/gondel/commits?author=janbiasi "Documentation") [🤔](#ideas-janbiasi "Ideas, Planning, & Feedback") [⚠️](https://github.com/namics/gondel/commits?author=janbiasi "Tests") [👀](#review-janbiasi "Reviewed Pull Requests") | [<img src="https://avatars1.githubusercontent.com/u/3381820?v=4" width="100px;"/><br /><sub><b>Jan Widmer</b></sub>](https://github.com/janwidmer)<br />[💻](https://github.com/namics/gondel/commits?author=janwidmer "Code") [📖](https://github.com/namics/gondel/commits?author=janwidmer "Documentation") [💡](#example-janwidmer "Examples") [🤔](#ideas-janwidmer "Ideas, Planning, & Feedback") [🔌](#plugin-janwidmer "Plugin/utility libraries") | [<img src="https://avatars1.githubusercontent.com/u/3457712?v=4" width="100px;"/><br /><sub><b>Claudio Bianucci</b></sub>](https://github.com/chezdev)<br />[💻](https://github.com/namics/gondel/commits?author=chezdev "Code") [🤔](#ideas-chezdev "Ideas, Planning, & Feedback") |
+| [<img src="https://avatars2.githubusercontent.com/u/4113649?v=4" width="100px;"/><br /><sub><b>Jan Nicklas</b></sub>](https://twitter.com/jantimon)<br />[💻](https://github.com/merkle-open/gondel/commits?author=jantimon "Code") [📖](https://github.com/merkle-open/gondel/commits?author=jantimon "Documentation") [🐛](https://github.com/merkle-open/gondel/issues?q=author%3Ajantimon "Bug reports") [💡](#example-jantimon "Examples") [🚇](#infra-jantimon "Infrastructure (Hosting, Build-Tools, etc)") [🔌](#plugin-jantimon "Plugin/utility libraries") [⚠️](https://github.com/merkle-open/gondel/commits?author=jantimon "Tests") [👀](#review-jantimon "Reviewed Pull Requests") | [<img src="https://avatars1.githubusercontent.com/u/149406?v=4" width="100px;"/><br /><sub><b>Ernst Ammann</b></sub>](https://github.com/ernscht)<br />[💻](https://github.com/merkle-open/gondel/commits?author=ernscht "Code") [📖](https://github.com/merkle-open/gondel/commits?author=ernscht "Documentation") [🚇](#infra-ernscht "Infrastructure (Hosting, Build-Tools, etc)") [📦](#platform-ernscht "Packaging/porting to new platform") [👀](#review-ernscht "Reviewed Pull Requests") | [<img src="https://avatars1.githubusercontent.com/u/9339019?v=4" width="100px;"/><br /><sub><b>Dušan Perković</b></sub>](https://github.com/noblica)<br />[💻](https://github.com/merkle-open/gondel/commits?author=noblica "Code") [📖](https://github.com/merkle-open/gondel/commits?author=noblica "Documentation") [🔌](#plugin-noblica "Plugin/utility libraries") [🤔](#ideas-noblica "Ideas, Planning, & Feedback") [⚠️](https://github.com/merkle-open/gondel/commits?author=noblica "Tests") | [<img src="https://avatars1.githubusercontent.com/u/4563751?v=4" width="100px;"/><br /><sub><b>Jan R. Biasi</b></sub>](https://aviormusic.com)<br />[💻](https://github.com/merkle-open/gondel/commits?author=janbiasi "Code") [📖](https://github.com/merkle-open/gondel/commits?author=janbiasi "Documentation") [🤔](#ideas-janbiasi "Ideas, Planning, & Feedback") [⚠️](https://github.com/merkle-open/gondel/commits?author=janbiasi "Tests") [👀](#review-janbiasi "Reviewed Pull Requests") | [<img src="https://avatars1.githubusercontent.com/u/3381820?v=4" width="100px;"/><br /><sub><b>Jan Widmer</b></sub>](https://github.com/janwidmer)<br />[💻](https://github.com/merkle-open/gondel/commits?author=janwidmer "Code") [📖](https://github.com/merkle-open/gondel/commits?author=janwidmer "Documentation") [💡](#example-janwidmer "Examples") [🤔](#ideas-janwidmer "Ideas, Planning, & Feedback") [🔌](#plugin-janwidmer "Plugin/utility libraries") | [<img src="https://avatars1.githubusercontent.com/u/3457712?v=4" width="100px;"/><br /><sub><b>Claudio Bianucci</b></sub>](https://github.com/chezdev)<br />[💻](https://github.com/merkle-open/gondel/commits?author=chezdev "Code") [🤔](#ideas-chezdev "Ideas, Planning, & Feedback") |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
@@ -110,11 +110,9 @@ Thanks to all who have contributed ([emoji key](https://github.com/kentcdodds/al
 
 [npm-image]: https://badge.fury.io/js/%40gondel%2Fcore.svg
 [npm-url]: https://npmjs.org/package/@gondel/core
-[travis-image]: https://travis-ci.org/namics/gondel.svg?branch=master
-[travis-url]: https://travis-ci.org/namics/gondel
 [license-image]: https://img.shields.io/badge/license-MIT-green.svg
 [license-url]: http://opensource.org/licenses/MIT
 [commitizen-image]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
 [commitizen-url]: http://commitizen.github.io/cz-cli/
-[size-image]: http://img.badgesize.io/namics/gondel/master/packages/core/dist/gondel.es5.min.js.svg?compression=gzip&label=gzip%20size
+[size-image]: http://img.badgesize.io/merkle-open/gondel/master/packages/core/dist/gondel.es5.min.js.svg?compression=gzip&label=gzip%20size
 [size-url]: https://unpkg.com/@gondel/core/dist/gondel.es5.min.js

@@ -31,7 +31,7 @@ const siteConfig = {
 
   // Used for publishing and more
   projectName: 'gondel',
-  organizationName: 'namics',
+  organizationName: 'merkle-open',
   // For top-level user or org sites, the organization is still the same.
   // e.g., for the https://JoelMarcey.github.io site, it would be set like...
   //   organizationName: 'JoelMarcey'
@@ -42,7 +42,7 @@ const siteConfig = {
     {doc: 'api', label: 'API'},
     {page: 'help', label: 'Help'},
     {
-      href: 'https://github.com/namics/gondel',
+      href: 'https://github.com/merkle-open/gondel',
       label: 'GitHub',
     },
   ],
@@ -77,7 +77,7 @@ const siteConfig = {
   copyright:
     'Copyright © ' +
     new Date().getFullYear() +
-    ' Namics',
+    ' Merkle Inc.',
 
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks
@@ -96,7 +96,7 @@ const siteConfig = {
 
   // You may provide arbitrary config keys to be used as needed by your
   // template. For example, if you need your repo's URL...
-  repoUrl: 'https://github.com/namics/gondel',
+  repoUrl: 'https://github.com/merkle-open/gondel',
 };
 
 module.exports = siteConfig;

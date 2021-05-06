@@ -35,7 +35,7 @@ to create a shared parent to prevent searching for your node over the whole docu
 
 ### Live Example
 
-https://codesandbox.io/s/github/namics/gondel/tree/master/examples/get-component-by-dom-node
+https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/get-component-by-dom-node
 
 ## findComponents
 
@@ -61,7 +61,7 @@ export class Foo extends GondelBaseComponent {
 
 ### Live Example
 
-https://codesandbox.io/s/github/namics/gondel/tree/master/examples/find-components
+https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/find-components
 
 ## triggerPublicEvent
 
@@ -97,4 +97,4 @@ disabling scroll on your page controller component
 
 ### Live Example
 
-https://codesandbox.io/s/github/namics/gondel/tree/master/examples/trigger-public-event
+https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/trigger-public-event
