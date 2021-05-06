@@ -1,7 +1,7 @@
 {
   "name": "@gondel/plugin-events",
   "private": true,
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "Provide additional custom events",
   "bugs": "https://github.com/merkle-open/gondel/issues",
   "homepage": "https://github.com/merkle-open/gondel",
@@ -23,7 +23,7 @@
   "devDependencies": {
     "@babel/core": "7.14.0",
     "@babel/preset-env": "7.14.1",
-    "@gondel/core": "^1.2.6",
+    "@gondel/core": "^1.2.7",
     "babel-cli": "7.0.0-beta.3",
     "babel-minify": "0.5.1",
     "babel-plugin-transform-class-properties": "6.24.1",

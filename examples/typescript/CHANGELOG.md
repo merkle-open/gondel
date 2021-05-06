@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.7](https://github.com/merkle-open/gondel/compare/v1.2.6...v1.2.7) (2021-05-06)
+
+**Note:** Version bump only for package gondel-typescript-example
+
+
+
+
+
+
 ## [1.2.6](https://github.com/merkle-open/gondel/compare/v1.2.5...v1.2.6) (2020-11-16)
 
 **Note:** Version bump only for package gondel-typescript-example

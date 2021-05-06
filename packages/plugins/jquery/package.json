@@ -1,6 +1,6 @@
 {
   "name": "@gondel/plugin-jquery",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "Provide jQuery helper for Gondel components",
   "bugs": "https://github.com/merkle-open/gondel/issues",
   "homepage": "https://github.com/merkle-open/gondel",
@@ -25,7 +25,7 @@
     "jquery": "*"
   },
   "devDependencies": {
-    "@gondel/core": "^1.2.6",
+    "@gondel/core": "^1.2.7",
     "@types/jquery": "3.5.5",
     "babel-cli": "7.0.0-beta.3",
     "babel-minify": "0.5.1",

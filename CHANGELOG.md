@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.7](https://github.com/merkle-open/gondel/compare/v1.2.6...v1.2.7) (2021-05-06)
+
+
+### Bug Fixes
+
+* property 'align' is missing in type 'HTMLElement' ([c1f460c](https://github.com/merkle-open/gondel/commit/c1f460cbee0e2334c7b52f9e1e43816b27867c28))
+
+
+
+
+
+
 ## [1.2.6](https://github.com/merkle-open/gondel/compare/v1.2.5...v1.2.6) (2020-11-16)
 
 
