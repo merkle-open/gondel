@@ -1,5 +1,5 @@
-[![NPM version][npm-image]][npm-url] 
-[![CI](https://github.com/merkle-open/gondel/workflows/CI/badge.svg)](https://github.com/merkle-open/gondel/actions?query=workflow%3ACI)
+[![NPM version][npm-image]][npm-url]
+[![Build Status](https://github.com/merkle-open/gondel/workflows/ci/badge.svg?branch=master)](https://github.com/merkle-open/gondel/actions)
 [![Size][size-image]][size-url]
 [![License][license-image]][license-url] 
 [![Commitizen friendly][commitizen-image]][commitizen-url] 
