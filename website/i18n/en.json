@@ -4,22 +4,40 @@
     "next": "Next",
     "previous": "Previous",
     "tagline": "UI component launcher",
-    "api": "DomUtils",
-    "communication": "Communication",
-    "Communication": "Communication",
-    "examples": "Examples",
-    "Examples": "Examples",
-    "getting-started": "Getting Started",
-    "Getting Started": "Getting Started",
-    "intro": "Introduction to Gondel",
-    "Introduction to Gondel": "Introduction to Gondel",
-    "plugins": "Plugins",
-    "Plugins": "Plugins",
-    "Docs": "Docs",
-    "API": "API",
-    "Help": "Help",
-    "GitHub": "GitHub",
-    "General": "General"
+    "docs": {
+      "api": {
+        "title": "DomUtils"
+      },
+      "communication": {
+        "title": "Communication",
+        "sidebar_label": "Communication"
+      },
+      "examples": {
+        "title": "Examples",
+        "sidebar_label": "Examples"
+      },
+      "getting-started": {
+        "title": "Getting Started",
+        "sidebar_label": "Getting Started"
+      },
+      "intro": {
+        "title": "Introduction to Gondel",
+        "sidebar_label": "Introduction to Gondel"
+      },
+      "plugins": {
+        "title": "Plugins",
+        "sidebar_label": "Plugins"
+      }
+    },
+    "links": {
+      "Docs": "Docs",
+      "API": "API",
+      "Help": "Help",
+      "GitHub": "GitHub"
+    },
+    "categories": {
+      "General": "General"
+    }
   },
   "pages-strings": {
     "Help Translate|recruit community translators for your project": "Help Translate",
