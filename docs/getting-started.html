@@ -1,18 +1,51 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Getting Started · Gondel</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Here&#x27;s how to get started:"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Getting Started · Gondel"/><meta property="og:type" content="website"/><meta property="og:url" content="https://gondel.js.org//index.html"/><meta property="og:description" content="Here&#x27;s how to get started:"/><meta property="og:image" content="https://gondel.js.org/img/docusaurus.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://gondel.js.org/img/docusaurus.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/gondel.png" alt="Gondel"/><h2 class="headerTitleWithLogo">Gondel</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/intro.html" target="_self">Docs</a></li><li class=""><a href="/docs/api.html" target="_self">API</a></li><li class=""><a href="/en/help.html" target="_self">Help</a></li><li class=""><a href="https://github.com/namics/gondel" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>General</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">General</h3><ul><li class="navListItem"><a class="navItem" href="/docs/intro.html">Introduction to Gondel</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/getting-started.html">Getting Started</a></li><li class="navListItem"><a class="navItem" href="/docs/examples.html">Examples</a></li><li class="navListItem"><a class="navItem" href="/docs/communication.html">Communication</a></li><li class="navListItem"><a class="navItem" href="/docs/plugins.html">Plugins</a></li></ul></div></div></section></div><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Getting Started · Gondel</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Here&#x27;s how to get started:"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Getting Started · Gondel"/><meta property="og:type" content="website"/><meta property="og:url" content="https://gondel.js.org//index.html"/><meta property="og:description" content="Here&#x27;s how to get started:"/><meta property="og:image" content="https://gondel.js.org/img/docusaurus.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://gondel.js.org/img/docusaurus.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/gondel.png" alt="Gondel"/><h2 class="headerTitleWithLogo">Gondel</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/intro.html" target="_self">Docs</a></li><li class=""><a href="/docs/api.html" target="_self">API</a></li><li class=""><a href="/help.html" target="_self">Help</a></li><li class=""><a href="https://github.com/merkle-open/gondel" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>General</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">General</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/intro.html">Introduction to Gondel</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/getting-started.html">Getting Started</a></li><li class="navListItem"><a class="navItem" href="/docs/examples.html">Examples</a></li><li class="navListItem"><a class="navItem" href="/docs/communication.html">Communication</a></li><li class="navListItem"><a class="navItem" href="/docs/plugins.html">Plugins</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
             document.addEventListener('DOMContentLoaded', function() {
               createToggler('#navToggler', '#docsNav', 'docsSliderActive');
               createToggler('#tocToggler', 'body', 'tocActive');
 
-              const headings = document.querySelector('.toc-headings');
+              var headings = document.querySelector('.toc-headings');
               headings && headings.addEventListener('click', function(event) {
-                if (event.target.tagName === 'A') {
-                  document.body.classList.remove('tocActive');
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
                 }
               }, false);
 
               function createToggler(togglerSelector, targetSelector, className) {
                 var toggler = document.querySelector(togglerSelector);
                 var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
 
                 toggler.onclick = function(event) {
                   event.preventDefault();
@@ -21,7 +54,7 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Getting Started</h1></header><article><div><span><p>Here's how to get started:</p>
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Getting Started</h1></header><article><div><span><p>Here's how to get started:</p>
 <h2><a class="anchor" aria-hidden="true" id="installation"></a><a href="#installation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Installation</h2>
 <p>To add Gondel to your project, execute the following line in your project directory:</p>
 <p><code>npm install @gondel/core --save</code></p>
@@ -29,19 +62,19 @@
 <h2><a class="anchor" aria-hidden="true" id="using-gondel"></a><a href="#using-gondel" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using Gondel</h2>
 <p>Ok, now you installed Gondel, but how do you use it?
 Well, first you need to modify your HTML code a bit. Let's say you have the following markup:</p>
-<pre><code class="hljs css languages- html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>
+<pre><code class="hljs css language-html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>
     I am a Button
 <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
 </code></pre>
 <p>To initialize gondel on the <code>&lt;button&gt;</code> element, you need to decorate your markup by adding a <code>data-g-name</code> attribute to the corresponding element, like so:</p>
-<pre><code class="hljs css languages- html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">data-g-name</span>=<span class="hljs-string">"Button"</span>&gt;</span>
+<pre><code class="hljs css language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">data-g-name</span>=<span class="hljs-string">"Button"</span>&gt;</span>
    I am a Button
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </code></pre>
 <p>Now, when Gondel runs, it will know to take control of this <code>&lt;button&gt;</code>, because of the <code>data-g-name</code> attribute.</p>
 <p>But for now, our code does nothing. So let's add some behaviour to demonstrate it:</p>
 <p>Create a <code>button.js</code> file in your project, and paste the following content:</p>
-<pre><code class="hljs css languages- javascript"><span class="hljs-keyword">import</span> {
+<pre><code class="hljs css language-javascript"><span class="hljs-keyword">import</span> {
   Component,
   EventListener,
   GondelBaseComponent
@@ -62,7 +95,7 @@ Well, first you need to modify your HTML code a bit. Let's say you have the foll
 <p>Presto! Our <code>&lt;button&gt;</code> now shows an alert box on click. But how did it do that? Let me explain line by line:</p>
 <h2><a class="anchor" aria-hidden="true" id="the-decorator"></a><a href="#the-decorator" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The decorator</h2>
 <p>Let's analyze the following code:</p>
-<pre><code class="hljs css languages- javascript">@Component(<span class="hljs-string">'Button'</span>)
+<pre><code class="hljs css language-javascript">@Component(<span class="hljs-string">'Button'</span>)
 <span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Button</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">GondelBaseComponent</span> </span>{
   start() {
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'The button has been initialized'</span>);
@@ -87,5 +120,5 @@ Well, first you need to modify your HTML code a bit. Let's say you have the foll
 <h2><a class="anchor" aria-hidden="true" id="gondel-bootstraping"></a><a href="#gondel-bootstraping" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Gondel bootstraping</h2>
 <p>Gondel will be initialized automatically, and will scan the page for elements containing the <code>data-g-name</code> attribute, and execute the start method of the corresponding modules.</p>
 <h2><a class="anchor" aria-hidden="true" id="live-example"></a><a href="#live-example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Live example</h2>
-<p>You can also find this code example live on <a href="https://codesandbox.io/s/github/namics/gondel/tree/master/examples/hello-world">CodeSandbox</a></p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/intro.html">← Introduction to Gondel</a><a class="docs-next button" href="/docs/examples.html">Examples →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#installation">Installation</a></li><li><a href="#using-gondel">Using Gondel</a></li><li><a href="#the-decorator">The decorator</a></li><li><a href="#the-class-definition">The class definition</a></li><li><a href="#the-start-method">The start method</a></li><li><a href="#gondel-bootstraping">Gondel bootstraping</a></li><li><a href="#live-example">Live example</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/gondel.png" alt="Gondel" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/intro.html">Introduction</a><a href="/docs/getting-started.html">Getting Started</a><a href="/docs/examples.html">Examples</a><a href="/docs/communication.html">Communication</a><a href="/docs/plugins.html">Plugins</a></div><div><h5>API</h5><a href="/docs/api.html">API Reference</a></div><div><h5>More</h5><a href="https://github.com/namics/gondel">GitHub</a><a class="github-button" href="https://github.com/namics/gondel" data-icon="octicon-star" data-count-href="https://github.com/namics/gondel/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 Namics</section></footer></div></body></html>
+<p>You can also find this code example live on <a href="https://codesandbox.io/s/github/merkle-open/gondel/tree/master/examples/hello-world">CodeSandbox</a></p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/intro.html"><span class="arrow-prev">← </span><span>Introduction to Gondel</span></a><a class="docs-next button" href="/docs/examples.html"><span>Examples</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#installation">Installation</a></li><li><a href="#using-gondel">Using Gondel</a></li><li><a href="#the-decorator">The decorator</a></li><li><a href="#the-class-definition">The class definition</a></li><li><a href="#the-start-method">The start method</a></li><li><a href="#gondel-bootstraping">Gondel bootstraping</a></li><li><a href="#live-example">Live example</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/gondel.png" alt="Gondel" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/intro.html">Introduction</a><a href="/docs/getting-started.html">Getting Started</a><a href="/docs/examples.html">Examples</a><a href="/docs/communication.html">Communication</a><a href="/docs/plugins.html">Plugins</a></div><div><h5>API</h5><a href="/docs/api.html">API Reference</a></div><div><h5>More</h5><a href="https://github.com/merkle-open/gondel">GitHub</a><a class="github-button" href="https://github.com/merkle-open/gondel" data-icon="octicon-star" data-count-href="https://github.com/merkle-open/gondel/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2021 Merkle Inc.</section></footer></div></body></html>
