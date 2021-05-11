@@ -12,16 +12,18 @@ export class AppWrapper<TConfig> extends Component<Props<TConfig>, TConfig> {
 		this.state = props.config;
 
 		// Forward react life cycle hooks
-		([
-			'componentWillMount',
-			'componentDidMount',
-			'componentWillReceiveProps',
-			'shouldComponentUpdate',
-			'componentWillUpdate',
-			'componentDidUpdate',
-			'componentWillUnmount',
-			'componentDidCatch',
-		] as const).forEach((reactHook) => {
+		(
+			[
+				'componentWillMount',
+				'componentDidMount',
+				'componentWillReceiveProps',
+				'shouldComponentUpdate',
+				'componentWillUpdate',
+				'componentDidUpdate',
+				'componentWillUnmount',
+				'componentDidCatch',
+			] as const
+		).forEach((reactHook) => {
 			if (!(this.props as any)[reactHook]) {
 				return;
 			}

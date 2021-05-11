@@ -10,11 +10,11 @@ import { internalGondelAsyncRefAttribute, internalGondelRefAttribute } from './G
 import { triggerPublicEvent } from './GondelEventEmitter';
 import { fireGondelPluginEvent } from './GondelPluginUtils';
 const noop = () => {};
-const Deferred = (function () {
+const Deferred = function () {
 	this.promise = new Promise((resolve) => {
 		this.resolve = resolve;
 	});
-} as any) as { new (): { promise: Promise<any>; resolve: () => void } };
+} as any as { new (): { promise: Promise<any>; resolve: () => void } };
 
 /**
  * Start all components of the gondel component registry

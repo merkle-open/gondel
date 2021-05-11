@@ -88,7 +88,8 @@ export function createGondelReactLoader<State extends {}, Module extends { [key:
 
 export class GondelReactComponent<State extends {} = {}, TElement extends HTMLElement = HTMLDivElement>
 	extends GondelBaseComponent<TElement>
-	implements ComponentLifecycle<null, State> {
+	implements ComponentLifecycle<null, State>
+{
 	static readonly AppPromiseMap = new WeakMap<
 		Promise<RenderableReactComponent<any>>,
 		RenderableReactComponent<any>
