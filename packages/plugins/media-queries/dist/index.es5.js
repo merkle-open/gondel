@@ -129,6 +129,11 @@
                 }
             });
         });
+        handlerResults.forEach(function (handlerResults) { return function () {
+            if (typeof handlerResults === 'function') {
+                handlerResults();
+            }
+        }; });
     }
     /**
      * This function returns the current viewport
