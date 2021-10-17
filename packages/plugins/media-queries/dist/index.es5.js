@@ -3,7 +3,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
     typeof define === 'function' && define.amd ? define(['exports'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.gondelPluginMediaQueries = {}));
-}(this, (function (exports) { 'use strict';
+})(this, (function (exports) { 'use strict';
 
     var basePluginListener = function (result, data, next) { return next(result); };
     // Global plugin events registry
@@ -129,11 +129,6 @@
                 }
             });
         });
-        handlerResults.forEach(function (handlerResults) { return function () {
-            if (typeof handlerResults === 'function') {
-                handlerResults();
-            }
-        }; });
     }
     /**
      * This function returns the current viewport
@@ -268,5 +263,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=index.es5.js.map
