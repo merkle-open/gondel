@@ -14,6 +14,7 @@
     "contributors": "npx all-contributors-cli generate",
     "commit": "git-cz",
     "postinstall": "npm run bootstrap",
+    "prepare": "husky install",
     "prettier": "prettier --write **/src/**/*.{ts,tsx}",
     "posttest": "prettier --list-different **/src/**/*.{ts,tsx}",
     "size": "npm run size-build && size-limit",
@@ -26,12 +27,6 @@
     "update-dependencies:root": "npm-check-updates -u -x husky"
   },
   "license": "MIT",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "lint-staged": {
     "**/src/**/*.(ts|tsx)": [
       "prettier --write"
@@ -61,7 +56,7 @@
     "@namics/prettier-config": "2.0.1",
     "@size-limit/preset-small-lib": "6.0.3",
     "cz-conventional-changelog": "3.3.0",
-    "husky": "4.3.8",
+    "husky": "7.0.2",
     "lerna": "4.0.0",
     "lint-staged": "11.2.3",
     "npm-check-updates": "11.8.5",
