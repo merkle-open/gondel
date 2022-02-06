@@ -63,7 +63,7 @@ export function getComponentByDomNode(domNode, namespace) {
     if (namespace === void 0) { namespace = 'g'; }
     var gondelComponent = extractComponent(getFirstDomNode(domNode), namespace);
     if (!gondelComponent) {
-        throw new Error("Could not find a started gondel component in namespace \"" + namespace + "\",\nplease check if your component is mounted via 'hasMountedGondelComponent'");
+        throw new Error("Could not find a started gondel component in namespace \"".concat(namespace, "\",\nplease check if your component is mounted via 'hasMountedGondelComponent'"));
     }
     return gondelComponent;
 }
@@ -107,8 +107,8 @@ export function findComponents(domNode, componentName, namespace) {
     if (namespace === void 0) { namespace = 'g'; }
     var firstNode = getFirstDomNode(domNode);
     var components = [];
-    var attribute = "_gondel_" + namespace;
-    var nodes = firstNode.querySelectorAll("[data-" + namespace + "-name" + (componentName ? "=\"" + componentName + "\"" : '') + "]");
+    var attribute = "_gondel_".concat(namespace);
+    var nodes = firstNode.querySelectorAll("[data-".concat(namespace, "-name").concat(componentName ? "=\"".concat(componentName, "\"") : '', "]"));
     for (var i = 0; i < nodes.length; i++) {
         var node = nodes[i];
         var gondelComponentInstance = node[attribute];

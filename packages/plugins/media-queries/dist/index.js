@@ -12,7 +12,7 @@ var currentViewport;
  */
 function getComponentsInEventRegistry(eventRegistry, namespace) {
     var selector = Object.keys(eventRegistry)
-        .map(function (componentName) { return "[data-" + namespace + "-name=\"" + componentName + "\"]"; })
+        .map(function (componentName) { return "[data-".concat(namespace, "-name=\"").concat(componentName, "\"]"); })
         .join(',');
     if (!selector) {
         return [];
@@ -94,13 +94,13 @@ function generateMediaQueries(breakPoints, unit) {
         var max = breakPoints[breakpointName] === Infinity ? undefined : breakPoints[breakpointName];
         var queryString;
         if (min && max) {
-            queryString = "(min-width: " + min + unit + ") and (max-width: " + max + unit + ")";
+            queryString = "(min-width: ".concat(min).concat(unit, ") and (max-width: ").concat(max).concat(unit, ")");
         }
         else if (min) {
-            queryString = "(min-width: " + min + unit + ")";
+            queryString = "(min-width: ".concat(min).concat(unit, ")");
         }
         else if (max) {
-            queryString = "(max-width: " + max + unit + ")";
+            queryString = "(max-width: ".concat(max).concat(unit, ")");
         }
         else {
             // This should only happen if the user did a miss configuration

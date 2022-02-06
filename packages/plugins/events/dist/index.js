@@ -8,7 +8,7 @@ import { getHandlers, executeHandlers } from '@gondel/core/dist/GondelEventRegis
  */
 function getComponentsInEventRegistry(eventRegistry, namespace) {
     var selector = Object.keys(eventRegistry)
-        .map(function (componentName) { return "[data-" + namespace + "-name=\"" + componentName + "\"]"; })
+        .map(function (componentName) { return "[data-".concat(namespace, "-name=\"").concat(componentName, "\"]"); })
         .join(',');
     if (!selector) {
         return [];
@@ -165,7 +165,7 @@ var customEvents = {
      */
     'swipe-left': function (eventRegistry, namespace) {
         document.documentElement.addEventListener('mousedown', function (mouseDownEvent) {
-            var handlers = getHandlers("data-" + namespace + "-name", eventRegistry, mouseDownEvent.target);
+            var handlers = getHandlers("data-".concat(namespace, "-name"), eventRegistry, mouseDownEvent.target);
             var latestMouseMoveEvent;
             var frameListernerId;
             if (handlers.length === 0) {
@@ -209,7 +209,7 @@ var customEvents = {
      */
     'swipe-right': function (eventRegistry, namespace) {
         document.documentElement.addEventListener('mousedown', function (mouseDownEvent) {
-            var handlers = getHandlers("data-" + namespace + "-name", eventRegistry, mouseDownEvent.target);
+            var handlers = getHandlers("data-".concat(namespace, "-name"), eventRegistry, mouseDownEvent.target);
             var latestMouseMoveEvent;
             var frameListernerId;
             if (handlers.length === 0) {

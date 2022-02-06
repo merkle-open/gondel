@@ -35,7 +35,7 @@
     function addGondelPluginEventListener(pluginName, eventName, eventListenerCallback) {
         // Prevent any event registration if this pluginHandlerName
         // has already been used
-        var pluginHandlerNamePerEvent = eventName + "#" + pluginName;
+        var pluginHandlerNamePerEvent = "".concat(eventName, "#").concat(pluginName);
         if (pluginMapping[pluginHandlerNamePerEvent]) {
             return;
         }
@@ -96,8 +96,8 @@
      */
     function startComponentsFromRegistry(gondelComponentRegistry, domContext, namespace) {
         // Get an array of all nodes which match the namespace
-        var gondelDomNodeList = Array.prototype.slice.call(domContext.querySelectorAll("[data-" + namespace + "-name]"));
-        if (domContext.hasAttribute("data-" + namespace + "-name")) {
+        var gondelDomNodeList = Array.prototype.slice.call(domContext.querySelectorAll("[data-".concat(namespace, "-name]")));
+        if (domContext.hasAttribute("data-".concat(namespace, "-name"))) {
             gondelDomNodeList.push(domContext);
         }
         // Remove already booted nodes
@@ -160,10 +160,10 @@
      * Constructs a new component
      */
     function constructComponent(domNode, gondelComponentRegistry, namespace) {
-        var componentName = domNode.getAttribute("data-" + namespace + "-name");
+        var componentName = domNode.getAttribute("data-".concat(namespace, "-name"));
         var GondelComponent = gondelComponentRegistry.getComponent(componentName);
         if (GondelComponent === undefined) {
-            throw new Error("Failed to boot component - " + componentName + " is not registred");
+            throw new Error("Failed to boot component - ".concat(componentName, " is not registred"));
         }
         var componentInstance = new GondelComponent(domNode, componentName);
         componentInstance._ctx = domNode;
@@ -195,7 +195,7 @@
      * Stops a started component
      */
     function stopStartedComponent(component, internalStopMethod, namespace) {
-        triggerPublicEvent(namespace + "Stop", component, component._ctx);
+        triggerPublicEvent("".concat(namespace, "Stop"), component, component._ctx);
         // Remove the component instance from the html element
         delete component._ctx[internalGondelRefAttribute + namespace];
         delete component._ctx[internalGondelAsyncRefAttribute + namespace];
@@ -370,7 +370,7 @@
         if (namespace === void 0) { namespace = 'g'; }
         var gondelComponent = extractComponent(getFirstDomNode(domNode), namespace);
         if (!gondelComponent) {
-            throw new Error("Could not find a started gondel component in namespace \"" + namespace + "\",\nplease check if your component is mounted via 'hasMountedGondelComponent'");
+            throw new Error("Could not find a started gondel component in namespace \"".concat(namespace, "\",\nplease check if your component is mounted via 'hasMountedGondelComponent'"));
         }
         return gondelComponent;
     }
@@ -414,8 +414,8 @@
         if (namespace === void 0) { namespace = 'g'; }
         var firstNode = getFirstDomNode(domNode);
         var components = [];
-        var attribute = "_gondel_" + namespace;
-        var nodes = firstNode.querySelectorAll("[data-" + namespace + "-name" + (componentName ? "=\"" + componentName + "\"" : '') + "]");
+        var attribute = "_gondel_".concat(namespace);
+        var nodes = firstNode.querySelectorAll("[data-".concat(namespace, "-name").concat(componentName ? "=\"".concat(componentName, "\"") : '', "]"));
         for (var i = 0; i < nodes.length; i++) {
             var node = nodes[i];
             var gondelComponentInstance = node[attribute];
@@ -587,7 +587,7 @@
      * The listener will always call handleEvent with the domEventRegistry for the given event
      */
     function startListeningForEvent(eventName, namespace) {
-        document.documentElement.addEventListener(eventNameMapping[eventName] || eventName, handleEvent.bind(null, namespace, "data-" + namespace + "-name", getEventRegistry(namespace)[eventName]));
+        document.documentElement.addEventListener(eventNameMapping[eventName] || eventName, handleEvent.bind(null, namespace, "data-".concat(namespace, "-name"), getEventRegistry(namespace)[eventName]));
     }
     /**
      * Add an event to the Gondel EventRegistry
@@ -694,7 +694,7 @@
         return function (target, handler) {
             hookEventDecoratorInCore();
             if (handler.substr(0, 1) !== '_') {
-                throw new Error("Invalid handler name '" + handler + "' use '_" + handler + "' instead.");
+                throw new Error("Invalid handler name '".concat(handler, "' use '_").concat(handler, "' instead."));
             }
             if (!target.__events) {
                 target.__events = [];

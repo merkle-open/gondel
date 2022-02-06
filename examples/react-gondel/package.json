@@ -9,18 +9,18 @@
     "@gondel/core": "^1.2.7",
     "@gondel/plugin-hot": "^1.2.7",
     "@gondel/plugin-react": "^1.2.7",
-    "@types/react": "17.0.33",
-    "@types/react-dom": "17.0.10",
+    "@types/react": "17.0.39",
+    "@types/react-dom": "17.0.11",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
   "devDependencies": {
-    "@babel/preset-env": "7.15.8",
-    "@babel/preset-react": "7.14.5",
+    "@babel/preset-env": "7.16.11",
+    "@babel/preset-react": "7.16.7",
     "common-config-webpack-plugin": "2.0.3",
     "html-webpack-plugin": "4.5.2",
     "webpack": "4.46.0",
-    "webpack-cli": "4.9.1",
-    "webpack-dev-server": "4.4.0"
+    "webpack-cli": "4.9.2",
+    "webpack-dev-server": "4.7.4"
   }
 }

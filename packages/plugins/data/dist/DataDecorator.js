@@ -12,7 +12,7 @@ export function data(targetOrAttributeKey, propertyKeyOrSerializer) {
             if (!target.__dataBindings) {
                 target.__dataBindings = [];
             }
-            var attributeKey = "data-" + customAttributeKey_1;
+            var attributeKey = "data-".concat(customAttributeKey_1);
             target.__dataBindings.push([propertyKey, attributeKey, serializer_1]);
         };
     }
@@ -42,7 +42,7 @@ function convertPropertyKeyToDataAttributeKey(propertyKey) {
         propertyKey = propertyKey.substr(1);
     }
     if (propertyKey.substr(0, 4) !== 'data') {
-        throw new Error(propertyKey + "\" has an invalid format please use @data dataSomeProp (data-some-prop) for valid bindings.");
+        throw new Error("".concat(propertyKey, "\" has an invalid format please use @data dataSomeProp (data-some-prop) for valid bindings."));
     }
     return propertyKey.replace(/([a-zA-Z])(?=[A-Z])/g, '$1-').toLowerCase();
 }
