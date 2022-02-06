@@ -8,7 +8,7 @@
   "dependencies": {
     "@gondel/core": "^1.2.7",
     "@gondel/plugin-resize": "^1.2.7",
-    "core-js": "3.18.3"
+    "core-js": "3.19.2"
   },
   "devDependencies": {
     "@babel/core": "7.15.8",
@@ -18,7 +18,7 @@
     "html-webpack-plugin": "4.5.2",
     "js-config-webpack-plugin": "2.0.3",
     "webpack": "4.46.0",
-    "webpack-cli": "4.9.0",
-    "webpack-dev-server": "4.3.1"
+    "webpack-cli": "4.9.1",
+    "webpack-dev-server": "4.4.0"
   }
 }

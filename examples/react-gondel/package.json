@@ -9,8 +9,8 @@
     "@gondel/core": "^1.2.7",
     "@gondel/plugin-hot": "^1.2.7",
     "@gondel/plugin-react": "^1.2.7",
-    "@types/react": "17.0.30",
-    "@types/react-dom": "17.0.9",
+    "@types/react": "17.0.33",
+    "@types/react-dom": "17.0.10",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
@@ -20,7 +20,7 @@
     "common-config-webpack-plugin": "2.0.3",
     "html-webpack-plugin": "4.5.2",
     "webpack": "4.46.0",
-    "webpack-cli": "4.9.0",
-    "webpack-dev-server": "4.3.1"
+    "webpack-cli": "4.9.1",
+    "webpack-dev-server": "4.4.0"
   }
 }
