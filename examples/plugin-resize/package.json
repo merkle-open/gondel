@@ -11,9 +11,9 @@
     "core-js": "3.21.0"
   },
   "devDependencies": {
-    "@babel/core": "7.17.0",
+    "@babel/core": "7.17.2",
     "@babel/plugin-proposal-class-properties": "^7.16.7",
-    "@babel/plugin-proposal-decorators": "7.17.0",
+    "@babel/plugin-proposal-decorators": "7.17.2",
     "@babel/preset-env": "7.16.11",
     "html-webpack-plugin": "4.5.2",
     "js-config-webpack-plugin": "2.0.3",
