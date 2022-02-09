@@ -31,7 +31,7 @@ export function createGondelReactLoader(loader, exportName) {
                     return mod[exportName];
                 }
                 else {
-                    throw new Error("export ".concat(exportName, " not found"));
+                    throw new Error("export " + exportName + " not found");
                 }
             }
             return lazyLoadModule;
@@ -132,7 +132,7 @@ var GondelReactComponent = /** @class */ (function (_super) {
         // If this App is a promise use the AppPromiseMap to extract the resolved promise value
         var App = isPromise(this.App) ? GondelReactComponent.AppPromiseMap.get(this.App) : this.App;
         if (!App) {
-            throw new Error("".concat(this._componentName, " could not render ").concat('App' in this ? 'ensure that you are returning a React component' : 'please add a render method'));
+            throw new Error(this._componentName + " could not render " + ('App' in this ? 'ensure that you are returning a React component' : 'please add a render method'));
         }
         return createElement(App, this.state);
     };

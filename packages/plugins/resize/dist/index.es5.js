@@ -19,7 +19,7 @@
     function addGondelPluginEventListener(pluginName, eventName, eventListenerCallback) {
         // Prevent any event registration if this pluginHandlerName
         // has already been used
-        var pluginHandlerNamePerEvent = "".concat(eventName, "#").concat(pluginName);
+        var pluginHandlerNamePerEvent = eventName + "#" + pluginName;
         if (pluginMapping[pluginHandlerNamePerEvent]) {
             return;
         }
@@ -67,7 +67,7 @@
         if (namespace === void 0) { namespace = 'g'; }
         var gondelComponent = extractComponent(getFirstDomNode(domNode), namespace);
         if (!gondelComponent) {
-            throw new Error("Could not find a started gondel component in namespace \"".concat(namespace, "\",\nplease check if your component is mounted via 'hasMountedGondelComponent'"));
+            throw new Error("Could not find a started gondel component in namespace \"" + namespace + "\",\nplease check if your component is mounted via 'hasMountedGondelComponent'");
         }
         return gondelComponent;
     }
@@ -102,7 +102,7 @@
      */
     function getComponentsInEventRegistry(eventRegistry, namespace) {
         var selector = Object.keys(eventRegistry)
-            .map(function (componentName) { return "[data-".concat(namespace, "-name=\"").concat(componentName, "\"]"); })
+            .map(function (componentName) { return "[data-" + namespace + "-name=\"" + componentName + "\"]"; })
             .join(',');
         if (!selector) {
             return [];

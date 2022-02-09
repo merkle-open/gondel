@@ -14,8 +14,8 @@ var Deferred = function () {
  */
 export function startComponentsFromRegistry(gondelComponentRegistry, domContext, namespace) {
     // Get an array of all nodes which match the namespace
-    var gondelDomNodeList = Array.prototype.slice.call(domContext.querySelectorAll("[data-".concat(namespace, "-name]")));
-    if (domContext.hasAttribute("data-".concat(namespace, "-name"))) {
+    var gondelDomNodeList = Array.prototype.slice.call(domContext.querySelectorAll("[data-" + namespace + "-name]"));
+    if (domContext.hasAttribute("data-" + namespace + "-name")) {
         gondelDomNodeList.push(domContext);
     }
     // Remove already booted nodes
@@ -78,10 +78,10 @@ export function attachGondelBootingFlag(domNode, bootingFlag, namespace) {
  * Constructs a new component
  */
 export function constructComponent(domNode, gondelComponentRegistry, namespace) {
-    var componentName = domNode.getAttribute("data-".concat(namespace, "-name"));
+    var componentName = domNode.getAttribute("data-" + namespace + "-name");
     var GondelComponent = gondelComponentRegistry.getComponent(componentName);
     if (GondelComponent === undefined) {
-        throw new Error("Failed to boot component - ".concat(componentName, " is not registred"));
+        throw new Error("Failed to boot component - " + componentName + " is not registred");
     }
     var componentInstance = new GondelComponent(domNode, componentName);
     componentInstance._ctx = domNode;
@@ -113,7 +113,7 @@ export function startConstructedComponent(component) {
  * Stops a started component
  */
 export function stopStartedComponent(component, internalStopMethod, namespace) {
-    triggerPublicEvent("".concat(namespace, "Stop"), component, component._ctx);
+    triggerPublicEvent(namespace + "Stop", component, component._ctx);
     // Remove the component instance from the html element
     delete component._ctx[internalGondelRefAttribute + namespace];
     delete component._ctx[internalGondelAsyncRefAttribute + namespace];

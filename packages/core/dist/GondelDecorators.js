@@ -63,7 +63,7 @@ export function EventListener(eventName, selector) {
     return function (target, handler) {
         hookEventDecoratorInCore();
         if (handler.substr(0, 1) !== '_') {
-            throw new Error("Invalid handler name '".concat(handler, "' use '_").concat(handler, "' instead."));
+            throw new Error("Invalid handler name '" + handler + "' use '_" + handler + "' instead.");
         }
         if (!target.__events) {
             target.__events = [];

@@ -160,7 +160,7 @@ export function executeHandlers(handlers, event, namespace) {
  * The listener will always call handleEvent with the domEventRegistry for the given event
  */
 function startListeningForEvent(eventName, namespace) {
-    document.documentElement.addEventListener(eventNameMapping[eventName] || eventName, handleEvent.bind(null, namespace, "data-".concat(namespace, "-name"), getEventRegistry(namespace)[eventName]));
+    document.documentElement.addEventListener(eventNameMapping[eventName] || eventName, handleEvent.bind(null, namespace, "data-" + namespace + "-name", getEventRegistry(namespace)[eventName]));
 }
 /**
  * Add an event to the Gondel EventRegistry
