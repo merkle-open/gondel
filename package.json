@@ -7,7 +7,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap --no-ci --hoist",
     "build": "lerna run build",
-    "clean": "npx -y npm-run-all clean:*",
+    "clean": "npx -y npm-run-all --npm-path npm clean:*",
     "clean:lerna": "lerna clean --yes",
     "clean:lock": "npx -y rimraf **/package-lock.json",
     "clean:modules": "npx -y rimraf node_modules",
