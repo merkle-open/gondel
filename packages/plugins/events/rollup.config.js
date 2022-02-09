@@ -1,4 +1,4 @@
-import { uglify } from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
 import resolve from 'rollup-plugin-node-resolve';
 
 export default {
@@ -12,6 +12,6 @@ export default {
   },
   plugins: [
     resolve(),
-    uglify()
+    terser(),
   ]
 };
