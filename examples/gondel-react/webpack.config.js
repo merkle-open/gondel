@@ -1,5 +1,4 @@
 const TsConfigWebpackPlugin = require('ts-config-webpack-plugin');
-const ScssConfigWebpackPlugin = require('scss-config-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -7,9 +6,16 @@ module.exports = {
   devtool: 'inline-source-map',
   context: __dirname,
   entry: './src/index.ts',
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      }
+    ]
+  },
   plugins: [
     new TsConfigWebpackPlugin(),
-    new ScssConfigWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './index.html'
     })

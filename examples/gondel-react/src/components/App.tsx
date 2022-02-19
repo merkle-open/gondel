@@ -1,7 +1,7 @@
 import React from 'react';
+// @ts-ignore
 import { AwesomeButton } from 'react-awesome-button';
 import 'react-awesome-button/dist/styles.css';
-import 'react-awesome-button/dist/themes/theme-blue.css';
 
 type Props = {
 	title: string;
