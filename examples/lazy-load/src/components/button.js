@@ -6,10 +6,13 @@ class Button extends GondelBaseComponent {
   @EventListener('click')
   async _handleMouseClick(event) {
     // Lazy load npm library
-    const {Funnies} = await import('funnies');
+    const { getLoremChucksum } = await import('lorem-chucksum/lib/index');
     // Use the lazy loaded library
-    let funnies = new Funnies();
-    alert (funnies.message());
+    const lorem = getLoremChucksum({
+      count: 1,
+      unit: 'sentences',
+    });
+    alert (lorem);
   }
 }
 
