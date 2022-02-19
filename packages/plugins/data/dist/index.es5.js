@@ -61,7 +61,7 @@
                 if (!target.__dataBindings) {
                     target.__dataBindings = [];
                 }
-                var attributeKey = "data-" + customAttributeKey_1;
+                var attributeKey = "data-".concat(customAttributeKey_1);
                 target.__dataBindings.push([propertyKey, attributeKey, serializer_1]);
             };
         }
@@ -91,7 +91,7 @@
             propertyKey = propertyKey.substr(1);
         }
         if (propertyKey.substr(0, 4) !== 'data') {
-            throw new Error(propertyKey + "\" has an invalid format please use @data dataSomeProp (data-some-prop) for valid bindings.");
+            throw new Error("".concat(propertyKey, "\" has an invalid format please use @data dataSomeProp (data-some-prop) for valid bindings."));
         }
         return propertyKey.replace(/([a-zA-Z])(?=[A-Z])/g, '$1-').toLowerCase();
     }
@@ -103,14 +103,14 @@
         deserialize: deserialize$2,
     };
 
-    var serialize$1 = function (value) { return "" + value; };
+    var serialize$1 = function (value) { return "".concat(value); };
     var deserialize$1 = function (value) { return value === 'true'; };
     var Boolean = {
         serialize: serialize$1,
         deserialize: deserialize$1,
     };
 
-    var serialize = function (value) { return "" + value; };
+    var serialize = function (value) { return "".concat(value); };
     var deserialize = function (value) { return parseFloat(value); };
     var Number = {
         serialize: serialize,
