@@ -7,7 +7,7 @@
 
 # 🚡 Gondel
 
-[Gondel](https://en.wikipedia.org/wiki/Gondola) is a tiny (2kb) non-intrusive library to help you modularize your code.  
+[Gondel](https://en.wikipedia.org/wiki/Gondola) is a tiny (3kb) non-intrusive library to help you modularize your code.  
 It does **not** ship with a rendering engine to be a perfect fit for most client side rendering engines (e.g. React or Angular) and server side rendering engines (e.g. Java or PHP)
 
 ## Installation
@@ -96,7 +96,7 @@ Running tests:
 npm run test:watch
 ```
 
-Thanks to all who have contributed ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)) so far:
+Thanks to all who have contributed ([emoji key](https://allcontributors.org/docs/en/emoji-key)) so far:
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->

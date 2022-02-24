@@ -1,5 +1,5 @@
 import resolve from 'rollup-plugin-node-resolve';
-import { uglify } from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
 
 export default {
   input: 'dist/index.js',
@@ -13,9 +13,9 @@ export default {
     resolve({
       extensions: ['.ts'],
     }),
-    uglify()
+    terser(),
   ],
   external: [
-    'jquery'
+    'jquery',
   ]
 };

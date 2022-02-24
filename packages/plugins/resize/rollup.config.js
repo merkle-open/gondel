@@ -11,6 +11,5 @@ export default {
   },
   plugins: [
     resolve(),
-    //uglify()
   ]
 };

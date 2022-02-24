@@ -15,7 +15,7 @@ export var WINDOW_RESIZED_EVENT = '@gondel/plugin-resize--window-resized';
  */
 function getComponentsInEventRegistry(eventRegistry, namespace) {
     var selector = Object.keys(eventRegistry)
-        .map(function (componentName) { return "[data-" + namespace + "-name=\"" + componentName + "\"]"; })
+        .map(function (componentName) { return "[data-".concat(namespace, "-name=\"").concat(componentName, "\"]"); })
         .join(',');
     if (!selector) {
         return [];

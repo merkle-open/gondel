@@ -1,24 +1,23 @@
 {
   "name": "gondel",
-  "version": "0.0.3",
+  "version": "1.2.7",
   "private": true,
   "description": "Gondel Monorepo",
   "main": "index.js",
   "scripts": {
     "bootstrap": "lerna bootstrap --no-ci --hoist",
     "build": "lerna run build",
-    "clean": "npx --ignore-existing --quiet npm-run-all clean:*",
-    "clean:lerna": "npx lerna clean --yes",
-    "clean:lock": "rimraf **/package-lock.json",
-    "clean:modules": "npx --ignore-existing --quiet rimraf node_modules",
+    "clean": "npx -y npm-run-all --npm-path npm clean:*",
+    "clean:lerna": "lerna clean --yes",
+    "clean:lock": "npx -y rimraf **/package-lock.json",
+    "clean:modules": "npx -y rimraf node_modules",
     "contributors": "npx all-contributors-cli generate",
     "commit": "git-cz",
     "postinstall": "npm run bootstrap",
     "prepare": "husky install",
     "prettier": "prettier --write **/src/**/*.{ts,tsx}",
     "posttest": "prettier --list-different **/src/**/*.{ts,tsx}",
-    "size": "npm run size-build && size-limit",
-    "size-build": "npm run build",
+    "size": "npm run build && size-limit",
     "test": "lerna run test",
     "test:watch": "lerna run --parallel test:watch",
     "release": "lerna publish --conventional-commits --no-commit-hooks",
@@ -45,25 +44,25 @@
   "size-limit": [
     {
       "name": "@gondel/core es5",
-      "limit": "3 KB",
-      "path": "./packages/core/dist/gondel.es5.js"
+      "limit": "3.2 KB",
+      "path": "./packages/core/dist/gondel.es5.min.js"
     }
   ],
   "devDependencies": {
     "commitizen": "4.2.4",
-    "@commitlint/cli": "13.2.1",
+    "@commitlint/cli": "16.2.1",
     "@namics/commitlint-conventional-changelog": "1.2.2",
     "@namics/prettier-config": "2.0.1",
-    "@size-limit/preset-small-lib": "6.0.3",
+    "@size-limit/preset-small-lib": "7.0.8",
     "cz-conventional-changelog": "3.3.0",
-    "husky": "7.0.2",
+    "husky": "7.0.4",
     "lerna": "4.0.0",
-    "lint-staged": "11.2.3",
-    "npm-check-updates": "11.8.5",
+    "lint-staged": "12.3.4",
+    "npm-check-updates": "12.3.1",
     "npm-run-all": "4.1.5",
-    "prettier": "2.4.1",
+    "prettier": "2.5.1",
     "rimraf": "3.0.2",
-    "size-limit": "6.0.3",
-    "standard-version": "9.3.1"
+    "size-limit": "7.0.8",
+    "standard-version": "9.3.2"
   }
 }

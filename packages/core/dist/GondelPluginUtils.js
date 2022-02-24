@@ -38,7 +38,7 @@ export function fireAsyncGondelPluginEvent(eventName, initialValue, data) {
 export function addGondelPluginEventListener(pluginName, eventName, eventListenerCallback) {
     // Prevent any event registration if this pluginHandlerName
     // has already been used
-    var pluginHandlerNamePerEvent = eventName + "#" + pluginName;
+    var pluginHandlerNamePerEvent = "".concat(eventName, "#").concat(pluginName);
     if (pluginMapping[pluginHandlerNamePerEvent]) {
         return;
     }
