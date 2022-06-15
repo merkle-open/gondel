@@ -73,7 +73,7 @@ export function createGondelReactLoader<State extends {}, Module extends { [key:
 				if (mod[exportName]) {
 					return mod[exportName] as RenderableReactComponent<State>;
 				} else {
-					throw new Error(`export ${exportName} not found`);
+					throw new Error(`export ${String(exportName)} not found`);
 				}
 			}
 

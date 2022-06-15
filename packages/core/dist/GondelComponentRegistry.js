@@ -5,7 +5,7 @@ var GondelComponentRegistry = /** @class */ (function () {
     function GondelComponentRegistry() {
         this._components = {};
         this._activeComponents = {};
-        this._bootMode = 2 /* onDomReady */;
+        this._bootMode = 2 /* RegistryBootMode.onDomReady */;
     }
     GondelComponentRegistry.prototype.registerComponent = function (name, gondelComponent) {
         this._components[name] = gondelComponent;

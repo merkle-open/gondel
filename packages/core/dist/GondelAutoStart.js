@@ -7,7 +7,7 @@ import { startComponentsFromRegistry } from './GondelComponentStarter';
  */
 export function disableAutoStart(namespace) {
     if (namespace === void 0) { namespace = 'g'; }
-    getComponentRegistry(namespace).setBootMode(1 /* manual */);
+    getComponentRegistry(namespace).setBootMode(1 /* RegistryBootMode.manual */);
 }
 /**
  * Wait for document ready and boot the registry
@@ -17,8 +17,8 @@ export function addRegistryToBootloader(namespace) {
     var boot = function () {
         Promise.resolve().then(function () {
             var gondelComponentRegistry = getComponentRegistry(namespace);
-            if (gondelComponentRegistry._bootMode === 2 /* onDomReady */) {
-                gondelComponentRegistry.setBootMode(0 /* alreadyBooted */);
+            if (gondelComponentRegistry._bootMode === 2 /* RegistryBootMode.onDomReady */) {
+                gondelComponentRegistry.setBootMode(0 /* RegistryBootMode.alreadyBooted */);
                 startComponentsFromRegistry(gondelComponentRegistry, document.documentElement, namespace);
             }
         });

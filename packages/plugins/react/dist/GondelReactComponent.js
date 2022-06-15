@@ -31,7 +31,7 @@ export function createGondelReactLoader(loader, exportName) {
                     return mod[exportName];
                 }
                 else {
-                    throw new Error("export ".concat(exportName, " not found"));
+                    throw new Error("export ".concat(String(exportName), " not found"));
                 }
             }
             return lazyLoadModule;
