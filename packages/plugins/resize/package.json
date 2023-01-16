@@ -22,7 +22,7 @@
     "@gondel/core": "*"
   },
   "devDependencies": {
-    "@babel/core": "7.20.5",
+    "@babel/core": "7.20.12",
     "@babel/preset-env": "7.20.2",
     "@gondel/core": "^1.2.7",
     "babel-cli": "7.0.0-beta.3",
