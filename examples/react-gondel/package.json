@@ -9,7 +9,7 @@
     "@gondel/core": "^1.2.7",
     "@gondel/plugin-hot": "^1.2.7",
     "@gondel/plugin-react": "^1.2.7",
-    "@types/react": "17.0.52",
+    "@types/react": "17.0.53",
     "@types/react-dom": "17.0.18",
     "react": "17.0.2",
     "react-dom": "17.0.2"

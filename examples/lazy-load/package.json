@@ -7,12 +7,12 @@
   },
   "dependencies": {
     "@gondel/core": "^1.2.7",
-    "core-js": "3.27.1",
+    "core-js": "3.27.2",
     "lorem-chucksum": "1.0.2"
   },
   "devDependencies": {
     "@babel/core": "7.20.12",
-    "@babel/plugin-proposal-decorators": "7.20.7",
+    "@babel/plugin-proposal-decorators": "7.20.13",
     "@babel/preset-env": "7.20.2",
     "html-webpack-plugin": "4.5.2",
     "js-config-webpack-plugin": "2.0.3",
