@@ -4,14 +4,14 @@ import {Component, GondelBaseComponent, EventListener, getComponentByDomNode, ha
 class Button extends GondelBaseComponent {
   @EventListener('click')
   _handleButtonClick(ev) {
-    const listElement = document.querySelector('.js-list');
+    const listElement = document.querySelector('[data-g-name="List"]');
 
     if (hasMountedGondelComponent(listElement)) {
       const list = getComponentByDomNode(listElement);
 
       list.appendContent();
     } else {
-      console.warn(`Component list has not been found`);
+      console.warn('Component list has not been found');
 
       return false;
     }

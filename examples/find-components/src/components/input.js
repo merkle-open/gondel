@@ -1,11 +1,11 @@
-import { Component, EventListener, GondelBaseComponent, triggerPublicEvent } from "@gondel/core";
+import { Component, EventListener, GondelBaseComponent, triggerPublicEvent } from '@gondel/core';
 
-@Component("Input")
+@Component('Input')
 class Input extends GondelBaseComponent {
 
-  @EventListener("input")
+  @EventListener('input')
   _handleInput() {
-    triggerPublicEvent("gInput", this);
+    triggerPublicEvent('gInput', this);
   }
 
   setValue(newValue) {

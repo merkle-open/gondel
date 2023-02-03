@@ -1,25 +1,27 @@
-import { Component, EventListener, findComponents, GondelBaseComponent } from "@gondel/core";
+import { Component, EventListener, findComponents, GondelBaseComponent } from '@gondel/core';
 
-@Component("Form")
+@Component('Form')
 class Form extends GondelBaseComponent {
-  @EventListener("submit")
+  @EventListener('submit')
   _handleSubmit(event) {
-    alert("Submitted");
+    alert('Submitted');
     event.preventDefault();
   }
 
-  @EventListener("gInput")
+  @EventListener('gInput')
   _handleChange() {
     const hasEmptyElements = this._getInputs().some(input => !input.getValue());
     this._getSubmitButton().setIsEnabled(!hasEmptyElements);
+
+    this._ctx.querySelector('.js-warning').style.display = (hasEmptyElements) ? 'inline' : 'none';
   }
 
   _getInputs() {
-    return findComponents(this._ctx, "Input");
+    return findComponents(this._ctx, 'Input');
   }
 
   _getSubmitButton() {
-    return findComponents(this._ctx, "Button")[0];
+    return findComponents(this._ctx, 'Button')[0];
   }
 }
 

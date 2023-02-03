@@ -1,47 +1,40 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Gondel Communication Example</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Gondel Communication - findComponents Example</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   </head>
-<body>
-  <div class="container mt-3">
-    <div class="card" style="max-width: 650px">
+<body class="d-flex justify-content-center p-5">
+  <div style="max-width:40em">
+    <div class="card">
       <div class="card-body">
-
         <h1>Communication Example</h1>
         <p>This example seperates responsibilities to different components:</p>
-
-        <ul>
-          <li>The Input component is only responsible for controlling the &lt;input /&gt; element</li>
-          <li>The Button component is only responsible for enabling / disabling the button</li>
-          <li>The Form compontent controls the entire form submission logic</li>
-        </ul>
-
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">The Input component is only responsible for controlling the &lt;input /&gt; element</li>
+        <li class="list-group-item">The Button component is only responsible for enabling / disabling the button</li>
+        <li class="list-group-item">The Form compontent validates and controls the form submission logic</li>
+      </ul>
+      <div class="card-body">
         <form data-g-name="Form">
-
-          <label>
-            Name*:
-            <div>
-              <input data-g-name="Input" class="field">
-            </div>
-          </label>
-
-          <label>
-            Age*:
-            <div>
-              <input data-g-name="Input" class="field">
-            </div>
-          </label>
-
           <div>
-            <button data-g-name="Button" class="btn btn-primary" disabled>
+            <label for="name" class="form-label">Name *</label>
+            <input type="text" class="form-control" id="name" data-g-name="Input">
+          </div>
+          <div class="mt-3">
+            <label for="age" class="form-label">Age *</label>
+            <input type="text" class="form-control" id="age" data-g-name="Input">
+          </div>
+          <div class="mt-4">
+            <button data-g-name="Button" class="btn btn-outline-primary" disabled>
               Send
             </button>
+            <span class="px-3 js-warning">Not all fields are filled</span>
           </div>
         </form>
       </div>
     </div>
-</div>
+  </div>
 </body>
 </html>

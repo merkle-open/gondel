@@ -8,8 +8,8 @@ class List extends GondelBaseComponent {
   }
 
   appendContent() {
-    const paragraph = document.createElement("li");
-    const content = document.createTextNode("New element appended");
+    const paragraph = document.createElement('li');
+    const content = document.createTextNode('New element appended');
     paragraph.appendChild(content);
 
     this.list.appendChild(paragraph);

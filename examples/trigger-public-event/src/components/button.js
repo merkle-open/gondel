@@ -8,7 +8,8 @@ class ColorPicker extends GondelBaseComponent {
     const inputField = document.querySelector('.js-input');
     const eventData = { color: inputField.value };
 
-    triggerPublicEvent('gButtonClick', this, document.getElementsByClassName('js-list'), eventData);
+    // notify parent components
+    triggerPublicEvent('gButtonClick', this, undefined, eventData);
   }
 }
 
