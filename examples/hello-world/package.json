@@ -2,9 +2,6 @@
   "name": "gondel-hello-world-example",
   "private": true,
   "version": "1.2.7",
-  "engines": {
-    "node": ">=16"
-  },
   "scripts": {
     "start": "webpack serve"
   },
