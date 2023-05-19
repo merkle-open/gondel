@@ -1,8 +1,4 @@
 {
-  "packages": [
-    "examples/*",
-    "packages/core",
-    "packages/plugins/*"
-  ],
-  "version": "1.2.7"
+	"packages": ["examples/*", "packages/core", "packages/plugins/*"],
+	"version": "1.2.8"
 }

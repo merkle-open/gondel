@@ -1,27 +1,27 @@
 {
-  "name": "gondel-react-gondel-example",
-  "private": true,
-  "version": "1.2.7",
-  "scripts": {
-    "start": "webpack serve"
-  },
-  "dependencies": {
-    "@gondel/core": "^1.2.7",
-    "@gondel/plugin-hot": "^1.2.7",
-    "@gondel/plugin-react": "^1.2.7",
-    "@types/react": "17.0.59",
-    "@types/react-dom": "17.0.20",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
-  },
-  "devDependencies": {
-    "@babel/core": "7.21.8",
-    "@babel/preset-env": "7.21.5",
-    "@babel/preset-react": "7.18.6",
-    "js-config-webpack-plugin": "2.0.3",
-    "html-webpack-plugin": "4.5.2",
-    "webpack": "4.46.0",
-    "webpack-cli": "4.10.0",
-    "webpack-dev-server": "4.15.0"
-  }
+	"name": "gondel-react-gondel-example",
+	"private": true,
+	"version": "1.2.8",
+	"scripts": {
+		"start": "webpack serve"
+	},
+	"dependencies": {
+		"@gondel/core": "^1.2.8",
+		"@gondel/plugin-hot": "^1.2.8",
+		"@gondel/plugin-react": "^1.2.8",
+		"@types/react": "17.0.59",
+		"@types/react-dom": "17.0.20",
+		"react": "17.0.2",
+		"react-dom": "17.0.2"
+	},
+	"devDependencies": {
+		"@babel/core": "7.21.8",
+		"@babel/preset-env": "7.21.5",
+		"@babel/preset-react": "7.18.6",
+		"html-webpack-plugin": "4.5.2",
+		"js-config-webpack-plugin": "2.0.3",
+		"webpack": "4.46.0",
+		"webpack-cli": "4.10.0",
+		"webpack-dev-server": "4.15.0"
+	}
 }

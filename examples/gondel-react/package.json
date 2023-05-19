@@ -1,27 +1,27 @@
 {
-  "name": "gondel-react-lazy-example",
-  "private": true,
-  "version": "1.2.7",
-  "scripts": {
-    "start": "webpack serve"
-  },
-  "dependencies": {
-    "@gondel/core": "^1.2.7",
-    "@gondel/plugin-hot": "^1.2.7",
-    "@gondel/plugin-react": "^1.2.7",
-    "prop-types": "15.8.1",
-    "react": "17.0.2",
-    "react-awesome-button": "7.0.5",
-    "react-dom": "17.0.2"
-  },
-  "devDependencies": {
-    "css-loader": "5.2.7",
-    "html-webpack-plugin": "4.5.2",
-    "style-loader": "2.0.0",
-    "ts-config-webpack-plugin": "2.0.3",
-    "typescript": "4.7.4",
-    "webpack": "4.46.0",
-    "webpack-cli": "4.10.0",
-    "webpack-dev-server": "4.15.0"
-  }
+	"name": "gondel-react-lazy-example",
+	"private": true,
+	"version": "1.2.8",
+	"scripts": {
+		"start": "webpack serve"
+	},
+	"dependencies": {
+		"@gondel/core": "^1.2.8",
+		"@gondel/plugin-hot": "^1.2.8",
+		"@gondel/plugin-react": "^1.2.8",
+		"prop-types": "15.8.1",
+		"react": "17.0.2",
+		"react-awesome-button": "7.0.5",
+		"react-dom": "17.0.2"
+	},
+	"devDependencies": {
+		"css-loader": "5.2.7",
+		"html-webpack-plugin": "4.5.2",
+		"style-loader": "2.0.0",
+		"ts-config-webpack-plugin": "2.0.3",
+		"typescript": "4.7.4",
+		"webpack": "4.46.0",
+		"webpack-cli": "4.10.0",
+		"webpack-dev-server": "4.15.0"
+	}
 }

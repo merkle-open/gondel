@@ -1,22 +1,22 @@
 {
-  "name": "gondel-communication-trigger-public-event-example",
-  "private": true,
-  "version": "1.2.7",
-  "scripts": {
-    "start": "webpack serve"
-  },
-  "dependencies": {
-    "@gondel/core": "^1.2.7",
-    "core-js": "3.30.2"
-  },
-  "devDependencies": {
-    "@babel/core": "7.21.8",
-    "@babel/plugin-proposal-decorators": "7.21.0",
-    "@babel/preset-env": "7.21.5",
-    "html-webpack-plugin": "4.5.2",
-    "js-config-webpack-plugin": "2.0.3",
-    "webpack": "4.46.0",
-    "webpack-cli": "4.10.0",
-    "webpack-dev-server": "4.15.0"
-  }
+	"name": "gondel-communication-trigger-public-event-example",
+	"private": true,
+	"version": "1.2.8",
+	"scripts": {
+		"start": "webpack serve"
+	},
+	"dependencies": {
+		"@gondel/core": "^1.2.8",
+		"core-js": "3.30.2"
+	},
+	"devDependencies": {
+		"@babel/core": "7.21.8",
+		"@babel/plugin-proposal-decorators": "7.21.0",
+		"@babel/preset-env": "7.21.5",
+		"html-webpack-plugin": "4.5.2",
+		"js-config-webpack-plugin": "2.0.3",
+		"webpack": "4.46.0",
+		"webpack-cli": "4.10.0",
+		"webpack-dev-server": "4.15.0"
+	}
 }

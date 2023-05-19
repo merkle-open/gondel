@@ -1,63 +1,52 @@
 {
-  "name": "@gondel/plugin-react",
-  "version": "1.2.7",
-  "description": "Gondel Plugin to boot react widgets and apps",
-  "bugs": "https://github.com/merkle-open/gondel/issues",
-  "homepage": "https://github.com/merkle-open/gondel",
-  "repository": "https://github.com/merkle-open/gondel.git",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "author": "Jan Nicklas",
-  "license": "MIT",
-  "scripts": {
-    "test": "jest",
-    "build:clean": "rimraf dist",
-    "build:esm": "tsc --project ./tsconfig.json --declaration --esModuleInterop --declarationDir dist/ --sourceMap --outDir dist/",
-    "build": "npm-run-all build:clean build:esm"
-  },
-  "files": [
-    "src/",
-    "dist/"
-  ],
-  "peerDependencies": {
-    "@gondel/core": "*",
-    "react": "*",
-    "react-dom": "*"
-  },
-  "devDependencies": {
-    "@gondel/core": "^1.2.7",
-    "jest": "28.1.3",
-    "jest-environment-jsdom": "28.1.3",
-    "npm-run-all": "4.1.5",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "rimraf": "5.0.1",
-    "typescript": "4.7.4"
-  },
-  "jest": {
-    "globals": {
-      "ts-jest": {
-        "diagnostics": true
-      }
-    },
-    "transform": {
-      "^.+\\.tsx?": "ts-jest"
-    },
-    "testRegex": "\\.test\\.tsx?",
-    "testEnvironment": "jsdom",
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*.{ts,tsx,js,jsx}"
-    ],
-    "coverageDirectory": "coverage",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "json",
-      "node"
-    ],
-    "preset": "ts-jest"
-  }
+	"name": "@gondel/plugin-react",
+	"version": "1.2.8",
+	"description": "Gondel Plugin to boot react widgets and apps",
+	"bugs": "https://github.com/merkle-open/gondel/issues",
+	"homepage": "https://github.com/merkle-open/gondel",
+	"repository": "https://github.com/merkle-open/gondel.git",
+	"main": "./dist/index.js",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"author": "Jan Nicklas",
+	"license": "MIT",
+	"scripts": {
+		"test": "jest",
+		"build:clean": "rimraf dist",
+		"build:esm": "tsc --project ./tsconfig.json --declaration --esModuleInterop --declarationDir dist/ --sourceMap --outDir dist/",
+		"build": "npm-run-all build:clean build:esm"
+	},
+	"files": ["src/", "dist/"],
+	"peerDependencies": {
+		"@gondel/core": "*",
+		"react": "*",
+		"react-dom": "*"
+	},
+	"devDependencies": {
+		"@gondel/core": "^1.2.8",
+		"jest": "28.1.3",
+		"jest-environment-jsdom": "28.1.3",
+		"npm-run-all": "4.1.5",
+		"react": "17.0.2",
+		"react-dom": "17.0.2",
+		"rimraf": "5.0.1",
+		"typescript": "4.7.4"
+	},
+	"jest": {
+		"globals": {
+			"ts-jest": {
+				"diagnostics": true
+			}
+		},
+		"transform": {
+			"^.+\\.tsx?": "ts-jest"
+		},
+		"testRegex": "\\.test\\.tsx?",
+		"testEnvironment": "jsdom",
+		"collectCoverage": true,
+		"collectCoverageFrom": ["src/**/*.{ts,tsx,js,jsx}"],
+		"coverageDirectory": "coverage",
+		"moduleFileExtensions": ["ts", "tsx", "js", "json", "node"],
+		"preset": "ts-jest"
+	}
 }
