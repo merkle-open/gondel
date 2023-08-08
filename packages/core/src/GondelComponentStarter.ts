@@ -23,18 +23,18 @@ const Deferred = function () {
 export function startComponentsFromRegistry(
 	gondelComponentRegistry: GondelComponentRegistry,
 	domContext: HTMLElement,
-	namespace: string
+	namespace: string,
 ): Promise<Array<GondelComponent>> {
 	// Get an array of all nodes which match the namespace
 	const gondelDomNodeList: Array<HTMLElement> = Array.prototype.slice.call(
-		domContext.querySelectorAll(`[data-${namespace}-name]`)
+		domContext.querySelectorAll(`[data-${namespace}-name]`),
 	);
 	if (domContext.hasAttribute(`data-${namespace}-name`)) {
 		gondelDomNodeList.push(domContext);
 	}
 	// Remove already booted nodes
 	const pristineGondelDomNodes: Array<HTMLElement> = gondelDomNodeList.filter((gondelDomNode) =>
-		isPristineGondelDomNode(gondelDomNode, namespace)
+		isPristineGondelDomNode(gondelDomNode, namespace),
 	);
 	const bootingDeferred = new Deferred();
 	// Mark all nodes as booting
@@ -49,9 +49,9 @@ export function startComponentsFromRegistry(
 		{ namespace },
 		(pristineGondelDomNodes) => {
 			return pristineGondelDomNodes.map((gondelDomNode) =>
-				constructComponent(gondelDomNode, gondelComponentRegistry, namespace)
+				constructComponent(gondelDomNode, gondelComponentRegistry, namespace),
 			);
-		}
+		},
 	);
 	// Get all component names
 	const newComponentNames = getNewComponents(gondelComponents, gondelComponentRegistry);
@@ -64,7 +64,7 @@ export function startComponentsFromRegistry(
 		(gondelComponents) => {
 			// Wait for async started components
 			return Promise.all(gondelComponents.map(startConstructedComponent));
-		}
+		},
 	)
 		// Let all plugins know that the components are now all ready to use
 		.then(() => {
@@ -109,7 +109,7 @@ export function attachGondelBootingFlag(domNode: HTMLElement, bootingFlag: Promi
 export function constructComponent(
 	domNode: HTMLElement,
 	gondelComponentRegistry: GondelComponentRegistry,
-	namespace: string
+	namespace: string,
 ) {
 	const componentName = domNode.getAttribute(`data-${namespace}-name`)!;
 	const GondelComponent = gondelComponentRegistry.getComponent(componentName);
@@ -125,7 +125,7 @@ export function constructComponent(
 		null,
 		componentInstance,
 		componentInstance.stop || noop,
-		namespace
+		namespace,
 	);
 	// Create a circular reference which will allow access to the componentInstance from ctx
 	(domNode as any)['_gondel_' + namespace] = componentInstance;

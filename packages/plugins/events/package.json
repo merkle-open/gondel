@@ -21,8 +21,8 @@
 		"@gondel/core": "*"
 	},
 	"devDependencies": {
-		"@babel/core": "7.22.9",
-		"@babel/preset-env": "7.22.9",
+		"@babel/core": "7.22.10",
+		"@babel/preset-env": "7.22.10",
 		"@gondel/core": "^1.2.8",
 		"babel-cli": "7.0.0-beta.3",
 		"babel-minify": "0.5.2",

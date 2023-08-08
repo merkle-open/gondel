@@ -22,11 +22,11 @@ type GondelComponentDecorator<T> = (target: T, propertyKey: string) => void;
 export function data<T extends GondelComponentWithData>(target: T, propertyKey: string): void;
 export function data<T extends GondelComponentWithData>(
 	customAttributeKey: string,
-	serializer?: ISerializer
+	serializer?: ISerializer,
 ): GondelComponentDecorator<T>;
 export function data<T extends GondelComponentWithData>(
 	targetOrAttributeKey: T | string,
-	propertyKeyOrSerializer: string | ISerializer | undefined
+	propertyKeyOrSerializer: string | ISerializer | undefined,
 ): void | GondelComponentDecorator<T> {
 	// First case will be used if we have a custom attribute and a valid serializer (which is typeof ISerializer)
 	if (typeof targetOrAttributeKey === 'string' && typeof propertyKeyOrSerializer !== 'string') {
@@ -79,7 +79,7 @@ function convertPropertyKeyToDataAttributeKey(propertyKey: string): string {
 
 	if (propertyKey.substr(0, 4) !== 'data') {
 		throw new Error(
-			`${propertyKey}" has an invalid format please use @data dataSomeProp (data-some-prop) for valid bindings.`
+			`${propertyKey}" has an invalid format please use @data dataSomeProp (data-some-prop) for valid bindings.`,
 		);
 	}
 

@@ -8,12 +8,12 @@
 	"dependencies": {
 		"@gondel/core": "^1.2.8",
 		"@gondel/plugin-media-queries": "^1.2.8",
-		"core-js": "3.31.1"
+		"core-js": "3.32.0"
 	},
 	"devDependencies": {
-		"@babel/core": "7.22.9",
-		"@babel/plugin-proposal-decorators": "7.22.7",
-		"@babel/preset-env": "7.22.9",
+		"@babel/core": "7.22.10",
+		"@babel/plugin-proposal-decorators": "7.22.10",
+		"@babel/preset-env": "7.22.10",
 		"html-webpack-plugin": "4.5.2",
 		"js-config-webpack-plugin": "2.0.3",
 		"webpack": "4.46.0",

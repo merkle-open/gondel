@@ -25,7 +25,7 @@ export interface IComponentDimension {
  */
 function getComponentsInEventRegistry(
 	eventRegistry: INamespacedEventHandlerRegistry,
-	namespace: string
+	namespace: string,
 ): Array<GondelComponent> {
 	const selector = Object.keys(eventRegistry)
 		.map((componentName) => `[data-${namespace}-name="${componentName}"]`)
@@ -53,7 +53,7 @@ function getComponentsInEventRegistry(
 const initializeResizeEvent = (
 	eventRegistry: INamespacedEventHandlerRegistry,
 	namespace: string,
-	eventName: string
+	eventName: string,
 ) => {
 	let isRunning = false;
 	let frameIsRequested = false;
@@ -89,8 +89,8 @@ const initializeResizeEvent = (
 				node: component._ctx,
 				selectors: Object.keys(gondelComponentHandlers).map((selector) =>
 					gondelComponentHandlers[selector].map(
-						(handlerOption) => (component as any)[handlerOption.handlerName]
-					)
+						(handlerOption) => (component as any)[handlerOption.handlerName],
+					),
 				),
 				width: size.width,
 				height: size.height,
@@ -140,8 +140,8 @@ const initializeResizeEvent = (
 			componentInformation.height = newSize.height;
 			componentInformation.selectors.forEach((selector) =>
 				selector.forEach((handler) =>
-					handlerResults.push(handler.call(componentInformation.component, event, newSize))
-				)
+					handlerResults.push(handler.call(componentInformation.component, event, newSize)),
+				),
 			);
 		});
 		handlerResults.forEach((handlerResult) => {
@@ -166,7 +166,7 @@ const initializeResizeEvent = (
 				return;
 			}
 			componentInformation.selectors.forEach((selector) =>
-				selector.forEach((handler) => handlerResults.push(handler.call(componentInformation.component, event)))
+				selector.forEach((handler) => handlerResults.push(handler.call(componentInformation.component, event))),
 			);
 		});
 		handlerResults.forEach((handlerResult) => {
@@ -205,7 +205,7 @@ export function initResizePlugin() {
 
 			// Tell the event system that it should not listen for the event:
 			resolve(false);
-		}
+		},
 	);
 
 	addGondelPluginEventListener(
@@ -221,6 +221,6 @@ export function initResizePlugin() {
 				});
 			});
 			resolve(components);
-		}
+		},
 	);
 }

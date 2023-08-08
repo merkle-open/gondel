@@ -33,13 +33,13 @@ export function getFirstDomNode(domNode: ArrayLikeHtmlElement): HTMLElement {
  */
 export function startComponents(
 	domContext?: ArrayLikeHtmlElement,
-	namespace: string = 'g'
+	namespace: string = 'g',
 ): Promise<Array<GondelComponent>> {
 	const registry = getComponentRegistry(namespace);
 	return startComponentsFromRegistry(
 		registry,
 		domContext ? getFirstDomNode(domContext) : document.documentElement!,
-		namespace
+		namespace,
 	);
 }
 
@@ -76,13 +76,13 @@ export function hasMountedGondelComponent(domNode: ArrayLikeHtmlElement, namespa
  */
 export function getComponentByDomNode<T extends GondelComponent>(
 	domNode: ArrayLikeHtmlElement,
-	namespace: string = 'g'
+	namespace: string = 'g',
 ): T {
 	const gondelComponent = extractComponent<T>(getFirstDomNode(domNode), namespace);
 	if (!gondelComponent) {
 		throw new Error(
 			`Could not find a started gondel component in namespace "${namespace}",
-please check if your component is mounted via 'hasMountedGondelComponent'`
+please check if your component is mounted via 'hasMountedGondelComponent'`,
 		);
 	}
 	return gondelComponent;
@@ -108,7 +108,7 @@ export function extractComponent<T extends GondelComponent>(element: HTMLElement
  */
 export function getComponentByDomNodeAsync<T extends GondelComponent>(
 	domNode: ArrayLikeHtmlElement,
-	namespace: string = 'g'
+	namespace: string = 'g',
 ): Promise<T> {
 	const firstNode = getFirstDomNode(domNode);
 	const gondelComponent = (firstNode as any)[internalGondelAsyncRefAttribute + namespace];
@@ -130,7 +130,7 @@ export function getComponentByDomNodeAsync<T extends GondelComponent>(
 export function findComponents<T extends GondelComponent>(
 	domNode: ArrayLikeHtmlElement = document.documentElement!,
 	componentName?: string,
-	namespace: string = 'g'
+	namespace: string = 'g',
 ): Array<T> {
 	const firstNode = getFirstDomNode(domNode);
 	const components: Array<T> = [];

@@ -49,7 +49,7 @@ describe('@gondel/plugin-react', () => {
 					...prev,
 					[curr]: jest.fn(),
 				}),
-				{} as Record<ArrayElement<typeof lifecycles>, () => any>
+				{} as Record<ArrayElement<typeof lifecycles>, () => any>,
 			);
 
 			const Wrapper = new AppWrapper<HelloProps>({
@@ -92,7 +92,7 @@ describe('@gondel/plugin-react', () => {
 								text: 'World',
 							},
 						},
-						null
+						null,
 					);
 				}
 			}
@@ -110,7 +110,7 @@ describe('@gondel/plugin-react', () => {
 					config: { text: 'initial' },
 					children: (props: HelloProps) => createElement(HelloFixture, props, null),
 				},
-				null
+				null,
 			);
 
 			const rendered = render<Props<HelloProps>>(wrapper, root) as Component<HelloProps, HelloProps>;

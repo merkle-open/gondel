@@ -77,7 +77,7 @@ export function registerComponent(componentName: string, component: IGondelCompo
 export function registerComponent(
 	componentName: string,
 	namespace: string | undefined,
-	component: IGondelComponent
+	component: IGondelComponent,
 ): void;
 export function registerComponent() {
 	const args = arguments;
@@ -104,6 +104,6 @@ export function registerComponent() {
 		},
 		function (component) {
 			gondelComponentRegistry.registerComponent(componentName, component);
-		}
+		},
 	);
 }

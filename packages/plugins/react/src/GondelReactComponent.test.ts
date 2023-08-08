@@ -172,7 +172,7 @@ describe('@gondel/plugin-react', () => {
 					function TestTitleSpan(props: { title: string }) {
 						return createElement('span', null, props.title);
 					}
-					const loader = async () => ({ TestTitleSpan } as const);
+					const loader = async () => ({ TestTitleSpan }) as const;
 					const GondelReactLoaderComponent = createGondelReactLoader(loader, 'TestTitleSpan');
 					@Component('Greeter')
 					class Greeter extends GondelReactLoaderComponent {
@@ -303,7 +303,7 @@ describe('@gondel/plugin-react', () => {
 				component.setState({ title: 'update using getComponentByDomNode' });
 
 				expect(root.innerHTML).toBe(
-					'<div data-g-name="Greeter"><span>update using getComponentByDomNode</span></div>'
+					'<div data-g-name="Greeter"><span>update using getComponentByDomNode</span></div>',
 				);
 			});
 

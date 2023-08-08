@@ -19,7 +19,7 @@ export function triggerPublicEvent(
 	gondelComponent: GondelComponent,
 	target?: ArrayLikeHtmlElement,
 	eventData: Object = {},
-	canBubble: boolean = true
+	canBubble: boolean = true,
 ): boolean {
 	const event = <UxEvent>document.createEvent('Event');
 	const eventTarget = target ? getFirstDomNode(target) : gondelComponent._ctx;
@@ -32,7 +32,7 @@ export function triggerPublicEvent(
 				namespace +
 				eventName.charAt(0).toUpperCase() +
 				eventName.slice(1) +
-				"'"
+				"'",
 		);
 	}
 	event.initEvent(eventName, canBubble, true);

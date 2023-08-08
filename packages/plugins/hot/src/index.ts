@@ -26,7 +26,7 @@ export function hot(module: __WebpackModuleApi.Module | NodeModule) {
 						(oldComponent as any).__proto__ = registerComponent.prototype;
 					});
 				next(registerComponent);
-			}
+			},
 		);
 	}
 }

@@ -10,7 +10,7 @@ import { getHandlers, executeHandlers } from '@gondel/core/dist/GondelEventRegis
  */
 function getComponentsInEventRegistry(
 	eventRegistry: INamespacedEventHandlerRegistry,
-	namespace: string
+	namespace: string,
 ): Array<GondelComponent> {
 	const selector = Object.keys(eventRegistry)
 		.map((componentName) => `[data-${namespace}-name="${componentName}"]`)
@@ -72,8 +72,8 @@ const customEvents: {
 					node: component._ctx,
 					selectors: Object.keys(gondelComponentHandlers).map((selector) =>
 						gondelComponentHandlers[selector].map(
-							(handlerOption) => (component as any)[handlerOption.handlerName]
-						)
+							(handlerOption) => (component as any)[handlerOption.handlerName],
+						),
 					),
 					width: size.width,
 					height: size.height,
@@ -123,8 +123,8 @@ const customEvents: {
 				componentInformation.height = newSize.height;
 				componentInformation.selectors.forEach((selector) =>
 					selector.forEach((handler) =>
-						handlerResults.push(handler.call(componentInformation.component, event, newSize))
-					)
+						handlerResults.push(handler.call(componentInformation.component, event, newSize)),
+					),
 				);
 			});
 			handlerResults.forEach((handlerResult) => {
@@ -162,11 +162,11 @@ const customEvents: {
 						if (selector === '' || event.key === selector) {
 							eventRegistry[component._componentName][selector].forEach((handlerOption) => {
 								handlerResults.push(
-									(component as any)[handlerOption.handlerName].call(component, event)
+									(component as any)[handlerOption.handlerName].call(component, event),
 								);
 							});
 						}
-					}
+					},
 				);
 			});
 			handlerResults.forEach((handlerResult) => {
@@ -278,7 +278,7 @@ export function initEventPlugin() {
 			} else {
 				resolve(isNativeEvent);
 			}
-		}
+		},
 	);
 
 	addGondelPluginEventListener(
@@ -294,6 +294,6 @@ export function initEventPlugin() {
 				});
 			});
 			resolve(components);
-		}
+		},
 	);
 }

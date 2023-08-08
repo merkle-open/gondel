@@ -1,6 +1,6 @@
 export type IGondelComponent<TElement extends HTMLElement = HTMLElement> = new (
 	context: TElement,
-	componentName: string
+	componentName: string,
 ) => GondelComponent<TElement>;
 
 export type StartMethod =

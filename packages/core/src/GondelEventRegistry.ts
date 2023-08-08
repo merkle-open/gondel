@@ -73,7 +73,7 @@ function getParentElements(startElement: HTMLElement): Array<HTMLElement> {
 export function getHandlers(
 	attributeName: string,
 	eventHandlerRegistry: INamespacedEventHandlerRegistry,
-	target: HTMLElement
+	target: HTMLElement,
 ): Array<IEventExecutionContext> {
 	const parents = getParentElements(target);
 	// Find all selectors which have been registred for this event type
@@ -131,7 +131,7 @@ export function getHandlers(
 	}
 	// Sort the queue so events which are further up the dom are fired first
 	handlerQueue.sort((handlerA, handlerB) =>
-		handlerA.index > handlerB.index ? 1 : handlerA.index === handlerB.index ? 0 : -1
+		handlerA.index > handlerB.index ? 1 : handlerA.index === handlerB.index ? 0 : -1,
 	);
 	return handlerQueue;
 }
@@ -143,7 +143,7 @@ function handleEvent(
 	namespace: string,
 	attributeName: string,
 	eventHandlerRegistry: INamespacedEventHandlerRegistry,
-	event: Event
+	event: Event,
 ) {
 	const target = event.target as HTMLElement;
 	const handlers = getHandlers(attributeName, eventHandlerRegistry, target);
@@ -193,7 +193,7 @@ export function executeHandlers(handlers: Array<IEventExecutionContext>, event: 
 			for (let j = 0; j < handlerOptions.length && !event.cancelBubble; j++) {
 				const handlerResult = (gondelComponent as any)[handlerOptions[j].handlerName].call(
 					gondelComponent,
-					event
+					event,
 				);
 				if (typeof handlerResult === 'function') {
 					results.push(handlerResult);
@@ -219,7 +219,7 @@ export function executeHandlers(handlers: Array<IEventExecutionContext>, event: 
 function startListeningForEvent(eventName: string, namespace: string) {
 	document.documentElement!.addEventListener(
 		(eventNameMapping as { [key: string]: string })[eventName] || eventName,
-		handleEvent.bind(null, namespace, `data-${namespace}-name`, getEventRegistry(namespace)[eventName])
+		handleEvent.bind(null, namespace, `data-${namespace}-name`, getEventRegistry(namespace)[eventName]),
 	);
 }
 
@@ -231,7 +231,7 @@ export function addRootEventListener(
 	domEventName: string,
 	gondelComponentName: string,
 	handlerName: string,
-	handlerOption?: string | { selector?: string }
+	handlerOption?: string | { selector?: string },
 ) {
 	// Create namespace if neededi
 	const namespacedDomEventRegistry = getEventRegistry(namespace);
@@ -253,7 +253,7 @@ export function addRootEventListener(
 				if (isNativeEvent) {
 					startListeningForEvent(domEventName, namespace);
 				}
-			}
+			},
 		);
 	}
 	if (!namespacedDomEventRegistry[domEventName][gondelComponentName]) {
@@ -265,7 +265,7 @@ export function addRootEventListener(
 		namespacedDomEventRegistry[domEventName][gondelComponentName][selectorKey] = [];
 	}
 	namespacedDomEventRegistry[domEventName][gondelComponentName][selectorKey].push(
-		Object.assign({ handlerName, handlerOption })
+		Object.assign({ handlerName, handlerOption }),
 	);
 }
 
@@ -277,7 +277,7 @@ export function removeRootEventListener(
 	domEventName: string,
 	gondelComponentName: string,
 	handlerName: string,
-	selector?: string
+	selector?: string,
 ) {
 	const selectorKey = selector || '';
 	const namespacedDomEventRegistry = getEventRegistry(namespace);

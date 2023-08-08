@@ -7,7 +7,7 @@ export type DataBindingConfig = [
 	// Attribute key
 	string,
 	// Serialization options
-	ISerializer | void
+	ISerializer | void,
 ];
 
 export let areDataBindingsHookedIntoCore = false;
@@ -62,6 +62,6 @@ export function hookDataDecoratorIntoCore() {
 			});
 
 			next(gondelComponents);
-		}
+		},
 	);
 }

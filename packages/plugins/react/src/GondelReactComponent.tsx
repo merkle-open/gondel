@@ -21,7 +21,7 @@ export interface ConstructableGondelReactComponent<State> {
  *
  */
 export function createGondelReactLoader<State extends {}>(
-	loader: () => Promise<RenderableReactComponent<State>>
+	loader: () => Promise<RenderableReactComponent<State>>,
 ): ConstructableGondelReactComponent<State>;
 /**
  * Create a GondelReactComponent class which is directly linked with a loader
@@ -33,7 +33,7 @@ export function createGondelReactLoader<State extends {}>(
  *
  */
 export function createGondelReactLoader<State extends {}>(
-	loader: () => RenderableReactComponent<State>
+	loader: () => RenderableReactComponent<State>,
 ): ConstructableGondelReactComponent<State>;
 /**
  * Create a GondelReactComponent class which is directly linked with a loader
@@ -48,14 +48,14 @@ export function createGondelReactLoader<State extends {}>(
 export function createGondelReactLoader<
 	State extends StateOfComponent<UnwrapPromise<Module>[ExportName]>,
 	Module extends Promise<{ [key: string]: unknown }>,
-	ExportName extends KeysMatching<UnwrapPromise<Module>, RenderableReactComponent<any>>
+	ExportName extends KeysMatching<UnwrapPromise<Module>, RenderableReactComponent<any>>,
 >(loader: () => Module, exportName: ExportName): ConstructableGondelReactComponent<State>;
 export function createGondelReactLoader<State extends {}, Module extends { [key: string]: unknown }>(
 	loader: () => // Synchronous loader
 	| RenderableReactComponent<State>
 		// Asynchronous loader
 		| Promise<RenderableReactComponent<State> | Module>,
-	exportName?: KeysMatching<Module, RenderableReactComponent<State>>
+	exportName?: KeysMatching<Module, RenderableReactComponent<State>>,
 ): ConstructableGondelReactComponent<State> {
 	const unifiedLoader = () => {
 		const loaderResult = loader();
@@ -110,13 +110,13 @@ export class GondelReactComponent<State extends {} = {}, TElement extends HTMLEl
 		// Overwrite the current start method
 		const originalStart = (this as any).start;
 		const ReactDOMPromise = import(/* webpackPrefetch: true, webpackChunkName: 'ReactDom' */ 'react-dom').then(
-			(ReactDOM) => ReactDOM.default || ReactDOM
+			(ReactDOM) => ReactDOM.default || ReactDOM,
 		);
 
 		const configScript = ctx.querySelector("script[type='text/json']");
 		this.state = configScript ? JSON.parse(configScript.innerHTML) : {};
 
-		let unmountComponentAtNode: typeof import('react-dom')['unmountComponentAtNode'] | undefined;
+		let unmountComponentAtNode: (typeof import('react-dom'))['unmountComponentAtNode'] | undefined;
 
 		(this as any).start = function (this: GondelReactComponent<State>) {
 			// Wait for the original start promise to allow lazy loading
@@ -166,7 +166,7 @@ export class GondelReactComponent<State extends {} = {}, TElement extends HTMLEl
 								componentDidCatch: this.componentDidCatch && this.componentDidCatch.bind(this),
 								config: this.state,
 							}),
-							this._ctx
+							this._ctx,
 						);
 				});
 
@@ -253,7 +253,7 @@ export class GondelReactComponent<State extends {} = {}, TElement extends HTMLEl
 			throw new Error(
 				`${this._componentName} could not render ${
 					'App' in this ? 'ensure that you are returning a React component' : 'please add a render method'
-				}`
+				}`,
 			);
 		}
 

@@ -39,7 +39,7 @@ export function useGondelComponent<TComponentType extends GondelComponent>() {
 			ref.current = element;
 			startComponents(element).then(() => {
 				setGondelInstance(
-					hasMountedGondelComponent(element) ? getComponentByDomNode<TComponentType>(element) : null
+					hasMountedGondelComponent(element) ? getComponentByDomNode<TComponentType>(element) : null,
 				);
 			});
 		}

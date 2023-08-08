@@ -11,7 +11,7 @@ export type gondelPluginListener = (result: any, data: any | undefined, next: (r
 export type gondelPluginFunction = (
 	result: any,
 	data: any | undefined,
-	next: (result: any, data: any, next: gondelPluginFunction) => any
+	next: (result: any, data: any, next: gondelPluginFunction) => any,
 ) => any;
 const basePluginListener: gondelPluginListener = (result, data, next) => next(result);
 
@@ -36,13 +36,13 @@ export function fireGondelPluginEvent<T, U>(
 	eventName: IGondelPluginEventName,
 	initialValue: T,
 	data: any,
-	callback: (result: T) => U
+	callback: (result: T) => U,
 ): U;
 export function fireGondelPluginEvent<T, U>(
 	eventName: IGondelPluginEventName,
 	initialValue: T,
 	data: any,
-	callback?: (result: T) => U
+	callback?: (result: T) => U,
 ): U {
 	let isSyncron: boolean = false;
 	let callbackResult;
@@ -66,7 +66,7 @@ export function fireGondelPluginEvent<T, U>(
 export function fireAsyncGondelPluginEvent<T>(
 	eventName: IGondelPluginEventName,
 	initialValue: T,
-	data: any
+	data: any,
 ): Promise<T> {
 	return new Promise((resolve) => {
 		(pluginEvents[eventName] || basePluginListener)(initialValue, data, (result) => {
@@ -81,7 +81,7 @@ export function fireAsyncGondelPluginEvent<T>(
 export function addGondelPluginEventListener(
 	pluginName: string,
 	eventName: IGondelPluginEventName,
-	eventListenerCallback: gondelPluginListener
+	eventListenerCallback: gondelPluginListener,
 ) {
 	// Prevent any event registration if this pluginHandlerName
 	// has already been used

@@ -16,7 +16,7 @@ let currentViewport: string;
  */
 function getComponentsInEventRegistry(
 	eventRegistry: INamespacedEventHandlerRegistry,
-	namespace: string
+	namespace: string,
 ): GondelComponent[] {
 	const selector = Object.keys(eventRegistry)
 		.map((componentName) => `[data-${namespace}-name="${componentName}"]`)
@@ -129,7 +129,7 @@ function generateMediaQueries(breakPoints: { [key: string]: number }, unit: 'em'
 function setupViewportChangeEvent(
 	mediaQueries: Array<{ name: string; query: string }>,
 	eventRegistry: INamespacedEventHandlerRegistry,
-	namespace: string
+	namespace: string,
 ) {
 	for (const viewport of mediaQueries) {
 		matchMedia(viewport.query).addListener((mediaQueryList) => {
@@ -215,6 +215,6 @@ export function initMediaQueriesPlugin(options: MediaQueryPluginOptions) {
 
 			// Tell the event system that it should not listen for the event:
 			resolve(false);
-		}
+		},
 	);
 }

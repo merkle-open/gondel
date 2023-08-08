@@ -18,7 +18,7 @@ type EventOption = [
 	// Handler
 	string,
 	// optional Selector or advanced event informations
-	string | object | undefined
+	string | object | undefined,
 ];
 
 function hookEventDecoratorInCore() {
@@ -43,12 +43,12 @@ function hookEventDecoratorInCore() {
 						/* event name: */ eventOptions[0],
 						componentName,
 						/* handler: */ eventOptions[1],
-						/* selector: */ eventOptions[2]
+						/* selector: */ eventOptions[2],
 					);
 				});
 			}
 			next(component);
-		}
+		},
 	);
 	addGondelPluginEventListener(
 		'GondelDecorators',
@@ -56,7 +56,7 @@ function hookEventDecoratorInCore() {
 		function (component, { componentName, namespace }, next) {
 			removeRootEventListernerForComponent(namespace, componentName);
 			next(component);
-		}
+		},
 	);
 	addGondelPluginEventListener(
 		'GondelDecorators',
@@ -72,7 +72,7 @@ function hookEventDecoratorInCore() {
 				gondelComponentRegistry: GondelComponentRegistry;
 				namespace: string;
 			},
-			next
+			next,
 		) {
 			newComponentNames.forEach((componentName) => {
 				const gondelComponent = gondelComponentRegistry.getComponent(componentName);
@@ -89,13 +89,13 @@ function hookEventDecoratorInCore() {
 							/* event name: */ eventOptions[0],
 							componentName,
 							/* handler: */ eventOptions[1],
-							/* selector: */ eventOptions[2]
+							/* selector: */ eventOptions[2],
 						);
 					});
 				}
 			});
 			next(gondelComponents);
-		}
+		},
 	);
 }
 
