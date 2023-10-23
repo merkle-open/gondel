@@ -1,0 +1,18 @@
+{
+	"setupTasks": [
+		{
+			"name": "Install Dependencies",
+			"command": "yarn install"
+		}
+	],
+	"tasks": {
+		"start": {
+			"name": "start",
+			"command": "yarn start",
+			"runAtStart": true,
+			"preview": {
+				"port": 8080
+			}
+		}
+	}
+}

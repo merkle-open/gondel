@@ -9,6 +9,9 @@ crypto.createHash = algorithm => crypto_orig_createHash(algorithm === 'md4' ? 's
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
+  devServer: {
+		allowedHosts: ['.codesandbox.io', '.csb.app'],
+	},
   context: __dirname,
   entry: './src/index.js',
   module: {

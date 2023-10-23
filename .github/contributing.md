@@ -2,6 +2,7 @@
 
 We are more than happy to accept external contributions to the project
 in the form of feedback, bug reports and even better - pull requests :)
+All our CodeSandBox-Samples are [synced-templates](https://codesandbox.io/docs/learn/sandboxes/synced-templates) with our GitHub-repo: they will update automatically, once our repositories master branch got updated.
 
 ## How to contribute
 
