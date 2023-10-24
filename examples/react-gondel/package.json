@@ -16,8 +16,10 @@
 	},
 	"devDependencies": {
 		"@babel/core": "7.22.10",
+		"@babel/plugin-proposal-decorators": "^7.23.2",
 		"@babel/preset-env": "7.22.10",
 		"@babel/preset-react": "7.22.5",
+		"babel-plugin-transform-class-properties": "^6.24.1",
 		"html-webpack-plugin": "4.5.2",
 		"js-config-webpack-plugin": "2.0.3",
 		"webpack": "4.46.0",
