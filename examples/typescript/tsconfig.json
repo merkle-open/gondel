@@ -1,6 +1,27 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "target": "es5",
+    "module": "esnext",
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "declaration": false,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "strictNullChecks": true,
+    "removeComments": false,
+    "importHelpers": true,
+    "outDir": "dist",
+    "types": ["jest", "webpack-env"],
+    "lib": ["es6", "es7", "dom"]
+  },
+  "exclude": ["dist", "build", "node_modules"],
+  "paths": {
+    "@gondel/core/*": ["./packages/core/src/*"],
+    "@gondel/plugin-*/*": ["./packages/plugins/*/*"]
   }
 }
