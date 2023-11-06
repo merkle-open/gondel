@@ -6,13 +6,11 @@
 		"start": "webpack serve"
 	},
 	"dependencies": {
-		"@gondel/core": "1.2.8",
+		"@gondel/core": "^1.2.8",
 		"@gondel/plugin-data": "^1.2.8",
-		"@gondel/plugin-hot": "^1.2.8",
-    "core-js": "3.33.2"
+		"@gondel/plugin-hot": "^1.2.8"
 	},
 	"devDependencies": {
-		"@babel/core": "7.23.2",
 		"html-webpack-plugin": "4.5.2",
 		"ts-config-webpack-plugin": "2.0.3",
 		"webpack": "4.46.0",
