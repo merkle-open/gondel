@@ -9,7 +9,7 @@
 		"@gondel/core": "1.2.8",
 		"@gondel/plugin-data": "^1.2.8",
 		"@gondel/plugin-hot": "^1.2.8",
-    "core-js": "3.32.0"
+    "core-js": "3.33.2"
 	},
 	"devDependencies": {
 		"@babel/core": "7.23.2",
