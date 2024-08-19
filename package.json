@@ -24,7 +24,7 @@
     "test:watch": "lerna run --parallel test:watch",
     "release": "lerna publish --conventional-commits --no-commit-hooks",
     "update-dependencies": "npm-run-all --parallel update-dependencies:*",
-    "update-dependencies:packages": "lerna exec -- npm-check-updates -u --deprecated -x html-webpack-plugin,webpack,webpack-cli,css-loader,style-loader,react,react-dom",
+    "update-dependencies:packages": "lerna exec -- npm-check-updates -u --deprecated -x html-webpack-plugin,webpack,webpack-cli,css-loader,style-loader,typescript,react,react-dom,@types/react,@types/react-dom,webpack-dev-server",
     "update-dependencies:root": "npm-check-updates -u --deprecated"
   },
   "license": "MIT",
@@ -53,17 +53,17 @@
   "devDependencies": {
     "commitizen": "4.3.0",
     "@commitlint/cli": "18.6.1",
-    "@merkle-open/commitlint-conventional-changelog": "1.0.7",
-    "@merkle-open/prettier-config": "1.2.0",
+    "@merkle-open/commitlint-conventional-changelog": "1.0.8",
+    "@merkle-open/prettier-config": "1.2.1",
     "@size-limit/preset-small-lib": "11.1.4",
     "cz-conventional-changelog": "3.3.0",
-    "husky": "9.1.0",
-    "lerna": "8.1.6",
-    "lint-staged": "15.2.7",
-    "npm-check-updates": "16.14.20",
+    "husky": "9.1.4",
+    "lerna": "8.1.8",
+    "lint-staged": "15.2.9",
+    "npm-check-updates": "17.0.6",
     "npm-run-all": "4.1.5",
     "prettier": "3.3.3",
-    "rimraf": "5.0.9",
+    "rimraf": "5.0.10",
     "size-limit": "11.1.4",
     "standard-version": "9.5.0"
   }
