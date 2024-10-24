@@ -15,10 +15,10 @@
 		"react-dom": "17.0.2"
 	},
 	"devDependencies": {
-		"@babel/core": "7.25.2",
-		"@babel/plugin-proposal-decorators": "7.24.7",
-		"@babel/preset-env": "7.25.3",
-		"@babel/preset-react": "7.24.7",
+		"@babel/core": "7.25.9",
+		"@babel/plugin-proposal-decorators": "7.25.9",
+		"@babel/preset-env": "7.25.9",
+		"@babel/preset-react": "7.25.9",
 		"babel-plugin-transform-class-properties": "6.24.1",
 		"html-webpack-plugin": "4.5.2",
 		"js-config-webpack-plugin": "2.0.3",
