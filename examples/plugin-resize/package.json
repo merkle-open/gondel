@@ -8,13 +8,13 @@
 	"dependencies": {
 		"@gondel/core": "^1.2.8",
 		"@gondel/plugin-resize": "^1.2.8",
-		"core-js": "3.38.1"
+		"core-js": "3.45.1"
 	},
 	"devDependencies": {
-		"@babel/core": "7.25.9",
-		"@babel/plugin-proposal-decorators": "7.25.9",
-		"@babel/plugin-transform-class-properties": "7.25.9",
-		"@babel/preset-env": "7.25.9",
+		"@babel/core": "7.28.4",
+		"@babel/plugin-proposal-decorators": "7.28.0",
+		"@babel/plugin-transform-class-properties": "7.27.1",
+		"@babel/preset-env": "7.28.3",
 		"html-webpack-plugin": "4.5.2",
 		"js-config-webpack-plugin": "2.0.3",
 		"webpack": "4.46.0",
