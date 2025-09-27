@@ -122,7 +122,5 @@
     exports.NumberSerializer = Number;
     exports.data = data;
 
-    Object.defineProperty(exports, '__esModule', { value: true });
-
 }));
 //# sourceMappingURL=index.es5.js.map

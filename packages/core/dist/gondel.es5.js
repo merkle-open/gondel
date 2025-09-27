@@ -728,7 +728,5 @@
     exports.stopComponents = stopComponents;
     exports.triggerPublicEvent = triggerPublicEvent;
 
-    Object.defineProperty(exports, '__esModule', { value: true });
-
 }));
 //# sourceMappingURL=gondel.es5.js.map

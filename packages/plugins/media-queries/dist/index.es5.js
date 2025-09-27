@@ -261,7 +261,5 @@
     exports.getCurrentViewport = getCurrentViewport;
     exports.initMediaQueriesPlugin = initMediaQueriesPlugin;
 
-    Object.defineProperty(exports, '__esModule', { value: true });
-
 }));
 //# sourceMappingURL=index.es5.js.map
