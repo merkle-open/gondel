@@ -6,7 +6,7 @@ export declare const VIEWPORT_ENTERED = "@gondel/plugin-media-queries--viewport-
  * This function returns the current viewport
  */
 export declare function getCurrentViewport(): string;
-export declare type MediaQueryPluginOptions = {
+export type MediaQueryPluginOptions = {
     /**
      * List all breakpoints as a key value pair.
      * The value will represent the max size of the breakpoint.

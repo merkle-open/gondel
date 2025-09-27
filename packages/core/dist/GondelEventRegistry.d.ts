@@ -2,10 +2,10 @@
  * The event registry provides a way to bind events ahead of time
  * with a very small foot print during launch to improve the time to interaction
  */
-export declare type IEventHandlerRegistry = {
+export type IEventHandlerRegistry = {
     [namespace: string]: INamespacedEventHandlerRegistry;
 };
-export declare type INamespacedEventHandlerRegistry = {
+export type INamespacedEventHandlerRegistry = {
     [gondelComponentName: string]: {
         [selector: string]: Array<IHandlerOption>;
     };
@@ -14,7 +14,7 @@ export declare type INamespacedEventHandlerRegistry = {
  * The current context information neccessary to
  * execute an event
  */
-export declare type IEventExecutionContext = {
+export type IEventExecutionContext = {
     ctx: HTMLElement;
     /**
      * The current listener target
@@ -22,7 +22,7 @@ export declare type IEventExecutionContext = {
     target: HTMLElement;
     handlerOptions: Array<IHandlerOption>;
 };
-export declare type IHandlerOption = {
+export type IHandlerOption = {
     selector?: string;
     handlerName: string;
 };

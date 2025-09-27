@@ -28,7 +28,7 @@ export declare class GondelComponentRegistry {
     constructor();
     registerComponent(name: string, gondelComponent: IGondelComponent): void;
     unregisterComponent(name: string): void;
-    getComponent(name: string): IGondelComponent<HTMLElement>;
+    getComponent(name: string): IGondelComponent;
     /**
      * Set if a component is used
      */

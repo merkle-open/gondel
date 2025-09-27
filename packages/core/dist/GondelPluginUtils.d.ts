@@ -1,6 +1,6 @@
-export declare type IGondelPluginEventName = 'register' | 'unregister' | 'boot' | 'start' | 'sync' | 'stop' | 'registerEvent';
-export declare type gondelPluginListener = (result: any, data: any | undefined, next: (result: any) => any) => any;
-export declare type gondelPluginFunction = (result: any, data: any | undefined, next: (result: any, data: any, next: gondelPluginFunction) => any) => any;
+export type IGondelPluginEventName = 'register' | 'unregister' | 'boot' | 'start' | 'sync' | 'stop' | 'registerEvent';
+export type gondelPluginListener = (result: any, data: any | undefined, next: (result: any) => any) => any;
+export type gondelPluginFunction = (result: any, data: any | undefined, next: (result: any, data: any, next: gondelPluginFunction) => any) => any;
 /** Global Plugin Event Handler Registry */
 export declare const pluginEvents: {
     [key: string]: gondelPluginFunction;

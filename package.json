@@ -24,7 +24,7 @@
     "test:watch": "lerna run --parallel test:watch",
     "release": "lerna publish --conventional-commits --no-commit-hooks",
     "update-dependencies": "npm-run-all --parallel update-dependencies:*",
-    "update-dependencies:packages": "lerna exec -- npm-check-updates -u --deprecated -x html-webpack-plugin,webpack,webpack-cli,css-loader,style-loader,typescript,react,react-dom,@types/react,@types/react-dom,webpack-dev-server",
+    "update-dependencies:packages": "lerna exec -- npm-check-updates -u --deprecated -x html-webpack-plugin,webpack,webpack-cli,css-loader,style-loader,react,react-dom,@types/react,@types/react-dom,webpack-dev-server",
     "update-dependencies:root": "npm-check-updates -u --deprecated"
   },
   "license": "MIT",

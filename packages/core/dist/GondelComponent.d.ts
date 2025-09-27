@@ -1,5 +1,5 @@
-export declare type IGondelComponent<TElement extends HTMLElement = HTMLElement> = new (context: TElement, componentName: string) => GondelComponent<TElement>;
-export declare type StartMethod = ((resolve: Function, reject?: Function) => void) | (() => Promise<any>) | (() => void);
+export type IGondelComponent<TElement extends HTMLElement = HTMLElement> = new (context: TElement, componentName: string) => GondelComponent<TElement>;
+export type StartMethod = ((resolve: Function, reject?: Function) => void) | (() => Promise<any>) | (() => void);
 export interface GondelComponent<TElement extends HTMLElement = HTMLElement> {
     _ctx: TElement;
     _namespace: string;
