@@ -4,9 +4,9 @@ import { createRenderableAppWrapper } from './AppWrapper';
 import { isPromise, KeysMatching, UnwrapPromise } from './utils';
 
 type RenderableReactComponent<State> = StatelessComponent<State> | ComponentClass<State, any>;
-type StateOfComponent<T> = T extends RenderableReactComponent<infer V> ? V : never;
+type StateOfComponent<T> = T extends RenderableReactComponent<infer V> ? V : {};
 
-export interface ConstructableGondelReactComponent<State> {
+export interface ConstructableGondelReactComponent<State extends {}> {
 	new (...args: any[]): GondelReactComponent<State>;
 }
 
@@ -46,7 +46,7 @@ export function createGondelReactLoader<State extends {}>(
  *
  */
 export function createGondelReactLoader<
-	State extends StateOfComponent<UnwrapPromise<Module>[ExportName]>,
+	State extends object,
 	Module extends Promise<{ [key: string]: unknown }>,
 	ExportName extends KeysMatching<UnwrapPromise<Module>, RenderableReactComponent<any>>,
 >(loader: () => Module, exportName: ExportName): ConstructableGondelReactComponent<State>;
