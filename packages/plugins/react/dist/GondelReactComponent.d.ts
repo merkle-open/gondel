@@ -1,9 +1,8 @@
 import React, { StatelessComponent, ComponentClass, ComponentLifecycle } from 'react';
 import { GondelBaseComponent } from '@gondel/core';
 import { KeysMatching, UnwrapPromise } from './utils';
-declare type RenderableReactComponent<State> = StatelessComponent<State> | ComponentClass<State, any>;
-declare type StateOfComponent<T> = T extends RenderableReactComponent<infer V> ? V : never;
-export interface ConstructableGondelReactComponent<State> {
+type RenderableReactComponent<State> = StatelessComponent<State> | ComponentClass<State, any>;
+export interface ConstructableGondelReactComponent<State extends {}> {
     new (...args: any[]): GondelReactComponent<State>;
 }
 /**
@@ -37,7 +36,7 @@ export declare function createGondelReactLoader<State extends {}>(loader: () => 
  *  }
  *
  */
-export declare function createGondelReactLoader<State extends StateOfComponent<UnwrapPromise<Module>[ExportName]>, Module extends Promise<{
+export declare function createGondelReactLoader<State extends object, Module extends Promise<{
     [key: string]: unknown;
 }>, ExportName extends KeysMatching<UnwrapPromise<Module>, RenderableReactComponent<any>>>(loader: () => Module, exportName: ExportName): ConstructableGondelReactComponent<State>;
 export declare class GondelReactComponent<State extends {} = {}, TElement extends HTMLElement = HTMLDivElement> extends GondelBaseComponent<TElement> implements ComponentLifecycle<null, State> {

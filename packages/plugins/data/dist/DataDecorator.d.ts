@@ -4,10 +4,10 @@ export interface ISerializer<T extends any = any> {
     serialize: (value: T) => string;
     deserialize: (value: string) => T;
 }
-declare type GondelComponentWithData = GondelComponent & {
+type GondelComponentWithData = GondelComponent & {
     __dataBindings?: Array<DataBindingConfig>;
 };
-declare type GondelComponentDecorator<T> = (target: T, propertyKey: string) => void;
+type GondelComponentDecorator<T> = (target: T, propertyKey: string) => void;
 /**
  * The @data prop decorator will save the selected value into the given variable at start.
  * Via overloads you're capable to use it in three different ways:

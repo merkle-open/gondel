@@ -280,7 +280,5 @@
     exports.WINDOW_RESIZED_EVENT = WINDOW_RESIZED_EVENT;
     exports.initResizePlugin = initResizePlugin;
 
-    Object.defineProperty(exports, '__esModule', { value: true });
-
 }));
 //# sourceMappingURL=index.es5.js.map

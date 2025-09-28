@@ -1,5 +1,5 @@
 import { ISerializer } from './DataDecorator';
-export declare type DataBindingConfig = [
+export type DataBindingConfig = [
     string,
     string,
     ISerializer | void
