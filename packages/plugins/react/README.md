@@ -38,7 +38,7 @@ This guarantees us that we have the full flexibility to pass a configuration, so
 
 ```html
   <div data-g-name="DemoWidget">
-    <script type="text/json">{ "foo":"bar" }</script>
+    <script type="application/json">{ "foo":"bar" }</script>
     Loading..
   </div>
 ```
@@ -73,7 +73,7 @@ In the following example below the React app will be bundled into the same bundl
 
 ```html
   <div data-g-name="DemoWidget">
-    <script type="text/json">{ "foo":"bar" }</script>
+    <script type="application/json">{ "foo":"bar" }</script>
     Loading..
   </div>
 ```
@@ -100,7 +100,7 @@ HTML Element is present, you can use the following pattern below which is called
 
 ```html
   <div data-g-name="DemoWidget">
-    <script type="text/json">{ "foo":"bar" }</script>
+    <script type="application/json">{ "foo":"bar" }</script>
     Loading..
   </div>
 ```
@@ -140,7 +140,7 @@ In the following example below, Gondel would extract the initial state `{ theme:
 
 ```html
   <div data-g-name="DemoWidget">
-    <script type="text/json">{ "theme":"light" }</script>
+    <script type="application/json">{ "theme":"light" }</script>
     Loading..
   </div>
 ```

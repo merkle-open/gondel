@@ -5,7 +5,7 @@ import { createGondelReactLoader, GondelReactComponent } from './GondelReactComp
 const createComponentStateHTML = (initialState: object = {}) => {
 	const tree = document.createElement('div');
 	const initialScript = document.createElement('script');
-	initialScript.type = 'text/json';
+	initialScript.type = 'application/json';
 	initialScript.innerHTML = JSON.stringify(initialState);
 	tree.appendChild(initialScript);
 	return tree;
@@ -119,7 +119,7 @@ describe('@gondel/plugin-react', () => {
 		describe('render', () => {
 			it('should be able to render React apps syncronously', async () => {
 				const root = document.createElement('div');
-				root.innerHTML = `<div data-g-name="Greeter"><script type="text/json">{ "title": "Hello World"}</script></div>`;
+				root.innerHTML = `<div data-g-name="Greeter"><script type="application/json">{ "title": "Hello World"}</script></div>`;
 
 				await new Promise<void>((resolve) => {
 					function TestTitleSpan(props: { title: string }) {
@@ -143,7 +143,7 @@ describe('@gondel/plugin-react', () => {
 
 			it('should be able to render React apps asyncronously', async () => {
 				const root = document.createElement('div');
-				root.innerHTML = `<div data-g-name="Greeter"><script type="text/json">{ "title": "Hello World"}</script></div>`;
+				root.innerHTML = `<div data-g-name="Greeter"><script type="application/json">{ "title": "Hello World"}</script></div>`;
 
 				await new Promise<void>((resolve) => {
 					function TestTitleSpan(props: { title: string }) {
@@ -166,7 +166,7 @@ describe('@gondel/plugin-react', () => {
 
 			it('should be able to render React apps named asyncronously', async () => {
 				const root = document.createElement('div');
-				root.innerHTML = `<div data-g-name="Greeter"><script type="text/json">{ "title": "Hello World"}</script></div>`;
+				root.innerHTML = `<div data-g-name="Greeter"><script type="application/json">{ "title": "Hello World"}</script></div>`;
 
 				await new Promise<void>((resolve) => {
 					function TestTitleSpan(props: { title: string }) {

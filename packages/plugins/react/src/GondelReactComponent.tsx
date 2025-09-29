@@ -113,8 +113,8 @@ export class GondelReactComponent<State extends {} = {}, TElement extends HTMLEl
 			(ReactDOM) => ReactDOM.default || ReactDOM,
 		);
 
-		const configScript = ctx.querySelector("script[type='text/json']");
-		this.state = configScript ? JSON.parse(configScript.innerHTML) : {};
+		const configScript = ctx.querySelector("script[type='application/json']");
+		this.state = configScript ? JSON.parse(configScript.textContent) : {};
 
 		let unmountComponentAtNode: (typeof import('react-dom'))['unmountComponentAtNode'] | undefined;
 
