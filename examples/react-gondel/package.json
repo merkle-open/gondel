@@ -9,8 +9,8 @@
 		"@gondel/core": "^1.2.8",
 		"@gondel/plugin-hot": "^1.2.8",
 		"@gondel/plugin-react": "^1.2.8",
-		"@types/react": "17.0.80",
-		"@types/react-dom": "17.0.25",
+		"@types/react": "17.0.88",
+		"@types/react-dom": "17.0.26",
 		"react": "17.0.2",
 		"react-dom": "17.0.2"
 	},
@@ -22,7 +22,7 @@
 		"babel-plugin-transform-class-properties": "6.24.1",
 		"html-webpack-plugin": "4.5.2",
 		"js-config-webpack-plugin": "2.0.3",
-		"webpack": "4.46.0",
+		"webpack": "4.47.0",
 		"webpack-cli": "4.10.0",
 		"webpack-dev-server": "4.15.2"
 	}
