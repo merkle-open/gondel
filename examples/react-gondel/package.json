@@ -1,14 +1,14 @@
 {
 	"name": "gondel-react-gondel-example",
 	"private": true,
-	"version": "1.2.8",
+	"version": "1.2.9",
 	"scripts": {
 		"start": "webpack serve"
 	},
 	"dependencies": {
-		"@gondel/core": "^1.2.8",
-		"@gondel/plugin-hot": "^1.2.8",
-		"@gondel/plugin-react": "^1.2.8",
+		"@gondel/core": "^1.2.9",
+		"@gondel/plugin-hot": "^1.2.9",
+		"@gondel/plugin-react": "^1.2.9",
 		"@types/react": "17.0.88",
 		"@types/react-dom": "17.0.26",
 		"react": "17.0.2",

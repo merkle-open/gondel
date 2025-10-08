@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.9](https://github.com/merkle-open/gondel/compare/v1.2.8...v1.2.9) (2025-10-08)
+
+### Bug Fixes
+
+- fixed dependency versioning in package.json ([84f2dc8](https://github.com/merkle-open/gondel/commit/84f2dc87f8a9a1eef9004acf821a44ea39cff68f))
+- four codesandbox-demos during build-process ([247f4ad](https://github.com/merkle-open/gondel/commit/247f4addb17708b727b1bb6f7d021870397a0c18))
+- invalid host header issue on codesandbox ([a9b09ee](https://github.com/merkle-open/gondel/commit/a9b09eeffe8ba50a4c7ae8edc138c7d109dc0e14)), closes [#94](https://github.com/merkle-open/gondel/issues/94)
+- invalid host header issue on codesandbox ([95220c1](https://github.com/merkle-open/gondel/commit/95220c19e8fbae3b6dd51acaef8ad699cfac0914)), closes [#94](https://github.com/merkle-open/gondel/issues/94)
+
 ## [1.2.8](https://github.com/merkle-open/gondel/compare/v1.2.7...v1.2.8) (2023-05-19)
 
 ### Bug Fixes

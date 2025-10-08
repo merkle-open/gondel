@@ -1,6 +1,6 @@
 {
 	"name": "@gondel/plugin-resize",
-	"version": "1.2.8",
+	"version": "1.2.9",
 	"description": "Provide a custom resize event",
 	"bugs": "https://github.com/merkle-open/gondel/issues",
 	"homepage": "https://github.com/merkle-open/gondel",
@@ -24,7 +24,8 @@
 	"devDependencies": {
 		"@babel/core": "7.28.4",
 		"@babel/preset-env": "7.28.3",
-		"@gondel/core": "^1.2.8",
+		"@gondel/core": "^1.2.9",
+		"@rollup/plugin-node-resolve": "16.0.2",
 		"babel-cli": "7.0.0-beta.3",
 		"babel-minify": "0.5.2",
 		"babel-plugin-transform-class-properties": "6.24.1",
@@ -33,8 +34,7 @@
 		"npm-run-all": "4.1.5",
 		"rimraf": "6.0.1",
 		"rollup": "4.52.4",
-		"@rollup/plugin-node-resolve": "16.0.2",
-    "typescript": "5.9.3"
+		"typescript": "5.9.3"
 	},
 	"jest": {
 		"globals": {

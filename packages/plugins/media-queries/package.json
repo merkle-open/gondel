@@ -1,6 +1,6 @@
 {
 	"name": "@gondel/plugin-media-queries",
-	"version": "1.2.8",
+	"version": "1.2.9",
 	"description": "Provide a custom gondel event which will fire once a given media query is met",
 	"bugs": "https://github.com/merkle-open/gondel/issues",
 	"homepage": "https://github.com/merkle-open/gondel/tree/master/packages/plugins/media-queries",
@@ -21,11 +21,11 @@
 		"@gondel/core": "*"
 	},
 	"devDependencies": {
-		"@gondel/core": "^1.2.8",
+		"@gondel/core": "^1.2.9",
+		"@rollup/plugin-node-resolve": "16.0.2",
 		"npm-run-all": "4.1.5",
 		"rimraf": "6.0.1",
 		"rollup": "4.52.4",
-		"@rollup/plugin-node-resolve": "16.0.2",
 		"typescript": "5.9.3"
 	}
 }
