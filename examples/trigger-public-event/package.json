@@ -7,7 +7,7 @@
 	},
 	"dependencies": {
 		"@gondel/core": "^1.2.9",
-		"core-js": "3.45.1"
+		"core-js": "3.46.0"
 	},
 	"devDependencies": {
 		"@babel/core": "7.28.4",
