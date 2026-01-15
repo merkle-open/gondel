@@ -11,7 +11,7 @@ function createMockElement(namespace: string) {
 	const buttonElement = document.createElement('div');
 	buttonElement.setAttribute('data-' + namespace + '-name', 'Button');
 	buttonElement.setAttribute('data-environment', 'TEST');
-	buttonElement.setAttribute('data-text', '2c8bd89c2e314f7f2245e04c'); // encrypted 'Hello World!'
+	buttonElement.setAttribute('data-text', '784e5b776ce40e9f42b4f1c8'); // encrypted 'Hello World!'
 	buttonElement.setAttribute('data-config', JSON.stringify({ hello: 'World!', id: 123 }));
 	document.documentElement!.appendChild(buttonElement);
 	startComponents(buttonElement, namespace);
@@ -153,13 +153,17 @@ describe('@gondel/plugin-data', () => {
 		it('Custom - should work with custom serializers (encrypted example)', () => {
 			const CustomEncryptionSerializer: ISerializer = {
 				serialize(value: string) {
-					const cipher = crypto.createCipher(CRYPTO_ALGORITHM, CRYPTO_PASSWORD);
+					const key = crypto.scryptSync(CRYPTO_PASSWORD, 'salt', 32);
+					const iv = Buffer.alloc(16, 0); // For testing: fixed IV. In production, use crypto.randomBytes(16)
+					const cipher = crypto.createCipheriv(CRYPTO_ALGORITHM, key, iv);
 					let crypted = cipher.update(value, 'utf8', 'hex');
 					crypted += cipher.final('hex');
 					return crypted;
 				},
 				deserialize(value: string): string {
-					const decipher = crypto.createDecipher(CRYPTO_ALGORITHM, CRYPTO_PASSWORD);
+					const key = crypto.scryptSync(CRYPTO_PASSWORD, 'salt', 32);
+					const iv = Buffer.alloc(16, 0);
+					const decipher = crypto.createDecipheriv(CRYPTO_ALGORITHM, key, iv);
 					let dec = decipher.update(value, 'hex', 'utf8');
 					dec += decipher.final('utf8');
 					return dec;

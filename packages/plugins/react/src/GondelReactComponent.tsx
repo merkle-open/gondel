@@ -52,7 +52,7 @@ export function createGondelReactLoader<
 >(loader: () => Module, exportName: ExportName): ConstructableGondelReactComponent<State>;
 export function createGondelReactLoader<State extends {}, Module extends { [key: string]: unknown }>(
 	loader: () => // Synchronous loader
-	| RenderableReactComponent<State>
+		| RenderableReactComponent<State>
 		// Asynchronous loader
 		| Promise<RenderableReactComponent<State> | Module>,
 	exportName?: KeysMatching<Module, RenderableReactComponent<State>>,

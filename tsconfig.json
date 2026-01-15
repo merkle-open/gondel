@@ -15,7 +15,7 @@
     "removeComments": false,
     "importHelpers": true,
     "outDir": "dist",
-    "types": ["jest", "webpack-env"],
+    "types": ["jest", "webpack-env", "node"],
     "lib": [
       "es6",
       "es7",

@@ -3,7 +3,7 @@ export declare function Component(componentName: string, namespace?: string): <T
 type EventOption = [
     string,
     string,
-    string | object | undefined
+    (string | object | undefined)
 ];
 /**
  * The @EventListener decorator will add all event names to a static variable
