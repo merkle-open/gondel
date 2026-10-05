@@ -19,8 +19,8 @@
 	"files": ["src/", "dist/"],
 	"peerDependencies": {
 		"@gondel/core": "*",
-		"react": "*",
-		"react-dom": "*"
+		"react": ">=16.8.0 <18",
+		"react-dom": ">=16.8.0 <18"
 	},
 	"devDependencies": {
 		"@gondel/core": "^1.2.9",
