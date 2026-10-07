@@ -2,11 +2,6 @@
 
 This tiny plugin bootstraps React widgets and apps using Gondel.  
 
-## Supported React versions
-
-This plugin supports React `>=16.8.0 <18` (React 16.8+ and 17) because it relies on `ReactDOM.render` and `unmountComponentAtNode`, which are deprecated in React 18 and removed in React 19.  
-Projects using React 18 or newer have to stay on React 17 while using this plugin.
-
 ## Usage
 
 **HTML**
