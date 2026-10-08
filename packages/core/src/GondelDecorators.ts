@@ -17,10 +17,8 @@ type EventOption = [
 	string,
 	// Handler
 	string,
-	(
-		// optional Selector or advanced event informations
-		string | object | undefined
-	),
+	// optional Selector or advanced event informations
+	string | object | undefined,
 ];
 
 function hookEventDecoratorInCore() {

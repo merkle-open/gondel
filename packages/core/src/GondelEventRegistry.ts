@@ -113,7 +113,7 @@ export function getHandlers(
 			}
 			// Iterate backwards over the children of the component to find an element
 			// which matches the selector for the current handler
-			for (let i = index; --i >= 0; ) {
+			for (let i = index; --i >= 0;) {
 				if (matchesCssSelector(parents[i], selectorName)) {
 					return handlerQueue.push({
 						index: i,

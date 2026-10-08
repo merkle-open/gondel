@@ -86,7 +86,7 @@ All contributions are welcome: use-cases, documentation, code, patches, bug repo
 The following commands will get you started to work locally:
 
 ```
-npm install
+npm ci
 npm run build
 ```
 
