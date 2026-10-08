@@ -38,11 +38,6 @@
       "@merkle-open/commitlint-conventional-changelog"
     ]
   },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
   "size-limit": [
     {
       "name": "@gondel/core es5",
