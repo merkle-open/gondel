@@ -9,10 +9,10 @@
 		"@gondel/core": "^1.2.9",
 		"@gondel/plugin-hot": "^1.2.9",
 		"@gondel/plugin-react": "^1.2.9",
-		"@types/react": "17.0.90",
-		"@types/react-dom": "17.0.26",
-		"react": "17.0.2",
-		"react-dom": "17.0.2"
+		"@types/react": "18.3.31",
+		"@types/react-dom": "18.3.7",
+		"react": "18.3.1",
+		"react-dom": "18.3.1"
 	},
 	"devDependencies": {
 		"@babel/core": "7.29.7",

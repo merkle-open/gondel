@@ -2,6 +2,10 @@
 
 This tiny plugin bootstraps React widgets and apps using Gondel.  
 
+## Supported React versions
+
+Supports React and React DOM `>=16.8.0 <19`. React 18 runs in React 17 compatibility mode and logs development warnings due to legacy rendering APIs. React 19 is not supported.
+
 ## Usage
 
 **HTML**
