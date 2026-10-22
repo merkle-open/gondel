@@ -14,11 +14,11 @@ export type MediaQueryPluginOptions = {
      *
      * {
      *   xxsmall: 480,     // for screen width 0-480
-     *   xsmall: 768,      // for screen width 481-768
-     *   small: 992,       // for screen width 769-992
-     *   medium: 1240,     // for screen width 993-1240
-     *   large: 1440,      // for screen width 1241-1441
-     *   xlarge: Infinity, // for screen width 1441-Infinity
+     *   xsmall: 768,      // for screen width >480 and <=768
+     *   small: 992,       // for screen width >768 and <=992
+     *   medium: 1240,     // for screen width >992 and <=1240
+     *   large: 1440,      // for screen width >1240 and <=1440
+     *   xlarge: Infinity, // for screen width >1440
      * }
      */
     breakPoints: {
