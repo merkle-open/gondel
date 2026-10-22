@@ -1,4 +1,4 @@
-import { useGondelComponent, GondelReactComponent } from './index';
+import { useGondelComponent, GondelReactComponent } from '../src/index';
 
 describe('@gondel/plugin-react', () => {
 	describe('module', () => {

@@ -1,5 +1,5 @@
-import { GondelComponentRegistry } from './GondelComponentRegistry';
-import { GondelBaseComponent, IGondelComponent } from './GondelComponent';
+import { GondelComponentRegistry } from '../src/GondelComponentRegistry';
+import { GondelBaseComponent, IGondelComponent } from '../src/GondelComponent';
 
 describe('GondelComponentRegistry', () => {
 	let componentInstance: GondelComponentRegistry;

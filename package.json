@@ -17,8 +17,8 @@
     "contributors": "npx all-contributors-cli generate",
     "commit": "git-cz",
     "prepare": "husky",
-    "prettier": "prettier --write **/src/**/*.{ts,tsx}",
-    "posttest": "prettier --list-different **/src/**/*.{ts,tsx}",
+    "prettier": "prettier --write **/{src,test}/**/*.{ts,tsx}",
+    "posttest": "prettier --list-different **/{src,test}/**/*.{ts,tsx}",
     "size": "npm run build && size-limit",
     "test": "npm run test --workspaces --if-present",
     "test:watch": "lerna run --parallel test:watch",
@@ -29,7 +29,7 @@
   },
   "license": "MIT",
   "lint-staged": {
-    "**/src/**/*.(ts|tsx)": [
+    "**/{src,test}/**/*.(ts|tsx)": [
       "prettier --write"
     ]
   },

@@ -1,8 +1,8 @@
-import { startComponents, getComponentByDomNode, getComponentByDomNodeAsync, Component } from './index';
+import { startComponents, getComponentByDomNode, getComponentByDomNodeAsync, Component } from '../src/index';
 
-import { GondelBaseComponent, IGondelComponent } from './GondelComponent';
-import { hasMountedGondelComponent } from './GondelDomUtils';
-import { disableAutoStart } from './GondelAutoStart';
+import { GondelBaseComponent, IGondelComponent } from '../src/GondelComponent';
+import { hasMountedGondelComponent } from '../src/GondelDomUtils';
+import { disableAutoStart } from '../src/GondelAutoStart';
 
 function createMockElement(namespace: string) {
 	const buttonElement = document.createElement('div');

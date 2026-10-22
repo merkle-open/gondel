@@ -1,6 +1,6 @@
 import { Component, getComponentByDomNode, startComponents } from '@gondel/core';
 import { createElement } from 'react';
-import { createGondelReactLoader, GondelReactComponent } from './GondelReactComponent';
+import { createGondelReactLoader, GondelReactComponent } from '../src/GondelReactComponent';
 
 const createComponentStateHTML = (initialState: object = {}) => {
 	const tree = document.createElement('div');

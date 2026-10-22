@@ -3,8 +3,5 @@
     "compilerOptions": {
       "importHelpers": false
     },
-    "exclude": [
-      "src/**/*.test.ts",
-      "fixtures"
-  ]
+    "exclude": ["test"]
 }

@@ -1,4 +1,4 @@
-import { isPromise } from './utils';
+import { isPromise } from '../src/utils';
 
 describe('@gondel/plugin-react utils', () => {
 	describe('isPromise', () => {

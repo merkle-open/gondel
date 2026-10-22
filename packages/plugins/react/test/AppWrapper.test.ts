@@ -1,4 +1,4 @@
-import { AppWrapper, Props as AppWrapperProps } from './AppWrapper';
+import { AppWrapper, Props as AppWrapperProps } from '../src/AppWrapper';
 import { createElement, Component, Props } from 'react';
 import { render } from 'react-dom';
 

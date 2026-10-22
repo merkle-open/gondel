@@ -1,4 +1,4 @@
-import { serialize, deserialize } from './JSON';
+import { serialize, deserialize } from '../src/serializer/JSON';
 
 describe('@gondel/plugin-data', () => {
 	describe('serializer', () => {

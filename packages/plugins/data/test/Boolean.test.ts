@@ -1,4 +1,4 @@
-import { serialize, deserialize } from './Boolean';
+import { serialize, deserialize } from '../src/serializer/Boolean';
 
 describe('@gondel/plugin-data', () => {
 	describe('serializer', () => {

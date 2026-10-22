@@ -1,6 +1,6 @@
 import { startComponents, getComponentByDomNode, Component, GondelBaseComponent } from '@gondel/core';
-import { data, ISerializer } from './DataDecorator';
-import JSONSerializer from './serializer/JSON';
+import { data, ISerializer } from '../src/DataDecorator';
+import JSONSerializer from '../src/serializer/JSON';
 
 // for custom serializer example
 const crypto = require('crypto');

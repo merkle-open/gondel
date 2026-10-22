@@ -1,11 +1,17 @@
-import { GondelBaseComponent } from './GondelComponent';
+import { GondelBaseComponent } from '../src/GondelComponent';
 import {
 	addRootEventListener,
 	getEventRegistry,
 	removeRootEventListener,
 	removeRootEventListernerForComponent,
-} from './GondelEventRegistry';
-import { getComponentByDomNode, registerComponent, startComponents, stopComponents, triggerPublicEvent } from './index';
+} from '../src/GondelEventRegistry';
+import {
+	getComponentByDomNode,
+	registerComponent,
+	startComponents,
+	stopComponents,
+	triggerPublicEvent,
+} from '../src/index';
 
 describe('GondelEventRegistry', () => {
 	const domEventRegistryG = getEventRegistry('g');

@@ -8,7 +8,7 @@ import {
 	disableAutoStart,
 } from '@gondel/core';
 
-import { initResizePlugin, WINDOW_RESIZED_EVENT, COMPONENT_RESIZED_EVENT } from './index';
+import { initResizePlugin, WINDOW_RESIZED_EVENT, COMPONENT_RESIZED_EVENT } from '../src/index';
 
 // mock clientWidth and clientHeight, see https://github.com/jsdom/jsdom/issues/2342
 Object.defineProperty((window as any).HTMLElement.prototype, 'clientWidth', {
