@@ -25,6 +25,10 @@ initMediaQueriesPlugin({
 ```
 
 Please note: the provided breakpoints need to be the maximum value of each viewport in px.
+Each maximum is inclusive; the next viewport starts immediately above it.
+For example, `xxsmall` covers viewport widths up to and including 480px, while
+`xsmall` covers widths greater than 480px and up to and including 768px.
+Adjacent viewport ranges are contiguous and do not overlap.
 
 ## Viewport entered
 

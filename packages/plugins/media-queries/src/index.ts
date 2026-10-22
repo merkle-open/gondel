@@ -83,10 +83,12 @@ function px2em(pixelValue: number) {
 	return Math.round((pixelValue / 16) * 100) / 1000;
 }
 
+type ViewportMediaQuery = { name: string; query: string; excludeQuery?: string };
+
 /**
  * This function generate mediaQueries from breakPoints
  */
-function generateMediaQueries(breakPoints: { [key: string]: number }, unit: 'em' | 'px') {
+function generateMediaQueries(breakPoints: { [key: string]: number }, unit: 'em' | 'px'): ViewportMediaQuery[] {
 	// Sort breakpoints by size
 	const breakpointNames = Object.keys(breakPoints).sort((breakpointNameA, breakpointNameB) => {
 		if (breakPoints[breakpointNameA] > breakPoints[breakpointNameB]) {
@@ -97,29 +99,40 @@ function generateMediaQueries(breakPoints: { [key: string]: number }, unit: 'em'
 		}
 		return 0;
 	});
-	// Convert breakpoints from 980 into (min-width: 700) and (max-width: 980)
-	// by using the previous breakpoint
 	return breakpointNames.map((breakpointName, i) => {
-		// If this is the first breakpoint we don't need a min value
-		const min = breakpointNames[i - 1] === undefined ? undefined : breakPoints[breakpointNames[i - 1]] + 1;
-		// If this is the last breakpoint we don't need a max value
-		const max = breakPoints[breakpointName] === Infinity ? undefined : breakPoints[breakpointName];
-
-		let queryString;
-		if (min && max) {
-			queryString = `(min-width: ${min}${unit}) and (max-width: ${max}${unit})`;
-		} else if (min) {
-			queryString = `(min-width: ${min}${unit})`;
-		} else if (max) {
-			queryString = `(max-width: ${max}${unit})`;
-		} else {
-			// This should only happen if the user did a miss configuration
-			// with only a single breakpoint which is set to infinity
-			throw new Error('The smallest provided viewport must not be set to Infinity');
+		const max = breakPoints[breakpointName];
+		const excludeQuery = i === 0 ? undefined : `(max-width: ${breakPoints[breakpointNames[i - 1]]}${unit})`;
+		if (max === Infinity) {
+			if (excludeQuery === undefined) {
+				throw new Error('The smallest provided viewport must not be set to Infinity');
+			}
+			return { name: breakpointName, query: `not all and ${excludeQuery}` };
 		}
-
-		return { name: breakpointName, query: queryString, min, max };
+		return { name: breakpointName, query: `(max-width: ${max}${unit})`, excludeQuery };
 	});
+}
+
+function observeViewport(viewport: ViewportMediaQuery, onEnter: () => void): boolean {
+	const upperBoundary = matchMedia(viewport.query);
+	const lowerBoundary = viewport.excludeQuery === undefined ? undefined : matchMedia(viewport.excludeQuery);
+	// Exclude the previous inclusive range rather than adding an offset to its boundary.
+	const matches = () => upperBoundary.matches && !(lowerBoundary && lowerBoundary.matches);
+	let matched = matches();
+	const handleChange = () => {
+		const nextMatched = matches();
+		if (nextMatched === matched) {
+			return;
+		}
+		matched = nextMatched;
+		if (matched) {
+			onEnter();
+		}
+	};
+	upperBoundary.addListener(handleChange);
+	if (lowerBoundary) {
+		lowerBoundary.addListener(handleChange);
+	}
+	return matched;
 }
 
 /**
@@ -127,15 +140,14 @@ function generateMediaQueries(breakPoints: { [key: string]: number }, unit: 'em'
  * Once a viewport changed call all gondel plugins which are listening
  */
 function setupViewportChangeEvent(
-	mediaQueries: Array<{ name: string; query: string }>,
+	mediaQueries: ViewportMediaQuery[],
 	eventRegistry: INamespacedEventHandlerRegistry,
 	namespace: string,
 ) {
 	for (const viewport of mediaQueries) {
-		matchMedia(viewport.query).addListener((mediaQueryList) => {
-			if (mediaQueryList.matches) {
-				fireViewportChangeEvent(viewport.name, eventRegistry, namespace);
-			}
+		observeViewport(viewport, () => {
+			currentViewport = viewport.name;
+			fireViewportChangeEvent(viewport.name, eventRegistry, namespace);
 		});
 	}
 }
@@ -144,19 +156,14 @@ function setupViewportChangeEvent(
  * Use enquire.js to listen for viewport changes
  * for the getCurrentViewport helper method
  */
-function setupCurrentViewportHelper(mediaQueries: Array<{ name: string; query: string }>) {
+function setupCurrentViewportHelper(mediaQueries: ViewportMediaQuery[]) {
 	for (const viewport of mediaQueries) {
-		const viewportMediaQueryList = matchMedia(viewport.query);
-		// Set initial viewport
-		if (viewportMediaQueryList.matches) {
+		const matched = observeViewport(viewport, () => {
+			currentViewport = viewport.name;
+		});
+		if (matched) {
 			currentViewport = viewport.name;
 		}
-		// Watch for media query changes
-		viewportMediaQueryList.addListener((mediaQueryList) => {
-			if (mediaQueryList.matches) {
-				currentViewport = viewport.name;
-			}
-		});
 	}
 }
 
@@ -168,11 +175,11 @@ export type MediaQueryPluginOptions = {
 	 *
 	 * {
 	 *   xxsmall: 480,     // for screen width 0-480
-	 *   xsmall: 768,      // for screen width 481-768
-	 *   small: 992,       // for screen width 769-992
-	 *   medium: 1240,     // for screen width 993-1240
-	 *   large: 1440,      // for screen width 1241-1441
-	 *   xlarge: Infinity, // for screen width 1441-Infinity
+	 *   xsmall: 768,      // for screen width >480 and <=768
+	 *   small: 992,       // for screen width >768 and <=992
+	 *   medium: 1240,     // for screen width >992 and <=1240
+	 *   large: 1440,      // for screen width >1240 and <=1440
+	 *   xlarge: Infinity, // for screen width >1440
 	 * }
 	 */
 	breakPoints: {

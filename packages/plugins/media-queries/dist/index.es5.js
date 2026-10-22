@@ -167,30 +167,39 @@
             }
             return 0;
         });
-        // Convert breakpoints from 980 into (min-width: 700) and (max-width: 980)
-        // by using the previous breakpoint
         return breakpointNames.map(function (breakpointName, i) {
-            // If this is the first breakpoint we don't need a min value
-            var min = breakpointNames[i - 1] === undefined ? undefined : breakPoints[breakpointNames[i - 1]] + 1;
-            // If this is the last breakpoint we don't need a max value
-            var max = breakPoints[breakpointName] === Infinity ? undefined : breakPoints[breakpointName];
-            var queryString;
-            if (min && max) {
-                queryString = "(min-width: ".concat(min).concat(unit, ") and (max-width: ").concat(max).concat(unit, ")");
+            var max = breakPoints[breakpointName];
+            var excludeQuery = i === 0 ? undefined : "(max-width: ".concat(breakPoints[breakpointNames[i - 1]]).concat(unit, ")");
+            if (max === Infinity) {
+                if (excludeQuery === undefined) {
+                    throw new Error('The smallest provided viewport must not be set to Infinity');
+                }
+                return { name: breakpointName, query: "not all and ".concat(excludeQuery) };
             }
-            else if (min) {
-                queryString = "(min-width: ".concat(min).concat(unit, ")");
-            }
-            else if (max) {
-                queryString = "(max-width: ".concat(max).concat(unit, ")");
-            }
-            else {
-                // This should only happen if the user did a miss configuration
-                // with only a single breakpoint which is set to infinity
-                throw new Error('The smallest provided viewport must not be set to Infinity');
-            }
-            return { name: breakpointName, query: queryString, min: min, max: max };
+            return { name: breakpointName, query: "(max-width: ".concat(max).concat(unit, ")"), excludeQuery: excludeQuery };
         });
+    }
+    function observeViewport(viewport, onEnter) {
+        var upperBoundary = matchMedia(viewport.query);
+        var lowerBoundary = viewport.excludeQuery === undefined ? undefined : matchMedia(viewport.excludeQuery);
+        // Exclude the previous inclusive range rather than adding an offset to its boundary.
+        var matches = function () { return upperBoundary.matches && !(lowerBoundary && lowerBoundary.matches); };
+        var matched = matches();
+        var handleChange = function () {
+            var nextMatched = matches();
+            if (nextMatched === matched) {
+                return;
+            }
+            matched = nextMatched;
+            if (matched) {
+                onEnter();
+            }
+        };
+        upperBoundary.addListener(handleChange);
+        if (lowerBoundary) {
+            lowerBoundary.addListener(handleChange);
+        }
+        return matched;
     }
     /**
      * Use enquire.js to listen for viewport changes
@@ -198,10 +207,9 @@
      */
     function setupViewportChangeEvent(mediaQueries, eventRegistry, namespace) {
         var _loop_1 = function (viewport) {
-            matchMedia(viewport.query).addListener(function (mediaQueryList) {
-                if (mediaQueryList.matches) {
-                    fireViewportChangeEvent(viewport.name, eventRegistry, namespace);
-                }
+            observeViewport(viewport, function () {
+                currentViewport = viewport.name;
+                fireViewportChangeEvent(viewport.name, eventRegistry, namespace);
             });
         };
         for (var _i = 0, mediaQueries_1 = mediaQueries; _i < mediaQueries_1.length; _i++) {
@@ -215,17 +223,12 @@
      */
     function setupCurrentViewportHelper(mediaQueries) {
         var _loop_2 = function (viewport) {
-            var viewportMediaQueryList = matchMedia(viewport.query);
-            // Set initial viewport
-            if (viewportMediaQueryList.matches) {
+            var matched = observeViewport(viewport, function () {
+                currentViewport = viewport.name;
+            });
+            if (matched) {
                 currentViewport = viewport.name;
             }
-            // Watch for media query changes
-            viewportMediaQueryList.addListener(function (mediaQueryList) {
-                if (mediaQueryList.matches) {
-                    currentViewport = viewport.name;
-                }
-            });
         };
         for (var _i = 0, mediaQueries_2 = mediaQueries; _i < mediaQueries_2.length; _i++) {
             var viewport = mediaQueries_2[_i];
