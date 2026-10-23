@@ -1,7 +1,7 @@
-import React, { StatelessComponent, ComponentClass, ComponentLifecycle } from 'react';
+import React, { FunctionComponent, ComponentClass, ComponentLifecycle } from 'react';
 import { GondelBaseComponent } from '@gondel/core';
 import { KeysMatching, UnwrapPromise } from './utils';
-type RenderableReactComponent<State> = StatelessComponent<State> | ComponentClass<State, any>;
+type RenderableReactComponent<State> = FunctionComponent<State> | ComponentClass<State, any>;
 export interface ConstructableGondelReactComponent<State extends {}> {
     new (...args: any[]): GondelReactComponent<State>;
 }

@@ -1,5 +1,5 @@
 import { AppWrapper, Props as AppWrapperProps } from '../src/AppWrapper';
-import { createElement, Component, Props } from 'react';
+import { createElement, Component } from 'react';
 import { render } from 'react-dom';
 
 const serializeRenderedOutput = (r: any): object => JSON.parse(JSON.stringify(r, null, 2));
@@ -105,7 +105,7 @@ describe('@gondel/plugin-react', () => {
 		it('state mutations should be possible', () => {
 			const root = document.createElement('div');
 			const wrapper = createElement(
-				AppWrapper,
+				AppWrapper<HelloProps>,
 				{
 					config: { text: 'initial' },
 					children: (props: HelloProps) => createElement(HelloFixture, props, null),
@@ -113,7 +113,7 @@ describe('@gondel/plugin-react', () => {
 				null,
 			);
 
-			const rendered = render<Props<HelloProps>>(wrapper, root) as Component<HelloProps, HelloProps>;
+			const rendered = render(wrapper, root);
 
 			rendered.setState({ text: 'galaxy' });
 			expect(rendered.state).toEqual({ text: 'galaxy' });
