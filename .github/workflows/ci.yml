@@ -1,11 +1,9 @@
 name: ci
 on:
   push:
-    branches:
-      - master
+    branches: [ main, master, develop ]
   pull_request:
-    branches:
-      - master
+    branches: [ main, master, develop ]
 jobs:
   test:
     strategy:

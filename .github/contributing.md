@@ -28,8 +28,8 @@ any output you've received, what OS and version you're on, etc.
 * Non-trivial changes should be discussed in an issue first
 * Please check project guidelines from `.editorconfig` & `.prettierrc`
 * Develop in a topic branch
-* Make sure test-suite passes: `npm test` (This includes linting).
-* Push to your fork and submit a pull request to the development branch
+* Make sure test-suite passes: `npm run build && npm test` (This includes linting).
+* Push to your fork and submit a pull request to the develop branch
 
 Some things that will increase the chance that your pull request is accepted:
 
@@ -40,7 +40,7 @@ Some things that will increase the chance that your pull request is accepted:
 #### Quick Start
 
 * You need [node](../.node-version) of course
-* Fork, then clone the repo and then run `npm install` in them
+* Fork, then clone the repo and then run `npm ci` in them
 * Start hacking ;-)
 
-You can keep your repo up to date by running `git pull --rebase upstream master`.
+You can keep your repo up to date by running `git pull --rebase upstream develop`.
