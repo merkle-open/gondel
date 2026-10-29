@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.10](https://github.com/merkle-open/gondel/compare/v1.2.9...v1.2.10) (2026-10-29)
+
+### Bug Fixes
+
+- **plugin-react:** restrict react peer dependencies to <19 [#107](https://github.com/merkle-open/gondel/issues/107) ([c2513f0](https://github.com/merkle-open/gondel/commit/c2513f07710fc94c852b99bdbdf730e153e4dcf3))
+
 ## [1.2.9](https://github.com/merkle-open/gondel/compare/v1.2.8...v1.2.9) (2025-10-08)
 
 ### Bug Fixes

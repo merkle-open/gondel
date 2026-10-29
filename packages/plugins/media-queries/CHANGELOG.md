@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.10](https://github.com/merkle-open/gondel/compare/v1.2.9...v1.2.10) (2026-10-29)
+
+### Bug Fixes
+
+- **plugin-media-queries:** remove gap between breakpoints [#109](https://github.com/merkle-open/gondel/issues/109) ([cd3df2d](https://github.com/merkle-open/gondel/commit/cd3df2d68ad6cb18354744cffda40a882aba599d))
+
 ## [1.2.9](https://github.com/merkle-open/gondel/compare/v1.2.8...v1.2.9) (2025-10-08)
 
 ### Bug Fixes

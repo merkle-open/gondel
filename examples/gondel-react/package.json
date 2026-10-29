@@ -1,14 +1,14 @@
 {
 	"name": "gondel-react-lazy-example",
 	"private": true,
-	"version": "1.2.9",
+	"version": "1.2.10",
 	"scripts": {
 		"start": "webpack serve"
 	},
 	"dependencies": {
-		"@gondel/core": "^1.2.9",
-		"@gondel/plugin-hot": "^1.2.9",
-		"@gondel/plugin-react": "^1.2.9",
+		"@gondel/core": "^1.2.10",
+		"@gondel/plugin-hot": "^1.2.10",
+		"@gondel/plugin-react": "^1.2.10",
 		"prop-types": "15.8.1",
 		"react": "18.3.1",
 		"react-awesome-button": "7.0.5",

@@ -1,6 +1,6 @@
 {
 	"name": "@gondel/plugin-jquery",
-	"version": "1.2.9",
+	"version": "1.2.10",
 	"description": "Provide jQuery helper for Gondel components",
 	"bugs": "https://github.com/merkle-open/gondel/issues",
 	"homepage": "https://github.com/merkle-open/gondel",
@@ -22,7 +22,7 @@
 		"jquery": "*"
 	},
 	"devDependencies": {
-		"@gondel/core": "^1.2.9",
+		"@gondel/core": "^1.2.10",
 		"@rollup/plugin-node-resolve": "16.0.3",
 		"@rollup/plugin-terser": "1.0.2",
 		"@types/jquery": "3.5.34",

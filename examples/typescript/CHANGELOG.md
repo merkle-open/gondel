@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.10](https://github.com/merkle-open/gondel/compare/v1.2.9...v1.2.10) (2026-10-29)
+
+**Note:** Version bump only for package gondel-typescript-example
+
 ## [1.2.9](https://github.com/merkle-open/gondel/compare/v1.2.8...v1.2.9) (2025-10-08)
 
 ### Bug Fixes

@@ -1,6 +1,6 @@
 {
 	"name": "@gondel/plugin-data",
-	"version": "1.2.9",
+	"version": "1.2.10",
 	"description": "Provide auto-bindings for data attributes located on your gondel DOM node",
 	"bugs": "https://github.com/merkle-open/gondel/issues",
 	"homepage": "https://github.com/merkle-open/gondel/tree/master/packages/plugins/data",
@@ -24,7 +24,7 @@
 		"@gondel/core": "*"
 	},
 	"devDependencies": {
-		"@gondel/core": "^1.2.9",
+		"@gondel/core": "^1.2.10",
 		"@rollup/plugin-node-resolve": "16.0.3",
 		"@rollup/plugin-terser": "1.0.2",
 		"jest": "28.1.3",
